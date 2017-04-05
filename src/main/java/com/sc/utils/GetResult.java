@@ -12,11 +12,11 @@ public class GetResult {
         if (res == null) {
             res = new Result(errorCode, errorMsg, token, obj, pageNum);
         } else {
-            res.errorCode = errorCode;
-            res.errorMsg = errorMsg;
-            res.token = token;
-            res.result = obj;
-            res.pageNum = pageNum;
+            res.setErrorCode(errorCode);
+            res.setErrorMsg(errorMsg);
+            res.setPageNum(pageNum);
+            res.setResult(obj);
+            res.setToken(token);
         }
 
         return res;
