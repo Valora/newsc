@@ -22,7 +22,7 @@ public class WebConfig {
     public EmbeddedServletContainerCustomizer containerCustomizer() {
         return container -> {
             Ssl ssl = new Ssl();
-            ssl.setKeyStore("C:\\Users\\Valora\\.keystore");
+            ssl.setKeyStore("/Users/valora/ssl/mykeys.jks");
             ssl.setKeyStorePassword("tzhlkj");
             container.setSsl(ssl);
             container.setPort(8443);
