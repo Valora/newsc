@@ -6,7 +6,6 @@ package com.sc.utils;
  */
 public class GetResult {
     private static Result res = null;
-    private static final Object plock = new Object();
 
     public static Result toJson(int errorCode, String errorMsg, String token, Object obj, int pageNum) {
         if (res == null) {
