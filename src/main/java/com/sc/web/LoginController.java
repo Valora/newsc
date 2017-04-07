@@ -1,9 +1,13 @@
 package com.sc.web;
 
+import com.sc.service.LoginService;
+import com.sc.utils.GetResult;
+import com.sc.utils.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
     public static final String URL = "/api/Login/";
+    @Autowired
+    private LoginService loginService;
 
     @RequestMapping(value = URL + "SendLoginCode", method = RequestMethod.GET)
     @ApiOperation("发送登录验证码")
@@ -33,8 +39,11 @@ public class LoginController {
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "query")
     })
 
-    public void getToken(@RequestParam(value = "account") String account, @RequestParam(value = "password") String password) {
-
+    public Result getToken(@RequestParam(value = "account") String account, @RequestParam(value = "password") String password) {
+        if (account.isEmpty() || password.isEmpty()){
+            return GetResult.toJson(1, null, null, null, 0);
+        }
+        return loginService.GetToken(account, password);
     }
 
     @RequestMapping(value = URL + "UserLogin", method = RequestMethod.GET)
