@@ -12,6 +12,7 @@ import static com.google.common.base.Predicates.or;
 import static springfox.documentation.builders.PathSelectors.regex;
 
 /**
+ * Swagger配置
  * Created by Valora on 2017/3/31.
  */
 @Configuration
