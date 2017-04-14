@@ -35,4 +35,23 @@ public class UserMapperTest {
         criteria.andCmPasswordEqualTo("sunyaofeng");
         Assert.assertNotNull(UserMapper.selectByExample(userExample));
     }
+    
+    @Test
+    public void testUpdate() throws Exception{
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andCmPasswordEqualTo("sunyaofeng");
+        User user = new User();
+        Long phone = new Long("18658343330");
+        user.setCmPhone(phone);
+        Assert.assertEquals(1, UserMapper.updateByExampleSelective(user, userExample));
+    }
+    
+    @Test
+    public void testDelete() throws Exception{
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andCmPasswordEqualTo("sunyaofeng");
+        Assert.assertEquals(1, UserMapper.deleteByExample(userExample));
+    }
 }

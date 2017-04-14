@@ -1,21 +1,55 @@
 package com.sc.utils;
 
+import com.sc.dao.RadCodeDao;
+import com.sc.domain.RadCode;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 生成Token。
  * Created by valora on 2017/4/5.
  */
+@Component
 public class JWT {
+    @Autowired
+    private RadCodeDao radCodeDao;
+
+    //检查token
+    public Token checkJWT(String jsonWebToken) {
+        Token token = new Token();
+        Claims claims = parseJWT(jsonWebToken);
+        if (claims.isEmpty()) {
+            return null;
+        }
+        String userID = (String) claims.get("userId");
+        Integer code = (Integer) claims.get("code");
+        List<RadCode> result = radCodeDao.getRcByUserID(userID);
+        if (result.isEmpty()) {
+            return null;
+        }
+        if (result.size() == 1) {
+            Integer resultcode = result.get(0).getCmCode();
+            if (code.equals(resultcode)) {
+                token.setUserId(userID);
+                token.setCode(code);
+            }
+        }
+        return token;
+    }
+    
     //解析Jwt
-    public static Claims parseJWT(String jsonWebToken) {
+    private Claims parseJWT(String jsonWebToken) {
         try {
             Claims claims = Jwts.parser()
-                    //签名
-                    .setSigningKey("")
+                    .setSigningKey("secret")
                     .parseClaimsJws(jsonWebToken).getBody();
             return claims;
         } catch (Exception ex) {
@@ -24,14 +58,24 @@ public class JWT {
     }
     
     //生成token
-    public static String createJWT(String account){
-        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
-
+    public String createJWT(String userId){
+        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS512;
+        int code = (int) (Math.random()*90000+10000);
+        List<RadCode> result = radCodeDao.getRcByUserID(userId);
+        if (result.size() == 0) {
+            radCodeDao.insert(userId, code);
+        } else {
+            radCodeDao.updateCode(userId, code);
+        } 
+        
+        //生成claims
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", userId);
+        claims.put("code", code);
+        
         JwtBuilder builder = Jwts.builder()
-                .setHeaderParam("type", "JWT")  //头信息
-                .claim("account", account)  //数据声明信息
-                //.setExpiration()  //过期时间设置。
-                .signWith(signatureAlgorithm,""); //签名
+                .setClaims(claims)
+                .signWith(signatureAlgorithm,"secret"); //签名
         
         return builder.compact();
     }
