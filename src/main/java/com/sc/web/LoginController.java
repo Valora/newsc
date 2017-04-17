@@ -29,7 +29,7 @@ public class LoginController {
     @ApiOperation("发送登录验证码")
     @ApiImplicitParam(name = "phone", value = "手机号码", required = true, dataType = "Long", paramType = "query")
     public void sendLoginCode(@RequestParam(value = "phone") Long phone) {
-
+        
     }
 
     @RequestMapping(value = URL + "GetToken", method = RequestMethod.GET)
@@ -53,8 +53,11 @@ public class LoginController {
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "code", value = "验证码", required = true, dataType = "Integer", paramType = "query"),
     })
-    public void userLogin(@RequestParam(value = "account") String account, @RequestParam(value = "password") String password, @RequestParam(value = "code") Integer code){
-
+    public Result userLogin(@RequestParam(value = "account") String account, @RequestParam(value = "password") String password, @RequestParam(value = "code") Integer code){
+        if (account.isEmpty() || password.isEmpty()) {
+            return GetResult.toJson(1, null, null, null, 0);
+        }
+        return loginService.userLogin(account, password, code);
     }
 
     @RequestMapping(value = URL + "SellerLogin", method = RequestMethod.GET)

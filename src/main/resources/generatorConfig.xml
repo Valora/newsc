@@ -10,8 +10,13 @@
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
         
-        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/SC" userId="SC" password="tzhlkj">
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/SC?useSSL=false" userId="SC" password="tzhlkj">
         </jdbcConnection>
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
         
         <javaModelGenerator targetPackage="com.sc.domain" targetProject="src/main/java">
             <property name="enableSubPackages" value="true" />
@@ -26,7 +31,7 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         
-        <table tableName="TB_RADCODE" domainObjectName="RadCode">
+        <table tableName="TB_REGISTER" domainObjectName="Register">
             
         </table>
     </context>

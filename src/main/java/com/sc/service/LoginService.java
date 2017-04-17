@@ -22,6 +22,12 @@ public class LoginService {
     @Autowired
     private JWT jwt;
 
+    /**
+     * 获得token
+     * @param account 账号
+     * @param password 密码
+     * @return token
+     */
     public Result GetToken(String account, String password) {
         List<User> result = userDao.getUserByAccountAndPassword(account, password);
         if (result.size() == 0) {
@@ -29,5 +35,18 @@ public class LoginService {
         }
         String userID = result.get(0).getCmUserid();
         return GetResult.toJson(0, null, jwt.createJWT(userID), null, 0);
+    }
+
+    /**
+     * 用户登录
+     * @param account 账号
+     * @param password 密码
+     * @param code 验证码
+     * @return Result
+     */
+    public Result userLogin(String account, String password, Integer code) {
+        
+        
+        return null;
     }
 }
