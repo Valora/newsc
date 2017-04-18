@@ -67,17 +67,23 @@ public class LoginController {
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "code", value = "验证码", required = true, dataType = "Integer", paramType = "query"),
     })
-    public void sellerLogin(@RequestParam(value = "account") String account, @RequestParam(value = "password") String password, @RequestParam(value = "code") Integer code){
-
+    public Result sellerLogin(@RequestParam(value = "account") String account, @RequestParam(value = "password") String password, @RequestParam(value = "code") Integer code){
+        if (account.isEmpty() || password.isEmpty()) {
+            return GetResult.toJson(1, null, null, null, 0);
+        }
+        return loginService.sellerLogin(account, password, code);
     }
-
+    
     @RequestMapping(value = URL + "AdminLogin", method = RequestMethod.GET)
     @ApiOperation("后台管理员登录(返回有权限的URL)")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "account", value = "账号", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "query")
     })
-    public void adminLogin(@RequestParam(value = "account") String account, @RequestParam(value = "password") String password){
-
+    public Result adminLogin(@RequestParam(value = "account") String account, @RequestParam(value = "password") String password){
+        if (account.isEmpty() || password.isEmpty()) {
+            return GetResult.toJson(1, null, null, null, 0);
+        }
+        return null;
     }
 }

@@ -1,4 +1,4 @@
-package com.sc.domain;
+package com.sc.domain.generator;
 
 import java.util.Date;
 

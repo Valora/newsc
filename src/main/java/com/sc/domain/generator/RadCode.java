@@ -1,4 +1,4 @@
-package com.sc.domain;
+package com.sc.domain.generator;
 
 public class RadCode {
     /**

@@ -1,7 +1,11 @@
 package com.sc.service;
 
+import com.sc.dao.RegisterDao;
+import com.sc.dao.SellerDao;
 import com.sc.dao.UserDao;
-import com.sc.domain.User;
+import com.sc.domain.SellerLogin;
+import com.sc.domain.UserLogin;
+import com.sc.domain.generator.User;
 import com.sc.utils.GetResult;
 import com.sc.utils.JWT;
 import com.sc.utils.Result;
@@ -20,11 +24,18 @@ public class LoginService {
     private UserDao userDao;
 
     @Autowired
+    private RegisterDao registerDao;
+
+    @Autowired
+    private SellerDao sellerDao;
+
+    @Autowired
     private JWT jwt;
 
     /**
      * 获得token
-     * @param account 账号
+     *
+     * @param account  账号
      * @param password 密码
      * @return token
      */
@@ -39,14 +50,63 @@ public class LoginService {
 
     /**
      * 用户登录
-     * @param account 账号
+     *
+     * @param account  账号
      * @param password 密码
-     * @param code 验证码
+     * @param code     验证码
      * @return Result
      */
     public Result userLogin(String account, String password, Integer code) {
-        
-        
+        UserLogin userLoginInfo = userDao.getUserLoginInfo(account, password);
+        if (userLoginInfo == null) {
+            return GetResult.toJson(6, null, null, null, 0);
+        }
+        if (userLoginInfo.getCmCode() == null) {
+            return GetResult.toJson(7, null, null, null, 0);
+        }
+        if (!userLoginInfo.getCmCode().equals(code)) {
+            return GetResult.toJson(8, null, null, null, 0);
+        }
+
+        //更新code值
+        registerDao.deleteCode(userLoginInfo.getCmPhone());
+
+        return GetResult.toJson(0, null, jwt.createJWT(userLoginInfo.getCmUserid()), userLoginInfo, 0);
+    }
+
+    /**
+     * 厂家登录
+     *
+     * @param account  账号
+     * @param password 密码
+     * @param code     验证码
+     * @return Result
+     */
+    public Result sellerLogin(String account, String password, Integer code) {
+        SellerLogin sellerLoginInfo = sellerDao.getSellerLoginInfo(account, password);
+        if (sellerLoginInfo == null) {
+            return GetResult.toJson(6, null, null, null, 0);
+        }
+        if (sellerLoginInfo.getCmCode() == null) {
+            return GetResult.toJson(7, null, null, null, 0);
+        }
+        if (!sellerLoginInfo.equals(code)) {
+            return GetResult.toJson(8, null, null, null, 0);
+        }
+
+        registerDao.deleteCode(sellerLoginInfo.getCmPhone());
+
+        return GetResult.toJson(0, null, jwt.createJWT(sellerLoginInfo.getCmSellerid()), sellerLoginInfo, 0);
+    }
+
+    /**
+     * 后台管理员登录
+     *
+     * @param account  账号
+     * @param password 密码
+     * @return
+     */
+    public Result adminLogin(String account, String password) {
         return null;
     }
 }

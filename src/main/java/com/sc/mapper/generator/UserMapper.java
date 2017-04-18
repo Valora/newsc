@@ -1,8 +1,7 @@
-package com.sc.mapper;
+package com.sc.mapper.generator;
 
-import com.sc.domain.User;
-import com.sc.domain.UserExample;
-import java.util.List;
+import com.sc.domain.generator.User;
+import com.sc.domain.generator.UserExample;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -12,6 +11,8 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
+
+import java.util.List;
 
 public interface UserMapper {
     /**

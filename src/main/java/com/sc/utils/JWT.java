@@ -1,7 +1,7 @@
 package com.sc.utils;
 
 import com.sc.dao.RadCodeDao;
-import com.sc.domain.RadCode;
+import com.sc.domain.generator.RadCode;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;

@@ -1,14 +1,18 @@
 package com.sc;
 
-import com.sc.domain.User;
-import com.sc.domain.UserExample;
-import com.sc.mapper.UserMapper;
+import com.sc.domain.generator.User;
+import com.sc.domain.generator.UserExample;
+import com.sc.domain.UserLogin;
+import com.sc.mapper.UserLoginMapper;
+import com.sc.mapper.generator.UserMapper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
 
 /**
  * user mapper test
@@ -19,6 +23,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class UserMapperTest {
     @Autowired
     private UserMapper UserMapper;
+    @Autowired
+    private UserLoginMapper userLoginMapper;
     @Test
     public void testInsert() throws Exception {
         User user = new User();
@@ -53,5 +59,11 @@ public class UserMapperTest {
         UserExample.Criteria criteria = userExample.createCriteria();
         criteria.andCmPasswordEqualTo("sunyaofeng");
         Assert.assertEquals(1, UserMapper.deleteByExample(userExample));
+    }
+    
+    @Test
+    public void testSelectLoginInfo() throws Exception {
+        List<UserLogin> result = userLoginMapper.selectLoginInfo("111111", "222222");
+        Assert.assertNotNull(result);
     }
 }

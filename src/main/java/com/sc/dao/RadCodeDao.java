@@ -1,15 +1,15 @@
 package com.sc.dao;
 
-import com.sc.domain.RadCode;
-import com.sc.domain.RadCodeExample;
-import com.sc.mapper.RadCodeMapper;
+import com.sc.domain.generator.RadCode;
+import com.sc.domain.generator.RadCodeExample;
+import com.sc.mapper.generator.RadCodeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
- * RadCodeDao
+ * 用户随机码操作类。随机码用来生成token
  * Created by valora on 2017/4/14.
  */
 @Component

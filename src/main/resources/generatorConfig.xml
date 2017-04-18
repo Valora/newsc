@@ -12,26 +12,21 @@
         
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/SC?useSSL=false" userId="SC" password="tzhlkj">
         </jdbcConnection>
-
-        <commentGenerator>
-            <property name="suppressDate" value="true"/>
-            <property name="suppressAllComments" value="true"/>
-        </commentGenerator>
         
-        <javaModelGenerator targetPackage="com.sc.domain" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.sc.domain.generator" targetProject="src/main/java">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
         
-        <sqlMapGenerator targetProject="com.sc.mapper" targetPackage="src/main/java">
+        <sqlMapGenerator targetProject="com.sc.mapper.generator" targetPackage="src/main/java">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
         
-        <javaClientGenerator targetPackage="com.sc.mapper" type="ANNOTATEDMAPPER" targetProject="src/main/java">
+        <javaClientGenerator targetPackage="com.sc.mapper.generator" type="ANNOTATEDMAPPER" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         
-        <table tableName="TB_REGISTER" domainObjectName="Register">
+        <table tableName="TB_SELLERS" domainObjectName="Sellers">
             
         </table>
     </context>
