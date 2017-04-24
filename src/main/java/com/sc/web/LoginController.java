@@ -84,6 +84,6 @@ public class LoginController {
         if (account.isEmpty() || password.isEmpty()) {
             return GetResult.toJson(1, null, null, null, 0);
         }
-        return null;
+        return loginService.adminLogin(account, password);
     }
 }

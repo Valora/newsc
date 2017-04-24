@@ -2,8 +2,8 @@ package com.sc;
 
 import com.sc.domain.generator.User;
 import com.sc.domain.generator.UserExample;
-import com.sc.domain.UserLogin;
-import com.sc.mapper.UserLoginMapper;
+import com.sc.domain.login.UserLogin;
+import com.sc.mapper.login.UserLoginMapper;
 import com.sc.mapper.generator.UserMapper;
 import org.junit.Assert;
 import org.junit.Test;

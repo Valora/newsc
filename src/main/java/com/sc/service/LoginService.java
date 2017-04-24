@@ -1,10 +1,9 @@
 package com.sc.service;
 
-import com.sc.dao.RegisterDao;
-import com.sc.dao.SellerDao;
-import com.sc.dao.UserDao;
-import com.sc.domain.SellerLogin;
-import com.sc.domain.UserLogin;
+import com.sc.dao.LoginDao;
+import com.sc.domain.login.AdminLogin;
+import com.sc.domain.login.SellerLogin;
+import com.sc.domain.login.UserLogin;
 import com.sc.domain.generator.User;
 import com.sc.utils.GetResult;
 import com.sc.utils.JWT;
@@ -21,13 +20,7 @@ import java.util.List;
 @Service
 public class LoginService {
     @Autowired
-    private UserDao userDao;
-
-    @Autowired
-    private RegisterDao registerDao;
-
-    @Autowired
-    private SellerDao sellerDao;
+    private LoginDao loginDao;
 
     @Autowired
     private JWT jwt;
@@ -40,7 +33,7 @@ public class LoginService {
      * @return token
      */
     public Result GetToken(String account, String password) {
-        List<User> result = userDao.getUserByAccountAndPassword(account, password);
+        List<User> result = loginDao.getUserByAccountAndPassword(account, password);
         if (result.size() == 0) {
             return GetResult.toJson(6, null, null, null, 0);
         }
@@ -57,7 +50,7 @@ public class LoginService {
      * @return Result
      */
     public Result userLogin(String account, String password, Integer code) {
-        UserLogin userLoginInfo = userDao.getUserLoginInfo(account, password);
+        UserLogin userLoginInfo = loginDao.getUserLoginInfo(account, password);
         if (userLoginInfo == null) {
             return GetResult.toJson(6, null, null, null, 0);
         }
@@ -69,7 +62,7 @@ public class LoginService {
         }
 
         //更新code值
-        registerDao.deleteCode(userLoginInfo.getCmPhone());
+        loginDao.deleteCode(userLoginInfo.getCmPhone());
 
         return GetResult.toJson(0, null, jwt.createJWT(userLoginInfo.getCmUserid()), userLoginInfo, 0);
     }
@@ -83,7 +76,7 @@ public class LoginService {
      * @return Result
      */
     public Result sellerLogin(String account, String password, Integer code) {
-        SellerLogin sellerLoginInfo = sellerDao.getSellerLoginInfo(account, password);
+        SellerLogin sellerLoginInfo = loginDao.getSellerLoginInfo(account, password);
         if (sellerLoginInfo == null) {
             return GetResult.toJson(6, null, null, null, 0);
         }
@@ -94,7 +87,7 @@ public class LoginService {
             return GetResult.toJson(8, null, null, null, 0);
         }
 
-        registerDao.deleteCode(sellerLoginInfo.getCmPhone());
+        loginDao.deleteCode(sellerLoginInfo.getCmPhone());
 
         return GetResult.toJson(0, null, jwt.createJWT(sellerLoginInfo.getCmSellerid()), sellerLoginInfo, 0);
     }
@@ -107,6 +100,14 @@ public class LoginService {
      * @return
      */
     public Result adminLogin(String account, String password) {
-        return null;
+        try {
+            AdminLogin adminLoginInfo = loginDao.getAdminLoginInfo(account, password);
+            if (adminLoginInfo == null) {
+                return GetResult.toJson(6, null, null, null, 0);
+            }
+            return GetResult.toJson(0, null, jwt.createJWT(adminLoginInfo.getCmAdminid()), adminLoginInfo, 0);
+        } catch (Exception e) {
+            return GetResult.toJson(200, null, null, null, 0);
+        }
     }
 }

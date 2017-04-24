@@ -1,6 +1,6 @@
-package com.sc.mapper;
+package com.sc.mapper.login;
 
-import com.sc.domain.SellerLogin;
+import com.sc.domain.login.SellerLogin;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;

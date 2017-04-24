@@ -1,4 +1,4 @@
-package com.sc.mapper;
+package com.sc.mapper.login;
 
 import org.apache.ibatis.jdbc.SQL;
 
