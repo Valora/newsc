@@ -1,5 +1,6 @@
 package com.sc.web;
 
+import com.sc.service.ManageService;
 import com.sc.utils.GetResult;
 import com.sc.utils.JWT;
 import com.sc.utils.Result;
@@ -26,6 +27,9 @@ public class ManageController {
     @Autowired
     private JWT jwt;
 
+    @Autowired
+    private ManageService manageService;
+
     @RequestMapping(value = URL + "AddEmployee", method = RequestMethod.GET)
     @ApiOperation("添加客服/销售(账号自动生成)")
     @ApiImplicitParams({
@@ -44,7 +48,7 @@ public class ManageController {
             return GetResult.toJson(101, null, null, null, 0);
         }
 
-        return null;
+        return manageService.addEmployee(name, password, phone, type, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "DelEmployee", method = RequestMethod.GET)
@@ -53,15 +57,15 @@ public class ManageController {
             @ApiImplicitParam(name = "adminid", value = "被删除客服／销售ID", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "token", value = "密钥", required = true, dataType = "String", paramType = "query")
     })
-    public Result delEmployee(@RequestParam(value = "adminid") String adminid, @RequestParam(value = "token") String token) {
+    public Result delEmployee(@RequestParam(value = "adminid") Integer adminid, @RequestParam(value = "token") String token) {
         Token tk = jwt.checkJWT(token);
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
         }
 
-        return null;
+        return manageService.delEmployee(adminid, tk.getUserId());
     }
-
+    
     @RequestMapping(value = URL + "QueryEmployee", method = RequestMethod.GET)
     @ApiOperation("查询客服/销售列表")
     @ApiImplicitParams({
@@ -69,7 +73,7 @@ public class ManageController {
             @ApiImplicitParam(name = "pagenum", value = "页码", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pagesize", value = "页面大小", required = true, dataType = "Integer", paramType = "query")
     })
-    public Result queryEmployee(@RequestParam(value = "token") String token, @RequestParam(value = "pagenum") Integer pagenum, @RequestParam(value = "pagesize") Integer pagesize) {
+    public Result queryEmployees(@RequestParam(value = "token") String token, @RequestParam(value = "pagenum") Integer pagenum, @RequestParam(value = "pagesize") Integer pagesize) {
         Token tk = jwt.checkJWT(token);
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
@@ -77,7 +81,7 @@ public class ManageController {
         pagenum = pagenum < 1 ? 1 : pagenum;
         pagesize = pagesize < 1 ? 10 : pagesize;
 
-        return null;
+        return manageService.queryEmployees(pagenum, pagesize, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "QueryUser", method = RequestMethod.GET)
@@ -87,7 +91,7 @@ public class ManageController {
             @ApiImplicitParam(name = "pagenum", value = "页码", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pagesize", value = "页面大小", required = true, dataType = "Integer", paramType = "query")
     })
-    public Result queryUser(@RequestParam(value = "token") String token, @RequestParam(value = "pagenum") Integer pagenum, @RequestParam(value = "pagesize") Integer pagesize) {
+    public Result queryUsers(@RequestParam(value = "token") String token, @RequestParam(value = "pagenum") Integer pagenum, @RequestParam(value = "pagesize") Integer pagesize) {
         Token tk = jwt.checkJWT(token);
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);

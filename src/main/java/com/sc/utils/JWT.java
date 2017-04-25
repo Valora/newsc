@@ -60,7 +60,7 @@ public class JWT {
     //生成token
     public String createJWT(String userId){
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS512;
-        int code = (int) (Math.random()*90000+10000);
+        int code = Integer.parseInt(GetRandomNumber.genRandomNum(5));
         List<RadCode> result = radCodeDao.getRcByUserID(userId);
         if (result.size() == 0) {
             radCodeDao.insert(userId, code);
