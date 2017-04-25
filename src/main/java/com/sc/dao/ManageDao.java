@@ -6,6 +6,7 @@ import com.sc.domain.generator.AdminsExample;
 import com.sc.domain.generator.User;
 import com.sc.domain.generator.UserExample;
 import com.sc.domain.manage.AdminsInfo;
+import com.sc.domain.manage.UserInfo;
 import com.sc.mapper.generator.AdminsMapper;
 import com.sc.mapper.generator.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,10 +123,20 @@ public class ManageDao {
      * @param pagesize 页面大小
      * @return 商家列表
      */
-    public List<User> queryUsers(int pagenum, int pagesize) {
+    public List<UserInfo> queryUsers(int pagenum, int pagesize) {
         UserExample userExample = new UserExample();
         List<User> results = userMapper.selectByExample(userExample);
         PageHelper.startPage(pagenum, pagesize);
+        //todo
         return null;
+    }
+
+    /**
+     * 查询商家数量
+     * @return 商家数量
+     */ 
+    public int getUsersCount() {
+        UserExample userExample = new UserExample();
+        return userMapper.deleteByExample(userExample);
     }
 }

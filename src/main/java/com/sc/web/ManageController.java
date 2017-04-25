@@ -99,7 +99,7 @@ public class ManageController {
         pagenum = pagenum < 1 ? 1 : pagenum;
         pagesize = pagesize < 1 ? 10 : pagesize;
 
-        return null;
+        return manageService.queryUsers(pagenum, pagesize, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "QuerySeller", method = RequestMethod.GET)

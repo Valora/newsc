@@ -3,6 +3,7 @@ package com.sc.service;
 import com.sc.dao.ManageDao;
 import com.sc.domain.generator.Admins;
 import com.sc.domain.manage.AdminsInfo;
+import com.sc.domain.manage.UserInfo;
 import com.sc.utils.GetRandomNumber;
 import com.sc.utils.GetResult;
 import com.sc.utils.JWT;
@@ -105,15 +106,45 @@ public class ManageService {
         }
     }
 
+    /**
+     * 查询商家列表
+     * @param pagenum 页码
+     * @param pagesize 页面大小
+     * @param adminId 用户ID
+     * @return 商家列表
+     */
     public Result queryUsers(Integer pagenum, Integer pagesize, String adminId) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminId);
             if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
-            
-            
-            
+            List<UserInfo> results = manageDao.queryUsers(pagenum, pagesize);
+            int i = manageDao.getUsersCount();
+            i = (i / pagesize) + ((i % pagesize) > 0 ? 1 : 0);
+            return GetResult.toJson(0, null, null, results, i);
+        } catch (Exception ex) {
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 查询厂家列表
+     * @param pagenum 页码
+     * @param pagesize 页面大小
+     * @param adminId 用户ID
+     * @return 商家列表
+     */
+    public Result querySellers(Integer pagenum, Integer pagesize, String adminId) {
+        try {
+            List<Admins> result = manageDao.selectAdminsByAdminId(adminId);
+            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+                return GetResult.toJson(37, null, null, null, 0);
+            }
+            List<UserInfo> results = manageDao.queryUsers(pagenum, pagesize);
+            int i = manageDao.getUsersCount();
+            i = (i / pagesize) + ((i % pagesize) > 0 ? 1 : 0);
+            return GetResult.toJson(0, null, null, results, i);
         } catch (Exception ex) {
             return GetResult.toJson(200, null, null, null, 0);
         }
