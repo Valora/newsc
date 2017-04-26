@@ -1,6 +1,7 @@
 package com.sc.service;
 
 import com.sc.dao.LoginDao;
+import com.sc.domain.generator.Users;
 import com.sc.domain.login.AdminLogin;
 import com.sc.domain.login.SellerLogin;
 import com.sc.domain.login.UserLogin;
@@ -32,7 +33,7 @@ public class LoginService {
      * @return token
      */
     public Result GetToken(String account, String password) {
-        List<User> result = loginDao.getUserByAccountAndPassword(account, password);
+        List<Users> result = loginDao.getUserByAccountAndPassword(account, password);
         if (result.size() == 0) {
             return GetResult.toJson(6, null, null, null, 0);
         }

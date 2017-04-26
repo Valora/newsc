@@ -117,7 +117,7 @@ public class ManageController {
         pagenum = pagenum < 1 ? 1 : pagenum;
         pagesize = pagesize < 1 ? 10 : pagesize;
 
-        return null;
+        return manageService.querySellers(pagenum, pagesize, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "QueryUserInfo", method = RequestMethod.GET)
@@ -132,7 +132,7 @@ public class ManageController {
             return GetResult.toJson(101, null, null, null, 0);
         }
 
-        return null;
+        return manageService.queryUserInfo(userid, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "QuerySellerInfo", method = RequestMethod.GET)
@@ -147,9 +147,9 @@ public class ManageController {
             return GetResult.toJson(101, null, null, null, 0);
         }
 
-        return null;
+        return manageService.querySellerInfo(sellerid, tk.getUserId());
     }
-
+    
     @RequestMapping(value = URL + "QueryEmployeesByUserInfo", method = RequestMethod.GET)
     @ApiOperation("根据客服/销售信息（模糊）查询客服/销售详情")
     @ApiImplicitParams({

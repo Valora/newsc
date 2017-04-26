@@ -1,7 +1,11 @@
 package com.sc.service;
 
 import com.sc.dao.ManageDao;
+import com.sc.domain.generator.Admins;
 import com.sc.domain.manage.AdminsInfo;
+import com.sc.domain.manage.SellerDetail;
+import com.sc.domain.manage.SellerInfo;
+import com.sc.domain.manage.UserDetail;
 import com.sc.domain.manage.UserInfo;
 import com.sc.utils.GetRandomNumber;
 import com.sc.utils.GetResult;
@@ -96,7 +100,7 @@ public class ManageService {
             if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
-            List<AdminsInfo> results = manageDao.queryEmplyees(pagenum, pagesize);
+            List<AdminsInfo> results = manageDao.queryEmployees(pagenum, pagesize);
             int i = manageDao.getAdminCount().intValue();
             i = (i / pagesize) + ((i % pagesize) > 0 ? 1 : 0);
             return GetResult.toJson(0, null, null, results, i);
@@ -132,7 +136,7 @@ public class ManageService {
      * @param pagenum 页码
      * @param pagesize 页面大小
      * @param adminId 用户ID
-     * @return 商家列表
+     * @return 厂家列表
      */
     public Result querySellers(Integer pagenum, Integer pagesize, String adminId) {
         try {
@@ -140,10 +144,53 @@ public class ManageService {
             if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
-            List<UserInfo> results = manageDao.queryUsers(pagenum, pagesize);
-            int i = manageDao.getUsersCount();
+            List<SellerInfo> results = manageDao.querySellers(pagenum, pagesize);
+            int i = manageDao.getSellersCount();
             i = (i / pagesize) + ((i % pagesize) > 0 ? 1 : 0);
+            
             return GetResult.toJson(0, null, null, results, i);
+        } catch (Exception ex) {
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 查询商家详细信息
+     * @param userid 商家ID
+     * @param adminid 管理员ID
+     * @return 商家详情
+     */
+    public Result queryUserInfo(String userid, String adminid) {
+        try {
+            List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
+            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+                return GetResult.toJson(37, null, null, null, 0);
+            }
+
+            List<UserDetail> results = manageDao.queryUserInfo(userid);
+
+            return GetResult.toJson(0, null, null, results, 0);
+        } catch (Exception ex) {
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 查询厂家详细信息
+     * @param sellerid 厂家ID
+     * @param adminid 管理员ID
+     * @return 厂家详细信息
+     */
+    public Result querySellerInfo(String sellerid, String adminid) {
+        try {
+            List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
+            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+                return GetResult.toJson(37, null, null, null, 0);
+            }
+
+            List<SellerDetail> results = manageDao.querySellerInfo(sellerid);
+
+            return GetResult.toJson(0, null, null, results, 0);
         } catch (Exception ex) {
             return GetResult.toJson(200, null, null, null, 0);
         }
