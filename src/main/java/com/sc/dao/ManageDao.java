@@ -3,12 +3,12 @@ package com.sc.dao;
 import com.github.pagehelper.PageHelper;
 import com.sc.domain.generator.Admins;
 import com.sc.domain.generator.AdminsExample;
-import com.sc.domain.generator.User;
-import com.sc.domain.generator.UserExample;
+import com.sc.domain.generator.Users;
+import com.sc.domain.generator.UsersExample;
 import com.sc.domain.manage.AdminsInfo;
 import com.sc.domain.manage.UserInfo;
 import com.sc.mapper.generator.AdminsMapper;
-import com.sc.mapper.generator.UserMapper;
+import com.sc.mapper.generator.UsersMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -27,7 +27,7 @@ public class ManageDao {
     private AdminsMapper adminsMapper;
 
     @Autowired
-    private UserMapper userMapper;
+    private UsersMapper usersMapper;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -123,9 +123,9 @@ public class ManageDao {
      * @param pagesize 页面大小
      * @return 商家列表
      */
-    public List<UserInfo> queryUsers(int pagenum, int pagesize) {
-        UserExample userExample = new UserExample();
-        List<User> results = userMapper.selectByExample(userExample);
+    public List<UserInfo> queryUsrs(int pagenum, int pagesize) {
+        UsersExample userExample = new UsersExample();
+        List<Users> results = usersMapper.selectByExample(userExample);
         PageHelper.startPage(pagenum, pagesize);
         //todo
         return null;
@@ -136,7 +136,7 @@ public class ManageDao {
      * @return 商家数量
      */ 
     public int getUsersCount() {
-        UserExample userExample = new UserExample();
-        return userMapper.deleteByExample(userExample);
+        UsersExample userExample = new UsersExample();
+        return usersMapper.deleteByExample(userExample);
     }
 }

@@ -1,15 +1,15 @@
 package com.sc.dao;
 
 import com.sc.domain.generator.RegisterExample;
-import com.sc.domain.generator.User;
-import com.sc.domain.generator.UserExample;
+import com.sc.domain.generator.Users;
+import com.sc.domain.generator.UsersExample;
 import com.sc.domain.login.AdminLogin;
 import com.sc.domain.login.AdminLoginInfo;
 import com.sc.domain.login.MenuInfo;
 import com.sc.domain.login.SellerLogin;
 import com.sc.domain.login.UserLogin;
 import com.sc.mapper.generator.RegisterMapper;
-import com.sc.mapper.generator.UserMapper;
+import com.sc.mapper.generator.UsersMapper;
 import com.sc.mapper.login.AdminLoginMapper;
 import com.sc.mapper.login.SellerLoginMapper;
 import com.sc.mapper.login.UserLoginMapper;
@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
+ * 登录用Dao
  * Created by valora on 2017/4/21.
  */
 @Component
@@ -30,10 +31,10 @@ public class LoginDao {
     private RegisterMapper registerMapper;
 
     @Autowired
-    private SellerLoginMapper sellerLoginMapper;
+    private SellerLoginMapper sellerLginMapper;
 
     @Autowired
-    private UserMapper userMapper;
+    private UsersMapper usersMapper;
 
     @Autowired
     private UserLoginMapper userLoginMapper;
@@ -44,12 +45,12 @@ public class LoginDao {
      * @param password 密码
      * @return 厂家
      */
-    public List<User> getUserByAccountAndPassword(String account, String password) {
-        UserExample userExample = new UserExample();
-        UserExample.Criteria criteria = userExample.createCriteria();
+    public List<Users> getUserByAccountAndPassword(String account, String password) {
+        UsersExample userExample = new UsersExample();
+        UsersExample.Criteria criteria = userExample.createCriteria();
         criteria.andCmAccountEqualTo(account);
         criteria.andCmPasswordEqualTo(password);
-        return userMapper.selectByExample(userExample);
+        return usersMapper.selectByExample(userExample);
     }
 
     /**
@@ -112,7 +113,7 @@ public class LoginDao {
     public SellerLogin getSellerLoginInfo(String account, String password) {
         //厂家信息
         SellerLogin sellerLoginInfo = new SellerLogin();
-        List<SellerLogin> result = sellerLoginMapper.selectLoginInfo(account, password);
+        List<SellerLogin> result = sellerLginMapper.selectLoginInfo(account, password);
         sellerLoginInfo.setCmCode(result.get(0).getCmCode());
         sellerLoginInfo.setCmPhone(result.get(0).getCmPhone());
         sellerLoginInfo.setCmSellerid(result.get(0).getCmSellerid());
