@@ -1,7 +1,6 @@
 package com.sc.service;
 
 import com.sc.dao.ManageDao;
-import com.sc.domain.generator.Admins;
 import com.sc.domain.manage.AdminsInfo;
 import com.sc.domain.manage.UserInfo;
 import com.sc.utils.GetRandomNumber;

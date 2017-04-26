@@ -29,6 +29,20 @@
         <table tableName="TB_USERS" domainObjectName="Users">
             
         </table>
+
+        <table tableName="TB_SELLERS" domainObjectName="Sellers">
+
+        </table>
+
+        <table tableName="TB_RADCODE" domainObjectName="RadCode">
+
+        </table>
+        <table tableName="TB_ADMINS" domainObjectName="Admins">
+
+        </table>
+        <table tableName="TB_REGISTER" domainObjectName="Register">
+
+        </table>
     </context>
  
 </generatorConfiguration>

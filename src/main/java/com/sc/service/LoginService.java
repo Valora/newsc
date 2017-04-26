@@ -4,7 +4,6 @@ import com.sc.dao.LoginDao;
 import com.sc.domain.login.AdminLogin;
 import com.sc.domain.login.SellerLogin;
 import com.sc.domain.login.UserLogin;
-import com.sc.domain.generator.User;
 import com.sc.utils.GetResult;
 import com.sc.utils.JWT;
 import com.sc.utils.Result;
