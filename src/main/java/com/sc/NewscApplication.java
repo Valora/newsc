@@ -1,16 +1,28 @@
 package com.sc;
 
+import com.sc.storage.StorageProperties;
+import com.sc.storage.StorageService;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-@EnableSwagger2
-@MapperScan("com.sc.mapper")
+@MapperScan(basePackages = "com.sc.mapper")
+@EnableConfigurationProperties(StorageProperties.class)
 public class NewscApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(NewscApplication.class, args);
+	}
+	
+	@Bean
+	CommandLineRunner init(StorageService storageService) {
+		return (args) -> {
+			storageService.deleteAll();
+			storageService.init();
+		};
 	}
 }

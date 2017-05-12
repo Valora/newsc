@@ -9,8 +9,11 @@
         <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
         
-        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/SC?useSSL=false" userId="SC" password="tzhlkj">
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/SC?useSSL=false" userId="root" password="">
         </jdbcConnection>
         
         <javaModelGenerator targetPackage="com.sc.domain.generator" targetProject="src/main/java">
@@ -25,22 +28,102 @@
         <javaClientGenerator targetPackage="com.sc.mapper.generator" type="ANNOTATEDMAPPER" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
+
+        <table tableName="TB_ADDRESSES" domainObjectName="Addresses">
+
+        </table>
+
+        <table tableName="TB_ADMIN_ROLE" domainObjectName="AdminRole">
+
+        </table>
+
+        <table tableName="TB_ADMINS" domainObjectName="Admins">
+
+        </table>
+
+        <table tableName="TB_AFTERSERVICES" domainObjectName="Afterservices">
+
+        </table>
+
+        <table tableName="TB_BRANDS" domainObjectName="Brands">
+
+        </table>
+
+        <table tableName="TB_CLASSIFYS" domainObjectName="Classifys">
+
+        </table>
+
+        <table tableName="TB_COLLECTIONS" domainObjectName="Collections">
+
+        </table>
         
-        <table tableName="TB_USERS" domainObjectName="Users">
+        <table tableName="TB_GOODS" domainObjectName="Goods">
             
+        </table>
+
+        <table tableName="TB_GOODSDETAILS" domainObjectName="Gooddetails">
+
+        </table>
+
+        <table tableName="TB_LOGISTICSS" domainObjectName="Logisticss">
+
+        </table>
+        <table tableName="TB_MENUS" domainObjectName="Menus">
+
+        </table>
+
+        <table tableName="TB_NOTICES" domainObjectName="Notices">
+
+        </table>
+
+        <table tableName="TB_ORDERDETAILS" domainObjectName="Orderdetails">
+
+        </table>
+        <table tableName="TB_ORDERS" domainObjectName="Orders">
+
+        </table>
+
+        <table tableName="TB_PAYS" domainObjectName="Pays">
+
+        </table>
+
+        <table tableName="TB_POWER_MENU" domainObjectName="PowerMenu">
+
+        </table>
+
+        <table tableName="TB_RADCODE" domainObjectName="Radcode">
+
+        </table>
+
+        <table tableName="TB_REGISTER" domainObjectName="Register">
+
+        </table>
+
+        <table tableName="TB_ROLE_POWER" domainObjectName="RolePower">
+
+        </table>
+
+        <table tableName="TB_ROLES" domainObjectName="Roles">
+
         </table>
 
         <table tableName="TB_SELLERS" domainObjectName="Sellers">
 
         </table>
 
-        <table tableName="TB_RADCODE" domainObjectName="RadCode">
+        <table tableName="TB_SERVICEDETAILS" domainObjectName="Servicedetails">
 
         </table>
-        <table tableName="TB_ADMINS" domainObjectName="Admins">
+
+        <table tableName="TB_SHOWS" domainObjectName="Shows">
 
         </table>
-        <table tableName="TB_REGISTER" domainObjectName="Register">
+
+        <table tableName="TB_USERAPPLICATIONS" domainObjectName="Userapplications">
+
+        </table>
+
+        <table tableName="TB_USERS" domainObjectName="Users">
 
         </table>
     </context>

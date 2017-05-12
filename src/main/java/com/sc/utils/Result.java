@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 结果类
- * Created by valora on 2017/4/5.
+ * Created by valora on 2017/4/27.
  */
 @Data
 @AllArgsConstructor

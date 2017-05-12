@@ -9,13 +9,17 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 随机码存储类(用来验证token)
- * Created by valora on 2017/4/21.
+ * 随机码生成(token用)
+ * Created by valora on 2017/4/27.
  */
 @Component
 public class RadCodeDao {
+    private final RadCodeMapper radCodeMapper;
+
     @Autowired
-    private RadCodeMapper radCodeMapper;
+    public RadCodeDao(RadCodeMapper radCodeMapper) {
+        this.radCodeMapper = radCodeMapper;
+    }
 
     /**
      * 随机码

@@ -14,19 +14,23 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 生成Token。
- * Created by valora on 2017/4/5.
+ * Token操作类
+ * Created by valora on 2017/4/27.
  */
 @Component
 public class JWT {
+    private final RadCodeDao radCodeDao;
+
     @Autowired
-    private RadCodeDao radCodeDao;
+    public JWT(RadCodeDao radCodeDao) {
+        this.radCodeDao = radCodeDao;
+    }
 
     //检查token
     public Token checkJWT(String jsonWebToken) {
         Token token = new Token();
         Claims claims = parseJWT(jsonWebToken);
-        if (claims.isEmpty()) {
+        if (claims == null) {
             return null;
         }
         String userID = (String) claims.get("userId");
@@ -44,19 +48,18 @@ public class JWT {
         }
         return token;
     }
-    
+
     //解析Jwt
     private Claims parseJWT(String jsonWebToken) {
         try {
-            Claims claims = Jwts.parser()
+            return Jwts.parser()
                     .setSigningKey("secret")
                     .parseClaimsJws(jsonWebToken).getBody();
-            return claims;
         } catch (Exception ex) {
             return null;
         }
     }
-    
+
     //生成token
     public String createJWT(String userId){
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS512;
@@ -66,17 +69,16 @@ public class JWT {
             radCodeDao.insert(userId, code);
         } else {
             radCodeDao.updateCode(userId, code);
-        } 
-        
+        }
+
         //生成claims
         Map<String, Object> claims = new HashMap<>();
         claims.put("userId", userId);
         claims.put("code", code);
-        
+
         JwtBuilder builder = Jwts.builder()
                 .setClaims(claims)
                 .signWith(signatureAlgorithm,"secret"); //签名
-        
         return builder.compact();
     }
 }

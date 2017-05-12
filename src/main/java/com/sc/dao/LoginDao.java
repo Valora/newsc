@@ -24,20 +24,24 @@ import java.util.List;
  */
 @Component
 public class LoginDao {
-    @Autowired
-    private AdminLoginMapper adminLoginMapper;
+    private final AdminLoginMapper adminLoginMapper;
+
+    private final RegisterMapper registerMapper;
+
+    private final SellerLoginMapper sellerLoginMapper;
+
+    private final UsersMapper usersMapper;
+
+    private final UserLoginMapper userLoginMapper;
 
     @Autowired
-    private RegisterMapper registerMapper;
-
-    @Autowired
-    private SellerLoginMapper sellerLginMapper;
-
-    @Autowired
-    private UsersMapper usersMapper;
-
-    @Autowired
-    private UserLoginMapper userLoginMapper;
+    public LoginDao(AdminLoginMapper adminLoginMapper, RegisterMapper registerMapper, SellerLoginMapper sellerLoginMapper, UsersMapper usersMapper, UserLoginMapper userLoginMapper) {
+        this.adminLoginMapper = adminLoginMapper;
+        this.registerMapper = registerMapper;
+        this.sellerLoginMapper = sellerLoginMapper;
+        this.usersMapper = usersMapper;
+        this.userLoginMapper = userLoginMapper;
+    }
 
     /**
      * 厂家信息
@@ -113,7 +117,7 @@ public class LoginDao {
     public SellerLogin getSellerLoginInfo(String account, String password) {
         //厂家信息
         SellerLogin sellerLoginInfo = new SellerLogin();
-        List<SellerLogin> result = sellerLginMapper.selectLoginInfo(account, password);
+        List<SellerLogin> result = sellerLoginMapper.selectLoginInfo(account, password);
         sellerLoginInfo.setCmCode(result.get(0).getCmCode());
         sellerLoginInfo.setCmPhone(result.get(0).getCmPhone());
         sellerLoginInfo.setCmSellerid(result.get(0).getCmSellerid());

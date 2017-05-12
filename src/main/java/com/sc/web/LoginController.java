@@ -21,15 +21,20 @@ import org.springframework.web.bind.annotation.RestController;
 @Api("Login")
 public class LoginController {
 
-    public static final String URL = "/api/Login/";
+    private static final String URL = "/api/Login/";
+    
+    private final LoginService loginService;
+
     @Autowired
-    private LoginService loginService;
+    public LoginController(LoginService loginService) {
+        this.loginService = loginService;
+    }
 
     @RequestMapping(value = URL + "SendLoginCode", method = RequestMethod.GET)
     @ApiOperation("发送登录验证码")
-    @ApiImplicitParam(name = "phone", value = "手机号码", required = true, dataType = "Long", paramType = "query")
-    public void sendLoginCode(@RequestParam(value = "phone") Long phone) {
-        
+    @ApiImplicitParam(name = "phone", value = "手机号码", required = true, dataType = "String", paramType = "query")
+    public void sendLoginCode(@RequestParam(value = "phone") String phone) {
+        loginService.send(phone, 2);
     }
 
     @RequestMapping(value = URL + "GetToken", method = RequestMethod.GET)
@@ -73,7 +78,7 @@ public class LoginController {
         }
         return loginService.sellerLogin(account, password, code);
     }
-    
+
     @RequestMapping(value = URL + "AdminLogin", method = RequestMethod.GET)
     @ApiOperation("后台管理员登录(返回有权限的URL)")
     @ApiImplicitParams({

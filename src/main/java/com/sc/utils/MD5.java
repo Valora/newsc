@@ -4,13 +4,13 @@ import java.security.MessageDigest;
 
 /**
  * 生成MD5
- * Created by valora on 2017/4/5.
+ * Created by valora on 2017/4/27.
  */
 public class MD5 {
     public static String getMD5(String inStr) {
         MessageDigest md5 = null;
         try {
-        //初始化md5算法对象
+            //初始化md5算法对象
             md5 = MessageDigest.getInstance("MD5");
         } catch (Exception e) {
             e.printStackTrace();
@@ -27,7 +27,7 @@ public class MD5 {
         byte[] md5Bytes = md5.digest(byteArray);
 
         StringBuffer hexValue = new StringBuffer();
-        
+
         //转成16进制
         for (int i = 0; i < md5Bytes.length; i++) {
             int val = ((int) md5Bytes[i]) & 0xff;
@@ -38,5 +38,4 @@ public class MD5 {
 
         return hexValue.toString();
     }
-    
 }

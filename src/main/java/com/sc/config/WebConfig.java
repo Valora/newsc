@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Web配置类
- * Created by valora on 2017/3/31.
+ * 配置https
+ * Created by valora on 2017/4/27.
  */
 @Configuration
 public class WebConfig {
@@ -22,7 +22,7 @@ public class WebConfig {
     public EmbeddedServletContainerCustomizer containerCustomizer() {
         return container -> {
             Ssl ssl = new Ssl();
-            ssl.setKeyStore("/Users/valora/ssl/mykeys.jks");
+            ssl.setKeyStore("mykeys.jks");
             ssl.setKeyStorePassword("tzhlkj");
             container.setSsl(ssl);
             container.setPort(8443);

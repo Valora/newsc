@@ -1,24 +1,55 @@
 package com.sc.utils;
 
-import com.yunpian.sdk.YunpianClient;
+import com.taobao.api.ApiException;
+import com.taobao.api.DefaultTaobaoClient;
+import com.taobao.api.TaobaoClient;
+import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
+import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
 
-import java.util.Map;
-
-/**
- * 验证码发送
- * Created by valora on 2017/4/15.
+/*
+ * Created by valora on 2017/5/12.
  */
 public class SendCode {
-    public static Boolean send(Long Phone, int code) {
-        YunpianClient clnt = new YunpianClient("").init();
-
-        Map<String, String> param = clnt.newParam(3);
-        param.put(YunpianClient.EMERGENCY_CONTACT, "yunpian");
-        param.put(YunpianClient.EMERGENCY_MOBILE, "11111111111");
-        param.put(YunpianClient.ALARM_BALANCE, "10");
-//        clnt.sms();
-        clnt.close();
-
-        return false;
+    private static final String ACCOUNT = "23746703";
+    private static final String PASSWORD = "30d8dfba2daaf3aec1939f27c7de95f5";
+    private static final String URL = "http://gw.api.taobao.com/router/rest";
+    public static boolean sendCode(String phone, Integer code, Integer type) {
+        String smsTemplateCode = "";
+        String smsParam = "";
+        switch (type) {
+            case 1:
+                smsTemplateCode = "SMS_61045125";
+                smsParam = "{'code':'" + code + "','product':'童E家'}";
+                break;
+            case 2:
+                smsTemplateCode = "SMS_61045123";
+                smsParam = "{'code':'" + code + "','product':'童E家'}";
+                break;
+            case 3:
+                smsTemplateCode = "SMS_61045121";
+                smsParam = "{'code':'" + code + "','product':'童E家'}";
+                break;
+            case 4:
+                smsTemplateCode = "SMS_61045119";
+                smsParam = "{'code':'" + code + "','product':'童E家'}";
+                break;
+        }
+        TaobaoClient client = new DefaultTaobaoClient(URL, ACCOUNT, PASSWORD, "json");
+        AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
+        req.setSmsType("normal");
+        req.setSmsParamString(smsParam);
+        req.setRecNum(phone);
+        req.setSmsFreeSignName("浙江汉联");
+        req.setSmsTemplateCode(smsTemplateCode);
+        try {
+            AlibabaAliqinFcSmsNumSendResponse rsp = client.execute(req);
+            if (rsp.getBody().contains("true")) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (ApiException e) {
+            return false;
+        }
     }
 }

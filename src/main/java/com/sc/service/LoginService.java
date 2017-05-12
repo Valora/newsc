@@ -19,11 +19,15 @@ import java.util.List;
  */
 @Service
 public class LoginService {
-    @Autowired
-    private LoginDao loginDao;
+    private final LoginDao loginDao;
+
+    private final JWT jwt;
 
     @Autowired
-    private JWT jwt;
+    public LoginService(LoginDao loginDao, JWT jwt) {
+        this.loginDao = loginDao;
+        this.jwt = jwt;
+    }
 
     /**
      * 获得token
@@ -83,7 +87,7 @@ public class LoginService {
         if (sellerLoginInfo.getCmCode() == null) {
             return GetResult.toJson(7, null, null, null, 0);
         }
-        if (!sellerLoginInfo.equals(code)) {
+        if (!sellerLoginInfo.getCmCode().equals(code)) {
             return GetResult.toJson(8, null, null, null, 0);
         }
 
@@ -97,7 +101,7 @@ public class LoginService {
      *
      * @param account  账号
      * @param password 密码
-     * @return
+     * @return 登录结果
      */
     public Result adminLogin(String account, String password) {
         try {
@@ -109,5 +113,16 @@ public class LoginService {
         } catch (Exception e) {
             return GetResult.toJson(200, null, null, null, 0);
         }
+    }
+
+    /**
+     * 发送验证码
+     * @param phone 手机号码
+     * @param type 类型
+     */
+    public void send(String phone, int type) {
+//        try {
+//            
+//        }
     }
 }

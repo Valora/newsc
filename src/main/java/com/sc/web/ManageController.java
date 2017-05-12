@@ -13,22 +13,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * 后台管理
- * Created by valora on 2017/4/21.
+ * Created by Sun on 2017/4/21.
  */
 @RestController
 @Api("Manege")
 public class ManageController {
     private final static String URL = "/api/Values/";
 
-    @Autowired
-    private JWT jwt;
+    private final JWT jwt;
+
+    private final ManageService manageService;
 
     @Autowired
-    private ManageService manageService;
+    public ManageController(JWT jwt, ManageService manageService) {
+        this.jwt = jwt;
+        this.manageService = manageService;
+    }
 
     @RequestMapping(value = URL + "AddEmployee", method = RequestMethod.GET)
     @ApiOperation("添加客服/销售(账号自动生成)")
@@ -65,7 +74,7 @@ public class ManageController {
 
         return manageService.delEmployee(adminid, tk.getUserId());
     }
-    
+
     @RequestMapping(value = URL + "QueryEmployee", method = RequestMethod.GET)
     @ApiOperation("查询客服/销售列表")
     @ApiImplicitParams({
@@ -146,10 +155,9 @@ public class ManageController {
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
         }
-
         return manageService.querySellerInfo(sellerid, tk.getUserId());
     }
-    
+
     @RequestMapping(value = URL + "QueryEmployeesByUserInfo", method = RequestMethod.GET)
     @ApiOperation("根据客服/销售信息（模糊）查询客服/销售详情")
     @ApiImplicitParams({
@@ -170,7 +178,7 @@ public class ManageController {
         pagenum = pagenum < 1 ? 1 : pagenum;
         pagesize = pagesize < 1 ? 10 : pagesize;
 
-        return null;
+        return manageService.queryEmployeesByUserInfo(content, pagenum, pagesize, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "QueryUsersByUserInfo", method = RequestMethod.GET)
@@ -193,7 +201,7 @@ public class ManageController {
         pagenum = pagenum < 1 ? 1 : pagenum;
         pagesize = pagesize < 1 ? 10 : pagesize;
 
-        return null;
+        return manageService.queryUserByUserInfo(content, pagenum, pagesize, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "QuerySellersBySellerInfo", method = RequestMethod.GET)
@@ -216,19 +224,28 @@ public class ManageController {
         pagenum = pagenum < 1 ? 1 : pagenum;
         pagesize = pagesize < 1 ? 10 : pagesize;
 
-        return null;
+        return manageService.querySellersBySellerInfo(content, pagenum, pagesize, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "AddClassify", method = RequestMethod.POST)
     @ApiOperation("添加商品分类和子分类{classifyname分类名称, type分类类型（0：大类，1：子类）,parentid上级分类（如果是大类，则输入0）,token秘钥, 图片}")
-    public void addClassify() {
-
+    public Result addClassify(@RequestPart("classifyname") String classifyname, @RequestPart("type") String type, @RequestPart("parentid") String parentid, @RequestPart("token") String token, @RequestPart("file") MultipartFile[] files) {
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return manageService.addClassify(classifyname, type, parentid, tk.getUserId(), files);
     }
 
     @RequestMapping(value = URL + "ReviceClassify", method = RequestMethod.POST)
     @ApiOperation("修改商品分类和子分类{classifyid分类ID，classifyname分类名称,type分类类型（0：大类，1：子类）,parentid上级分类（如果是大类，则输入0）,token秘钥,图片}")
-    public void reviceClassify() {
+    public Result reviceClassify(@RequestPart("classifyid") String classifyid, @RequestPart("classifyname") String classifyname, @RequestPart("type") String type, @RequestPart("parentid") String parentid, @RequestPart("token") String token, @RequestPart("file") MultipartFile[] files) {
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
 
+        return manageService.reviceClassify(classifyid, classifyname, type, parentid, tk.getUserId(), files);
     }
 
     @RequestMapping(value = URL + "QueryClassifies", method = RequestMethod.GET)
@@ -242,7 +259,7 @@ public class ManageController {
         pagenum = pagenum < 1 ? 1 : pagenum;
         pagesize = pagesize < 1 ? 10 : pagesize;
 
-        return null;
+        return manageService.queryClassifies(type, pagenum, pagesize);
     }
 
     @RequestMapping(value = URL + "ClassifySort", method = RequestMethod.GET)
@@ -258,7 +275,7 @@ public class ManageController {
             return GetResult.toJson(101, null, null, null, 0);
         }
 
-        return null;
+        return manageService.classifySort(classifyid, sort, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "DelClassify", method = RequestMethod.GET)
@@ -274,7 +291,7 @@ public class ManageController {
             return GetResult.toJson(101, null, null, null, 0);
         }
 
-        return null;
+        return manageService.delClassify(classifyid, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "QueryBrands", method = RequestMethod.GET)
@@ -284,7 +301,7 @@ public class ManageController {
             @ApiImplicitParam(name = "pagenum", value = "页码", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pagesize", value = "页面大小", required = true, dataType = "Integer", paramType = "query")
     })
-    public Result queryBands(@RequestParam(value = "token") String token, @RequestParam(value = "pagenum") Integer pagenum, @RequestParam(value = "pagesize") Integer pagesize) {
+    public Result queryBrands(@RequestParam(value = "token") String token, @RequestParam(value = "pagenum") Integer pagenum, @RequestParam(value = "pagesize") Integer pagesize) {
         Token tk = jwt.checkJWT(token);
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
@@ -293,7 +310,7 @@ public class ManageController {
         pagenum = pagenum < 1 ? 1 : pagenum;
         pagesize = pagesize < 1 ? 10 : pagesize;
 
-        return null;
+        return manageService.queryBrands(pagenum, pagesize);
     }
 
     @RequestMapping(value = URL + "AddBrand", method = RequestMethod.GET)
@@ -303,13 +320,13 @@ public class ManageController {
             @ApiImplicitParam(name = "brand", value = "品牌", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "introduce", value = "介绍", required = true, dataType = "String", paramType = "query")
     })
-    public Result addBands(@RequestParam(value = "token") String token, @RequestParam(value = "brand") String brand, @RequestParam(value = "introduce") String introduce) {
+    public Result addBrand(@RequestParam(value = "token") String token, @RequestParam(value = "brand") String brand, @RequestParam(value = "introduce") String introduce) {
         Token tk = jwt.checkJWT(token);
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
         }
 
-        return null;
+        return manageService.addBrand(tk.getUserId(), brand, introduce);
     }
 
     @RequestMapping(value = URL + "DelBrand", method = RequestMethod.GET)
@@ -318,13 +335,13 @@ public class ManageController {
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "brandid", value = "品牌ID", required = true, dataType = "Integer", paramType = "query")
     })
-    public Result delBands(@RequestParam(value = "token") String token, @RequestParam(value = "pagenum") Integer pagenum, @RequestParam(value = "pagesize") Integer pagesize) {
+    public Result delBrands(@RequestParam(value = "token") String token, @RequestParam(value = "brandid") Integer brandid) {
         Token tk = jwt.checkJWT(token);
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
         }
 
-        return null;
+        return manageService.delBrands(tk.getUserId(), brandid);
     }
 
     @RequestMapping(value = URL + "QueryApplications", method = RequestMethod.GET)
@@ -342,8 +359,8 @@ public class ManageController {
 
         pagenum = pagenum < 1 ? 1 : pagenum;
         pagesize = pagesize < 1 ? 10 : pagesize;
-        
-        return null;
+
+        return manageService.queryApplications(pagenum, pagesize, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "QueryApplicationDetail", method = RequestMethod.GET)
@@ -358,7 +375,7 @@ public class ManageController {
             return GetResult.toJson(101, null, null, null, 0);
         }
 
-        return null;
+        return manageService.queryApplicationDetail(userid, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "ThroughAudit", method = RequestMethod.GET)
@@ -373,7 +390,7 @@ public class ManageController {
             return GetResult.toJson(101, null, null, null, 0);
         }
 
-        return null;
+        return manageService.throughAudit(tk.getUserId(), userid);
     }
 
     @RequestMapping(value = URL + "AuditFailure", method = RequestMethod.GET)
@@ -389,7 +406,7 @@ public class ManageController {
             return GetResult.toJson(101, null, null, null, 0);
         }
 
-        return null;
+        return manageService.auditFailure(tk.getUserId(), userid, reason);
     }
 
     @RequestMapping(value = URL + "QueryNotices", method = RequestMethod.GET)
@@ -407,14 +424,24 @@ public class ManageController {
 
         pagenum = pagenum < 1 ? 1 : pagenum;
         pagesize = pagesize < 1 ? 10 : pagesize;
-        
-        return null;
+
+        return manageService.queryNotices(pagenum, pagesize, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "AddNotices", method = RequestMethod.POST)
     @ApiOperation("添加公告(对厂家){token秘钥，title标题，content内容，creator公告者，other其他，deadline过期时间}")
-    public void addNotices() {
+    public Result addNotices(@RequestPart("token") String token, @RequestPart("title") String title, @RequestPart("content") String content, @RequestPart("creator") String creator, @RequestPart("other") String other, @RequestPart("deadline") String deadline) {
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
 
+        LocalDate now = LocalDate.now();
+        LocalDate deadLine = LocalDate.parse(deadline, DateTimeFormatter.ISO_LOCAL_DATE);
+        if (title.isEmpty() || content.isEmpty() || creator.isEmpty() || deadLine.isBefore(now)) {
+            return GetResult.toJson(53, null, null, null, 0);
+        }
+        return manageService.addNotices(tk.getUserId(), title, content, creator, other, deadLine);
     }
 
     @RequestMapping(value = URL + "DelNotices", method = RequestMethod.GET)
@@ -429,6 +456,6 @@ public class ManageController {
             return GetResult.toJson(101, null, null, null, 0);
         }
 
-        return null;
+        return manageService.delNotices(tk.getUserId(), noticeid);
     }
 }
