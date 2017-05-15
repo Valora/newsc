@@ -21,6 +21,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <docker.image.prefix>newsc</docker.image.prefix>
 		<java.version>1.8</java.version>
 	</properties>
 
@@ -98,6 +99,17 @@
 			<version>3.4</version>
 		</dependency>
 
+        <dependency>
+            <groupId>taobao</groupId>
+            <artifactId>taobao</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>taobao</groupId>
+            <artifactId>taobao-source</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
 	<build>
@@ -135,6 +147,22 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.11</version>
+                <configuration>
+                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+                    <dockerDirectory>src/main/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
                 </configuration>
             </plugin>
         </plugins>

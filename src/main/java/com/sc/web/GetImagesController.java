@@ -1,5 +1,6 @@
 package com.sc.web;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by valora on 2017/5/12.
  */
 @RestController
+@Api("GetImages")
 public class GetImagesController {
     private final static String URL = "/api/GetImages/";
 

@@ -3,6 +3,7 @@ package com.sc.web;
 import com.sc.service.CustomServiceService;
 import com.sc.utils.JWT;
 import com.sc.utils.Result;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by valora on 2017/5/12.
  */
 @RestController
+@Api("CustomService")
 public class CustomServiceController {
     private final static String URL = "/api/CustomService/";
 

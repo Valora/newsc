@@ -25,7 +25,7 @@ import java.time.format.DateTimeFormatter;
  * Created by Sun on 2017/4/21.
  */
 @RestController
-@Api("Manege")
+@Api("Manage")
 public class ManageController {
     private final static String URL = "/api/Values/";
 
