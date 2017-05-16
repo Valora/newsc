@@ -98,8 +98,12 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.4</version>
 		</dependency>
+<<<<<<< HEAD
 
 
+=======
+		
+>>>>>>> 5492a45f9cbe00548c991c6b691c8a0acfad9152
     </dependencies>
 
 	<build>
