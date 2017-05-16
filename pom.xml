@@ -99,17 +99,7 @@
 			<version>3.4</version>
 		</dependency>
 
-        <dependency>
-            <groupId>taobao</groupId>
-            <artifactId>taobao</artifactId>
-            <version>1.0</version>
-        </dependency>
 
-        <dependency>
-            <groupId>taobao</groupId>
-            <artifactId>taobao-source</artifactId>
-            <version>1.0</version>
-        </dependency>
     </dependencies>
 
 	<build>
