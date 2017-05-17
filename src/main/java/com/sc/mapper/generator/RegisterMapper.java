@@ -22,10 +22,10 @@ public interface RegisterMapper {
     int deleteByExample(RegisterExample example);
 
     @Insert({
-        "insert into TB_REGISTER (CM_PHONE, CM_CODE, ",
-        "CM_TIME, CM_COUNT)",
-        "values (#{cmPhone,jdbcType=BIGINT}, #{cmCode,jdbcType=INTEGER}, ",
-        "#{cmTime,jdbcType=TIMESTAMP}, #{cmCount,jdbcType=INTEGER})"
+            "insert into TB_REGISTER (CM_PHONE, CM_CODE, ",
+            "CM_TIME, CM_COUNT)",
+            "values (#{cmPhone,jdbcType=BIGINT}, #{cmCode,jdbcType=INTEGER}, ",
+            "#{cmTime,jdbcType=TIMESTAMP}, #{cmCount,jdbcType=INTEGER})"
     })
     int insert(Register record);
 
@@ -34,10 +34,10 @@ public interface RegisterMapper {
 
     @SelectProvider(type=RegisterSqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="CM_PHONE", property="cmPhone", jdbcType= JdbcType.BIGINT),
-        @Result(column="CM_CODE", property="cmCode", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_TIME", property="cmTime", jdbcType= JdbcType.TIMESTAMP),
-        @Result(column="CM_COUNT", property="cmCount", jdbcType= JdbcType.INTEGER)
+            @Result(column="CM_PHONE", property="cmPhone", jdbcType= JdbcType.BIGINT),
+            @Result(column="CM_CODE", property="cmCode", jdbcType= JdbcType.INTEGER),
+            @Result(column="CM_TIME", property="cmTime", jdbcType= JdbcType.TIMESTAMP),
+            @Result(column="CM_COUNT", property="cmCount", jdbcType= JdbcType.INTEGER)
     })
     List<Register> selectByExample(RegisterExample example);
 
