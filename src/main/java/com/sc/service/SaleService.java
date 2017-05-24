@@ -39,26 +39,30 @@ public class SaleService {
      * @return Result
      */
     public Result sendApplocationCodeS(Long phone, Integer type) {
-        List<Register> list = SaleDao.selectregisterbyphone(phone);
-        Integer code = Integer.valueOf(GetRandomNumber.genRandomNum(4));
-        LocalDate time = LocalDate.now();
-        if (SendCode.sendCode(phone.toString(), code, type)) {
-            Register register = new Register();
-            register.setCmCode(code);
-            Date date = Date.from(time.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            register.setCmTime(date);
-            register.setCmCount(0);
-            //如果是新用户，则新增
-            if (list.get(0) == null) {
-                register.setCmPhone(phone);
-                SaleDao.addregister(register);
+        try {
+            List<Register> list = SaleDao.selectregisterbyphone(phone);
+            Integer code = Integer.valueOf(GetRandomNumber.genRandomNum(4));
+            LocalDate time = LocalDate.now();
+            if (SendCode.sendCode(phone.toString(), code, type)) {
+                Register register = new Register();
+                register.setCmCode(code);
+                Date date = Date.from(time.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                register.setCmTime(date);
+                register.setCmCount(0);
+                //如果是新用户，则新增
+                if (list.get(0) == null) {
+                    register.setCmPhone(phone);
+                    SaleDao.addregister(register);
+                } else {
+                    //如果不是新用户，就update
+                    SaleDao.updateregister(register, phone);
+                }
+                return GetResult.toJson(0, null, null, null, 0);
             } else {
-                //如果不是新用户，就update
-                SaleDao.updateregister(register, phone);
+                return GetResult.toJson(2, null, null, null, 0);
             }
-            return GetResult.toJson(0, null, null, null, 0);
-        } else {
-            return GetResult.toJson(2, null, null, null, 0);
+        } catch (NumberFormatException e) {
+            return GetResult.toJson(200, null, null, null, 0);
         }
     }
 
@@ -72,20 +76,24 @@ public class SaleService {
      * @return result
      */
     public Result QueryUsersByMap(String userId, Double lon, Double lat, Double distance) {
-        double lon1 = 0, lon2 = 0, lat1 = 0, lat2 = 0;
-        if (distance == 0) {
-            lon1 = lon - 0.02;
-            lon2 = lon + 0.02;
-            lat1 = lat - 0.02;
-            lat2 = lat + 0.02;
-        } else {
-            lon1 = lon - distance;
-            lon2 = lon + distance;
-            lat1 = lat - distance;
-            lat2 = lat + distance;
+        try {
+            double lon1 = 0, lon2 = 0, lat1 = 0, lat2 = 0;
+            if (distance == 0) {
+                lon1 = lon - 0.02;
+                lon2 = lon + 0.02;
+                lat1 = lat - 0.02;
+                lat2 = lat + 0.02;
+            } else {
+                lon1 = lon - distance;
+                lon2 = lon + distance;
+                lat1 = lat - distance;
+                lat2 = lat + distance;
+            }
+            List<Users> list = SaleDao.selectuserByMap(lon1, lon2, lat1, lat2);
+            return GetResult.toJson(0, null, null, list, 0);
+        } catch (Exception e) {
+            return GetResult.toJson(200, null, null, null, 0);
         }
-        List<Users> list = SaleDao.selectuserByMap(lon1, lon2, lat1, lat2);
-        return GetResult.toJson(0, null, null, list, 0);
     }
 
     /**
@@ -98,20 +106,24 @@ public class SaleService {
      * @return result
      */
     public Result QuerySellerByMap(String userId, Double lon, Double lat, Double distance) {
-        double lon1 = 0, lon2 = 0, lat1 = 0, lat2 = 0;
-        if (distance == 0) {
-            lon1 = lon - 0.02;
-            lon2 = lon + 0.02;
-            lat1 = lat - 0.02;
-            lat2 = lat + 0.02;
-        } else {
-            lon1 = lon - distance;
-            lon2 = lon + distance;
-            lat1 = lat - distance;
-            lat2 = lat + distance;
+        try {
+            double lon1 = 0, lon2 = 0, lat1 = 0, lat2 = 0;
+            if (distance == 0) {
+                lon1 = lon - 0.02;
+                lon2 = lon + 0.02;
+                lat1 = lat - 0.02;
+                lat2 = lat + 0.02;
+            } else {
+                lon1 = lon - distance;
+                lon2 = lon + distance;
+                lat1 = lat - distance;
+                lat2 = lat + distance;
+            }
+            List<Sellers> list = SaleDao.selectSellersByMap(lon1, lon2, lat1, lat2);
+            return GetResult.toJson(0, null, null, list, 0);
+        } catch (Exception e) {
+            return GetResult.toJson(200, null, null, null, 0);
         }
-        List<Sellers> list = SaleDao.selectSellersByMap(lon1, lon2, lat1, lat2);
-        return GetResult.toJson(0, null, null, list, 0);
     }
 
     /**
@@ -123,33 +135,42 @@ public class SaleService {
      * @return
      */
     public Result ResettingPassword(Long phone, Integer code, String newpassword) {
-        List<Register> list = SaleDao.selectregisterbyphone(phone);
-        Register register = list.get(0);
-        //业务人员不存在
-        if (register == null || register.getCmCode() != code) {
-            return GetResult.toJson(8, null, null, list, 0);
+        try {
+            List<Register> list = SaleDao.selectregisterbyphone(phone);
+            Register register = list.get(0);
+            //业务人员不存在
+            if (register == null || register.getCmCode() != code) {
+                return GetResult.toJson(8, null, null, list, 0);
+            }
+            Admins admins = SaleDao.selectadminbyphone(phone);
+            admins.setCmPassword(newpassword);
+            //update业务人员密码
+            SaleDao.updateAdminPassword(admins);
+            return GetResult.toJson(0, null, null, list, 0);
+        } catch (Exception e) {
+            return GetResult.toJson(200, null, null, null, 0);
         }
-        Admins admins = SaleDao.selectadminbyphone(phone);
-        admins.setCmPassword(newpassword);
-        //update业务人员密码
-        SaleDao.updateAdminPassword(admins);
-        return GetResult.toJson(0, null, null, list, 0);
     }
 
     /**
      * 找回业务人员账号
+     *
      * @param phone 业务人员手机号码
-     * @param code 验证码
+     * @param code  验证码
      * @return result
      */
     public Result BackAccount(Long phone, Integer code) {
-        List<Register> list = SaleDao.selectregisterbyphone(phone);
-        Register register = list.get(0);
-        //业务人员不存在
-        if (register == null || register.getCmCode() != code) {
-            return GetResult.toJson(8, null, null, list, 0);
+        try {
+            List<Register> list = SaleDao.selectregisterbyphone(phone);
+            Register register = list.get(0);
+            //业务人员不存在
+            if (register == null || register.getCmCode() != code) {
+                return GetResult.toJson(8, null, null, list, 0);
+            }
+            Admins admins = SaleDao.selectadminbyphone_and_Level(phone, 1);
+            return GetResult.toJson(0, null, null, admins == null ? admins.getCmAccount() : null, 0);
+        } catch (Exception e) {
+            return GetResult.toJson(200, null, null, null, 0);
         }
-        Admins admins = SaleDao.selectadminbyphone_and_Level(phone, 1);
-        return GetResult.toJson(0, null, null, admins == null ? admins.getCmAccount() : null, 0);
     }
 }
