@@ -14,15 +14,15 @@ import org.springframework.context.annotation.Bean;
 @EnableConfigurationProperties(StorageProperties.class)
 public class NewscApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(NewscApplication.class, args);
-	}
-	
-	@Bean
-	CommandLineRunner init(StorageService storageService) {
-		return (args) -> {
-			storageService.deleteAll();
-			storageService.init();
-		};
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(NewscApplication.class, args);
+    }
+
+    @Bean
+    CommandLineRunner init(StorageService storageService) {
+        return (args) -> {
+            storageService.deleteAll();
+            storageService.init();
+        };
+    }
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -58,10 +59,9 @@ public class FileSystemStorageService implements StorageService {
         try {
             Path file = load(filename);
             Resource resource = new UrlResource(file.toUri());
-            if(resource.exists() || resource.isReadable()) {
+            if (resource.exists() || resource.isReadable()) {
                 return resource;
-            }
-            else {
+            } else {
                 throw new StorageFileNotFoundException("Could not read file: " + filename);
             }
         } catch (MalformedURLException e) {
@@ -72,6 +72,13 @@ public class FileSystemStorageService implements StorageService {
     @Override
     public void deleteAll() {
         FileSystemUtils.deleteRecursively(rootLocation.toFile());
+    }
+
+    @Override
+    public void deleteByfigurepath(String figurepath) {
+        //@todo
+        File file = new File(figurepath);
+        file.delete();
     }
 
     @Override

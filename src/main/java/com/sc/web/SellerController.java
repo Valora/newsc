@@ -1,8 +1,10 @@
 package com.sc.web;
 
 import com.sc.service.SellerService;
+import com.sc.utils.GetResult;
 import com.sc.utils.JWT;
 import com.sc.utils.Result;
+import com.sc.utils.Token;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -12,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDate;
 
 /**
  * SellerController
@@ -39,14 +39,24 @@ public class SellerController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "orderstate", value = "订单状态（1：全部，2：未发货，2：已发货，3：已结束）", required = true, dataType = "Integer", paramType = "query"),
+<<<<<<< HEAD
             @ApiImplicitParam(name = "starttime", value = "起始时间（必传）", required = true, dataType = "Date", paramType = "query"),
             @ApiImplicitParam(name = "endtime", value = "截止时间", required = true, dataType = "DateTime", paramType = "query"),
+=======
+            @ApiImplicitParam(name = "starttime", value = "起始时间（必传）", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "endtime", value = "截止时间", required = true, dataType = "String", paramType = "query"),
+>>>>>>> 35e6f04d2b0e77bee697d8ceaa9530d824c655a8
             @ApiImplicitParam(name = "pagenum", value = "页码", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pagesize", value = "页面大小", required = true, dataType = "Integer", paramType = "query")
     })
-    public Result queryMySalesOrder(@RequestParam("token") String token, @RequestParam("orderstate") Integer orderState, @RequestParam("starttime") LocalDate starttime, @RequestParam("endtime") LocalDate endtime, @RequestParam("pagenum") Integer pagenum, @RequestParam("pagesize") Integer pagesize) {
-
-        return null;
+    public Result queryMySalesOrder(@RequestParam("token") String token, @RequestParam("orderstate") Integer orderState, @RequestParam("starttime") String starttime, @RequestParam("endtime") String endtime, @RequestParam("pagenum") Integer pagenum, @RequestParam("pagesize") Integer pagesize) {
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        pagenum = pagenum < 1 ? 1 : pagenum;
+        pagesize = pagesize < 1 ? 10 : pagesize;
+        return sellerService.QueryMySalesOrderS(tk.getUserId(), orderState, starttime, endtime, pagenum, pagesize);
     }
 
     @RequestMapping(value = URL + "QuerySaleOrderDetails", method = RequestMethod.GET)
@@ -55,9 +65,15 @@ public class SellerController {
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "orderdetailsid", value = "订单详情ID", required = true, dataType = "String", paramType = "query")
     })
-    public Result querySaleOrderDetails(@RequestParam("token") String token, @RequestParam("orderstate") String orderdetailsid) {
-
-        return null;
+    public Result querySaleOrderDetails(@RequestParam("token") String token, @RequestParam("orderdetailsid") String orderdetailsid) {
+        if (orderdetailsid == null || orderdetailsid.isEmpty()) {
+            return GetResult.toJson(24, null, null, null, 0);
+        }
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return sellerService.QuerySaleOrderDetails(orderdetailsid);
     }
 
     @RequestMapping(value = URL + "AgreeUserService", method = RequestMethod.GET)
@@ -67,8 +83,11 @@ public class SellerController {
             @ApiImplicitParam(name = "afierserviceid", value = "售后服务ID", required = true, dataType = "String", paramType = "query")
     })
     public Result agreeUserService(@RequestParam("token") String token, @RequestParam("afierserviceid") String afierserviceid) {
-
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return sellerService.AgreeUserService(tk.getUserId(), afierserviceid);
     }
 
     @RequestMapping(value = URL + "SendOutGoods_new", method = RequestMethod.GET)
@@ -78,11 +97,14 @@ public class SellerController {
             @ApiImplicitParam(name = "orderdetailid", value = "订单详情ID", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "logisticsid", value = "物流ID", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "logisticsnum", value = "物流单号", required = true, dataType = "String", paramType = "query")
-            
-    })
-    public Result sendOutGoodsNew(@RequestParam("token") String token, @RequestParam("afierserviceid") String orderdetaili, @RequestParam("logisticsid") String logisticsid, @RequestParam("logisticsnum") String logisticsnum) {
 
-        return null;
+    })
+    public Result sendOutGoodsNew(@RequestParam("token") String token, @RequestParam("orderdetailid") String orderdetailid, @RequestParam("logisticsid") String logisticsid, @RequestParam("logisticsnum") String logisticsnum) {
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return sellerService.sendOutGoodsNewS(tk.getUserId(), orderdetailid, logisticsid, logisticsnum);
     }
 
     @RequestMapping(value = URL + "QueryCustomerService", method = RequestMethod.GET)
@@ -90,15 +112,20 @@ public class SellerController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "serverstate", value = "售后状态(0:全部,1:待审核，2：待用户发货，3：用户已发货，4：厂家未退换货，5：厂家已退换货,6：完成)", required = true, dataType = "Integer", paramType = "query"),
-            @ApiImplicitParam(name = "starttime", value = "起始时间（必传）", required = true, dataType = "Date", paramType = "query"),
-            @ApiImplicitParam(name = "endtime", value = "截止时间（必传）", required = true, dataType = "Date", paramType = "query"),
+            @ApiImplicitParam(name = "starttime", value = "起始时间（必传）", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "endtime", value = "截止时间（必传）", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "pagenum", value = "页码", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pagesize", value = "页码大小", required = true, dataType = "Integer", paramType = "query")
 
     })
-    public Result queryCustomerService(@RequestParam("token") String token, @RequestParam("serverstate") Integer serverstate, @RequestParam("starttime") LocalDate starttime, @RequestParam("endtime") LocalDate endtime, @RequestParam("pagenum") Integer pagenum, @RequestParam("pagesize") Integer pagesize) {
-
-        return null;
+    public Result queryCustomerService(@RequestParam("token") String token, @RequestParam("serverstate") Integer serverstate, @RequestParam("starttime") String starttime, @RequestParam("endtime") String endtime, @RequestParam("pagenum") Integer pagenum, @RequestParam("pagesize") Integer pagesize) {
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        pagenum = pagenum < 1 ? 1 : pagenum;
+        pagesize = pagesize > 1 ? 10 : pagesize;
+        return sellerService.queryCustomerServiceS(tk.getUserId(), serverstate, starttime, endtime, pagenum, pagesize);
     }
 
     @RequestMapping(value = URL + "ConfirmReturnGoods", method = RequestMethod.GET)
@@ -108,8 +135,11 @@ public class SellerController {
             @ApiImplicitParam(name = "afierserviceid", value = "售后ID", required = true, dataType = "Long", paramType = "query"),
     })
     public Result confirmReturnGoods(@RequestParam("token") String token, @RequestParam("afierserviceid") Long afierserviceid) {
-
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return sellerService.confirmReturnGoodsS(tk.getUserId(), afierserviceid.toString());
     }
 
     @RequestMapping(value = URL + "SendOutGoods_service", method = RequestMethod.GET)
@@ -121,8 +151,11 @@ public class SellerController {
             @ApiImplicitParam(name = "logisticsnum", value = "物流单号", required = true, dataType = "String", paramType = "query")
     })
     public Result sendOutGoodsService(@RequestParam("token") String token, @RequestParam("afierserviceid") Long afierserviceid, @RequestParam("logisticsid") Integer logisticsid, @RequestParam("logisticsnum") String logisticsnum) {
-
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return sellerService.sendOutGoodsServiceS(tk.getUserId(), afierserviceid.toString(), logisticsid, logisticsnum);
     }
 
     @RequestMapping(value = URL + "Refund", method = RequestMethod.GET)
@@ -132,8 +165,11 @@ public class SellerController {
             @ApiImplicitParam(name = "afierserviceid", value = "售后服务ID", required = true, dataType = "Long", paramType = "query")
     })
     public Result refund(@RequestParam("token") String token, @RequestParam("afierserviceid") Long afierserviceid) {
-
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return sellerService.refundS(tk.getUserId(), afierserviceid.toString());
     }
 
     @RequestMapping(value = URL + "QueryMySaleGoods", method = RequestMethod.GET)
@@ -144,8 +180,13 @@ public class SellerController {
             @ApiImplicitParam(name = "pagesize", value = "页面大小", required = true, dataType = "Integer", paramType = "query")
     })
     public Result queryMySaleGoods(@RequestParam("token") String token, @RequestParam("pagenum") Integer pagenum, @RequestParam("pagesize") Integer pagesize) {
-
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        pagenum = pagenum < 1 ? 1 : pagenum;
+        pagesize = pagesize < 1 ? 10 : pagesize;
+        return sellerService.queryMySaleGoodsS(tk.getUserId(), pagenum, pagesize);
     }
 
     @RequestMapping(value = URL + "ModifyPassword", method = RequestMethod.GET)
@@ -157,8 +198,20 @@ public class SellerController {
             @ApiImplicitParam(name = "confirmpassword", value = "确认密码", required = true, dataType = "String", paramType = "query")
     })
     public Result modifyPassword(@RequestParam("token") String token, @RequestParam("oldpassword") String oldpassword, @RequestParam("newpassword") String newpassword, @RequestParam("confirmpassword") String confirmpassword) {
-
-        return null;
+        if (oldpassword.isEmpty() || newpassword.isEmpty() || confirmpassword.isEmpty()) {
+            return GetResult.toJson(38, null, null, null, 0);
+        }
+        if (!newpassword.equals(confirmpassword)) {
+            return GetResult.toJson(39, null, null, null, 0);
+        }
+        if (oldpassword == newpassword) {
+            return GetResult.toJson(40, null, null, null, 0);
+        }
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return sellerService.modifyPasswordS(tk.getUserId(), oldpassword, newpassword);
     }
 
     @RequestMapping(value = URL + "SendRetrieveCode", method = RequestMethod.GET)
@@ -167,8 +220,7 @@ public class SellerController {
             @ApiImplicitParam(name = "phone", value = "手机号码", required = true, dataType = "String", paramType = "query"),
     })
     public Result sendRetrieveCode(@RequestParam("phone") Long phone) {
-
-        return null;
+        return sellerService.sendRetrieveCodeS(phone, 4);
     }
 
     @RequestMapping(value = URL + "ResettingPassword", method = RequestMethod.GET)
@@ -180,8 +232,13 @@ public class SellerController {
             @ApiImplicitParam(name = "confirmpassword", value = "确认密码", required = true, dataType = "String", paramType = "query")
     })
     public Result resettingPassword(@RequestParam("phone") Long phone, @RequestParam("code") Integer code, @RequestParam("newpassword") String newpassword, @RequestParam("confirmpassword") String confirmpassword) {
-
-        return null;
+        if (newpassword.isEmpty() || confirmpassword.isEmpty()) {
+            return GetResult.toJson(38, null, null, null, 0);
+        }
+        if (!newpassword.equals(confirmpassword)) {
+            return GetResult.toJson(39, null, null, null, 0);
+        }
+        return sellerService.resettingPassword(newpassword, code, phone);
     }
 
     @RequestMapping(value = URL + "SendBackAccountCode", method = RequestMethod.GET)
@@ -190,8 +247,7 @@ public class SellerController {
             @ApiImplicitParam(name = "phone", value = "手机号码", required = true, dataType = "Long", paramType = "query"),
     })
     public Result sendBackAccountCode(@RequestParam("phone") Long phone) {
-
-        return null;
+        return sellerService.sendRetrieveCodeS(phone, 1);
     }
 
     @RequestMapping(value = URL + "BackAccount", method = RequestMethod.GET)
@@ -200,8 +256,7 @@ public class SellerController {
             @ApiImplicitParam(name = "phone", value = "手机号码", required = true, dataType = "Long", paramType = "query"),
             @ApiImplicitParam(name = "code", value = "验证码", required = true, dataType = "Long", paramType = "query"),
     })
-    public Result backAccount(@RequestParam("phone") Long phone, @RequestParam("phone") Integer code) {
-
-        return null;
+    public Result backAccount(@RequestParam("phone") Long phone, @RequestParam("code") Integer code) {
+        return sellerService.BackAccountS(phone, code);
     }
 }

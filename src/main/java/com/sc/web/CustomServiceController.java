@@ -1,8 +1,10 @@
 package com.sc.web;
 
 import com.sc.service.CustomServiceService;
+import com.sc.utils.GetResult;
 import com.sc.utils.JWT;
 import com.sc.utils.Result;
+import com.sc.utils.Token;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -62,18 +64,26 @@ public class CustomServiceController {
             @ApiImplicitParam(name = "goodsdetailsid", value = "商品详细ID", required = true, dataType = "Integer", paramType = "query")
     })
     public Result delGoodsDetails(@RequestParam("token") String token, @RequestParam("goodsdetailsid") Integer goodsdetailsid) {
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return customServiceService.delGoodsDetailsS(tk.getUserId(), goodsdetailsid);
     }
 
     @RequestMapping(value = URL + "DelGoodsShowImg", method = RequestMethod.GET)
-    @ApiOperation("删除商品详细")
+    @ApiOperation("删除商品展示图")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "goodsid", value = "商品ID", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "delnum", value = "图片序号(从0开始)", required = true, dataType = "Integer", paramType = "query")
     })
     public Result delGoodsShowImg(@RequestParam("token") String token, @RequestParam("goodsid") String goodsid, @RequestParam("delnum") Integer delnum) {
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return customServiceService.delGoodsShowImg(tk.getUserId(), goodsid, delnum);
     }
 
     @RequestMapping(value = URL + "UploadGoodsImg", method = RequestMethod.POST)
@@ -89,7 +99,14 @@ public class CustomServiceController {
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "Integer", paramType = "query")
     })
     public Result searchSellers(@RequestParam("token") String token, @RequestParam("content") String content) {
-        return null;
+        if (content.isEmpty()) {
+            return GetResult.toJson(16, null, null, null, 0);
+        }
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return customServiceService.selectSellerByLike(content);
     }
 
     @RequestMapping(value = URL + "QuerySellers", method = RequestMethod.GET)
@@ -98,7 +115,11 @@ public class CustomServiceController {
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "Integer", paramType = "query")
     })
     public Result querySellers(@RequestParam("token") String token) {
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return customServiceService.queryAllSellers();
     }
 
     @RequestMapping(value = URL + "SearchBrands", method = RequestMethod.GET)
@@ -108,7 +129,11 @@ public class CustomServiceController {
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "Integer", paramType = "query")
     })
     public Result searchBrands(@RequestParam("token") String token, @RequestParam("content") String content) {
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return customServiceService.searchBrandsByLike(content);
     }
 
     @RequestMapping(value = URL + "QueryBrands", method = RequestMethod.GET)
@@ -117,6 +142,10 @@ public class CustomServiceController {
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "Integer", paramType = "query")
     })
     public Result queryBrands(@RequestParam("token") String token) {
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return customServiceService.queryAllBrands();
     }
 }

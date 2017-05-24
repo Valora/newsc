@@ -1,8 +1,10 @@
 package com.sc.web;
 
 import com.sc.service.SaleService;
+import com.sc.utils.GetResult;
 import com.sc.utils.JWT;
 import com.sc.utils.Result;
+import com.sc.utils.Token;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -36,7 +38,7 @@ public class SaleController {
     @ApiOperation("发送申请验证码")
     @ApiImplicitParam(name = "phone", value = "手机号码", required = true, dataType = "Integer", paramType = "query")
     public Result sendApplocationCode(@RequestParam("phone") Long phone) {
-        return null;
+        return saleService.sendApplocationCodeS(phone, 1);
     }
 
     @RequestMapping(value = URL + "UserApplication", method = RequestMethod.POST)
@@ -60,7 +62,12 @@ public class SaleController {
             @ApiImplicitParam(name = "distance", value = "距离（0：默认2公里，其他自传；一公里为0.01）", required = true, dataType = "Double", paramType = "query")
     })
     public Result queryUsersByMap(@RequestParam("token") String token, @RequestParam("lon") Double lon, @RequestParam("lat") Double lat, @RequestParam("distance") Double distance) {
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        } else {
+            return saleService.QueryUsersByMap(tk.getUserId(), lon, lat, distance);
+        }
     }
 
     @RequestMapping(value = URL + "QuerySellersByMap", method = RequestMethod.GET)
@@ -72,14 +79,19 @@ public class SaleController {
             @ApiImplicitParam(name = "distance", value = "距离（0：默认2公里，其他自传；一公里为0.01）", required = true, dataType = "Double", paramType = "query")
     })
     public Result querySellersByMap(@RequestParam("token") String token, @RequestParam("lon") Double lon, @RequestParam("lat") Double lat, @RequestParam("distance") Double distance) {
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        } else {
+            return saleService.QuerySellerByMap(tk.getUserId(), lon, lat, distance);
+        }
     }
 
     @RequestMapping(value = URL + "SendRetrieveCode", method = RequestMethod.GET)
     @ApiOperation("发送找回密码验证码（业务人员）")
     @ApiImplicitParam(name = "phone", value = "手机号码", required = true, dataType = "Integer", paramType = "query")
     public Result sendRetrieveCode(@RequestParam("phone") Long phone) {
-        return null;
+        return saleService.sendApplocationCodeS(phone, 4);
     }
 
     @RequestMapping(value = URL + "ResettingPassword", method = RequestMethod.GET)
@@ -91,14 +103,20 @@ public class SaleController {
             @ApiImplicitParam(name = "confirmpassword", value = "确认密码", required = true, dataType = "String", paramType = "query")
     })
     public Result resettingPassword(@RequestParam("phone") Long phone, @RequestParam("code") Integer code, @RequestParam("newpassword") String newpassword, @RequestParam("confirmpassword") String confirmpassword) {
-        return null;
+        if (newpassword.isEmpty() || confirmpassword.isEmpty()) {
+            return GetResult.toJson(38, null, null, null, 0);
+        }
+        if (newpassword.equals(confirmpassword)) {
+            return GetResult.toJson(39, null, null, null, 0);
+        }
+        return saleService.ResettingPassword(phone, code, newpassword);
     }
 
     @RequestMapping(value = URL + "SendBackAccountCode", method = RequestMethod.GET)
     @ApiOperation("发送找回用户名验证码（业务人员）")
     @ApiImplicitParam(name = "phone", value = "手机号码", required = true, dataType = "Integer", paramType = "query")
     public Result sendBackAccountCode(@RequestParam("phone") Long phone) {
-        return null;
+        return saleService.sendApplocationCodeS(phone, 1);
     }
 
     @RequestMapping(value = URL + "BackAccount", method = RequestMethod.GET)
@@ -109,6 +127,6 @@ public class SaleController {
     })
 
     public Result backAccount(@RequestParam("phone") Long phone, @RequestParam("code") Integer code) {
-        return null;
+        return saleService.BackAccount(phone,code);
     }
 }

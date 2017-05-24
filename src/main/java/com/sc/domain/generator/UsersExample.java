@@ -94,7 +94,7 @@ public class UsersExample {
         protected void addCriterion(String condition, Object value, String property) {
             if (value == null) {
                 throw new RuntimeException("Value for " + property + " cannot be null");
-            }
+            }                                           
             criteria.add(new Criterion(condition, value));
         }
 
@@ -105,14 +105,14 @@ public class UsersExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andCmUseridIsNull() {
+        public Criteria andCmUseridIsNull() {  
             addCriterion("CM_USERID is null");
             return (Criteria) this;
         }
 
         public Criteria andCmUseridIsNotNull() {
             addCriterion("CM_USERID is not null");
-            return (Criteria) this;
+            return (Criteria) this; 
         }
 
         public Criteria andCmUseridEqualTo(String value) {
