@@ -34,7 +34,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
 		</dependency>
 
 		<!--Swagger UI依赖-->
@@ -99,7 +98,7 @@
 			<version>3.4</version>
 		</dependency>
 		
-    </dependencies>
+	</dependencies>
 
 	<build>
 		<plugins>

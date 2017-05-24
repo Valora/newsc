@@ -1,10 +1,17 @@
 package com.sc.web;
 
+import com.sc.service.UserDoMainService;
+import com.sc.utils.GetResult;
+import com.sc.utils.JWT;
 import com.sc.utils.Result;
+import com.sc.utils.Token;
+import com.sc.utils.goodobject.GOODSJSON;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,10 +26,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserDoMainController {
     private final static String URL = "/api/UserDoMain/";
 
+    private final JWT jwt;
+
+    private final UserDoMainService userDoMainService;
+
+    @Autowired
+    public UserDoMainController(JWT jwt, UserDoMainService userDoMainService) {
+        this.jwt = jwt;
+        this.userDoMainService = userDoMainService;
+    }
+
     @RequestMapping(value = URL + "SubmitOrder", method = RequestMethod.POST)
     @ApiOperation("提交订单{传入参数-->秘钥:token，商品信息:goodsjson}")
-    public Result submitOrder() {
-        return null;
+    public Result submitOrder(@RequestParam("token") String token, @ModelAttribute GOODSJSON goodsjson) {
+        GOODSJSON goodslist = null;
+        if (goodsjson == null) {
+            return GetResult.toJson(10, null, null, null, 0);
+        }
+        goodslist = goodsjson;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+
+        return userDoMainService.submitOrder(tk.getUserId(), goodslist);
     }
 
     @RequestMapping(value = URL + "QueryMyOrders_All", method = RequestMethod.GET)
@@ -33,9 +60,16 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query")
     })
     public Result queryMyOrdersAll(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize, @RequestParam("token") String token) {
-        return null;
-    }
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
 
+        pageNum = pageNum < 1 ? 1 : pageNum;
+        pageSize = pageSize < 1 ? 10 : pageSize;
+        return userDoMainService.queryMyOrdersAll(pageNum, pageSize, tk.getUserId());
+    }
+    
     @RequestMapping(value = URL + "QueryMyOrders_Arrearage", method = RequestMethod.GET)
     @ApiOperation("查询我的待付款订单")
     @ApiImplicitParams({
@@ -44,7 +78,15 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query")
     })
     public Result queryMyOrdersArrearage(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize, @RequestParam("token") String token) {
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+
+        pageNum = pageNum < 1 ? 1 : pageNum;
+        pageSize = pageSize < 1 ? 10 : pageSize;
+        
+        return userDoMainService.queryMyOrderArregrage(pageNum, pageSize, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "QueryMyOrders_Settlement", method = RequestMethod.GET)
@@ -55,7 +97,15 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query")
     })
     public Result queryMyOrdersSettlement(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize, @RequestParam("token") String token) {
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+
+        pageNum = pageNum < 1 ? 1 : pageNum;
+        pageSize = pageSize < 1 ? 10 : pageSize;
+
+        return userDoMainService.queryMyOrderSettlement(pageNum, pageSize, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "QueryOrderDetails", method = RequestMethod.GET)
@@ -65,9 +115,16 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query")
     })
     public Result queryOrderDetails(@RequestParam("orderid") String orderid, @RequestParam("token") String token) {
-        return null;
+        if (orderid.isEmpty() || orderid.contains(" ")) {
+            return GetResult.toJson(33, null, null, null, 0);
+        }
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return userDoMainService.queryOrderDetails(orderid);
     }
-
+    
     @RequestMapping(value = URL + "DelMyOrder", method = RequestMethod.GET)
     @ApiOperation("删除我的订单")
     @ApiImplicitParams({
@@ -75,7 +132,12 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query")
     })
     public Result delMyOrder(@RequestParam("orderid") String orderid, @RequestParam("token") String token) {
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+
+        return userDoMainService.delMyOrder(orderid, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "ConfirmOrderByDetailid", method = RequestMethod.GET)
@@ -85,7 +147,12 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query")
     })
     public Result confirmOrderByDetailid(@RequestParam("orderdetailid") Long orderdetailid, @RequestParam("token") String token) {
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+
+        return userDoMainService.confirmOrderByDetailid(orderdetailid, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "ConfirmOrderByOrderid", method = RequestMethod.GET)
@@ -94,10 +161,14 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "orderid", value = "订单ID", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query")
     })
-    public Result confirmOrderByOrderid(@RequestParam("orderdetailid") Long orderdetailid, @RequestParam("token") String token) {
-        return null;
+    public Result confirmOrderByOrderid(@RequestParam("orderdetailid") Long orderid, @RequestParam("token") String token) {
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return userDoMainService.confirmOrderByOrderid(orderid.toString(), tk.getUserId());
     }
-
+    
     @RequestMapping(value = URL + "QueryMyCanAfterService", method = RequestMethod.GET)
     @ApiOperation("查询我的可售后服务商品")
     @ApiImplicitParams({
@@ -106,9 +177,16 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query")
     })
     public Result queryMyCanAfterService(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize, @RequestParam("token") String token) {
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        pageNum = pageNum < 1 ? 1 : pageNum;
+        pageSize = pageSize < 1 ? 10 : pageSize;
+        
+        return userDoMainService.queryMyCanAfterService(pageNum, pageSize, tk.getUserId());
     }
-
+    
     @RequestMapping(value = URL + "QueryMyAfterService", method = RequestMethod.GET)
     @ApiOperation("查询我的售后服务单(退/换/返修)")
     @ApiImplicitParams({

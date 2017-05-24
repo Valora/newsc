@@ -1,6 +1,7 @@
 package com.sc.mapper.manage;
 
 import com.sc.domain.manage.SellerDetail;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
@@ -12,6 +13,7 @@ import java.util.List;
  * Manage用Mapper
  * Created by valora on 2017/4/26.
  */
+@Mapper
 public interface ManageMapper {
     @SelectProvider(type = ManageSqlProvider.class, method = "getSellerDetail")
     @Results({

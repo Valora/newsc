@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.login.LoginMapper">
+    <resultMap id="AdminLoginInfo" type="com.sc.domain.login.AdminLogin" autoMapping="true">
+        <result column="CM_ADMINID" property="cmAdminid" jdbcType="VARCHAR"/>
+        <result column="CM_LEVEL" property="cmLevel" jdbcType="INTEGER"/>
+        <result column="CM_NAME" property="cmName" jdbcType="VARCHAR"/>
+        <association property="tbMenu" javaType="com.sc.domain.login.MenuInfo">
+            <result column="CM_MENUURL" property="cmMenuurl" jdbcType="VARCHAR"/>
+            <result column="CM_MENUNAME" property="cmMenename" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+    
+    <select id="getAdminLoginInfo" resultMap="AdminLoginInfo">
+        SELECT
+            t0.CM_ADMINID,
+            t0.CM_LEVEL,
+            t0.CM_NAME,
+            t5.value  AS CM_MENUURL,
+            t5.value2 AS CM_MENUNAME,
+            (
+                SELECT COUNT(*)
+                FROM TB_ADMIN_ROLE AS t6
+                    LEFT OUTER JOIN TB_ROLE_POWER AS t7 ON t6.CM_ROLEID = t7.CM_ROLEID
+                    LEFT OUTER JOIN TB_POWER_MENU AS t8 ON t7.CM_POWERID = t8.CM_POWERID
+                    LEFT OUTER JOIN TB_MENUS AS t9 ON t8.CM_MENUID = (t9.CM_MENUID)
+                WHERE t6.CM_ADMINID = t0.CM_ADMINID
+            )         AS value
+        FROM TB_ADMINS AS t0
+            LEFT OUTER JOIN (
+                                SELECT
+                                    t4.CM_MENUURL  AS value,
+                                    t4.CM_MENUNAME AS value2,
+                                    t1.CM_ADMINID,
+                                    t1.CM_ID,
+                                    t2.CM_ID       AS CM_ID2,
+                                    t3.CM_ID       AS CM_ID3,
+                                    t4.CM_MENUID
+                                FROM TB_ADMIN_ROLE AS t1
+                                    LEFT OUTER JOIN TB_ROLE_POWER AS t2 ON t1.CM_ROLEID = t2.CM_ROLEID
+                                    LEFT OUTER JOIN TB_POWER_MENU AS t3 ON t2.CM_POWERID = t3.CM_POWERID
+                                    LEFT OUTER JOIN TB_MENUS AS t4 ON t3.CM_MENUID = (t4.CM_MENUID)
+                            ) AS t5 ON t5.CM_ADMINID = t0.CM_ADMINID
+        WHERE (t0.CM_ACCOUNT = #{account}) AND (t0.CM_PASSWORD = #{password})
+        ORDER BY t0.CM_ADMINID, t5.CM_ID, t5.CM_ID2, t5.CM_ID3, t5.CM_MENUID
+    </select>
+</mapper>
