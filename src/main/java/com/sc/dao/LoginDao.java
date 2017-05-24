@@ -4,13 +4,12 @@ import com.sc.domain.generator.RegisterExample;
 import com.sc.domain.generator.Users;
 import com.sc.domain.generator.UsersExample;
 import com.sc.domain.login.AdminLogin;
-import com.sc.domain.login.AdminLoginInfo;
-import com.sc.domain.login.MenuInfo;
 import com.sc.domain.login.SellerLogin;
 import com.sc.domain.login.UserLogin;
 import com.sc.mapper.generator.RegisterMapper;
 import com.sc.mapper.generator.UsersMapper;
 import com.sc.mapper.login.AdminLoginMapper;
+import com.sc.mapper.login.LoginMapper;
 import com.sc.mapper.login.SellerLoginMapper;
 import com.sc.mapper.login.UserLoginMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +33,16 @@ public class LoginDao {
 
     private final UserLoginMapper userLoginMapper;
 
+    private final LoginMapper loginMapper;
+
     @Autowired
-    public LoginDao(AdminLoginMapper adminLoginMapper, RegisterMapper registerMapper, SellerLoginMapper sellerLoginMapper, UsersMapper usersMapper, UserLoginMapper userLoginMapper) {
+    public LoginDao(AdminLoginMapper adminLoginMapper, RegisterMapper registerMapper, SellerLoginMapper sellerLoginMapper, UsersMapper usersMapper, UserLoginMapper userLoginMapper, LoginMapper loginMapper) {
         this.adminLoginMapper = adminLoginMapper;
         this.registerMapper = registerMapper;
         this.sellerLoginMapper = sellerLoginMapper;
         this.usersMapper = usersMapper;
         this.userLoginMapper = userLoginMapper;
+        this.loginMapper = loginMapper;
     }
 
     /**
@@ -85,16 +87,7 @@ public class LoginDao {
      * @return 管理员信息
      */
     public AdminLogin getAdminLoginInfo(String account, String password) {
-        AdminLogin adminLogin = new AdminLogin();
-        MenuInfo menuInfo = new MenuInfo();
-        List<AdminLoginInfo> result = adminLoginMapper.selectLoginInfo(account, password);
-        menuInfo.setCmMenuurl(result.get(0).getCmMenuurl());
-        menuInfo.setCmMenename(result.get(0).getCmMenuname());
-        adminLogin.setCmAdminid(result.get(0).getCmAdminid());
-        adminLogin.setCmLevel(result.get(0).getCmLevel());
-        adminLogin.setCmName(result.get(0).getCmName());
-        adminLogin.setTbMenu(menuInfo);
-        return adminLogin;
+        return loginMapper.getAdminLoginInfo(account, password);
     }
 
     /**
