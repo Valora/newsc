@@ -47,6 +47,7 @@ public class QueryCustomerServiceSqlProvider {
             sql.WHERE("CM_STATE=5||CM_STATE=6");
         }
         sql.ORDER_BY("CM_CREATETIME desc");
+        System.out.println(sql.toString());
         return sql.toString();
     }
 }
