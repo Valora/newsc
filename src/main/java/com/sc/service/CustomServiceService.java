@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -145,9 +146,11 @@ public class CustomServiceService {
     public Result queryAllBrands() {
         try {
             List<Brands> list = customServiceDao.queryAllBrandsD();
+            System.out.println(list.size());
             List<BrandidAndBrand> list1 = brandsToBrandidAndBrand(list);
             return GetResult.toJson(0, null, null, list1, 0);
         } catch (Exception e) {
+            e.printStackTrace();
             return GetResult.toJson(200, null, null, null, 0);
         }
     }
@@ -159,7 +162,7 @@ public class CustomServiceService {
      * @return SelleridAndNameAndAccount集合
      */
     private List<SelleridAndNameAndAccount> sellertToSelleridAndNameAndAccount(List<Sellers> list) {
-        List<SelleridAndNameAndAccount> list1 = null;
+        List<SelleridAndNameAndAccount> list1 = new ArrayList<>();
         if (list != null && list.size() > 0) {
             //只有当list不为空的时候才对list1进行赋值，不然就是搜索的厂家名不存在
             for (Sellers sellers : list) {
@@ -180,7 +183,7 @@ public class CustomServiceService {
      * @return BrandidAndBrand集合
      */
     private List<BrandidAndBrand> brandsToBrandidAndBrand(List<Brands> list) {
-        List<BrandidAndBrand> list1 = null;
+        List<BrandidAndBrand> list1 = new ArrayList<>();
         if (list != null && list.size() > 0) {
             for (Brands brands : list) {
                 BrandidAndBrand brandidAndBrand = new BrandidAndBrand();

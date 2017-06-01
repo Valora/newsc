@@ -39,13 +39,10 @@ public class SellerController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "orderstate", value = "订单状态（1：全部，2：未发货，2：已发货，3：已结束）", required = true, dataType = "Integer", paramType = "query"),
-<<<<<<< HEAD
             @ApiImplicitParam(name = "starttime", value = "起始时间（必传）", required = true, dataType = "Date", paramType = "query"),
             @ApiImplicitParam(name = "endtime", value = "截止时间", required = true, dataType = "DateTime", paramType = "query"),
-=======
             @ApiImplicitParam(name = "starttime", value = "起始时间（必传）", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "endtime", value = "截止时间", required = true, dataType = "String", paramType = "query"),
->>>>>>> 35e6f04d2b0e77bee697d8ceaa9530d824c655a8
             @ApiImplicitParam(name = "pagenum", value = "页码", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pagesize", value = "页面大小", required = true, dataType = "Integer", paramType = "query")
     })

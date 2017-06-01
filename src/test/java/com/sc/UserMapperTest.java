@@ -1,7 +1,9 @@
 package com.sc;
 
 import com.sc.dao.UserDoMainDao;
+import com.sc.domain.login.AdminLogin;
 import com.sc.domain.userdomain.MyOrders;
+import com.sc.mapper.login.LoginMapper;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +22,9 @@ import java.util.List;
 public class UserMapperTest {
     @Autowired
     private UserDoMainDao userDoMainDao;
+
+    @Autowired
+    private LoginMapper loginMapper;
     
     @Test
     public void testUserMapper(){
@@ -33,4 +38,12 @@ public class UserMapperTest {
         
         Assert.assertNotNull(myOrders);
     }
+    
+//    @Test
+//    public void testLogin() {
+//        String accont = "121212";
+//        String password = "121212";
+//        AdminLogin adminLogin = loginMapper.getAdminLoginInfo(accont, password);
+//        Assert.assertNotNull(adminLogin);
+//    }
 }

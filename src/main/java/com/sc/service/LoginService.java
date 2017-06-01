@@ -111,6 +111,7 @@ public class LoginService {
             }
             return GetResult.toJson(0, null, jwt.createJWT(adminLoginInfo.getCmAdminid()), adminLoginInfo, 0);
         } catch (Exception e) {
+            e.printStackTrace();
             return GetResult.toJson(200, null, null, null, 0);
         }
     }

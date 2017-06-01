@@ -1,31 +1,25 @@
 package com.sc.service;
 
+import com.github.pagehelper.PageHelper;
 import com.sc.dao.UserDoMainDao;
-import com.sc.domain.generator.GooddetailsWithBLOBs;
-import com.sc.domain.generator.Goods;
-import com.sc.domain.generator.Orderdetails;
-import com.sc.domain.generator.OrderdetailsWithBLOBs;
-import com.sc.domain.generator.Orders;
-import com.sc.domain.generator.OrdersWithBLOBs;
-import com.sc.domain.userdomain.MyOrders;
-import com.sc.domain.userdomain.MyStateOrders;
-import com.sc.domain.userdomain.Order;
-import com.sc.domain.userdomain.OrderDetails;
-import com.sc.domain.userdomain.TBUSERS;
-import com.sc.domain.userdomain.User;
+import com.sc.domain.generator.*;
+import com.sc.domain.userdomain.*;
 import com.sc.utils.GetRandomNumber;
 import com.sc.utils.GetResult;
 import com.sc.utils.JWT;
 import com.sc.utils.Result;
+import com.sc.utils.SendCode;
 import com.sc.utils.goodobject.GOODS;
 import com.sc.utils.goodobject.GOODSDETAILS;
 import com.sc.utils.goodobject.GOODSJSON;
 import com.sc.utils.goodobject.ORDER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -347,12 +341,463 @@ public class UserDoMainService {
 
     /**
      * 查询我的可售后服务的商品
-     * @param pageNum 页码
+     *
+     * @param pageNum  页码
      * @param pageSize 页面大小
-     * @param userId 用户ID
+     * @param userId   用户ID
      * @return Result
      */
-    public Result queryMyCanAfterService(Integer pageNum, Integer pageSize, String userId) {
+    public Result queryMyCanAfterServiceS(Integer pageNum, Integer pageSize, String userId) {
+        try {
+            List<OdersAndOrderdetails> list = userDoMainDao.queryMyCanAfterServiceD(userId);
+            PageHelper.startPage(pageNum, pageSize);
+            int i = list.size();
+            i = (i / pageSize) + ((i % pageSize) > 0 ? 1 : 0);
+            return GetResult.toJson(0, null, jwt.createJWT(userId), list, i);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 查询我的售后服务单(退/换/返修)
+     *
+     * @param pageNum  页码
+     * @param pageSize 页码大小
+     * @param userId   用户id
+     * @return result
+     */
+    public Result queryMyAfterServiceS(Integer pageNum, Integer pageSize, String userId) {
+        try {
+            List<AfsAndOdtAndGoodsAndSellers> list = userDoMainDao.queryMyAfterServiceD(userId);
+            PageHelper.startPage(pageNum, pageSize);
+            int i = list.size();
+            i = (i / pageSize) + ((i % pageSize) > 0 ? 1 : 0);
+            return GetResult.toJson(0, null, jwt.createJWT(userId), list, i);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 填写售后发货信息
+     *
+     * @param userId         用户id
+     * @param afierserviceid 售后服务id
+     * @param logisticsid    物流id
+     * @param logisticsnum   物流单号
+     * @return
+     */
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public Result sendBackGoodsS(String userId, String afierserviceid, Integer logisticsid, String logisticsnum) {
+        try {
+            Afterservices afterservices = null;
+            List<Afterservices> list = userDoMainDao.selectAfterserviceByAfterserviceid(afierserviceid);
+            if (list != null && list.size() > 0) {
+                afterservices = list.get(0);
+            }
+            if (afterservices == null) {
+                return GetResult.toJson(51, null, jwt.createJWT(userId), null, 0);
+            }
+            Orderdetails orderdetails = null;
+            List<Orderdetails> list1 = userDoMainDao.selectOrderdetailsByorderdetailsid(afterservices.getCmOrderdetailsid());
+            if (list1 != null && list1.size() > 0) {
+                orderdetails = list1.get(0);
+            }
+            if (orderdetails != null || orderdetails.getCmSellerstate() != 4 || afterservices.getCmState() != 2) {
+                return GetResult.toJson(52, null, jwt.createJWT(userId), null, 0);
+            }
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd HHmmssSSSS");
+            Date date = new Date();
+            String str = simpleDateFormat.format(date);
+            afterservices.setCmState(3);
+            afterservices.setCmSvid(str);
+            ServicedetailsWithBLOBs servicedetails = new ServicedetailsWithBLOBs();
+            servicedetails.setCmSvid(str);
+            servicedetails.setCmAfterserviceid(afterservices.getCmAfterserviceid());
+            servicedetails.setCmCreatetime(date);
+            servicedetails.setCmType(3);
+            servicedetails.setCmLogisticsid(logisticsid);
+            servicedetails.setCmLogisticsnum(logisticsnum);
+            userDoMainDao.insertServicedetails(servicedetails);
+            userDoMainDao.updateAfterservice(afterservices);
+            return GetResult.toJson(0, null, jwt.createJWT(userId), null, 0);
+        } catch (Exception e) {
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 确认售后服务完成
+     *
+     * @param userId         用户id
+     * @param afterserviceid 服务id
+     * @return result
+     */
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public Result confirmAfterServiceS(String userId, String afterserviceid) {
+        try {
+            Afterservices afterservices = null;
+            List<Afterservices> list = userDoMainDao.selectAfterserviceByAfterserviceid(afterserviceid);
+            if (list != null && list.size() > 0) {
+                afterservices = list.get(0);
+            }
+            if (afterservices == null) {
+                return GetResult.toJson(29, null, jwt.createJWT(userId), null, 0);
+            }
+            Orderdetails orderdetails = new Orderdetails();
+            orderdetails.setCmServicestate(0);
+            userDoMainDao.updateOrderdetails(afterservices.getCmOrderdetailsid(), orderdetails);
+
+            afterservices.setCmState(9);
+            userDoMainDao.updateAfterservice(afterservices);
+
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd HHmmssSSSS");
+            Date date = new Date();
+            String str = simpleDateFormat.format(date);
+            ServicedetailsWithBLOBs servicedetails = new ServicedetailsWithBLOBs();
+            servicedetails.setCmSvid(str);
+            servicedetails.setCmAfterserviceid(afterservices.getCmAfterserviceid());
+            servicedetails.setCmCreatetime(date);
+            servicedetails.setCmType(9);
+            userDoMainDao.insertServicedetails(servicedetails);
+            return GetResult.toJson(0, null, jwt.createJWT(userId), null, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 取消售后服务
+     *
+     * @param userId         用户id
+     * @param afterserviceid 服务id
+     * @return result
+     */
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public Result cancelAfterServiceS(String userId, String afterserviceid) {
+        try {
+            Afterservices afterservices = null;
+            List<Afterservices> list = userDoMainDao.selectAfterserviceByAfterserviceid(afterserviceid);
+            if (list != null && list.size() > 0) {
+                afterservices = list.get(0);
+            }
+            if (afterservices == null) {
+                return GetResult.toJson(29, null, jwt.createJWT(userId), null, 0);
+            }
+            Orderdetails orderdetails = new Orderdetails();
+            orderdetails.setCmServicestate(0);
+            userDoMainDao.updateOrderdetails(afterservices.getCmOrderdetailsid(), orderdetails);
+
+            afterservices.setCmState(0);
+            userDoMainDao.updateAfterservice(afterservices);
+
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd HHmmssSSSS");
+            Date date = new Date();
+            String str = simpleDateFormat.format(date);
+            ServicedetailsWithBLOBs servicedetails = new ServicedetailsWithBLOBs();
+            servicedetails.setCmSvid(str);
+            servicedetails.setCmAfterserviceid(afterservices.getCmAfterserviceid());
+            servicedetails.setCmCreatetime(date);
+            servicedetails.setCmType(10);
+            userDoMainDao.insertServicedetails(servicedetails);
+            return GetResult.toJson(0, null, jwt.createJWT(userId), null, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 查询我的收藏
+     *
+     * @param userId   用户id
+     * @param pageNum  页码
+     * @param pageSize 页面大小
+     * @return result
+     */
+    public Result queryMyCollectionS(String userId, Integer pageNum, Integer pageSize) {
+        try {
+            List<CollectionAndGoods> list = userDoMainDao.queryMyCollectionD(userId);
+            PageHelper.startPage(pageNum, pageSize);
+            int i = list.size();
+            i = (i / pageSize) + ((i % pageSize) > 0 ? 1 : 0);
+            return GetResult.toJson(0, null, null, list, i);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 刪除我的收藏
+     *
+     * @param goodsid 商品id
+     * @param userId  用户id
+     * @return result
+     */
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public Result delMyCollectionS(String goodsid, String userId) {
+        try {
+            int i = userDoMainDao.delMyCollectionD(goodsid, userId);
+            if (i > 0) {
+                return GetResult.toJson(0, null, null, null, 0);
+            } else {
+                return GetResult.toJson(30, null, null, null, 0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 加入收藏
+     *
+     * @param goodsid 商品id
+     * @param userId  用户id
+     * @return result
+     */
+    public Result joinMyCollectionS(String goodsid, String userId) {
+        try {
+            int i = userDoMainDao.selectMyCollectionByGoodsidAndUserid(goodsid, userId);
+            if (i > 0) {
+                return GetResult.toJson(35, null, null, null, 0);
+            }
+            Collections collections = new Collections();
+            collections.setCmGoodsid(goodsid);
+            collections.setCmUserid(userId);
+            collections.setCmJointime(new Date());
+            userDoMainDao.insertCollection(collections);
+            return GetResult.toJson(0, null, jwt.createJWT(userId), null, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 增加收货地址
+     *
+     * @param address 收货地址
+     * @param userId  用户id
+     * @param name    收货人姓名
+     * @param phone   联系人电话
+     * @param isfirst 是否设为默认
+     * @return
+     */
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public Result addAddressS(String address, String userId, String name, Long phone, Integer isfirst) {
+        try {
+            Addresses addresses = null;
+            List<Addresses> list = userDoMainDao.selectAddaddressbyuserid(userId);
+            if (list != null && list.size() > 0) {
+                addresses = list.get(0);
+            }
+            if (addresses != null) {
+                addresses.setCmIsfirst(0);
+            }
+            Addresses addresses1 = new Addresses();
+            addresses1.setCmAddress(address);
+            addresses1.setCmName(name);
+            addresses1.setCmUserid(userId);
+            addresses1.setCmIsfirst(isfirst);
+            addresses1.setCmPhone(phone);
+            userDoMainDao.insertAddress(addresses1);
+            userDoMainDao.updateAddress(addresses);
+            return GetResult.toJson(0, null, jwt.createJWT(userId), null, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 删除收货地址
+     *
+     * @param addressid 地址id
+     * @param userId    用户id
+     * @return result
+     */
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public Result delAdressS(Integer addressid, String userId) {
+        try {
+            int i = userDoMainDao.delAdressD(addressid);
+            return i > 0 ? GetResult.toJson(0, null, jwt.createJWT(userId), null, 0) :
+                    GetResult.toJson(200, null, null, null, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 设置默认地址
+     *
+     * @param addressid 地址id
+     * @param userId    用户id
+     * @return result
+     */
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public Result setUpFirstAddressS(Integer addressid, String userId) {
+        try {
+            int i = userDoMainDao.deleteAddressIsfirst();
+            int ii = userDoMainDao.addAddressIsfirst(addressid);
+            return GetResult.toJson(0, null, jwt.createJWT(userId), null, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 根据用户id查询用户信息
+     *
+     * @param userId 用户id
+     * @return result
+     */
+    public Result queryMyInformationS(String userId) {
+        try {
+            Users users = null;
+            List<Users> list = userDoMainDao.selectUserByuserid(userId);
+            if (list != null && list.size() > 0) {
+                users = list.get(0);
+            }
+            return GetResult.toJson(0, null, jwt.createJWT(userId), users, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 用户修改密码（商家）
+     *
+     * @param oldpassword 旧密码
+     * @param newpassword 新密码
+     * @param userId      用户id
+     * @return result
+     */
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public Result modifyPasswordS(String oldpassword, String newpassword, String userId) {
+        try {
+            Users users = userDoMainDao.selectUserByuserid(userId).get(0);
+            if (!oldpassword.equals(users.getCmPassword())) {
+                return GetResult.toJson(41, null, null, null, 0);
+            }
+            users.setCmPassword(newpassword);
+            userDoMainDao.updateUsersPassword(users);
+            return GetResult.toJson(0, null, jwt.createJWT(userId), users, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 发送验证码
+     *
+     * @param phone 手机号码
+     * @param type  类型
+     * @return result
+     */
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public Result sendRetrieveCodeS(Long phone, int type) {
+        try {
+            Register register = null;
+            List<Register> list = userDoMainDao.selectRegisterByPhone(phone);
+            if (list != null && list.size() > 0) {
+                register = list.get(0);
+            }
+            int code = Integer.valueOf(GetRandomNumber.genRandomNum(4));
+            Date date = new Date();
+            if (SendCode.sendCode(phone.toString(), code, 4)) {
+                if (register == null) {
+                    register.setCmCode(code);
+                    register.setCmPhone(phone);
+                    register.setCmTime(date);
+                    register.setCmCount(0);
+                    userDoMainDao.insertRegister(register);
+                } else {
+                    register.setCmCount(0);
+                    register.setCmTime(date);
+                    register.setCmCount(code);
+                    userDoMainDao.updateRegister(register);
+                }
+                return GetResult.toJson(0, null, null, null, 0);
+            } else {
+                return GetResult.toJson(2, null, null, null, 0);
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 设置新密码（找回密码）（商家）
+     *
+     * @param phone       手机号码
+     * @param code        验证码
+     * @param newpassword 新密码
+     * @return result
+     */
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public Result resettingPassword(Long phone, Integer code, String newpassword) {
+        try {
+            Register register = null;
+            List<Register> list = userDoMainDao.selectRegisterByPhone(phone);
+            if (list != null && list.size() > 0) {
+                register = list.get(0);
+            }
+            if (register == null || register.getCmCode() != code) {
+                return GetResult.toJson(8, null, null, null, 0);
+            }
+            Users users = userDoMainDao.selectUserByPhone(phone);
+            users.setCmPassword(newpassword);
+            userDoMainDao.updateUsersPassword(users);
+            return GetResult.toJson(0, null, null, null, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 找回账号
+     *
+     * @param phone 手机号码
+     * @param code  验证码
+     * @return result
+     */
+    public Result BackAccountS(Long phone, Integer code) {
+        try {
+            Register register = null;
+            List<Register> list = userDoMainDao.selectRegisterByPhone(phone);
+            if (list != null && list.size() > 0) {
+                register = list.get(0);
+            }
+            if (register == null || register.getCmCode() != code) {
+                return GetResult.toJson(8, null, null, null, 0);
+            }
+            Users users = userDoMainDao.selectUserByPhone(phone);
+            return GetResult.toJson(0, null, null, users.getCmAccount(), 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 查询物流信息
+     *
+     * @param orderdetailid 订单详情id
+     * @return result
+     */
+    public Result queryLogisticsInfoOneS(String orderdetailid) {
         return null;
     }
 }

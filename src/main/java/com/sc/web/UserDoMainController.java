@@ -69,7 +69,7 @@ public class UserDoMainController {
         pageSize = pageSize < 1 ? 10 : pageSize;
         return userDoMainService.queryMyOrdersAll(pageNum, pageSize, tk.getUserId());
     }
-    
+
     @RequestMapping(value = URL + "QueryMyOrders_Arrearage", method = RequestMethod.GET)
     @ApiOperation("查询我的待付款订单")
     @ApiImplicitParams({
@@ -85,7 +85,7 @@ public class UserDoMainController {
 
         pageNum = pageNum < 1 ? 1 : pageNum;
         pageSize = pageSize < 1 ? 10 : pageSize;
-        
+
         return userDoMainService.queryMyOrderArregrage(pageNum, pageSize, tk.getUserId());
     }
 
@@ -124,7 +124,7 @@ public class UserDoMainController {
         }
         return userDoMainService.queryOrderDetails(orderid);
     }
-    
+
     @RequestMapping(value = URL + "DelMyOrder", method = RequestMethod.GET)
     @ApiOperation("删除我的订单")
     @ApiImplicitParams({
@@ -168,7 +168,7 @@ public class UserDoMainController {
         }
         return userDoMainService.confirmOrderByOrderid(orderid.toString(), tk.getUserId());
     }
-    
+
     @RequestMapping(value = URL + "QueryMyCanAfterService", method = RequestMethod.GET)
     @ApiOperation("查询我的可售后服务商品")
     @ApiImplicitParams({
@@ -183,10 +183,10 @@ public class UserDoMainController {
         }
         pageNum = pageNum < 1 ? 1 : pageNum;
         pageSize = pageSize < 1 ? 10 : pageSize;
-        
-        return userDoMainService.queryMyCanAfterService(pageNum, pageSize, tk.getUserId());
+
+        return userDoMainService.queryMyCanAfterServiceS(pageNum, pageSize, tk.getUserId());
     }
-    
+
     @RequestMapping(value = URL + "QueryMyAfterService", method = RequestMethod.GET)
     @ApiOperation("查询我的售后服务单(退/换/返修)")
     @ApiImplicitParams({
@@ -195,7 +195,14 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query")
     })
     public Result queryMyAfterService(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize, @RequestParam("token") String token) {
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        pageNum = pageNum < 1 ? 1 : pageNum;
+        pageSize = pageSize < 1 ? 10 : pageSize;
+
+        return userDoMainService.queryMyAfterServiceS(pageNum, pageSize, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "ApplyAfterService", method = RequestMethod.POST)
@@ -208,12 +215,16 @@ public class UserDoMainController {
     @ApiOperation("填写售后发货信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "afierserviceid", value = "售后服务ID", required = true, dataType = "Long", paramType = "query"),
+            @ApiImplicitParam(name = "afierserviceid", value = "售后服务ID", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "logisticsid", value = "物流ID", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "logisticsnum", value = "物流单号", required = true, dataType = "String", paramType = "query")
     })
-    public Result sendBackGoods(@RequestParam("token") String token, @RequestParam("afierserviceid") Integer afierserviceid, @RequestParam("logisticsid") Integer logisticsid, @RequestParam("logisticsnum") String logisticsnum) {
-        return null;
+    public Result sendBackGoods(@RequestParam("token") String token, @RequestParam("afierserviceid") String afierserviceid, @RequestParam("logisticsid") Integer logisticsid, @RequestParam("logisticsnum") String logisticsnum) {
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return userDoMainService.sendBackGoodsS(tk.getUserId(), afierserviceid, logisticsid, logisticsnum);
     }
 
     @RequestMapping(value = URL + "ConfirmAfterService", method = RequestMethod.GET)
@@ -223,7 +234,11 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "afterserviceid", value = "售后服务ID", required = true, dataType = "String", paramType = "query")
     })
     public Result confirmAfterService(@RequestParam("token") String token, @RequestParam("afterserviceid") String afterserviceid) {
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return userDoMainService.confirmAfterServiceS(tk.getUserId(), afterserviceid);
     }
 
     @RequestMapping(value = URL + "CancelAfterService", method = RequestMethod.GET)
@@ -233,7 +248,11 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "afterserviceid", value = "售后服务ID", required = true, dataType = "String", paramType = "query")
     })
     public Result cancelAfterService(@RequestParam("token") String token, @RequestParam("afterserviceid") String afterserviceid) {
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return userDoMainService.cancelAfterServiceS(tk.getUserId(), afterserviceid);
     }
 
     @RequestMapping(value = URL + "QueryMyCollection", method = RequestMethod.GET)
@@ -244,7 +263,13 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query")
     })
     public Result queryMyCollection(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize, @RequestParam("token") String token) {
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        pageNum = pageNum < 1 ? 1 : pageNum;
+        pageSize = pageSize < 1 ? 10 : pageSize;
+        return userDoMainService.queryMyCollectionS(tk.getUserId(), pageNum, pageSize);
     }
 
     @RequestMapping(value = URL + "DelMyCollection", method = RequestMethod.GET)
@@ -254,7 +279,11 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query")
     })
     public Result delMyCollection(@RequestParam("goodsid") Long goodsid, @RequestParam("token") String token) {
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return userDoMainService.delMyCollectionS(goodsid.toString(), tk.getUserId());
     }
 
     @RequestMapping(value = URL + "JoinMyCollection", method = RequestMethod.GET)
@@ -264,7 +293,11 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query")
     })
     public Result joinMyCollection(@RequestParam("goodsid") Long goodsid, @RequestParam("token") String token) {
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return userDoMainService.joinMyCollectionS(goodsid.toString(), tk.getUserId());
     }
 
     @RequestMapping(value = URL + "AddAddress", method = RequestMethod.GET)
@@ -277,7 +310,14 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query")
     })
     public Result addAddress(@RequestParam("address") String address, @RequestParam("name") String name, @RequestParam("phone") Long phone, @RequestParam("isfirst") Integer isfirst, @RequestParam("token") String token) {
-        return null;
+        if (address.isEmpty()) {
+            return GetResult.toJson(42, null, null, null, 0);
+        }
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return userDoMainService.addAddressS(address, tk.getUserId(), name, phone, isfirst);
     }
 
     @RequestMapping(value = URL + "DelAdress", method = RequestMethod.GET)
@@ -287,7 +327,11 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query")
     })
     public Result delAdress(@RequestParam("addressid") Integer addressid, @RequestParam("token") String token) {
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return userDoMainService.delAdressS(addressid, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "SetUpFirstAddress", method = RequestMethod.GET)
@@ -297,7 +341,11 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query")
     })
     public Result setUpFirstAddress(@RequestParam("addressid") Integer addressid, @RequestParam("token") String token) {
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return userDoMainService.setUpFirstAddressS(addressid, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "QueryMyInformation", method = RequestMethod.GET)
@@ -306,7 +354,11 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query")
     })
     public Result queryMyInformation(@RequestParam("token") String token) {
-        return null;
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return userDoMainService.queryMyInformationS(tk.getUserId());
     }
 
     @RequestMapping(value = URL + "ModifyPassword", method = RequestMethod.GET)
@@ -318,7 +370,20 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query")
     })
     public Result modifyPassword(@RequestParam("oldpassword") String oldpassword, @RequestParam("newpassword") String newpassword, @RequestParam("confirmpassword") String confirmpassword, @RequestParam("token") String token) {
-        return null;
+        if (oldpassword.isEmpty() || newpassword.isEmpty() || confirmpassword.isEmpty()) {
+            return GetResult.toJson(38, null, null, null, 0);
+        }
+        if (!newpassword.equals(confirmpassword)) {
+            return GetResult.toJson(39, null, null, null, 0);
+        }
+        if (oldpassword.equals(newpassword)) {
+            return GetResult.toJson(40, null, null, null, 0);
+        }
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return userDoMainService.modifyPasswordS(oldpassword, newpassword, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "SendRetrieveCode", method = RequestMethod.GET)
@@ -327,7 +392,7 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "phone", value = "手机号码", required = true, dataType = "Long", paramType = "query")
     })
     public Result sendRetrieveCode(@RequestParam("phone") Long phone) {
-        return null;
+        return userDoMainService.sendRetrieveCodeS(phone, 4);
     }
 
     @RequestMapping(value = URL + "ResettingPassword", method = RequestMethod.GET)
@@ -339,7 +404,13 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "confirmpassword", value = "确认密码", required = true, dataType = "String", paramType = "query")
     })
     public Result resettingPassword(@RequestParam("phone") Long phone, @RequestParam("code") Integer code, @RequestParam("newpassword") String newpassword, @RequestParam("confirmpassword") String confirmpassword) {
-        return null;
+        if (newpassword.isEmpty() || confirmpassword.isEmpty()) {
+            return GetResult.toJson(38, null, null, null, 0);
+        }
+        if (!newpassword.equals(confirmpassword)) {
+            return GetResult.toJson(39, null, null, null, 0);
+        }
+        return userDoMainService.resettingPassword(phone, code, newpassword);
     }
 
     @RequestMapping(value = URL + "SendBackAccountCode", method = RequestMethod.GET)
@@ -348,7 +419,7 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "phone", value = "手机号码", required = true, dataType = "Long", paramType = "query")
     })
     public Result sendBackAccountCode(@RequestParam("phone") Long phone) {
-        return null;
+        return userDoMainService.sendRetrieveCodeS(phone, 1);
     }
 
     @RequestMapping(value = URL + "BackAccount", method = RequestMethod.GET)
@@ -357,8 +428,8 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "phone", value = "手机号码", required = true, dataType = "Long", paramType = "query"),
             @ApiImplicitParam(name = "code", value = "验证码", required = true, dataType = "Integer", paramType = "query")
     })
-    public Result BackAccount(@RequestParam("phone") Long phone, @RequestParam("code")Integer code) {
-        return null;
+    public Result BackAccount(@RequestParam("phone") Long phone, @RequestParam("code") Integer code) {
+        return userDoMainService.BackAccountS(phone, code);
     }
 
     @RequestMapping(value = URL + "QueryLogisticsInfo_one", method = RequestMethod.GET)
@@ -367,7 +438,7 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "orderdetailid", value = "订单详情ID", required = true, dataType = "Long", paramType = "query")
     })
     public Result queryLogisticsInfoOne(@RequestParam("orderdetailid") String orderdetailid) {
-        return null;
+        return userDoMainService.queryLogisticsInfoOneS(orderdetailid);
     }
 
     @RequestMapping(value = URL + "QueryLogisticsInfo_two", method = RequestMethod.GET)
