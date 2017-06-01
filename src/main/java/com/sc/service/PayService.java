@@ -60,7 +60,7 @@ public class PayService {
     private final PaysMapper paysMapper;
 
     @Autowired
-    public PayService(PayMapper payMapper, WxPayService wxPayService, PaysMapper paysMapper) {
+    public PayService(PayMapper payMapper, PaysMapper paysMapper) {
         this.payMapper = payMapper;
         this.paysMapper = paysMapper;
     }
