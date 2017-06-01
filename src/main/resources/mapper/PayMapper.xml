@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.pay.PayMapper">
+    <update id="updateTableOrder">
+        UPDATE TB_ORDERS a set a.CM_PAYTYPE = 4 WHERE a.CM_ORDERID = #{cmOrderid}
+    </update>
+
+    <update id="updateTableOrderAli">
+        UPDATE TB_ORDERS a set a.CM_PAYTYPE = 1 WHERE a.CM_ORDERID = #{cmOrderid}
+    </update>
+    
+    <select id="getOrderByOrderIds" resultType="com.sc.domain.generator.OrdersWithBLOBs">
+        SELECT *
+        FROM TB_ORDERS
+        WHERE CM_ORDERID IN
+        <foreach item="items" index="index" collection="array"
+                 open="(" separator="," close=")">
+            #{items}
+        </foreach>
+    </select>
+</mapper>
