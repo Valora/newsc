@@ -7,6 +7,7 @@ import com.alipay.api.request.AlipayTradeAppPayRequest;
 import com.alipay.api.response.AlipayTradeAppPayResponse;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
 import com.github.binarywang.wxpay.service.WxPayService;
+import com.github.binarywang.wxpay.service.impl.WxPayServiceImpl;
 import com.sc.config.AliPayConfig;
 import com.sc.domain.generator.OrdersWithBLOBs;
 import com.sc.domain.generator.Pays;
@@ -56,14 +57,11 @@ public class PayService {
     @Value("${wechat.pay.proxyUrl}")
     private String PROXY_URL;
 
-    private final WxPayService wxPayService;
-
     private final PaysMapper paysMapper;
 
     @Autowired
     public PayService(PayMapper payMapper, WxPayService wxPayService, PaysMapper paysMapper) {
         this.payMapper = payMapper;
-        this.wxPayService = wxPayService;
         this.paysMapper = paysMapper;
     }
 
@@ -74,6 +72,7 @@ public class PayService {
      */
     public Result wechatPayApp(String orderids) {
         try {
+            WxPayService wxPayService = new WxPayServiceImpl();
             String[] arr = orderids.split("|");
             List<OrdersWithBLOBs> orders = payMapper.getOrderByOrderIds(arr);
             if (orders.size() <= 0) {
@@ -82,6 +81,7 @@ public class PayService {
             double moneysum = orders.stream().mapToDouble(t -> (t.getCmMoneysun() - t.getCmUserbalance())).sum();
             double score = orders.stream().mapToDouble(t -> t.getCmUsescore()).sum() * 0.01;
             int totalFee = (int) ((moneysum - score) * 100);
+            
             WxPayUnifiedOrderRequest orderRequest = new WxPayUnifiedOrderRequest();
             //公众账号ID
             orderRequest.setAppid(APPID);
@@ -139,6 +139,7 @@ public class PayService {
      */
     public Result wechatPayPC(String orderids) {
         try {
+            WxPayService wxPayService = new WxPayServiceImpl();
             String[] arr = orderids.split("|");
             List<OrdersWithBLOBs> orders = payMapper.getOrderByOrderIds(arr);
             if (orders.size() <= 0) {
