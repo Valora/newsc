@@ -447,7 +447,7 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "afterserviceid", value = "售后服务ID", required = true, dataType = "Long", paramType = "query")
     })
     public Result queryLogisticsInfoTwo(@RequestParam("afterserviceid") String afterserviceid) {
-        return null;
+        return userDoMainService.queryLogisticsInfoTwoS(afterserviceid);
     }
 
     @RequestMapping(value = URL + "QueryLogisticsInfo_three", method = RequestMethod.GET)
@@ -456,6 +456,6 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "servicedetailsid", value = "售后服务详情ID", required = true, dataType = "Long", paramType = "query")
     })
     public Result queryLogisticsInfoThree(@RequestParam("servicedetailsid") String servicedetailsid) {
-        return null;
+        return userDoMainService.queryLogisticsInfoThreeS(servicedetailsid);
     }
 }

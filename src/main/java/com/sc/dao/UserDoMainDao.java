@@ -151,6 +151,8 @@ public class UserDoMainDao {
      */
     public void updateOrderDetails(OrderdetailsWithBLOBs orderdetails) {
         OrderdetailsExample orderdetailsExample = new OrderdetailsExample();
+        OrderdetailsExample.Criteria criteria = orderdetailsExample.createCriteria();
+        criteria.andCmOrderdetailsidEqualTo(orderdetails.getCmOrderdetailsid());
         orderdetailsMapper.updateByExample(orderdetails, orderdetailsExample);
     }
 
@@ -362,11 +364,11 @@ public class UserDoMainDao {
      * @param cmOrderdetailsid Orderdetailsid
      * @return Orderdetails集合
      */
-    public List<Orderdetails> selectOrderdetailsByorderdetailsid(String cmOrderdetailsid) {
+    public List<OrderdetailsWithBLOBs> selectOrderdetailsByorderdetailsid(String cmOrderdetailsid) {
         OrderdetailsExample orderdetailsExample = new OrderdetailsExample();
         OrderdetailsExample.Criteria criteria = orderdetailsExample.createCriteria();
         criteria.andCmOrderdetailsidEqualTo(cmOrderdetailsid);
-        return orderdetailsMapper.selectByExample(orderdetailsExample);
+        return orderdetailsMapper.selectByExampleWithBLOBs(orderdetailsExample);
     }
 
     /**
@@ -588,5 +590,30 @@ public class UserDoMainDao {
         UsersExample.Criteria criteria = usersExample.createCriteria();
         criteria.andCmPhoneEqualTo(phone);
         return usersMapper.selectByExample(usersExample).get(0);
+    }
+
+    /**
+     * 根据svic查询servicedetails对象
+     *
+     * @param cmSvid svic
+     * @return servicedetails对象
+     */
+    public ServicedetailsWithBLOBs selectServicedetailsBySvid(String cmSvid) {
+        ServicedetailsExample servicedetailsExample = new ServicedetailsExample();
+        ServicedetailsExample.Criteria criteria = servicedetailsExample.createCriteria();
+        criteria.andCmSvidEqualTo(cmSvid);
+        return servicedetailsMapper.selectByExampleWithBLOBs(servicedetailsExample).get(0);
+    }
+
+    /**
+     * 更新servicedetails表
+     *
+     * @param servicedetailsWithBLOBs 需要更新的对象
+     */
+    public void updateServicedetails(ServicedetailsWithBLOBs servicedetailsWithBLOBs) {
+        ServicedetailsExample servicedetailsExample = new ServicedetailsExample();
+        ServicedetailsExample.Criteria criteria = servicedetailsExample.createCriteria();
+        criteria.andCmSvidEqualTo(servicedetailsWithBLOBs.getCmSvid());
+        servicedetailsMapper.updateByExampleWithBLOBs(servicedetailsWithBLOBs, servicedetailsExample);
     }
 }

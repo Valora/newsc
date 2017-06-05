@@ -4,15 +4,13 @@ import com.github.pagehelper.PageHelper;
 import com.sc.dao.UserDoMainDao;
 import com.sc.domain.generator.*;
 import com.sc.domain.userdomain.*;
-import com.sc.utils.GetRandomNumber;
-import com.sc.utils.GetResult;
-import com.sc.utils.JWT;
-import com.sc.utils.Result;
-import com.sc.utils.SendCode;
+import com.sc.utils.*;
 import com.sc.utils.goodobject.GOODS;
 import com.sc.utils.goodobject.GOODSDETAILS;
 import com.sc.utils.goodobject.GOODSJSON;
 import com.sc.utils.goodobject.ORDER;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -402,7 +400,7 @@ public class UserDoMainService {
                 return GetResult.toJson(51, null, jwt.createJWT(userId), null, 0);
             }
             Orderdetails orderdetails = null;
-            List<Orderdetails> list1 = userDoMainDao.selectOrderdetailsByorderdetailsid(afterservices.getCmOrderdetailsid());
+            List<OrderdetailsWithBLOBs> list1 = userDoMainDao.selectOrderdetailsByorderdetailsid(afterservices.getCmOrderdetailsid());
             if (list1 != null && list1.size() > 0) {
                 orderdetails = list1.get(0);
             }
@@ -798,6 +796,85 @@ public class UserDoMainService {
      * @return result
      */
     public Result queryLogisticsInfoOneS(String orderdetailid) {
-        return null;
+        try {
+            OrderdetailsWithBLOBs orderdetailsWithBLOBs = userDoMainDao.selectOrderdetailsByorderdetailsid(orderdetailid).get(0);
+            String info = orderdetailsWithBLOBs.getCmLogisticsinfo();
+            if (StringUtils.isNotEmpty(info)) {
+                return GetResult.toJson(0, null, null, info, 0);
+            } else {
+                String number = orderdetailsWithBLOBs.getCmLogisticsnum();
+                HttpResponse json = QueryLogistics.query(number);
+                System.out.println(json);
+                if (json != null) {
+                    orderdetailsWithBLOBs.setCmLogisticsinfo(json.toString());
+                    orderdetailsWithBLOBs.setCmSellerstate(4);
+                    userDoMainDao.updateOrderDetails(orderdetailsWithBLOBs);
+                }
+                return GetResult.toJson(0, null, null, json, 0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 查询物流信息
+     *
+     * @param afterserviceid 售后服务id
+     * @return
+     */
+    public Result queryLogisticsInfoTwoS(String afterserviceid) {
+        try {
+            Afterservices afterservices = userDoMainDao.selectAfterserviceByAfterserviceid(afterserviceid).get(0);
+            if (afterservices == null || afterservices.getCmSvid() == null) {
+                return GetResult.toJson(51, null, null, null, 0);
+            }
+            ServicedetailsWithBLOBs servicedetailsWithBLOBs = userDoMainDao.selectServicedetailsBySvid(afterservices.getCmSvid());
+            String str = servicedetailsWithBLOBs.getCmLogisticsinfo();
+            if (StringUtils.isNotEmpty(str)) {
+                return GetResult.toJson(0, null, null, str, 0);
+            } else {
+                String number = servicedetailsWithBLOBs.getCmLogisticsnum();
+                HttpResponse json = QueryLogistics.query(number);
+                if (json != null) {
+                    servicedetailsWithBLOBs.setCmLogisticsinfo(json.toString());
+                }
+                userDoMainDao.updateServicedetails(servicedetailsWithBLOBs);
+                return GetResult.toJson(0, null, null, json, 0);
+            }
+        } catch (Exception e) {
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 查询物流信息
+     *
+     * @param servicedetailsid 服务详情id
+     * @return
+     */
+    public Result queryLogisticsInfoThreeS(String servicedetailsid) {
+        try {
+            ServicedetailsWithBLOBs servicedetailsWithBLOBs = userDoMainDao.selectServicedetailsBySvid(servicedetailsid);
+            if (servicedetailsWithBLOBs == null) {
+                return GetResult.toJson(51, null, null, null, 0);
+            }
+            String str = servicedetailsWithBLOBs.getCmLogisticsinfo();
+            if (StringUtils.isNotEmpty(str)) {
+                return GetResult.toJson(0, null, null, str, 0);
+            } else {
+                String number = servicedetailsWithBLOBs.getCmLogisticsnum();
+                HttpResponse json = QueryLogistics.query(number);
+                if (json != null) {
+                    servicedetailsWithBLOBs.setCmLogisticsinfo(json.toString());
+                }
+                userDoMainDao.updateServicedetails(servicedetailsWithBLOBs);
+                return GetResult.toJson(0, null, null, json, 0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return GetResult.toJson(200, null, null, null, 0);
+        }
     }
 }

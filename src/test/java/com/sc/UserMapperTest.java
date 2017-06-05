@@ -36,4 +36,11 @@ public class UserMapperTest {
 //        AdminLogin adminLogin = loginMapper.getAdminLoginInfo(accont, password);
 //        Assert.assertNotNull(adminLogin);
 //    }
+    
+//    @Test
+//    public void testLogstic(){
+//        String numer = "5511008515";
+//        HttpResponse response = QueryLogistics.query(numer);
+//        Assert.assertNotNull(response);
+//    }
 }
