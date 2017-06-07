@@ -10,7 +10,7 @@ public interface StorageService {
 
     void init();
 
-    void store(MultipartFile file);
+    Boolean store(MultipartFile file, String newfilename);
 
     Stream<Path> loadAll();
 
@@ -20,5 +20,9 @@ public interface StorageService {
 
     void deleteAll();
 
-    void deleteByfigurepath(String figurepath);
+    void deleteByFigurePath(String figurepath);
+    
+    Boolean isImage(String fileName);
+
+    String getFileType(String fileName);
 }

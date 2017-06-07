@@ -1,5 +1,6 @@
 package com.sc.storage;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -26,12 +27,14 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public void store(MultipartFile file) {
+    public Boolean store(MultipartFile file, String newfilename) {
         try {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
             }
-            Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+            File newfile = new File(String.valueOf(this.rootLocation.resolve(newfilename)));
+            FileUtils.copyInputStreamToFile(file.getInputStream(), newfile);
+            return true;
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
         }
@@ -75,10 +78,11 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public void deleteByfigurepath(String figurepath) {
-        //@todo
+    public void deleteByFigurePath(String figurepath) {
         File file = new File(figurepath);
-        file.delete();
+        if (file.exists()) {
+            file.delete();
+        }
     }
 
     @Override
@@ -88,5 +92,28 @@ public class FileSystemStorageService implements StorageService {
         } catch (IOException e) {
             throw new StorageException("Could not initialize storage", e);
         }
+    }
+
+    @Override
+    public Boolean isImage(String fileName) {
+        String[] img_type = new String[]{".jpg", ".jpeg", ".png", ".gif", ".bmp"};
+        if (fileName == null) {
+            return false;
+        }
+        fileName = fileName.toLowerCase();
+        for (String type : img_type) {
+            if (fileName.endsWith(type)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String getFileType(String fileName) {
+        if (fileName != null && fileName.indexOf(".") >= 0) {
+            return fileName.substring(fileName.lastIndexOf("."), fileName.length());
+        }
+        return "";
     }
 }

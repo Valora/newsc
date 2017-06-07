@@ -307,7 +307,7 @@ public class ManageService {
             String filename = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmss")) + GetRandomNumber.genRandomNum(4);
             if (files.length > 0) {
                 try {
-                    storageService.store(files[0]);
+                    storageService.store(files[0], filename);
                 } catch (Exception ex) {
                     return GetResult.toJson(47, null, null, null, 0);
                 }
@@ -345,7 +345,7 @@ public class ManageService {
             String imgpath = "";
             if (files.length > 0) {
                 try {
-                    storageService.store(files[0]);
+                    storageService.store(files[0], filename);
                 } catch (Exception ex) {
                     return GetResult.toJson(47, null, null, null, 0);
                 }

@@ -13,6 +13,7 @@ import com.sc.mapper.generator.RegisterMapper;
 import com.sc.mapper.generator.SellersMapper;
 import com.sc.mapper.generator.UsersMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -29,17 +30,19 @@ public class SaleDao {
     private final UsersMapper usersMapper;
     private final SellersMapper sellersMapper;
     private final AdminsMapper adminsMapper;
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public SaleDao(RegisterMapper registerMapper, UsersMapper usersMapper, SellersMapper sellersMapper, AdminsMapper adminsMapper) {
+    public SaleDao(RegisterMapper registerMapper, UsersMapper usersMapper, SellersMapper sellersMapper, AdminsMapper adminsMapper, JdbcTemplate jdbcTemplate) {
         this.registerMapper = registerMapper;
         this.usersMapper = usersMapper;
         this.sellersMapper = sellersMapper;
         this.adminsMapper = adminsMapper;
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     /**
-     * 根据电话号码查询用户
+     * 根据电话号码查询注册人员
      *
      * @param phone 查询条件
      * @return 查询结果集
@@ -160,5 +163,81 @@ public class SaleDao {
             return list2.get(0);
         }
         return null;
+    }
+
+    /**
+     * 获得管理员信息
+     *
+     * @param userId 管理员ID
+     * @return
+     */
+    public Admins getAdminByAdminId(String userId) {
+        AdminsExample adminsExample = new AdminsExample();
+        AdminsExample.Criteria criteria = adminsExample.createCriteria();
+        criteria.andCmAdminidEqualTo(userId);
+        Admins admins = adminsMapper.selectByExample(adminsExample).get(0);
+        if (admins == null) {
+            return null;
+        } else {
+            return admins;
+        }
+    }
+
+    /**
+     * 检查当前手机号有没有注册(商家)
+     * @param phone
+     * @return
+     */
+    public int getUserCount(Long phone) {
+        UsersExample example = new UsersExample();
+        UsersExample.Criteria criteria = example.createCriteria();
+        criteria.andCmPhoneEqualTo(phone);
+        return (int) usersMapper.countByExample(example);
+    }
+
+    /**
+     * 账号值
+     * @return
+     */
+    public Long getUserMaxAccount() {
+        String sql = "SELECT MAX(cast(CM_ACCOUNT AS UNSIGNED INTEGER))FROM TB_USERS";
+        return jdbcTemplate.queryForObject(sql, Long.class);
+    }
+
+    /**
+     * 商家申请
+     * @param users
+     */
+    public void userApplication(Users users) {
+        usersMapper.insert(users);
+    }
+
+    /**
+     * 检查当前手机号有没有注册(厂家)
+     * @param phone
+     * @return
+     */
+    public int getSellerCount(Long phone) {
+        SellersExample example = new SellersExample();
+        SellersExample.Criteria criteria = example.createCriteria();
+        criteria.andCmPhoneEqualTo(phone);
+        return (int) sellersMapper.countByExample(example);
+    }
+
+    /**
+     * 厂家账号值
+     * @return
+     */
+    public Long getSellerMaxAccount() {
+        String sql = "SELECT MAX(cast(CM_ACCOUNT AS UNSIGNED INTEGER))FROM TB_SELLERS";
+        return jdbcTemplate.queryForObject(sql, Long.class);
+    }
+
+    /**
+     * 厂家申请
+     * @param sellers
+     */
+    public void sellerApplication(Sellers sellers) {
+        sellersMapper.insert(sellers);
     }
 }

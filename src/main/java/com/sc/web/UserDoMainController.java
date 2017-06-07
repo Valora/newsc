@@ -39,7 +39,7 @@ public class UserDoMainController {
     @RequestMapping(value = URL + "SubmitOrder", method = RequestMethod.POST)
     @ApiOperation("提交订单{传入参数-->秘钥:token，商品信息:goodsjson}")
     public Result submitOrder(@RequestParam("token") String token, @ModelAttribute GOODSJSON goodsjson) {
-        GOODSJSON goodslist = null;
+        GOODSJSON goodslist;
         if (goodsjson == null) {
             return GetResult.toJson(10, null, null, null, 0);
         }

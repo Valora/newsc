@@ -75,8 +75,8 @@ public class CustomServiceService {
                 //list中放的是父类，有些属性只有子类才有，需要对list中的对象塑性
                 goodsWithBLOBs = (GoodsWithBLOBs) list.get(0);
                 String[] str1 = goodsWithBLOBs.getCmFigurespath().split("|");
-                //删除图片=======可能会有问题=========
-                fileSystemStorageService.deleteByfigurepath(str1[delnum]);
+                //删除图片
+                fileSystemStorageService.deleteByFigurePath(str1[delnum]);
                 str1[delnum] = "";
                 String str2 = String.join("|", str1).replace("||", "|");
                 goodsWithBLOBs.setCmFigurespath(str2);

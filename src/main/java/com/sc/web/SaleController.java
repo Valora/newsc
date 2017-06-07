@@ -1,5 +1,7 @@
 package com.sc.web;
 
+import com.sc.domain.sale.SellerApplication;
+import com.sc.domain.sale.UserApplication;
 import com.sc.service.SaleService;
 import com.sc.utils.GetResult;
 import com.sc.utils.JWT;
@@ -10,10 +12,14 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Objects;
 
 /**
  * SaleController
@@ -43,14 +49,37 @@ public class SaleController {
 
     @RequestMapping(value = URL + "UserApplication", method = RequestMethod.POST)
     @ApiOperation("(商家)申请{token秘钥,phone电话,code验证码,shopname店铺名称，address地址,lon经度,lat纬度,pwd密码,pwdagain确认密码,cardno身份证号码，personname用户姓名,contactname紧急联系人姓名，contactphone紧急联系人电话，telephone固定电话,pax固定电话,图片{身份证以及人name:card,店铺name:store,营业执照以及证件name:license}")
-    public Result userApplication() {
-        return null;
-    }
+    public Result userApplication(@ModelAttribute UserApplication user, BindingResult result) {
+        Token tk = jwt.checkJWT(user.getToken());
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
 
+        if (result.hasErrors()) {
+            return GetResult.toJson(38, null, null, null, 0);
+        }
+
+        if (!Objects.equals(user.getPwd(), user.getPwdagain())) {
+            return GetResult.toJson(55, null, null, null, 0);
+        }
+        return saleService.UserApplication(tk.getUserId(), user.getPhone(), user.getCode(), user.getAddress(), user.getLon(), user.getLat(), user.getPwd(), user.getCardno(), user.getShopname(), user.getPersonname(), user.getContactname(), user.getContactphone(), user.getTelephone(), user.getPax(), user.getFiles());
+    }
     @RequestMapping(value = URL + "SellerApplication", method = RequestMethod.POST)
     @ApiOperation("(商家)申请{token秘钥,phone电话,code验证码,shopname店铺名称，address地址,lon经度,lat纬度,pwd密码,pwdagain确认密码,cardno身份证号码，personname用户姓名,contactname紧急联系人姓名，contactphone紧急联系人电话，telephone固定电话,pax固定电话,图片{身份证以及人name:card,店铺name:store,营业执照以及证件name:license}")
-    public Result sellerApplication() {
-        return null;
+    public Result sellerApplication(@ModelAttribute SellerApplication seller, BindingResult result) {
+        Token tk = jwt.checkJWT(seller.getToken());
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+
+        if (result.hasErrors()) {
+            return GetResult.toJson(38, null, null, null, 0);
+        }
+
+        if (!Objects.equals(seller.getPwd(), seller.getPwdagain())) {
+            return GetResult.toJson(55, null, null, null, 0);
+        }
+        return saleService.SellerApplication(tk.getUserId(), seller.getPhone(), seller.getCode(), seller.getAddress(), seller.getLon(), seller.getLat(), seller.getPwd(), seller.getCardno(), seller.getCompanyname(), seller.getPersonname(), seller.getContactname(), seller.getContactphone(), seller.getTelephone(), seller.getPax(), seller.getFiles());
     }
 
     @RequestMapping(value = URL + "QueryUsersByMap", method = RequestMethod.GET)

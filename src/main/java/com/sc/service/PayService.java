@@ -1,8 +1,10 @@
 package com.sc.service;
 
+import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.domain.AlipayTradeAppPayModel;
+import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradeAppPayRequest;
 import com.alipay.api.response.AlipayTradeAppPayResponse;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
@@ -23,10 +25,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 支付用
@@ -246,5 +252,56 @@ public class PayService {
         } catch (Exception e) {
             return GetResult.toJson(200, null, null, null, 0);
         }
+    }
+
+    /**
+     * 阿里异步通知
+     * @param request
+     * @param response
+     */
+    public void aliNotify(HttpServletRequest request, HttpServletResponse response) throws AlipayApiException {
+        //获取支付宝POST过来反馈信息
+        Map<String,String> params = new HashMap<>();
+        Map requestParams = request.getParameterMap();
+        for (Object o : requestParams.keySet()) {
+            String name = (String) o;
+            String[] values = (String[]) requestParams.get(name);
+            String valueStr = "";
+            for (int i = 0; i < values.length; i++) {
+                valueStr = (i == values.length - 1) ? valueStr + values[i]
+                        : valueStr + values[i] + ",";
+            }
+            //乱码解决，这段代码在出现乱码时使用。
+            //valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
+            params.put(name, valueStr);
+        }
+        
+        boolean flag = AlipaySignature.rsaCheckV1(params, AliPayConfig.ALIPAYPUBLICKEY, AliPayConfig.CHARSET, "RSA2");
+        if (flag) {
+            //逻辑处理
+        }
+    }
+
+    /**
+     * 微信异步通知
+     * @param request
+     * @param response
+     */
+    public String wxNotify(HttpServletRequest request, HttpServletResponse response) {
+//        WxMpPayService wxMpPayService = wxMpService.getPayService();
+//        try {
+//            String xmlResult = IOUtils.toString(request.getInputStream(), request.getCharacterEncoding());
+//            WxPayOrderNotifyResult result = wxMpPayService.getOrderNotifyResult(xmlResult);
+//            // 结果正确
+//            String orderId = result.getOutTradeNo();
+//            String tradeNo = result.getTransactionId();
+//            String totalFee = WxPayBaseResult.feeToYuan(result.getTotalFee());
+//            //自己处理订单的业务逻辑，需要判断订单是否已经支付过，否则可能会重复调用
+//            return WxPayOrderNotifyResponse.success("处理成功!");
+//        } catch (Exception e) {
+//            log.error("微信回调结果异常,异常原因{}", e.getMessage());
+//            return WxPayOrderNotifyResponse.fail(e.getMessage());
+//        }
+        return null;
     }
 }
