@@ -1,13 +1,7 @@
 package com.sc.dao;
 
-import com.sc.domain.generator.Brands;
-import com.sc.domain.generator.BrandsExample;
-import com.sc.domain.generator.GooddetailsExample;
-import com.sc.domain.generator.Goods;
-import com.sc.domain.generator.GoodsExample;
-import com.sc.domain.generator.GoodsWithBLOBs;
-import com.sc.domain.generator.Sellers;
-import com.sc.domain.generator.SellersExample;
+import com.sc.domain.generator.*;
+import com.sc.mapper.generator.AdminsMapper;
 import com.sc.mapper.generator.BrandsMapper;
 import com.sc.mapper.generator.GooddetailsMapper;
 import com.sc.mapper.generator.GoodsMapper;
@@ -26,13 +20,15 @@ public class CustomServiceDao {
     private final GoodsMapper goodsMapper;
     private final SellersMapper sellersMapper;
     private final BrandsMapper brandsMapper;
+    private final AdminsMapper adminsMapper;
 
     @Autowired
-    public CustomServiceDao(GooddetailsMapper gooddetailsMapper, GoodsMapper goodsMapper, SellersMapper sellersMapper, BrandsMapper brandsMapper) {
+    public CustomServiceDao(GooddetailsMapper gooddetailsMapper, GoodsMapper goodsMapper, SellersMapper sellersMapper, BrandsMapper brandsMapper, AdminsMapper adminsMapper) {
         this.gooddetailsMapper = gooddetailsMapper;
         this.goodsMapper = goodsMapper;
         this.sellersMapper = sellersMapper;
         this.brandsMapper = brandsMapper;
+        this.adminsMapper = adminsMapper;
     }
 
     /**
@@ -120,5 +116,38 @@ public class CustomServiceDao {
     public List<Brands> queryAllBrandsD() {
         BrandsExample brandsExample = new BrandsExample();
         return brandsMapper.selectByExample(brandsExample);
+    }
+
+    /**
+     * 管理员信息
+     * @param userId
+     * @return
+     */
+    public Admins selectAdminInfo(String userId) {
+        AdminsExample adminsExample = new AdminsExample();
+        AdminsExample.Criteria criteria = adminsExample.createCriteria();
+        criteria.andCmAdminidEqualTo(userId);
+        Admins admins = adminsMapper.selectByExample(adminsExample).get(0);
+        if (admins == null) {
+            return null;
+        } else {
+            return admins;
+        }
+    }
+
+    /**
+     * 添加商品详情
+     * @param details
+     */
+    public void insertGoodDetails(GooddetailsWithBLOBs details) {
+        gooddetailsMapper.insert(details);
+    }
+
+    /**
+     * 添加商品
+     * @param goods
+     */
+    public void insertGoods(GoodsWithBLOBs goods) {
+        goodsMapper.insert(goods);
     }
 }

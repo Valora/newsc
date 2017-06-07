@@ -249,6 +249,7 @@ public class SaleService {
                 } else if (file.getName() == "license") {
                     license += res + "|";
                 }
+                i++;
             }
 
             Long act = saleDao.getUserMaxAccount();
@@ -344,6 +345,7 @@ public class SaleService {
                 } else if (file.getName() == "license") {
                     license += res + "|";
                 }
+                i++;
             }
 
             Long act = saleDao.getSellerMaxAccount();

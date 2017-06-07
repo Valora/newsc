@@ -1,4 +1,4 @@
-package com.sc.domain.CustomService;
+package com.sc.domain.costomservice;
 
 import lombok.Data;
 

@@ -1,22 +1,31 @@
 package com.sc.service;
 
 import com.sc.dao.CustomServiceDao;
-import com.sc.domain.CustomService.BrandidAndBrand;
+import com.sc.domain.costomservice.BrandidAndBrand;
+import com.sc.domain.costomservice.SelleridAndNameAndAccount;
+import com.sc.domain.generator.Admins;
 import com.sc.domain.generator.Brands;
+import com.sc.domain.generator.GooddetailsWithBLOBs;
 import com.sc.domain.generator.Goods;
 import com.sc.domain.generator.GoodsWithBLOBs;
 import com.sc.domain.generator.Sellers;
-import com.sc.domain.CustomService.SelleridAndNameAndAccount;
-import com.sc.storage.FileSystemStorageService;
+import com.sc.storage.StorageService;
+import com.sc.utils.DateUtils;
+import com.sc.utils.GetRandomNumber;
 import com.sc.utils.GetResult;
 import com.sc.utils.JWT;
 import com.sc.utils.Result;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,15 +34,19 @@ import java.util.List;
  */
 @Service
 public class CustomServiceService {
+
+    @Value("${root}")
+    private String root;
+
     private final CustomServiceDao customServiceDao;
     private final JWT jwt;
-    private final FileSystemStorageService fileSystemStorageService;
+    private final StorageService storageService;
 
     @Autowired
-    public CustomServiceService(CustomServiceDao customServiceDao, JWT jwt, FileSystemStorageService fileSystemStorageService) {
+    public CustomServiceService(CustomServiceDao customServiceDao, JWT jwt, StorageService storageService) {
         this.customServiceDao = customServiceDao;
         this.jwt = jwt;
-        this.fileSystemStorageService = fileSystemStorageService;
+        this.storageService = storageService;
     }
 
     /**
@@ -76,7 +89,7 @@ public class CustomServiceService {
                 goodsWithBLOBs = (GoodsWithBLOBs) list.get(0);
                 String[] str1 = goodsWithBLOBs.getCmFigurespath().split("|");
                 //删除图片
-                fileSystemStorageService.deleteByFigurePath(str1[delnum]);
+                storageService.deleteByFigurePath(str1[delnum]);
                 str1[delnum] = "";
                 String str2 = String.join("|", str1).replace("||", "|");
                 goodsWithBLOBs.setCmFigurespath(str2);
@@ -193,5 +206,98 @@ public class CustomServiceService {
             }
         }
         return list1;
+    }
+
+    /**
+     * 上传商品
+     *
+     * @param userId
+     * @param goodsartnum
+     * @param sellerid
+     * @param classifyid
+     * @param classifytabs
+     * @param brandid
+     * @param title
+     * @param originalprice
+     * @param presentprice
+     * @param html
+     * @param chtml
+     * @param ispromotion
+     * @param spec
+     * @param stock
+     * @param colorarr
+     * @param files
+     * @param goodsid
+     * @return
+     */
+    public Result uploadGoods(String userId, String goodsartnum, String sellerid, int classifyid, String classifytabs, int brandid, String title, double originalprice, double presentprice, String html, String chtml, int ispromotion, String spec, int stock, String[] colorarr, List<MultipartFile> files, String goodsid) {
+        try {
+            Admins admin = customServiceDao.selectAdminInfo(userId);
+            if (admin == null || (admin.getCmLevel() != 1 && admin.getCmLevel() != 3)) {
+                return GetResult.toJson(45, null, null, null, 0);
+            }
+            Date time = new Date();
+            if (StringUtils.isBlank(goodsid)) {
+                goodsid = DateUtils.todayYyyyMmDdHhMmSs() + GetRandomNumber.genRandomNum(4);
+            }
+            String mainpath = "";
+            String showpath = "";
+            File file = new File(root);
+            if (!file.isDirectory()) {
+                file.mkdirs();
+            }
+            String spec_stock = "";
+            String[] specArr = spec.split("|");
+            for (String spec1 : specArr) {
+                spec_stock = spec1 + "_" + stock + "|";
+            }
+            for (MultipartFile file1 : files) {
+                int i = 0;
+                String res = "";
+                String newfilename = i + "." + storageService.getFileType(file1.getOriginalFilename());
+                if (storageService.store(file1, newfilename)) {
+                    res = root + newfilename;
+                }
+                if (file1.getName() == "main") {
+                    mainpath = res;
+                } else if (file1.getName() == "show") {
+                    showpath += res + "|";
+                } else {
+                    GooddetailsWithBLOBs details = new GooddetailsWithBLOBs();
+                    details.setCmGoodsid(goodsid);
+                    details.setCmImagepath(res);
+                    details.setCmColor(colorarr[i]);
+                    details.setCmSpecStock(spec_stock);
+                    customServiceDao.insertGoodDetails(details);
+                    i++;
+                }
+            }
+
+            GoodsWithBLOBs goods = new GoodsWithBLOBs();
+            goods.setCmGoodsid(goodsid);
+            goods.setCmGoodsartnum(goodsartnum);
+            goods.setCmSellerid(sellerid);
+            goods.setCmClassifyid(classifyid);
+            goods.setCmClassifytabs(classifytabs);
+            goods.setCmBrandid(brandid);
+            goods.setCmTitle(title);
+            goods.setCmChtml(chtml);
+            goods.setCmSales(0);
+            goods.setCmOriginalprice(originalprice);
+            goods.setCmPresentprice(presentprice);
+            goods.setCmHtml(html);
+            goods.setCmMainfigurepath(mainpath);
+            goods.setCmFigurespath(showpath);
+            goods.setCmCreatetime(time);
+            goods.setCmIsoff(0);
+            goods.setCmIspromotion(ispromotion);
+            goods.setCmSpec(spec);
+
+            customServiceDao.insertGoods(goods);
+
+            return GetResult.toJson(0, null, jwt.createJWT(userId), null, 0);
+        } catch (Exception e) {
+            return GetResult.toJson(200, null, null, null, 0);
+        }
     }
 }
