@@ -1,6 +1,5 @@
 package com.sc.storage;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -8,6 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -32,10 +34,10 @@ public class FileSystemStorageService implements StorageService {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
             }
-            File newfile = new File(String.valueOf(this.rootLocation.resolve(newfilename)));
-            FileUtils.copyInputStreamToFile(file.getInputStream(), newfile);
+            //压缩
+            scale(file, String.valueOf(this.rootLocation.resolve(newfilename)));
             return true;
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
         }
     }
@@ -115,5 +117,20 @@ public class FileSystemStorageService implements StorageService {
             return fileName.substring(fileName.lastIndexOf("."), fileName.length());
         }
         return "";
+    }
+
+    private static void scale(MultipartFile srcFile, String result) {
+        try {
+            BufferedImage src = ImageIO.read(srcFile.getInputStream());
+            int width = src.getWidth();
+            int height = src.getHeight();
+            width = width / 5;
+            height = width / 5;
+            Image image = src.getScaledInstance(width, height, Image.SCALE_DEFAULT);
+            BufferedImage tag = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+            ImageIO.write(tag, "JPEG", new File(result));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
