@@ -1,23 +1,19 @@
 package com.sc.web;
 
+import com.sc.domain.costomservice.ReviseGoods;
 import com.sc.domain.costomservice.UploadGoods;
 import com.sc.service.CustomServiceService;
-import com.sc.utils.GetResult;
-import com.sc.utils.JWT;
-import com.sc.utils.ParseUtil;
-import com.sc.utils.Result;
-import com.sc.utils.Token;
+import com.sc.utils.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * Created by valora on 2017/5/12.
@@ -69,20 +65,65 @@ public class CustomServiceController {
 
     @RequestMapping(value = URL + "ReviceGoods", method = RequestMethod.POST)
     @ApiOperation("修改商品{goodsid商品ID，token秘钥，goodsartnum商品码(限15字符)， sellerid厂家ID，classifyid大类ID(只属于一个大类)，classifytabs子类ID(如：1|2|3|,最后一个字符必须为\"|\")，brandid品牌ID，title标题(限25个字符)，originalprice原价，presentprice现价，stock库存，html展示内容，chtml展示内容(APP小图)，ispromotion是否推荐(0:不，1：推荐)，spec规格(如：29/74A_10|30/76A_100|,最后一个字符必须为\"|\",请注意特殊字符，不能影响字符切割)，图片必须有name属性（主图：main,展示图:show)changetab(多张修改用|拼接，如0|1|)}")
-    public Result reviseGoods() {
-        return null;
+    public Result reviseGoods(@ModelAttribute ReviseGoods reviseGoods, BindingResult result) {
+        if (result.hasErrors()) {
+            return GetResult.toJson(43, null, null, null, 0);
+        }
+        if (!ParseUtil.parseInt(reviseGoods.getClassifyid()) || !ParseUtil.parseInt(reviseGoods.getBrandid()) || !ParseUtil.parseInt(reviseGoods.getIspromotion()) || !ParseUtil.parseInt((reviseGoods.getStock())) || !ParseUtil.parseDouble(reviseGoods.getOriginalprice()) || !ParseUtil.parseDouble(reviseGoods.getPresentprice()) || reviseGoods.getGoodsartnum().length() > 15 || reviseGoods.getTitle().length() > 25) {
+            return GetResult.toJson(44, null, null, null, 0);
+        }
+        Token tk = jwt.checkJWT(reviseGoods.getToken());
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        String goodsartnum = reviseGoods.getGoodsartnum();
+        String sellerid = reviseGoods.getSellerid();
+        int Classifyid = Integer.parseInt(reviseGoods.getClassifyid());
+        String classifytabs = reviseGoods.getClassifytabs();
+        int Brandid = Integer.parseInt(reviseGoods.getBrandid());
+        String title = reviseGoods.getTitle();
+        double Originalprice = Double.parseDouble(reviseGoods.getOriginalprice());
+        double Presentprice = Double.parseDouble(reviseGoods.getPresentprice());
+        String html = reviseGoods.getHtml();
+        String chtml = reviseGoods.getChtml();
+        int Ispromotion = Integer.parseInt(reviseGoods.getIspromotion());
+        String spec = reviseGoods.getSpec();
+        int Stock = Integer.parseInt(reviseGoods.getStock());
+        String goodsid = reviseGoods.getGoodsid();
+        String changetab = reviseGoods.getChangetab();
+        return customServiceService.reviseGoodsS(tk.getUserId(), goodsartnum, sellerid, Classifyid, classifytabs, Brandid, title, Originalprice, Presentprice, html, chtml, Ispromotion, spec, Stock, reviseGoods.getFiles(), goodsid, changetab);
     }
 
     @RequestMapping(value = URL + "ReciceGoodsDetails", method = RequestMethod.POST)
     @ApiOperation("修改商品详细(颜色，颜色图){token：秘钥，goodsdetailsid：商品详细ID,color:颜色，stock：库存，图片自定}")
-    public Result reviseGoodsDetails() {
-        return null;
+    public Result reviseGoodsDetails(@RequestParam("goodsdetailsid") String goodsdetailsid, @RequestParam("stock") String stock, @RequestParam("token") String token, @RequestParam("color") String color, @RequestParam("files") List<MultipartFile> files) {
+        if (goodsdetailsid == null || !ParseUtil.parseInt(goodsdetailsid)) {
+            return GetResult.toJson(53, null, null, null, 0);
+        }
+        if (stock != null && (!ParseUtil.parseInt(stock))) {
+            return GetResult.toJson(53, null, null, null, 0);
+        }
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return customServiceService.reviseGoodsDetailsS(tk.getUserId(), goodsdetailsid, color, stock, files);
     }
 
     @RequestMapping(value = URL + "AddGoodsDetails", method = RequestMethod.POST)
     @ApiOperation("添加商品详细{token：秘钥，goodsid：商品ID，color：颜色，stock：库存，图片自定}")
-    public Result addGoodsDetails() {
-        return null;
+    public Result addGoodsDetails(@RequestParam("goodsid") String goodsid, @RequestParam("stock") String stock, @RequestParam("token") String token, @RequestParam("color") String color, @RequestParam("files") List<MultipartFile> files) {
+        if (goodsid == null || color == null || !ParseUtil.parseInt(stock)) {
+            return GetResult.toJson(53, null, null, null, 0);
+        }
+        if (files.size() < 1) {
+            return GetResult.toJson(58, null, null, null, 0);
+        }
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        }
+        return customServiceService.addGoodsDetailsS(tk.getUserId(), goodsid, color, stock, files.get(0));
     }
 
     @RequestMapping(value = URL + "DelGoodsDetails", method = RequestMethod.GET)

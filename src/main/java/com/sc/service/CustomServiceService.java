@@ -3,18 +3,9 @@ package com.sc.service;
 import com.sc.dao.CustomServiceDao;
 import com.sc.domain.costomservice.BrandidAndBrand;
 import com.sc.domain.costomservice.SelleridAndNameAndAccount;
-import com.sc.domain.generator.Admins;
-import com.sc.domain.generator.Brands;
-import com.sc.domain.generator.GooddetailsWithBLOBs;
-import com.sc.domain.generator.Goods;
-import com.sc.domain.generator.GoodsWithBLOBs;
-import com.sc.domain.generator.Sellers;
+import com.sc.domain.generator.*;
 import com.sc.storage.StorageService;
-import com.sc.utils.DateUtils;
-import com.sc.utils.GetRandomNumber;
-import com.sc.utils.GetResult;
-import com.sc.utils.JWT;
-import com.sc.utils.Result;
+import com.sc.utils.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -251,8 +244,8 @@ public class CustomServiceService {
             for (String spec1 : specArr) {
                 spec_stock = spec1 + "_" + stock + "|";
             }
+            int i = 0;
             for (MultipartFile file1 : files) {
-                int i = 0;
                 String res = "";
                 String newfilename = i + "." + storageService.getFileType(file1.getOriginalFilename());
                 if (storageService.store(file1, newfilename)) {
@@ -297,6 +290,215 @@ public class CustomServiceService {
 
             return GetResult.toJson(0, null, jwt.createJWT(userId), null, 0);
         } catch (Exception e) {
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 修改商品
+     *
+     * @param adminid
+     * @param goodsartnum
+     * @param sellerid
+     * @param classifyid
+     * @param classifytabs
+     * @param brandid
+     * @param title
+     * @param originalprice
+     * @param presentprice
+     * @param html
+     * @param chtml
+     * @param ispromotion
+     * @param spec
+     * @param stock
+     * @param files
+     * @param goodsid
+     * @param changetab
+     * @return
+     */
+    public Result reviseGoodsS(String adminid, String goodsartnum, String sellerid, int classifyid, String classifytabs, int brandid, String title, double originalprice, double presentprice, String html, String chtml, int ispromotion, String spec, int stock, List<MultipartFile> files, String goodsid, String changetab) {
+        try {
+            Admins admins = customServiceDao.selectAdminInfo(adminid);
+            if (admins == null || (admins.getCmLevel() != 1 && admins.getCmLevel() != 3)) {
+                return GetResult.toJson(45, null, null, null, 0);
+            }
+            GoodsWithBLOBs goods = null;
+            List list = customServiceDao.selectGoodsByGoodsid(goodsid);
+            if (list != null && list.size() > 0) {
+                goods = (GoodsWithBLOBs) list.get(0);
+            }
+            if (goods == null) {
+                return GetResult.toJson(17, null, jwt.createJWT(adminid), null, 0);
+            }
+            String spec_stock = "";
+            String[] specArr = spec.split("|");
+            for (String spec1 : specArr) {
+                spec_stock = spec1 + "_" + stock + "|";
+            }
+            List<GooddetailsWithBLOBs> gooddetailsList = customServiceDao.selectGooddetailBygoodid(goodsid);
+            for (GooddetailsWithBLOBs gooddetails : gooddetailsList) {
+                gooddetails.setCmSpecStock(spec_stock);
+            }
+            int a = files.size();
+            String mainpath = "";
+            String showpath = "";
+            if (a > 0) {
+                String[] carr = changetab.split("|");
+                List<String> iarr = Arrays.asList(goods.getCmFigurespath().split("|"));
+                File file = new File(root);
+                if (!file.isDirectory()) {
+                    file.mkdirs();
+                }
+                int i = 0;
+                for (MultipartFile file1 : files) {
+                    String res = "";
+                    Date date = new Date();
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HHmmssSSSS");
+                    String str = simpleDateFormat.format(date);
+                    String newfilename = str + "." + storageService.getFileType(file1.getOriginalFilename());
+                    if (storageService.store(file1, newfilename)) {
+                        res = root + newfilename;
+                    }
+                    if (file1.getName() == "main") {
+                        mainpath = res;
+                    } else {
+                        storageService.deleteByFigurePath(iarr.get(i));
+                        if (i > (iarr.size() - 1)) {
+                            iarr.add(res);
+                        } else {
+                            iarr.set(i, res);
+                        }
+                        i++;
+                    }
+                }
+                showpath = String.join("|", iarr);
+            }
+            goods.setCmGoodsartnum(goodsartnum);
+            goods.setCmSellerid(sellerid);
+            goods.setCmClassifyid(classifyid);
+            goods.setCmClassifytabs(classifytabs);
+            goods.setCmBrandid(brandid);
+            goods.setCmTitle(title);
+            goods.setCmChtml(chtml);
+            goods.setCmSales(0);
+            goods.setCmOriginalprice(originalprice);
+            goods.setCmPresentprice(presentprice);
+            goods.setCmHtml(html);
+            goods.setCmIspromotion(ispromotion);
+            goods.setCmSpec(spec);
+            if (!mainpath.equals("")) {
+                goods.setCmMainfigurepath(mainpath);
+            }
+            if (!showpath.equals("")) {
+                goods.setCmFigurespath(showpath);
+            }
+            customServiceDao.updateGoods(goods);
+            return GetResult.toJson(0, null, jwt.createJWT(adminid), null, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 修改商品颜色
+     *
+     * @param adminid
+     * @param goodsdetailsid
+     * @param color
+     * @param stock
+     * @param files
+     * @return
+     */
+    public Result reviseGoodsDetailsS(String adminid, String goodsdetailsid, String color, String stock, List<MultipartFile> files) {
+        try {
+            GooddetailsWithBLOBs gooddetailsWithBLOBs = customServiceDao.selectGooddetailBygooddetailsid(goodsdetailsid);
+            if (gooddetailsWithBLOBs == null) {
+                return GetResult.toJson(53, null, jwt.createJWT(adminid), null, 0);
+            }
+            if (files.size() > 0) {
+                String res = "";
+                storageService.deleteByFigurePath(gooddetailsWithBLOBs.getCmImagepath());
+                File file = new File(root);
+                if (!file.isDirectory()) {
+                    file.mkdirs();
+                }
+                Date date = new Date();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HHmmssSSSS");
+                String str = simpleDateFormat.format(date);
+                String newfilename = str + "." + storageService.getFileType(files.get(0).getOriginalFilename());
+                if (storageService.store(files.get(0), newfilename)) {
+                    res = root + newfilename;
+                }
+                gooddetailsWithBLOBs.setCmImagepath(res);
+            }
+            int stock1 = Integer.valueOf(stock);
+            if (stock1 > 0) {
+                String spec_stock = "";
+                Goods goods = customServiceDao.selectGoodsByGoodsid(gooddetailsWithBLOBs.getCmGoodsid()).get(0);
+                String spec = goods.getCmSpec();
+                String[] specArr = spec.split("|");
+                for (String spec1 : specArr) {
+                    spec_stock = spec1 + "_" + stock + "|";
+                }
+                gooddetailsWithBLOBs.setCmSpecStock(spec_stock);
+            }
+            gooddetailsWithBLOBs.setCmColor(color);
+            customServiceDao.updateGooddetails(gooddetailsWithBLOBs);
+            return GetResult.toJson(0, null, jwt.createJWT(adminid), null, 0);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 添加商品详情
+     *
+     * @param adminid
+     * @param goodsid
+     * @param color
+     * @param stock
+     * @param multipartFile
+     * @return
+     */
+    public Result addGoodsDetailsS(String adminid, String goodsid, String color, String stock, MultipartFile multipartFile) {
+        try {
+            GoodsWithBLOBs goods = null;
+            List<Goods> list = customServiceDao.selectGoodsByGoodsid(goodsid);
+            if (list != null && list.size() > 0) {
+                goods = (GoodsWithBLOBs) list.get(0);
+            }
+            if (goods == null) {
+                return GetResult.toJson(53, null, jwt.createJWT(adminid), null, 0);
+            }
+            File file = new File(root);
+            if (!file.isDirectory()) {
+                file.mkdirs();
+            }
+            Date date = new Date();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HHmmssSSSS");
+            String str = simpleDateFormat.format(date);
+            String newfilename = str + "." + storageService.getFileType(multipartFile.getOriginalFilename());
+            String res = "";
+            if (storageService.store(multipartFile, newfilename)) {
+                res = root + newfilename;
+            }
+            String spec_stock = "";
+            String spec = goods.getCmSpec();
+            String[] specArr = spec.split("|");
+            for (String spec1 : specArr) {
+                spec_stock = spec1 + "_" + stock + "|";
+            }
+            GooddetailsWithBLOBs gooddetailsWithBLOBs = new GooddetailsWithBLOBs();
+            gooddetailsWithBLOBs.setCmColor(color);
+            gooddetailsWithBLOBs.setCmGoodsid(goodsid);
+            gooddetailsWithBLOBs.setCmSpecStock(spec_stock);
+            gooddetailsWithBLOBs.setCmImagepath(res);
+            customServiceDao.insertGoodDetails(gooddetailsWithBLOBs);
+            return GetResult.toJson(0, null, jwt.createJWT(adminid), null, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
             return GetResult.toJson(200, null, null, null, 0);
         }
     }

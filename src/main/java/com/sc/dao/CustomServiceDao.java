@@ -1,11 +1,7 @@
 package com.sc.dao;
 
 import com.sc.domain.generator.*;
-import com.sc.mapper.generator.AdminsMapper;
-import com.sc.mapper.generator.BrandsMapper;
-import com.sc.mapper.generator.GooddetailsMapper;
-import com.sc.mapper.generator.GoodsMapper;
-import com.sc.mapper.generator.SellersMapper;
+import com.sc.mapper.generator.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -120,6 +116,7 @@ public class CustomServiceDao {
 
     /**
      * 管理员信息
+     *
      * @param userId
      * @return
      */
@@ -137,6 +134,7 @@ public class CustomServiceDao {
 
     /**
      * 添加商品详情
+     *
      * @param details
      */
     public void insertGoodDetails(GooddetailsWithBLOBs details) {
@@ -145,9 +143,53 @@ public class CustomServiceDao {
 
     /**
      * 添加商品
+     *
      * @param goods
      */
     public void insertGoods(GoodsWithBLOBs goods) {
         goodsMapper.insert(goods);
+    }
+
+    /**
+     * 根据商品id查询商品详情
+     *
+     * @param goodsid 商品 id
+     * @return GooDetail对象
+     */
+    public List<GooddetailsWithBLOBs> selectGooddetailBygoodid(String goodsid) {
+        GooddetailsExample gooddetailsExample = new GooddetailsExample();
+        GooddetailsExample.Criteria criteria = gooddetailsExample.createCriteria();
+        criteria.andCmGoodsidEqualTo(goodsid);
+        return gooddetailsMapper.selectByExampleWithBLOBs(gooddetailsExample);
+    }
+
+    /**
+     * 根据商品的详细id查询商品详细对象
+     *
+     * @param goodsdetailsid 商品的详细id
+     * @return 商品详细对象
+     */
+    public GooddetailsWithBLOBs selectGooddetailBygooddetailsid(String goodsdetailsid) {
+        GooddetailsWithBLOBs gooddetailsWithBLOBs = null;
+        GooddetailsExample gooddetailsExample = new GooddetailsExample();
+        GooddetailsExample.Criteria criteria = gooddetailsExample.createCriteria();
+        criteria.andCmGoodsdetailsidEqualTo(Integer.valueOf(goodsdetailsid));
+        List<GooddetailsWithBLOBs> list = gooddetailsMapper.selectByExampleWithBLOBs(gooddetailsExample);
+        if (list != null && list.size() > 0) {
+            gooddetailsWithBLOBs = list.get(0);
+        }
+        return gooddetailsWithBLOBs;
+    }
+
+    /**
+     * 更新商品详情
+     *
+     * @param gooddetailsWithBLOBs 需要更新的商品详情
+     */
+    public void updateGooddetails(GooddetailsWithBLOBs gooddetailsWithBLOBs) {
+        GooddetailsExample gooddetailsExample = new GooddetailsExample();
+        GooddetailsExample.Criteria criteria = gooddetailsExample.createCriteria();
+        criteria.andCmGoodsdetailsidEqualTo(gooddetailsWithBLOBs.getCmGoodsdetailsid());
+        gooddetailsMapper.updateByExample(gooddetailsWithBLOBs, gooddetailsExample);
     }
 }
