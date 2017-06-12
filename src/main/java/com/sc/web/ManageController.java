@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -229,7 +228,7 @@ public class ManageController {
 
     @RequestMapping(value = URL + "AddClassify", method = RequestMethod.POST)
     @ApiOperation("添加商品分类和子分类{classifyname分类名称, type分类类型（0：大类，1：子类）,parentid上级分类（如果是大类，则输入0）,token秘钥, 图片}")
-    public Result addClassify(@RequestPart("classifyname") String classifyname, @RequestPart("type") String type, @RequestPart("parentid") String parentid, @RequestPart("token") String token, @RequestPart("file") MultipartFile[] files) {
+    public Result addClassify(@RequestParam("classifyname") String classifyname, @RequestParam("type") String type, @RequestParam("parentid") String parentid, @RequestParam("token") String token, @RequestParam("file") MultipartFile[] files) {
         Token tk = jwt.checkJWT(token);
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
@@ -239,7 +238,7 @@ public class ManageController {
 
     @RequestMapping(value = URL + "ReviceClassify", method = RequestMethod.POST)
     @ApiOperation("修改商品分类和子分类{classifyid分类ID，classifyname分类名称,type分类类型（0：大类，1：子类）,parentid上级分类（如果是大类，则输入0）,token秘钥,图片}")
-    public Result reviceClassify(@RequestPart("classifyid") String classifyid, @RequestPart("classifyname") String classifyname, @RequestPart("type") String type, @RequestPart("parentid") String parentid, @RequestPart("token") String token, @RequestPart("file") MultipartFile[] files) {
+    public Result reviceClassify(@RequestParam("classifyid") String classifyid, @RequestParam("classifyname") String classifyname, @RequestParam("type") String type, @RequestParam("parentid") String parentid, @RequestParam("token") String token, @RequestParam("file") MultipartFile[] files) {
         Token tk = jwt.checkJWT(token);
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
@@ -430,7 +429,7 @@ public class ManageController {
 
     @RequestMapping(value = URL + "AddNotices", method = RequestMethod.POST)
     @ApiOperation("添加公告(对厂家){token秘钥，title标题，content内容，creator公告者，other其他，deadline过期时间}")
-    public Result addNotices(@RequestPart("token") String token, @RequestPart("title") String title, @RequestPart("content") String content, @RequestPart("creator") String creator, @RequestPart("other") String other, @RequestPart("deadline") String deadline) {
+    public Result addNotices(@RequestParam("token") String token, @RequestParam("title") String title, @RequestParam("content") String content, @RequestParam("creator") String creator, @RequestParam("other") String other, @RequestParam("deadline") String deadline) {
         Token tk = jwt.checkJWT(token);
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);

@@ -3,6 +3,8 @@ package com.sc.service;
 import com.sc.dao.PageDataDao;
 import com.sc.domain.generator.Classifys;
 import com.sc.domain.pagedata.FirstPage;
+import com.sc.domain.pagedata.GoodDetail;
+import com.sc.domain.pagedata.GoodDetailWithOutUserid;
 import com.sc.domain.pagedata.PageGoods;
 import com.sc.domain.pagedata.PageShow;
 import com.sc.utils.GetResult;
@@ -159,8 +161,17 @@ public class PageDataService {
      * @return 商品详情
      */
     public Result queryGoodsDetails(String goodsid, Token tk) {
-        //todo
-        return null;
+        try {
+            if (tk != null) {
+                GoodDetail goodDetail =  pageDataDao.getGoodsDetailsWithUserid(tk.getUserId(), goodsid);
+                return GetResult.toJson(0, null, null, goodDetail, 0);
+            } else {
+                GoodDetailWithOutUserid goodDetail =  pageDataDao.getGoodsDetailsWithOutUserid(goodsid);
+                return GetResult.toJson(0, null, null, goodDetail, 0);
+            }
+        } catch (Exception e) {
+            return GetResult.toJson(200, null, null, null, 0);
+        }
     }
 
     /**
@@ -207,7 +218,11 @@ public class PageDataService {
      * @return 所有分类
      */
     public Result getClassify() {
-        //todo
+        try {
+            //todo 
+        } catch (Exception e) {
+            
+        }
         return null;
     }
 }

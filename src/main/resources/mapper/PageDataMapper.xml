@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.pagedata.PageDataMapper">
+    <resultMap id="GoodDetail" type="com.sc.domain.pagedata.GoodDetail" autoMapping="true">
+        <result column="CM_GOODSID" property="cmGoodsid" jdbcType="VARCHAR"/>
+        <result column="CM_TITLE" property="cmTitle" jdbcType="VARCHAR"/>
+        <result column="CM_SALES" property="cmSales" jdbcType="VARCHAR"/>
+        <result column="CM_HTML" property="cmHtml" jdbcType="VARCHAR"/>
+        <result column="CM_CHTML" property="cmChtml" jdbcType="VARCHAR"/>
+        <result column="CM_BRANDID" property="cmBrandid" jdbcType="VARCHAR"/>
+        <result column="CM_MAINFIGUREPATH" property="cmMainfigurepath" jdbcType="VARCHAR"/>
+        <result column="CM_FIGURESPATH" property="cmFigurespath" jdbcType="VARCHAR"/>
+        <result column="CM_CREATETIME" property="cmCreatetime" jdbcType="DATE"/>
+        <result column="CM_ORIGINALPRICE" property="cmOriginalprice" jdbcType="DOUBLE"/>
+        <result column="CM_PRESENTPRICE" property="cmPresentprice" jdbcType="DOUBLE"/>
+        <result column="CM_ISOFF" property="cmIsoff" jdbcType="INTEGER"/>
+        <result column="CM_SELLERID" property="cmSellerid" jdbcType="VARCHAR"/>
+        <result column="CM_GOODSARTNUM" property="cmGoodsartnum" jdbcType="VARCHAR"/>
+        <result column="CM_ISPROMOTION" property="cmIspromotion" jdbcType="INTEGER"/>
+        <result column="CM_SELLERNAME" property="cmSellername" jdbcType="VARCHAR"/>
+        <result column="CM_ISCOLLECTION" property="cmIscollection" jdbcType="INTEGER"/>
+        <collection property="cmOther" ofType="com.sc.domain.pagedata.GoodDetailsOther">
+            <result column="CM_GOODSDETAILSID" property="cmGoodsdetailsid" jdbcType="VARCHAR"/>
+            <result column="CM_COLOR" property="cmColor" jdbcType="VARCHAR"/>
+            <result column="CM_IMAGEPATH" property="cmImagepath" jdbcType="VARCHAR"/>
+            <result column="CM_SPEC_STOCK" property="cmSpecStock" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="GoodDetailWithOutUserID" type="com.sc.domain.pagedata.GoodDetailWithOutUserid" autoMapping="true">
+        <result column="CM_GOODSID" property="cmGoodsid" jdbcType="VARCHAR"/>
+        <result column="CM_TITLE" property="cmTitle" jdbcType="VARCHAR"/>
+        <result column="CM_SALES" property="cmSales" jdbcType="VARCHAR"/>
+        <result column="CM_HTML" property="cmHtml" jdbcType="VARCHAR"/>
+        <result column="CM_BRANDID" property="cmBrandid" jdbcType="VARCHAR"/>
+        <result column="CM_MAINFIGUREPATH" property="cmMainfigurepath" jdbcType="VARCHAR"/>
+        <result column="CM_FIGURESPATH" property="cmFigurespath" jdbcType="VARCHAR"/>
+        <result column="CM_CREATETIME" property="cmCreatetime" jdbcType="DATE"/>
+        <result column="CM_ORIGINALPRICE" property="cmOriginalprice" jdbcType="DOUBLE"/>
+        <result column="CM_PRESENTPRICE" property="cmPresentprice" jdbcType="DOUBLE"/>
+        <result column="CM_ISOFF" property="cmIsoff" jdbcType="INTEGER"/>
+        <result column="CM_SELLERID" property="cmSellerid" jdbcType="VARCHAR"/>
+        <result column="CM_SELLERNAME" property="cmSellername" jdbcType="VARCHAR"/>
+        <collection property="cmOther" ofType="com.sc.domain.pagedata.GoodDetailsOther">
+            <result column="CM_GOODSDETAILSID" property="cmGoodsdetailsid" jdbcType="VARCHAR"/>
+            <result column="CM_COLOR" property="cmColor" jdbcType="VARCHAR"/>
+            <result column="CM_IMAGEPATH" property="cmImagepath" jdbcType="VARCHAR"/>
+            <result column="CM_SPEC_STOCK" property="cmSpecStock" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+    <select id="getGoodsDetailsWithUserid" resultMap="GoodDetail">
+        SELECT
+            t0.CM_GOODSID,
+            t0.CM_TITLE,
+            t0.CM_SALES,
+            t0.CM_HTML,
+            t0.CM_CHTML,
+            t0.CM_BRANDID,
+            t0.CM_MAINFIGUREPATH,
+            t0.CM_FIGURESPATH,
+            t0.CM_CREATETIME,
+            t0.CM_ORIGINALPRICE,
+            t0.CM_CLASSIFYID,
+            t0.CM_CLASSIFYTABS,
+            t0.CM_PRESENTPRICE,
+            t0.CM_ISOFF,
+            t0.CM_SELLERID,
+            t0.CM_GOODSARTNUM,
+            t0.CM_ISPROMOTION,
+            t1.CM_SELLERNAME AS CM_SELLERNAME,
+            (CASE
+             WHEN t3.test IS NULL
+                 THEN 0
+             ELSE 1
+             END)            AS CM_ISCOLLECTION,
+            t4.CM_GOODSDETAILSID,
+            t4.CM_COLOR,
+            t4.CM_IMAGEPATH,
+            t4.CM_SPEC_STOCK,
+            (
+                SELECT COUNT(*)
+                FROM TB_GOODSDETAILS AS t5
+                WHERE t5.CM_GOODSID = t0.CM_GOODSID
+            )                AS value
+        FROM TB_GOODS AS t0
+            LEFT OUTER JOIN TB_SELLERS AS t1 ON t0.CM_SELLERID = t1.CM_SELLERID
+            LEFT OUTER JOIN (
+                                SELECT
+                                    1 AS test,
+                                    t2.CM_COLLECTIONID,
+                                    t2.CM_USERID,
+                                    t2.CM_GOODSID
+                                FROM TB_COLLECTIONS AS t2
+                            ) AS t3 ON (t0.CM_GOODSID = t3.CM_GOODSID) AND (t3.CM_USERID = #{userID})
+            LEFT OUTER JOIN TB_GOODSDETAILS AS t4 ON t4.CM_GOODSID = t0.CM_GOODSID
+        WHERE t0.CM_GOODSID = #{goodsid}
+        ORDER BY t0.CM_GOODSID, t1.CM_SELLERID, t3.CM_COLLECTIONID, t4.CM_GOODSDETAILSID
+    </select>
+    <select id="getGoodsDetailsWithOutUserid" resultMap="GoodDetailWithOutUserID">
+        SELECT
+            t0.CM_GOODSID,
+            t0.CM_TITLE,
+            t0.CM_SALES,
+            t0.CM_HTML,
+            t0.CM_BRANDID,
+            t0.CM_MAINFIGUREPATH,
+            t0.CM_FIGURESPATH,
+            t0.CM_CREATETIME,
+            t0.CM_ORIGINALPRICE,
+            t0.CM_GOODSARTNUM,
+            t0.CM_PRESENTPRICE,
+            t0.CM_ISOFF,
+            t0.CM_SELLERID,
+            t1.CM_SELLERNAME AS CM_SELLERNAME,
+            t2.CM_GOODSDETAILSID,
+            t2.CM_COLOR,
+            t2.CM_IMAGEPATH,
+            t2.CM_SPEC_STOCK,
+            (
+                SELECT COUNT(*)
+                FROM TB_GOODSDETAILS AS t3
+                WHERE t3.CM_GOODSID = t0.CM_GOODSID
+            )                AS value
+        FROM TB_GOODS AS t0
+            LEFT OUTER JOIN TB_SELLERS AS t1 ON t0.CM_SELLERID = t1.CM_SELLERID
+            LEFT OUTER JOIN TB_GOODSDETAILS AS t2 ON t2.CM_GOODSID = t0.CM_GOODSID
+        WHERE t0.CM_GOODSID = #{goodsid}
+        ORDER BY t0.CM_GOODSID, t1.CM_SELLERID, t2.CM_GOODSDETAILSID
+    </select>
+</mapper>

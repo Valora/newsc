@@ -6,10 +6,13 @@ import com.sc.domain.generator.ClassifysExample;
 import com.sc.domain.generator.Goods;
 import com.sc.domain.generator.GoodsExample;
 import com.sc.domain.generator.GoodsWithBLOBs;
+import com.sc.domain.pagedata.GoodDetail;
+import com.sc.domain.pagedata.GoodDetailWithOutUserid;
 import com.sc.domain.pagedata.PageGoods;
 import com.sc.domain.pagedata.PageShow;
 import com.sc.mapper.generator.ClassifysMapper;
 import com.sc.mapper.generator.GoodsMapper;
+import com.sc.mapper.pagedata.PageDataMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,10 +30,13 @@ public class PageDataDao {
 
     private final ClassifysMapper classifysMapper;
 
+    private final PageDataMapper pageDataMapper;
+    
     @Autowired
-    public PageDataDao(GoodsMapper goodsMapper, ClassifysMapper classifysMapper) {
+    public PageDataDao(GoodsMapper goodsMapper, ClassifysMapper classifysMapper, PageDataMapper pageDataMapper) {
         this.goodsMapper = goodsMapper;
         this.classifysMapper = classifysMapper;
+        this.pageDataMapper = pageDataMapper;
     }
 
 
@@ -329,5 +335,23 @@ public class PageDataDao {
         criteria.andCmClassifyidEqualTo(classifyid);
         classifysExample.setOrderByClause("CM_SORT");
         return classifysMapper.selectByExample(classifysExample);
+    }
+
+    /**
+     * 查询商品详情(有ID)
+     * @param id
+     * @param userId
+     */
+    public GoodDetail getGoodsDetailsWithUserid(String id, String userId) {
+        return pageDataMapper.getGoodsDetailsWithUserid(userId, id);
+    }
+
+    /**
+     * 查询商品详情(没有ID)
+     * @param goodsid
+     * @return
+     */
+    public GoodDetailWithOutUserid getGoodsDetailsWithOutUserid(String goodsid) {
+        return pageDataMapper.getGoodsDetailsWithOutUserid(goodsid);
     }
 }

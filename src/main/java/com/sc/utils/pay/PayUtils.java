@@ -1,13 +1,12 @@
-package com.sc.utils;
+package com.sc.utils.pay;
 
 import com.github.binarywang.wxpay.bean.result.WxPayUnifiedOrderResult;
-import com.github.binarywang.wxpay.util.SignUtils;
+import com.sc.utils.DateUtils;
+import com.sc.utils.GetRandomNumber;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by valora on 2017/5/27.
@@ -29,19 +28,6 @@ public class PayUtils {
      */
     public static String generateOutTradeNo() {
         return "{0}{1}{2}" + MCHID + DateUtils.todayYyyyMmDdHhMmSs() + GetRandomNumber.genRandomNum(3);
-    }
-
-    /**
-     * 生成签名
-     *
-     * @return
-     */
-    public static String createSign() {
-        Map<String, String> params = new HashMap<>();
-        params.put("mch_id", MCHID);
-        params.put("key", KEY);
-        params.put("appid", APPID);
-        return SignUtils.createSign(params, KEY);
     }
 
     /**

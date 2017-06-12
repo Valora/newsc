@@ -54,7 +54,7 @@ public class PayStartCallController {
     }
 
     @RequestMapping(value = "wxnotify")
-    public void wxNotify(HttpServletRequest request, HttpServletResponse response) {
+    public void wxNotify(HttpServletRequest request, HttpServletResponse response) throws Exception {
         payService.wxNotify(request, response);
     }
 }
