@@ -5,6 +5,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
@@ -58,6 +59,15 @@ public class FileSystemStorageService implements StorageService {
     public Path load(String filename) {
         return rootLocation.resolve(filename);
     }
+
+    @Override
+    public File loadAsFile(String filename) {
+        if (StringUtils.isEmpty(filename)) {
+            return null;
+        }
+        return new File(filename);
+    }
+
 
     @Override
     public Resource loadAsResource(String filename) {

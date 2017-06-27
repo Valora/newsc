@@ -1,16 +1,20 @@
 package com.sc.service;
 
 import com.sc.dao.LoginDao;
+import com.sc.domain.generator.Register;
 import com.sc.domain.generator.Users;
 import com.sc.domain.login.AdminLogin;
 import com.sc.domain.login.SellerLogin;
 import com.sc.domain.login.UserLogin;
+import com.sc.utils.GetRandomNumber;
 import com.sc.utils.GetResult;
 import com.sc.utils.JWT;
 import com.sc.utils.Result;
+import com.sc.utils.SendCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -121,9 +125,23 @@ public class LoginService {
      * @param phone 手机号码
      * @param type 类型
      */
-    public void send(String phone, int type) {
-//        try {
-//            
-//        }
+    public Result send(String phone, int type) {
+        try {
+            Register reg = loginDao.getRegisterInfo(phone);
+            String code = GetRandomNumber.genRandomNum(4);
+            Date time = new Date();
+            if (SendCode.sendCode(phone, type, Integer.valueOf(code))) {
+                if (reg == null) {
+                    loginDao.insertReg(phone, code, time);
+                } else {
+                    loginDao.updateReg(phone, code, time);
+                }
+                return GetResult.toJson(0, null, null, null, 0);
+            } else {
+                return GetResult.toJson(2, null, null, null, 0);
+            } 
+        } catch (Exception ex) {
+            return GetResult.toJson(200, null, null, null, 0);
+        }
     }
 }

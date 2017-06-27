@@ -1,5 +1,6 @@
 package com.sc.dao;
 
+import com.sc.domain.generator.Register;
 import com.sc.domain.generator.RegisterExample;
 import com.sc.domain.generator.Users;
 import com.sc.domain.generator.UsersExample;
@@ -15,6 +16,7 @@ import com.sc.mapper.login.UserLoginMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -116,5 +118,50 @@ public class LoginDao {
         sellerLoginInfo.setCmSellerid(result.get(0).getCmSellerid());
         sellerLoginInfo.setCmSellerName(result.get(0).getCmSellerName());
         return sellerLoginInfo;
+    }
+
+    /**
+     * 获得注册信息
+     * @param phone 手机号码
+     * @return
+     */
+    public Register getRegisterInfo(String phone) {
+        RegisterExample registerExample = new RegisterExample();
+        RegisterExample.Criteria criteria = registerExample.createCriteria();
+        criteria.andCmPhoneEqualTo(Long.valueOf(phone));
+        List<Register> result = registerMapper.selectByExample(registerExample);
+        return result.size() == 0 ? null : result.get(0);
+    }
+
+    /**
+     * 新建注册信息
+     * @param phone 手机号
+     * @param code 验证码
+     * @param time 时间
+     */
+    public void insertReg(String phone, String code, Date time) {
+        Register register = new Register();
+        register.setCmPhone(Long.valueOf(phone));
+        register.setCmCode(Integer.valueOf(code));
+        register.setCmTime(time);
+        register.setCmCount(0);
+        registerMapper.insert(register);
+    }
+
+    /**
+     * 更新注册信息
+     * @param phone 手机号
+     * @param code 验证码
+     * @param time 时间
+     */
+    public void updateReg(String phone, String code, Date time) {
+        RegisterExample registerExample = new RegisterExample();
+        RegisterExample.Criteria criteria = registerExample.createCriteria();
+        criteria.andCmPhoneEqualTo(Long.valueOf(phone));
+        Register register = new Register();
+        register.setCmCode(Integer.valueOf(code));
+        register.setCmCount(0);
+        register.setCmTime(time);
+        registerMapper.updateByExample(register, registerExample);
     }
 }

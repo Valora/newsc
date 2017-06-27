@@ -8,6 +8,7 @@ import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradeAppPayRequest;
 import com.alipay.api.response.AlipayTradeAppPayResponse;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
+import com.github.binarywang.wxpay.config.WxPayConfig;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.github.binarywang.wxpay.service.impl.WxPayServiceImpl;
 import com.github.binarywang.wxpay.util.SignUtils;
@@ -24,7 +25,6 @@ import com.sc.utils.pay.PayUtils;
 import com.thoughtworks.xstream.XStream;
 import me.chanjar.weixin.common.util.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +37,6 @@ import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -51,27 +50,27 @@ import java.util.TreeMap;
 @Service
 public class PayService {
     private final PayMapper payMapper;
+    
+    //异步接收微信支付结果通知的回调地址
+    private final static String WX_NOTIFY_URL = "http://www.zuichu.cc/wxnotify";
 
-    @Value("${wechat.pay.notifyUrl}")
-    private String NOTIFY_URL;
+    //APP和网页支付提交用户端ip
+    private final static String WX_IP = "8.8.8.8";
 
-    @Value("${wechat.pay.ip}")
-    private String IP;
+    //微信支付分配的商户号
+    private final static String WX_MCHID = "1461584902";
 
-    @Value("${wechat.pay.mchId}")
-    private String MCHID;
+    //微信支付分配的公众账号ID
+    private final static String WX_APPID = "wxdc1d4d16f56b3c77";
 
-    @Value("${wechat.pay.appId}")
-    private String APPID;
+    //账号密钥
+    private final static String WX_MCHKEY = "taizhouhanliankejitzhlkj12345678";
 
-    @Value("${wechat.pay.mchKey}")
-    private String MCHKEY;
+    //微信密钥
+    private final static String WX_APPSECREST = "7056583bc53be38a8ad16cc911aecb40";
 
-    @Value("${wechat.pay.appSecret}")
-    private String APPSECREST;
-
-    @Value("${wechat.pay.proxyUrl}")
-    private String PROXY_URL;
+    //通知地址
+    private final static String WX_PROXY_URL = "http://10.152.18.220:8080";
 
     private final PaysMapper paysMapper;
 
@@ -89,21 +88,31 @@ public class PayService {
      */
     public Result wechatPayApp(String orderids) {
         try {
+            //payService初始化
+            WxPayConfig payConfig = new WxPayConfig();
+            payConfig.setMchKey(WX_MCHKEY);
+            payConfig.setMchId(WX_MCHID);
+            payConfig.setAppId(WX_APPID);
+            payConfig.setNotifyUrl(WX_NOTIFY_URL);
+            payConfig.setTradeType("APP");
             WxPayService wxPayService = new WxPayServiceImpl();
+            wxPayService.setConfig(payConfig);
+            
+            XStream xStream = new XStream();
+            //订单号处理
             String[] arr = orderids.split("|");
             List<OrdersWithBLOBs> orders = payMapper.getOrderByOrderIds(arr);
             if (orders.size() <= 0) {
                 return GetResult.toJson(63, null, null, null, 0);
             }
+            //订单金额
             double moneysum = orders.stream().mapToDouble(t -> (t.getCmMoneysun() - t.getCmUserbalance())).sum();
+            //使用积分
             double score = orders.stream().mapToDouble(t -> t.getCmUsescore()).sum() * 0.01;
+            //应付金额（以分为单位）
             int totalFee = (int) ((moneysum - score) * 100);
 
             WxPayUnifiedOrderRequest orderRequest = new WxPayUnifiedOrderRequest();
-            //公众账号ID
-            orderRequest.setAppid(APPID);
-            //商户号
-            orderRequest.setMchId(MCHID);
             //随机字符串
             orderRequest.setNonceStr(RandomUtils.getRandomStr());
             //商品描述
@@ -113,20 +122,15 @@ public class PayService {
             //标价金额
             orderRequest.setTotalFee(totalFee);
             //终端IP
-            orderRequest.setSpbillCreateIp(IP);
-            //通知地址
-            orderRequest.setNotifyURL(NOTIFY_URL);
-            //交易类型
-            orderRequest.setTradeType("APP");
+            orderRequest.setSpbillCreateIp(WX_IP);
             //开始时间
             orderRequest.setTimeStart(DateUtils.todayYyyyMmDdHhMmSs());
             //过期时间
             orderRequest.setTimeExpire(LocalDateTime.now().plusMinutes(10).format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")));
             //附加数据
             orderRequest.setAttach(orderids);
-            XStream xStream = new XStream();
             //签名
-            orderRequest.setSign(SignUtils.createSign(xStream.toXML(orderRequest), MCHKEY));
+            orderRequest.setSign(SignUtils.createSign(xStream.toXML(orderRequest), WX_MCHKEY));
             
             String payjson = PayUtils.getPayJson(wxPayService.unifiedOrder(orderRequest));
             try {
@@ -158,7 +162,17 @@ public class PayService {
      */
     public Result wechatPayPC(String orderids) {
         try {
+            //payService初始化
+            WxPayConfig payConfig = new WxPayConfig();
+            payConfig.setMchKey(WX_MCHKEY);
+            payConfig.setMchId(WX_MCHID);
+            payConfig.setAppId(WX_APPID);
+            payConfig.setNotifyUrl(WX_NOTIFY_URL);
+            payConfig.setTradeType("NATIVE");
             WxPayService wxPayService = new WxPayServiceImpl();
+            wxPayService.setConfig(payConfig);
+
+            XStream xStream = new XStream();
             String[] arr = orderids.split("|");
             List<OrdersWithBLOBs> orders = payMapper.getOrderByOrderIds(arr);
             if (orders.size() <= 0) {
@@ -168,10 +182,6 @@ public class PayService {
             double score = orders.stream().mapToDouble(t -> t.getCmUsescore()).sum() * 0.01;
             int totalFee = (int) ((moneysum - score) * 100);
             WxPayUnifiedOrderRequest orderRequest = new WxPayUnifiedOrderRequest();
-            //公众账号ID
-            orderRequest.setAppid(APPID);
-            //商户号
-            orderRequest.setMchId(MCHID);
             //随机字符串
             orderRequest.setNonceStr(RandomUtils.getRandomStr());
             //商品描述
@@ -181,20 +191,15 @@ public class PayService {
             //标价金额
             orderRequest.setTotalFee(totalFee);
             //终端IP
-            orderRequest.setSpbillCreateIp(IP);
-            //通知地址
-            orderRequest.setNotifyURL(NOTIFY_URL);
-            //交易类型
-            orderRequest.setTradeType("NATIVE");
+            orderRequest.setSpbillCreateIp(WX_IP);
             //开始时间
             orderRequest.setTimeStart(DateUtils.todayYyyyMmDdHhMmSs());
             //过期时间
             orderRequest.setTimeExpire(LocalDateTime.now().plusMinutes(10).format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")));
             //附加数据
             orderRequest.setAttach(orderids);
-            XStream xStream = new XStream();
             //签名
-            orderRequest.setSign(SignUtils.createSign(xStream.toXML(orderRequest), MCHKEY));
+            orderRequest.setSign(SignUtils.createSign(xStream.toXML(orderRequest), WX_MCHKEY));
 
             String url = "/WechatPay/MakeQRCode.aspx?data=" + wxPayService.unifiedOrder(orderRequest).getCodeURL();
             try {
@@ -277,7 +282,7 @@ public class PayService {
      */
     public void aliNotify(HttpServletRequest request, HttpServletResponse response) throws AlipayApiException {
         //获取支付宝POST过来反馈信息
-        Map<String, String> params = new HashMap<>();
+        Map<String, String> params = new TreeMap<>();
         Map requestParams = request.getParameterMap();
         for (Object o : requestParams.keySet()) {
             String name = (String) o;
@@ -341,7 +346,7 @@ public class PayService {
         }
 
         // 账号信息  
-        String key = MCHKEY; //key  
+        String key = WX_MCHKEY; //key  
 
         //判断签名是否正确  
         if(SignUtils.checkSign(packageParams,key)) {

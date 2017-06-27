@@ -12,7 +12,6 @@ import java.util.List;
  * 管理员登录接口
  * Created by valora on 2017/4/20.
  */
-@Deprecated
 public interface AdminLoginMapper {
     @SelectProvider(type = SellerLoginSqlProvider.class, method = "selectLoginInfo")
     @Results({
