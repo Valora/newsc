@@ -42,7 +42,7 @@ public class ManageService {
 
     private final StorageService storageService;
 
-    @Value("${root}")
+    @Value("${classifyfilespath}")
     private String root;
 
     @Autowired
@@ -307,12 +307,12 @@ public class ManageService {
             String filename = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmss")) + GetRandomNumber.genRandomNum(4);
             if (files.length > 0) {
                 try {
-                    storageService.store(files[0], filename);
+                    storageService.store(files[0], root+filename);
                 } catch (Exception ex) {
                     return GetResult.toJson(47, null, null, null, 0);
                 }
             }
-            manageDao.addClassify(classifyname, type, parentid, root + filename);
+            manageDao.addClassify(classifyname, type, parentid, "/upload/" +root + filename);
             return GetResult.toJson(0, null, jwt.createJWT(adminid), null, 0);
         } catch (Exception ex) {
             return GetResult.toJson(200, null, null, null, 0);
@@ -345,13 +345,13 @@ public class ManageService {
             String imgpath = "";
             if (files.length > 0) {
                 try {
-                    storageService.store(files[0], filename);
+                    storageService.store(files[0], root+filename);
                 } catch (Exception ex) {
                     return GetResult.toJson(47, null, null, null, 0);
                 }
                 imgpath = root + filename;
             }
-            manageDao.reviceClassify(classifyname, type, parentid, imgpath);
+            manageDao.reviceClassify(classifyname, type, parentid, "/upload/"+imgpath);
             return GetResult.toJson(0, null, jwt.createJWT(adminid), null, 0);
         } catch (Exception ex) {
             return GetResult.toJson(200, null, null, null, 0);

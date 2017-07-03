@@ -36,7 +36,7 @@ public class SaleService {
 
     private final JWT jwt;
 
-    @Value("${root}")
+    @Value("${applicationspath}")
     private String root;
 
     @Autowired
@@ -239,7 +239,7 @@ public class SaleService {
                 }
                 String res = "";
                 String newfilename = i + "." + storageService.getFileType(fileName);
-                if (storageService.store(file, newfilename)) {
+                if (storageService.store(file, root + newfilename)) {
                     res = root + newfilename;
                 }
                 if (file.getName() == "card") {
@@ -335,7 +335,7 @@ public class SaleService {
                 }
                 String res = "";
                 String newfilename = i + "." + storageService.getFileType(fileName);
-                if (storageService.store(file, newfilename)) {
+                if (storageService.store(file, root + newfilename)) {
                     res = root + newfilename;
                 }
                 if (file.getName() == "card") {

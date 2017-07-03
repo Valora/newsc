@@ -28,7 +28,7 @@ import java.util.List;
 @Service
 public class CustomServiceService {
 
-    @Value("${root}")
+    @Value("${goodsfiles}")
     private String root;
 
     private final CustomServiceDao customServiceDao;
@@ -235,7 +235,7 @@ public class CustomServiceService {
             }
             String mainpath = "";
             String showpath = "";
-            File file = new File(root);
+            File file = new File("/upload/" + root);
             if (!file.isDirectory()) {
                 file.mkdirs();
             }
@@ -248,7 +248,7 @@ public class CustomServiceService {
             for (MultipartFile file1 : files) {
                 String res = "";
                 String newfilename = i + "." + storageService.getFileType(file1.getOriginalFilename());
-                if (storageService.store(file1, newfilename)) {
+                if (storageService.store(file1, root+newfilename)) {
                     res = root + newfilename;
                 }
                 if (file1.getName() == "main") {
@@ -356,7 +356,7 @@ public class CustomServiceService {
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HHmmssSSSS");
                     String str = simpleDateFormat.format(date);
                     String newfilename = str + "." + storageService.getFileType(file1.getOriginalFilename());
-                    if (storageService.store(file1, newfilename)) {
+                    if (storageService.store(file1, root + newfilename)) {
                         res = root + newfilename;
                     }
                     if (file1.getName() == "main") {
@@ -427,7 +427,7 @@ public class CustomServiceService {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HHmmssSSSS");
                 String str = simpleDateFormat.format(date);
                 String newfilename = str + "." + storageService.getFileType(files.get(0).getOriginalFilename());
-                if (storageService.store(files.get(0), newfilename)) {
+                if (storageService.store(files.get(0), root + newfilename)) {
                     res = root + newfilename;
                 }
                 gooddetailsWithBLOBs.setCmImagepath(res);
@@ -481,7 +481,7 @@ public class CustomServiceService {
             String str = simpleDateFormat.format(date);
             String newfilename = str + "." + storageService.getFileType(multipartFile.getOriginalFilename());
             String res = "";
-            if (storageService.store(multipartFile, newfilename)) {
+            if (storageService.store(multipartFile, root + newfilename)) {
                 res = root + newfilename;
             }
             String spec_stock = "";
