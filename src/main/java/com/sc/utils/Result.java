@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Result {
-    public int errorCode;
-    public String errorMsg;
-    public String token;
-    public Object result;
-    public int pageNum;
+    public int ErrorCode;
+    public String ErrorMsg;
+    public String Token;
+    public Object Result;
+    public int PageNum;
 }

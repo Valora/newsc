@@ -162,6 +162,6 @@ public class LoginDao {
         register.setCmCode(Integer.valueOf(code));
         register.setCmCount(0);
         register.setCmTime(time);
-        registerMapper.updateByExample(register, registerExample);
+        registerMapper.updateByExampleSelective(register, registerExample);
     }
 }

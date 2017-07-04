@@ -130,7 +130,7 @@ public class LoginService {
             Register reg = loginDao.getRegisterInfo(phone);
             String code = GetRandomNumber.genRandomNum(4);
             Date time = new Date();
-            if (SendCode.sendCode(phone, type, Integer.valueOf(code))) {
+            if (SendCode.sendCode(phone, Integer.valueOf(code), type)) {
                 if (reg == null) {
                     loginDao.insertReg(phone, code, time);
                 } else {

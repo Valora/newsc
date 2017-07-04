@@ -10,6 +10,9 @@ import org.springframework.boot.context.embedded.Ssl;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * 配置https
@@ -46,6 +49,7 @@ public class WebConfig {
         factory.addAdditionalTomcatConnectors(createHttpConnector());
         return factory;
     }
+
 
     private Connector createHttpConnector() {
         Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
