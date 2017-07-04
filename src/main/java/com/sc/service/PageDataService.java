@@ -2,6 +2,7 @@ package com.sc.service;
 
 import com.sc.dao.PageDataDao;
 import com.sc.domain.generator.Classifys;
+import com.sc.domain.pagedata.Classify;
 import com.sc.domain.pagedata.FirstPage;
 import com.sc.domain.pagedata.GoodDetail;
 import com.sc.domain.pagedata.GoodDetailWithOutUserid;
@@ -219,10 +220,11 @@ public class PageDataService {
      */
     public Result getClassify() {
         try {
-            //todo 
+            ArrayList<Classify> classify = pageDataDao.getClassify();
+            return GetResult.toJson(0, null, null, classify, 0);
         } catch (Exception e) {
-            
+            e.printStackTrace();
+            return GetResult.toJson(200, null, null, null, 0);
         }
-        return null;
     }
 }

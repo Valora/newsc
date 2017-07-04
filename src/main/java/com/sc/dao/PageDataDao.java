@@ -6,6 +6,7 @@ import com.sc.domain.generator.ClassifysExample;
 import com.sc.domain.generator.Goods;
 import com.sc.domain.generator.GoodsExample;
 import com.sc.domain.generator.GoodsWithBLOBs;
+import com.sc.domain.pagedata.Classify;
 import com.sc.domain.pagedata.GoodDetail;
 import com.sc.domain.pagedata.GoodDetailWithOutUserid;
 import com.sc.domain.pagedata.PageGoods;
@@ -353,5 +354,13 @@ public class PageDataDao {
      */
     public GoodDetailWithOutUserid getGoodsDetailsWithOutUserid(String goodsid) {
         return pageDataMapper.getGoodsDetailsWithOutUserid(goodsid);
+    }
+
+    /**
+     * 获取所有分类
+     * @return
+     */
+    public ArrayList<Classify> getClassify() {
+        return pageDataMapper.getClassify();
     }
 }

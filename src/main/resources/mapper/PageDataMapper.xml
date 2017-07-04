@@ -48,6 +48,48 @@
             <result column="CM_SPEC_STOCK" property="cmSpecStock" jdbcType="VARCHAR"/>
         </collection>
     </resultMap>
+
+    <resultMap id="Classify" type="com.sc.domain.pagedata.Classify">
+        <result column="CM_CLASSIFYNAME_A" property="cmClassifyname" jdbcType="VARCHAR"/>
+        <result column="CM_IMGPATH_A" property="cmImgpath" jdbcType="VARCHAR"/>
+        <result column="CM_CLASSIFYID_A" property="cmClassifyid" jdbcType="VARCHAR"/>
+        <result column="CM_SORT_A" property="cmSort" jdbcType="VARCHAR"/>
+        <collection property="tbSubclass" ofType="com.sc.domain.pagedata.Subclass">
+            <result column="CM_CLASSIFYNAME_B" property="cmClassifyname" jdbcType="VARCHAR"/>
+            <result column="CM_IMGPATH_B" property="cmImgpath" jdbcType="VARCHAR"/>
+            <result column="CM_CLASSIFYID_B" property="cmClassifyid" jdbcType="VARCHAR"/>
+            <result column="CM_SORT_B" property="cmSort" jdbcType="VARCHAR"/>
+            <collection property="tbGoods" ofType="com.sc.domain.pagedata.ClassifyGoods">
+                <result column="CM_GOODSID" property="cmGoodsid" jdbcType="VARCHAR"/>
+                <result column="CM_MAINFIGUREPATH" property="cmMainfigurepath" jdbcType="VARCHAR"/>
+                <result column="CM_CREATETIME" property="cmCreatetime" jdbcType="DATE"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <resultMap id="Classify1" type="com.sc.domain.pagedata.Classify">
+        <result column="CM_CLASSIFYNAME_A" property="cmClassifyname" jdbcType="VARCHAR"/>
+        <result column="CM_IMGPATH_A" property="cmImgpath" jdbcType="VARCHAR"/>
+        <result column="CM_CLASSIFYID_A" property="cmClassifyid" jdbcType="VARCHAR"/>
+        <result column="CM_SORT_A" property="cmSort" jdbcType="VARCHAR"/>
+        <collection property="tbSubclass" javaType="com.sc.domain.pagedata.Subclass" resultMap="SubClass"/>
+    </resultMap>
+
+    <resultMap id="SubClass" type="com.sc.domain.pagedata.Subclass">
+        <result column="CM_CLASSIFYNAME_B" property="cmClassifyname" jdbcType="VARCHAR"/>
+        <result column="CM_IMGPATH_B" property="cmImgpath" jdbcType="VARCHAR"/>
+        <result column="CM_CLASSIFYID_B" property="cmClassifyid" jdbcType="VARCHAR"/>
+        <result column="CM_SORT_B" property="cmSort" jdbcType="VARCHAR"/>
+        <collection property="tbGoods" javaType="com.sc.domain.pagedata.ClassifyGoods" resultMap="Goods"/>
+    </resultMap>
+
+    <resultMap id="Goods" type="com.sc.domain.pagedata.ClassifyGoods">
+        <result column="CM_GOODSID" property="cmGoodsid" jdbcType="VARCHAR"/>
+        <result column="CM_MAINFIGUREPATH" property="cmMainfigurepath" jdbcType="VARCHAR"/>
+        <result column="CM_CREATETIME" property="cmCreatetime" jdbcType="DATE"/>
+    </resultMap>
+
+
     <select id="getGoodsDetailsWithUserid" resultMap="GoodDetail">
         SELECT
             t0.CM_GOODSID,
@@ -126,5 +168,24 @@
             LEFT OUTER JOIN TB_GOODSDETAILS AS t2 ON t2.CM_GOODSID = t0.CM_GOODSID
         WHERE t0.CM_GOODSID = #{goodsid}
         ORDER BY t0.CM_GOODSID, t1.CM_SELLERID, t2.CM_GOODSDETAILSID
+    </select>
+    <select id="getClassify" resultMap="Classify">
+        SELECT
+            a.CM_CLASSIFYNAME AS CM_CLASSIFYNAME_A,
+            a.CM_IMGPATH AS CM_IMGPATH_A,
+            a.CM_CLASSIFYID AS CM_CLASSIFYID_A,
+            a.CM_SORT AS CM_SORT_A,
+            b.CM_CLASSIFYNAME AS CM_CLASSIFYNAME_B,
+            b.CM_IMGPATH AS CM_IMGPATH_B,
+            b.CM_CLASSIFYID AS CM_CLASSIFYID_B,
+            b.CM_SORT AS CM_SORT_B,
+            d.CM_GOODSID,
+            d.CM_MAINFIGUREPATH,
+            d.CM_CREATETIME
+        FROM TB_CLASSIFYS a
+            LEFT JOIN TB_CLASSIFYS b ON a.CM_CLASSIFYID = b.CM_PARENTID
+            LEFT JOIN TB_GOODS d ON b.CM_CLASSIFYID = d.CM_CLASSIFYID
+        WHERE a.CM_PARENTID = "0"
+        ORDER BY  CM_SORT_A
     </select>
 </mapper>
