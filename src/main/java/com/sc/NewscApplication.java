@@ -33,15 +33,6 @@ public class NewscApplication {
         };
     }
 
-    private static ValueFilter filter = new ValueFilter() {
-        @Override
-        public Object process(Object obj, String s, Object v) {
-            if (v == null)
-                return null;
-            return v;
-        }
-    };
-
     @Bean
     public HttpMessageConverters fastJsonHttpMessageConverters() {
         TypeUtils.compatibleWithJavaBean = true;
