@@ -13,12 +13,28 @@ public class UserLoginSqlProvider {
                 "  a.CM_BALANCE,\n" +
                 "  a.CM_PHONE,\n" +
                 "  a.CM_LEVEL,\n" +
-                "  a.CM_NICKNAME,\n" +
+                "  a.CM_SHOPNAME,\n" +
                 "  a.CM_INTEGRAL,\n" +
                 "  b.CM_CODE");
         sql.FROM("TB_USERS a");
         sql.INNER_JOIN("TB_REGISTER b ON a.CM_PHONE = b.CM_PHONE");
         sql.WHERE("a.CM_ACCOUNT = " + account + " AND a.CM_PASSWORD =" + password);
+        return sql.toString();
+    }
+
+
+    public String selectLoginInfoByPhoneAndCodeI(String phone, String code) {
+        SQL sql = new SQL();
+        sql.SELECT("  a.CM_USERID,\n" +
+                "  a.CM_BALANCE,\n" +
+                "  a.CM_PHONE,\n" +
+                "  a.CM_LEVEL,\n" +
+                "  a.CM_SHOPNAME,\n" +
+                "  a.CM_INTEGRAL,\n" +
+                "  b.CM_CODE");
+        sql.FROM("TB_USERS a");
+        sql.INNER_JOIN("TB_REGISTER b ON a.CM_PHONE = b.CM_PHONE");
+        sql.WHERE("b.CM_CODE = " + code + " AND b.CM_PHONE =" + phone);
         return sql.toString();
     }
 }

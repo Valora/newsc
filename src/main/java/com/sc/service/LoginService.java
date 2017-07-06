@@ -83,7 +83,7 @@ public class LoginService {
      */
     public Result userLoginByAccountAndPasswordS(String account, String password) {
         UserLogin userLoginInfo = loginDao.getUserLoginInfo(account, password);
-        if (userLoginInfo == null) {
+        if (userLoginInfo == null || userLoginInfo.getCM_USERID() == null) {
             return GetResult.toJson(6, null, null, null, 0);
         }
         return GetResult.toJson(0, null, jwt.createJWT(userLoginInfo.getCM_USERID()), userLoginInfo, 0);
@@ -97,12 +97,12 @@ public class LoginService {
      * @return
      */
     public Result userLoginByPhoneAndCodeS(String phone, String code) {
-        Register register = loginDao.selectByPhoneAndCodeD(phone, code);
-        if (register == null) {
+        UserLogin userLoginInfo = loginDao.getUserLoginInfoByPhoneAndCode(phone, code);
+        if (userLoginInfo == null) {
             return GetResult.toJson(6, null, null, null, 0);
         }
-        Users users = loginDao.getUserLoginInfoByPhone(phone);
-        return GetResult.toJson(0, null, jwt.createJWT(users.getCM_USERID()), users, 0);
+        loginDao.deleteCode(userLoginInfo.getCM_PHONE());
+        return GetResult.toJson(0, null, jwt.createJWT(userLoginInfo.getCM_USERID()), userLoginInfo, 0);
     }
 
     /**

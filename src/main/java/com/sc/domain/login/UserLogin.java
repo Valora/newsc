@@ -9,10 +9,10 @@ import lombok.Data;
 @Data
 public class UserLogin {
     private String CM_USERID;
-    private Double CM_BALANCE; 
+    private Double CM_BALANCE;
     private Long CM_PHONE;
     private Integer CM_LEVEL;
-    private String CM_NICKNAME;
+    private String CM_SHOPNAME;
     private Integer CM_INTEGRAL;
     private Integer CM_CODE;
 }

@@ -73,34 +73,38 @@ public class LoginDao {
         //登录信息类
         UserLogin userLoginInfo = new UserLogin();
         List<UserLogin> result = userLoginMapper.selectLoginInfo(account, password);
-        userLoginInfo.setCM_USERID(result.get(0).getCM_USERID());
-        userLoginInfo.setCM_BALANCE(result.get(0).getCM_BALANCE());
-        userLoginInfo.setCM_NICKNAME(result.get(0).getCM_NICKNAME());
-        userLoginInfo.setCM_LEVEL(result.get(0).getCM_LEVEL());
-        userLoginInfo.setCM_INTEGRAL(result.get(0).getCM_INTEGRAL());
-        userLoginInfo.setCM_CODE(result.get(0).getCM_CODE());
-        userLoginInfo.setCM_PHONE(result.get(0).getCM_PHONE());
+        if (result != null && result.size() > 0) {
+            userLoginInfo.setCM_USERID(result.get(0).getCM_USERID());
+            userLoginInfo.setCM_BALANCE(result.get(0).getCM_BALANCE());
+            userLoginInfo.setCM_SHOPNAME(result.get(0).getCM_SHOPNAME());
+            userLoginInfo.setCM_LEVEL(result.get(0).getCM_LEVEL());
+            userLoginInfo.setCM_INTEGRAL(result.get(0).getCM_INTEGRAL());
+            userLoginInfo.setCM_CODE(result.get(0).getCM_CODE());
+            userLoginInfo.setCM_PHONE(result.get(0).getCM_PHONE());
+        }
         return userLoginInfo;
     }
-
+    
     /**
-     * 商家只用手机号和验证码登入
+     * 商家根据电话号码和验证码登入
      *
-     * @param phone 手机号
+     * @param phone 电话号码
      * @param code  验证码
      * @return
      */
-    public Register selectByPhoneAndCodeD(String phone, String code) {
-        Register register = null;
-        RegisterExample registerExample = new RegisterExample();
-        RegisterExample.Criteria criteria = registerExample.createCriteria();
-        criteria.andCM_PHONEEqualTo(Long.valueOf(phone));
-        criteria.andCM_CODEEqualTo(Integer.valueOf(code));
-        List<Register> list = registerMapper.selectByExample(registerExample);
-        if (list != null && list.size() > 0) {
-            register = list.get(0);
+    public UserLogin getUserLoginInfoByPhoneAndCode(String phone, String code) {
+        UserLogin userLoginInfo = new UserLogin();
+        List<UserLogin> result = userLoginMapper.selectLoginInfoByPhoneAndCode(phone, code);
+        if (result != null && result.size() > 0) {
+            userLoginInfo.setCM_USERID(result.get(0).getCM_USERID());
+            userLoginInfo.setCM_BALANCE(result.get(0).getCM_BALANCE());
+            userLoginInfo.setCM_SHOPNAME(result.get(0).getCM_SHOPNAME());
+            userLoginInfo.setCM_LEVEL(result.get(0).getCM_LEVEL());
+            userLoginInfo.setCM_INTEGRAL(result.get(0).getCM_INTEGRAL());
+            userLoginInfo.setCM_CODE(result.get(0).getCM_CODE());
+            userLoginInfo.setCM_PHONE(result.get(0).getCM_PHONE());
         }
-        return register;
+        return userLoginInfo;
     }
 
     /**

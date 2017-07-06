@@ -16,7 +16,7 @@ public interface UserLoginMapper {
     @SelectProvider(type = UserLoginSqlProvider.class, method = "selectLoginInfo")
     @Results({
             @Result(column = "CM_USERID", property = "CM_USERID", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_NICKNAME", property = "CM_NICKNAME", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_SHOPNAME", property = "CM_SHOPNAME", jdbcType = JdbcType.VARCHAR),
             @Result(column = "CM_PHONE", property = "CM_PHONE", jdbcType = JdbcType.BIGINT),
             @Result(column = "CM_INTEGRAL", property = "CM_INTEGRAL", jdbcType = JdbcType.INTEGER),
             @Result(column = "CM_BALANCE", property = "CM_BALANCE", jdbcType = JdbcType.DOUBLE),
@@ -24,4 +24,17 @@ public interface UserLoginMapper {
             @Result(column = "CM_CODE", property = "CM_CODE", jdbcType = JdbcType.INTEGER)
     })
     List<UserLogin> selectLoginInfo(String account, String password);
+
+
+    @SelectProvider(type = UserLoginSqlProvider.class, method = "selectLoginInfoByPhoneAndCodeI")
+    @Results({
+            @Result(column = "CM_USERID", property = "CM_USERID", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_SHOPNAME", property = "CM_SHOPNAME", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_PHONE", property = "CM_PHONE", jdbcType = JdbcType.BIGINT),
+            @Result(column = "CM_INTEGRAL", property = "CM_INTEGRAL", jdbcType = JdbcType.INTEGER),
+            @Result(column = "CM_BALANCE", property = "CM_BALANCE", jdbcType = JdbcType.DOUBLE),
+            @Result(column = "CM_LEVEL", property = "CM_LEVEL", jdbcType = JdbcType.INTEGER),
+            @Result(column = "CM_CODE", property = "CM_CODE", jdbcType = JdbcType.INTEGER)
+    })
+    List<UserLogin> selectLoginInfoByPhoneAndCode(String phone, String code);
 }
