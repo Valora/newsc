@@ -12,7 +12,7 @@ public class GetRandomNumber {
         int i; // 生成的随机数  
         int count = 0; // 生成的密码的长度
 
-        char[] str = { '0', '1', '2', '3', '5', '6', '7', '8', '9' };
+        char[] str = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
         StringBuffer pwd = new StringBuffer("");
         Random r = new Random();

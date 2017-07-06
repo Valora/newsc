@@ -391,7 +391,7 @@ public class UserDoMainService {
     @Transactional(isolation = Isolation.READ_COMMITTED)
     public Result sendBackGoodsS(String userId, String afierserviceid, Integer logisticsid, String logisticsnum) {
         try {
-            Afterservices afterservices = null;
+            Afterservices afterservices = new Afterservices();
             List<Afterservices> list = userDoMainDao.selectAfterserviceByAfterserviceid(afierserviceid);
             if (list != null && list.size() > 0) {
                 afterservices = list.get(0);
@@ -437,7 +437,7 @@ public class UserDoMainService {
     @Transactional(isolation = Isolation.READ_COMMITTED)
     public Result confirmAfterServiceS(String userId, String afterserviceid) {
         try {
-            Afterservices afterservices = null;
+            Afterservices afterservices = new Afterservices();
             List<Afterservices> list = userDoMainDao.selectAfterserviceByAfterserviceid(afterserviceid);
             if (list != null && list.size() > 0) {
                 afterservices = list.get(0);
@@ -478,7 +478,7 @@ public class UserDoMainService {
     @Transactional(isolation = Isolation.READ_COMMITTED)
     public Result cancelAfterServiceS(String userId, String afterserviceid) {
         try {
-            Afterservices afterservices = null;
+            Afterservices afterservices = new Afterservices();
             List<Afterservices> list = userDoMainDao.selectAfterserviceByAfterserviceid(afterserviceid);
             if (list != null && list.size() > 0) {
                 afterservices = list.get(0);
@@ -659,10 +659,10 @@ public class UserDoMainService {
      */
     public Result queryMyInformationS(String userId) {
         try {
-            Users users = null;
+            Users users = new Users();
             List<Users> list = userDoMainDao.selectUserByuserid(userId);
             if (list != null && list.size() > 0) {
-                users = list.get(0);
+                users = (Users)list.get(0);
             }
             return GetResult.toJson(0, null, jwt.createJWT(userId), users, 0);
         } catch (Exception e) {
@@ -705,7 +705,7 @@ public class UserDoMainService {
     @Transactional(isolation = Isolation.READ_COMMITTED)
     public Result sendRetrieveCodeS(Long phone, int type) {
         try {
-            Register register = null;
+            Register register = new Register();
             List<Register> list = userDoMainDao.selectRegisterByPhone(phone);
             if (list != null && list.size() > 0) {
                 register = list.get(0);
@@ -773,12 +773,12 @@ public class UserDoMainService {
      */
     public Result BackAccountS(Long phone, Integer code) {
         try {
-            Register register = null;
+            Register register = new Register();
             List<Register> list = userDoMainDao.selectRegisterByPhone(phone);
             if (list != null && list.size() > 0) {
-                register = list.get(0);
+                register = (Register)list.get(0);
             }
-            if (register == null || register.getCM_CODE() != code) {
+            if (register == null || !Objects.equals(register.getCM_CODE(), code)) {
                 return GetResult.toJson(8, null, null, null, 0);
             }
             Users users = userDoMainDao.selectUserByPhone(phone);

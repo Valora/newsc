@@ -17,7 +17,7 @@ public class PageGoods {
     private Double CM_PRESENTPRICE;
     private Double CM_ORIGINALPRICE;
     private Integer CM_SALES;
-    private String CM_TITILE;
+    private String CM_TITLE;
     private Date CM_CREATETIME;
     private Integer CM_ISOFF;
     private String CM_SELLERID;

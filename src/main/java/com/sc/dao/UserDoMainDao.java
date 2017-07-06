@@ -576,7 +576,7 @@ public class UserDoMainDao {
         RegisterExample registerExample = new RegisterExample();
         RegisterExample.Criteria criteria = registerExample.createCriteria();
         criteria.andCM_PHONEEqualTo(register.getCM_PHONE());
-        registerMapper.updateByExample(register, registerExample);
+        registerMapper.updateByExampleSelective(register, registerExample);
     }
 
     /**
