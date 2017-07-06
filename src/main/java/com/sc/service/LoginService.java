@@ -101,7 +101,7 @@ public class LoginService {
         if (userLoginInfo == null) {
             return GetResult.toJson(6, null, null, null, 0);
         }
-        loginDao.deleteCode(userLoginInfo.getCM_PHONE());
+        //  loginDao.deleteCode(userLoginInfo.getCM_PHONE());
         return GetResult.toJson(0, null, jwt.createJWT(userLoginInfo.getCM_USERID()), userLoginInfo, 0);
     }
 

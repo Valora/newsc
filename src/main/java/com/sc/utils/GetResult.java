@@ -5,9 +5,8 @@ package com.sc.utils;
  * Created by valora on 2017/4/27.
  */
 public class GetResult {
-    private static Result res = null;
-
     public static synchronized Result toJson(int errorCode, String errorMsg, String token, Object obj, int pageNum) {
+        Result res = null;
         if (res == null) {
             res = new Result(errorCode, errorMsg, token, obj, pageNum);
         } else {

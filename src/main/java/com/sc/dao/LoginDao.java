@@ -103,8 +103,10 @@ public class LoginDao {
             userLoginInfo.setCM_INTEGRAL(result.get(0).getCM_INTEGRAL());
             userLoginInfo.setCM_CODE(result.get(0).getCM_CODE());
             userLoginInfo.setCM_PHONE(result.get(0).getCM_PHONE());
+            return userLoginInfo;
+        } else {
+            return null;
         }
-        return userLoginInfo;
     }
 
     /**

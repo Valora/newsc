@@ -9,7 +9,6 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,7 +34,6 @@ public class LoginController {
     @RequestMapping(value = URL + "SendLoginCode", method = RequestMethod.GET)
     @ApiOperation("发送登录验证码")
     @ApiImplicitParam(name = "phone", value = "手机号码", required = true, dataType = "String", paramType = "query")
-    @Async
     public Result sendLoginCode(@RequestParam(value = "phone") String phone) {
         return loginService.send(phone, 2);
     }

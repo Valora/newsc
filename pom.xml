@@ -149,6 +149,14 @@
             <systemPath>${project.basedir}/libs/taobao-sdk-java-auto_1455552377940-20160607.jar</systemPath>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.34</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
