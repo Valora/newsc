@@ -1,7 +1,7 @@
 package com.sc;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.alibaba.fastjson.serializer.ValueFilter;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.alibaba.fastjson.util.TypeUtils;
@@ -36,10 +36,12 @@ public class NewscApplication {
     @Bean
     public HttpMessageConverters fastJsonHttpMessageConverters() {
         TypeUtils.compatibleWithJavaBean = true;
+        JSON.DEFFAULT_DATE_FORMAT="yyyy-MM-dd HH:mm:ss.SSS";
         FastJsonHttpMessageConverter fastConvert = new FastJsonHttpMessageConverter();
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
         fastJsonConfig.setSerializerFeatures(SerializerFeature.WriteNullListAsEmpty);
         fastJsonConfig.setSerializerFeatures(SerializerFeature.WriteMapNullValue);
+        fastJsonConfig.setSerializerFeatures(SerializerFeature.WriteDateUseDateFormat);
         fastConvert.setFastJsonConfig(fastJsonConfig);
         return new HttpMessageConverters((HttpMessageConverter<?>) fastConvert);
     }
