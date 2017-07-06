@@ -1,63 +1,63 @@
 package com.sc.domain.generator;
 
 public class Addresses {
-    private Integer cmAddressid;
+    private Integer CM_ADDRESSID;
 
-    private String cmAddress;
+    private String CM_ADDRESS;
 
-    private String cmUserid;
+    private String CM_USERID;
 
-    private Integer cmIsfirst;
+    private Integer CM_ISFIRST;
 
-    private String cmName;
+    private String CM_NAME;
 
-    private Long cmPhone;
+    private Long CM_PHONE;
 
-    public Integer getCmAddressid() {
-        return cmAddressid;
+    public Integer getCM_ADDRESSID() {
+        return CM_ADDRESSID;
     }
 
-    public void setCmAddressid(Integer cmAddressid) {
-        this.cmAddressid = cmAddressid;
+    public void setCM_ADDRESSID(Integer CM_ADDRESSID) {
+        this.CM_ADDRESSID = CM_ADDRESSID;
     }
 
-    public String getCmAddress() {
-        return cmAddress;
+    public String getCM_ADDRESS() {
+        return CM_ADDRESS;
     }
 
-    public void setCmAddress(String cmAddress) {
-        this.cmAddress = cmAddress == null ? null : cmAddress.trim();
+    public void setCM_ADDRESS(String CM_ADDRESS) {
+        this.CM_ADDRESS = CM_ADDRESS == null ? null : CM_ADDRESS.trim();
     }
 
-    public String getCmUserid() {
-        return cmUserid;
+    public String getCM_USERID() {
+        return CM_USERID;
     }
 
-    public void setCmUserid(String cmUserid) {
-        this.cmUserid = cmUserid == null ? null : cmUserid.trim();
+    public void setCM_USERID(String CM_USERID) {
+        this.CM_USERID = CM_USERID == null ? null : CM_USERID.trim();
     }
 
-    public Integer getCmIsfirst() {
-        return cmIsfirst;
+    public Integer getCM_ISFIRST() {
+        return CM_ISFIRST;
     }
 
-    public void setCmIsfirst(Integer cmIsfirst) {
-        this.cmIsfirst = cmIsfirst;
+    public void setCM_ISFIRST(Integer CM_ISFIRST) {
+        this.CM_ISFIRST = CM_ISFIRST;
     }
 
-    public String getCmName() {
-        return cmName;
+    public String getCM_NAME() {
+        return CM_NAME;
     }
 
-    public void setCmName(String cmName) {
-        this.cmName = cmName == null ? null : cmName.trim();
+    public void setCM_NAME(String CM_NAME) {
+        this.CM_NAME = CM_NAME == null ? null : CM_NAME.trim();
     }
 
-    public Long getCmPhone() {
-        return cmPhone;
+    public Long getCM_PHONE() {
+        return CM_PHONE;
     }
 
-    public void setCmPhone(Long cmPhone) {
-        this.cmPhone = cmPhone;
+    public void setCM_PHONE(Long CM_PHONE) {
+        this.CM_PHONE = CM_PHONE;
     }
 }

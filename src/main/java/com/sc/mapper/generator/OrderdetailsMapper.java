@@ -3,6 +3,7 @@ package com.sc.mapper.generator;
 import com.sc.domain.generator.Orderdetails;
 import com.sc.domain.generator.OrderdetailsExample;
 import com.sc.domain.generator.OrderdetailsWithBLOBs;
+import java.util.List;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -12,8 +13,6 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
-
-import java.util.List;
 
 public interface OrderdetailsMapper {
     @SelectProvider(type=OrderdetailsSqlProvider.class, method="countByExample")
@@ -30,13 +29,13 @@ public interface OrderdetailsMapper {
         "CM_SERVICESTATE, CM_SELLERSTATE, ",
         "CM_LOGISTICSNUM, CM_LOGISTICSID, ",
         "CM_SPECNUMDETAILS, CM_LOGISTICSINFO)",
-        "values (#{cmOrderdetailsid,jdbcType=VARCHAR}, #{cmOrderid,jdbcType=VARCHAR}, ",
-        "#{cmGoodsid,jdbcType=VARCHAR}, #{cmUserid,jdbcType=VARCHAR}, ",
-        "#{cmNumber,jdbcType=INTEGER}, #{cmMoney,jdbcType=DOUBLE}, ",
-        "#{cmSellerid,jdbcType=VARCHAR}, #{cmCreatetime,jdbcType=TIMESTAMP}, ",
-        "#{cmServicestate,jdbcType=INTEGER}, #{cmSellerstate,jdbcType=INTEGER}, ",
-        "#{cmLogisticsnum,jdbcType=VARCHAR}, #{cmLogisticsid,jdbcType=INTEGER}, ",
-        "#{cmSpecnumdetails,jdbcType=LONGVARCHAR}, #{cmLogisticsinfo,jdbcType=LONGVARCHAR})"
+        "values (#{CM_ORDERDETAILSID,jdbcType=VARCHAR}, #{CM_ORDERID,jdbcType=VARCHAR}, ",
+        "#{CM_GOODSID,jdbcType=VARCHAR}, #{CM_USERID,jdbcType=VARCHAR}, ",
+        "#{CM_NUMBER,jdbcType=INTEGER}, #{CM_MONEY,jdbcType=DOUBLE}, ",
+        "#{CM_SELLERID,jdbcType=VARCHAR}, #{CM_CREATETIME,jdbcType=TIMESTAMP}, ",
+        "#{CM_SERVICESTATE,jdbcType=INTEGER}, #{CM_SELLERSTATE,jdbcType=INTEGER}, ",
+        "#{CM_LOGISTICSNUM,jdbcType=VARCHAR}, #{CM_LOGISTICSID,jdbcType=INTEGER}, ",
+        "#{CM_SPECNUMDETAILS,jdbcType=LONGVARCHAR}, #{CM_LOGISTICSINFO,jdbcType=LONGVARCHAR})"
     })
     int insert(OrderdetailsWithBLOBs record);
 
@@ -45,37 +44,37 @@ public interface OrderdetailsMapper {
 
     @SelectProvider(type=OrderdetailsSqlProvider.class, method="selectByExampleWithBLOBs")
     @Results({
-        @Result(column="CM_ORDERDETAILSID", property="cmOrderdetailsid", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_ORDERID", property="cmOrderid", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_GOODSID", property="cmGoodsid", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_USERID", property="cmUserid", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_NUMBER", property="cmNumber", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_MONEY", property="cmMoney", jdbcType= JdbcType.DOUBLE),
-        @Result(column="CM_SELLERID", property="cmSellerid", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_CREATETIME", property="cmCreatetime", jdbcType= JdbcType.TIMESTAMP),
-        @Result(column="CM_SERVICESTATE", property="cmServicestate", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_SELLERSTATE", property="cmSellerstate", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_LOGISTICSNUM", property="cmLogisticsnum", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_LOGISTICSID", property="cmLogisticsid", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_SPECNUMDETAILS", property="cmSpecnumdetails", jdbcType= JdbcType.LONGVARCHAR),
-        @Result(column="CM_LOGISTICSINFO", property="cmLogisticsinfo", jdbcType= JdbcType.LONGVARCHAR)
+        @Result(column="CM_ORDERDETAILSID", property="CM_ORDERDETAILSID", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_ORDERID", property="CM_ORDERID", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_GOODSID", property="CM_GOODSID", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_USERID", property="CM_USERID", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_NUMBER", property="CM_NUMBER", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_MONEY", property="CM_MONEY", jdbcType=JdbcType.DOUBLE),
+        @Result(column="CM_SELLERID", property="CM_SELLERID", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_CREATETIME", property="CM_CREATETIME", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="CM_SERVICESTATE", property="CM_SERVICESTATE", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_SELLERSTATE", property="CM_SELLERSTATE", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_LOGISTICSNUM", property="CM_LOGISTICSNUM", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_LOGISTICSID", property="CM_LOGISTICSID", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_SPECNUMDETAILS", property="CM_SPECNUMDETAILS", jdbcType=JdbcType.LONGVARCHAR),
+        @Result(column="CM_LOGISTICSINFO", property="CM_LOGISTICSINFO", jdbcType=JdbcType.LONGVARCHAR)
     })
     List<OrderdetailsWithBLOBs> selectByExampleWithBLOBs(OrderdetailsExample example);
 
     @SelectProvider(type=OrderdetailsSqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="CM_ORDERDETAILSID", property="cmOrderdetailsid", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_ORDERID", property="cmOrderid", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_GOODSID", property="cmGoodsid", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_USERID", property="cmUserid", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_NUMBER", property="cmNumber", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_MONEY", property="cmMoney", jdbcType= JdbcType.DOUBLE),
-        @Result(column="CM_SELLERID", property="cmSellerid", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_CREATETIME", property="cmCreatetime", jdbcType= JdbcType.TIMESTAMP),
-        @Result(column="CM_SERVICESTATE", property="cmServicestate", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_SELLERSTATE", property="cmSellerstate", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_LOGISTICSNUM", property="cmLogisticsnum", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_LOGISTICSID", property="cmLogisticsid", jdbcType= JdbcType.INTEGER)
+        @Result(column="CM_ORDERDETAILSID", property="CM_ORDERDETAILSID", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_ORDERID", property="CM_ORDERID", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_GOODSID", property="CM_GOODSID", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_USERID", property="CM_USERID", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_NUMBER", property="CM_NUMBER", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_MONEY", property="CM_MONEY", jdbcType=JdbcType.DOUBLE),
+        @Result(column="CM_SELLERID", property="CM_SELLERID", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_CREATETIME", property="CM_CREATETIME", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="CM_SERVICESTATE", property="CM_SERVICESTATE", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_SELLERSTATE", property="CM_SELLERSTATE", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_LOGISTICSNUM", property="CM_LOGISTICSNUM", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_LOGISTICSID", property="CM_LOGISTICSID", jdbcType=JdbcType.INTEGER)
     })
     List<Orderdetails> selectByExample(OrderdetailsExample example);
 

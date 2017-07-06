@@ -1,13 +1,12 @@
 package com.sc.mapper.generator;
 
 import com.sc.domain.generator.Notices;
-import com.sc.domain.generator.NoticesExample;
 import com.sc.domain.generator.NoticesExample.Criteria;
 import com.sc.domain.generator.NoticesExample.Criterion;
-import org.apache.ibatis.jdbc.SQL;
-
+import com.sc.domain.generator.NoticesExample;
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.jdbc.SQL;
 
 public class NoticesSqlProvider {
 
@@ -29,36 +28,36 @@ public class NoticesSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("TB_NOTICES");
         
-        if (record.getCmNoticeiid() != null) {
-            sql.VALUES("CM_NOTICEIID", "#{cmNoticeiid,jdbcType=INTEGER}");
+        if (record.getCM_NOTICEIID() != null) {
+            sql.VALUES("CM_NOTICEIID", "#{CM_NOTICEIID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmTitle() != null) {
-            sql.VALUES("CM_TITLE", "#{cmTitle,jdbcType=VARCHAR}");
+        if (record.getCM_TITLE() != null) {
+            sql.VALUES("CM_TITLE", "#{CM_TITLE,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmContent() != null) {
-            sql.VALUES("CM_CONTENT", "#{cmContent,jdbcType=VARCHAR}");
+        if (record.getCM_CONTENT() != null) {
+            sql.VALUES("CM_CONTENT", "#{CM_CONTENT,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmOther() != null) {
-            sql.VALUES("CM_OTHER", "#{cmOther,jdbcType=VARCHAR}");
+        if (record.getCM_OTHER() != null) {
+            sql.VALUES("CM_OTHER", "#{CM_OTHER,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmCreator() != null) {
-            sql.VALUES("CM_CREATOR", "#{cmCreator,jdbcType=VARCHAR}");
+        if (record.getCM_CREATOR() != null) {
+            sql.VALUES("CM_CREATOR", "#{CM_CREATOR,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmDeadline() != null) {
-            sql.VALUES("CM_DEADLINE", "#{cmDeadline,jdbcType=TIMESTAMP}");
+        if (record.getCM_DEADLINE() != null) {
+            sql.VALUES("CM_DEADLINE", "#{CM_DEADLINE,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getCmAdminid() != null) {
-            sql.VALUES("CM_ADMINID", "#{cmAdminid,jdbcType=VARCHAR}");
+        if (record.getCM_ADMINID() != null) {
+            sql.VALUES("CM_ADMINID", "#{CM_ADMINID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmCreatetime() != null) {
-            sql.VALUES("CM_CREATETIME", "#{cmCreatetime,jdbcType=TIMESTAMP}");
+        if (record.getCM_CREATETIME() != null) {
+            sql.VALUES("CM_CREATETIME", "#{CM_CREATETIME,jdbcType=TIMESTAMP}");
         }
         
         return sql.toString();
@@ -95,36 +94,36 @@ public class NoticesSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_NOTICES");
         
-        if (record.getCmNoticeiid() != null) {
-            sql.SET("CM_NOTICEIID = #{record.cmNoticeiid,jdbcType=INTEGER}");
+        if (record.getCM_NOTICEIID() != null) {
+            sql.SET("CM_NOTICEIID = #{record.CM_NOTICEIID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmTitle() != null) {
-            sql.SET("CM_TITLE = #{record.cmTitle,jdbcType=VARCHAR}");
+        if (record.getCM_TITLE() != null) {
+            sql.SET("CM_TITLE = #{record.CM_TITLE,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmContent() != null) {
-            sql.SET("CM_CONTENT = #{record.cmContent,jdbcType=VARCHAR}");
+        if (record.getCM_CONTENT() != null) {
+            sql.SET("CM_CONTENT = #{record.CM_CONTENT,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmOther() != null) {
-            sql.SET("CM_OTHER = #{record.cmOther,jdbcType=VARCHAR}");
+        if (record.getCM_OTHER() != null) {
+            sql.SET("CM_OTHER = #{record.CM_OTHER,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmCreator() != null) {
-            sql.SET("CM_CREATOR = #{record.cmCreator,jdbcType=VARCHAR}");
+        if (record.getCM_CREATOR() != null) {
+            sql.SET("CM_CREATOR = #{record.CM_CREATOR,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmDeadline() != null) {
-            sql.SET("CM_DEADLINE = #{record.cmDeadline,jdbcType=TIMESTAMP}");
+        if (record.getCM_DEADLINE() != null) {
+            sql.SET("CM_DEADLINE = #{record.CM_DEADLINE,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getCmAdminid() != null) {
-            sql.SET("CM_ADMINID = #{record.cmAdminid,jdbcType=VARCHAR}");
+        if (record.getCM_ADMINID() != null) {
+            sql.SET("CM_ADMINID = #{record.CM_ADMINID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmCreatetime() != null) {
-            sql.SET("CM_CREATETIME = #{record.cmCreatetime,jdbcType=TIMESTAMP}");
+        if (record.getCM_CREATETIME() != null) {
+            sql.SET("CM_CREATETIME = #{record.CM_CREATETIME,jdbcType=TIMESTAMP}");
         }
         
         applyWhere(sql, example, true);
@@ -135,14 +134,14 @@ public class NoticesSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_NOTICES");
         
-        sql.SET("CM_NOTICEIID = #{record.cmNoticeiid,jdbcType=INTEGER}");
-        sql.SET("CM_TITLE = #{record.cmTitle,jdbcType=VARCHAR}");
-        sql.SET("CM_CONTENT = #{record.cmContent,jdbcType=VARCHAR}");
-        sql.SET("CM_OTHER = #{record.cmOther,jdbcType=VARCHAR}");
-        sql.SET("CM_CREATOR = #{record.cmCreator,jdbcType=VARCHAR}");
-        sql.SET("CM_DEADLINE = #{record.cmDeadline,jdbcType=TIMESTAMP}");
-        sql.SET("CM_ADMINID = #{record.cmAdminid,jdbcType=VARCHAR}");
-        sql.SET("CM_CREATETIME = #{record.cmCreatetime,jdbcType=TIMESTAMP}");
+        sql.SET("CM_NOTICEIID = #{record.CM_NOTICEIID,jdbcType=INTEGER}");
+        sql.SET("CM_TITLE = #{record.CM_TITLE,jdbcType=VARCHAR}");
+        sql.SET("CM_CONTENT = #{record.CM_CONTENT,jdbcType=VARCHAR}");
+        sql.SET("CM_OTHER = #{record.CM_OTHER,jdbcType=VARCHAR}");
+        sql.SET("CM_CREATOR = #{record.CM_CREATOR,jdbcType=VARCHAR}");
+        sql.SET("CM_DEADLINE = #{record.CM_DEADLINE,jdbcType=TIMESTAMP}");
+        sql.SET("CM_ADMINID = #{record.CM_ADMINID,jdbcType=VARCHAR}");
+        sql.SET("CM_CREATETIME = #{record.CM_CREATETIME,jdbcType=TIMESTAMP}");
         
         NoticesExample example = (NoticesExample) parameter.get("example");
         applyWhere(sql, example, true);

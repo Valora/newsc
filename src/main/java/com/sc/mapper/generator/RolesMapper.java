@@ -2,6 +2,7 @@ package com.sc.mapper.generator;
 
 import com.sc.domain.generator.Roles;
 import com.sc.domain.generator.RolesExample;
+import java.util.List;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -12,8 +13,6 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
 
-import java.util.List;
-
 public interface RolesMapper {
     @SelectProvider(type=RolesSqlProvider.class, method="countByExample")
     long countByExample(RolesExample example);
@@ -23,7 +22,7 @@ public interface RolesMapper {
 
     @Insert({
         "insert into TB_ROLES (CM_ROLEID, CM_ROLENAME)",
-        "values (#{cmRoleid,jdbcType=INTEGER}, #{cmRolename,jdbcType=VARCHAR})"
+        "values (#{CM_ROLEID,jdbcType=INTEGER}, #{CM_ROLENAME,jdbcType=VARCHAR})"
     })
     int insert(Roles record);
 
@@ -32,8 +31,8 @@ public interface RolesMapper {
 
     @SelectProvider(type=RolesSqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="CM_ROLEID", property="cmRoleid", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_ROLENAME", property="cmRolename", jdbcType= JdbcType.VARCHAR)
+        @Result(column="CM_ROLEID", property="CM_ROLEID", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_ROLENAME", property="CM_ROLENAME", jdbcType=JdbcType.VARCHAR)
     })
     List<Roles> selectByExample(RolesExample example);
 

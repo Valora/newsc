@@ -1,33 +1,33 @@
 package com.sc.domain.generator;
 
 public class AdminRole {
-    private Integer cmId;
+    private Integer CM_ID;
 
-    private String cmAdminid;
+    private String CM_ADMINID;
 
-    private Integer cmRoleid;
+    private Integer CM_ROLEID;
 
-    public Integer getCmId() {
-        return cmId;
+    public Integer getCM_ID() {
+        return CM_ID;
     }
 
-    public void setCmId(Integer cmId) {
-        this.cmId = cmId;
+    public void setCM_ID(Integer CM_ID) {
+        this.CM_ID = CM_ID;
     }
 
-    public String getCmAdminid() {
-        return cmAdminid;
+    public String getCM_ADMINID() {
+        return CM_ADMINID;
     }
 
-    public void setCmAdminid(String cmAdminid) {
-        this.cmAdminid = cmAdminid == null ? null : cmAdminid.trim();
+    public void setCM_ADMINID(String CM_ADMINID) {
+        this.CM_ADMINID = CM_ADMINID == null ? null : CM_ADMINID.trim();
     }
 
-    public Integer getCmRoleid() {
-        return cmRoleid;
+    public Integer getCM_ROLEID() {
+        return CM_ROLEID;
     }
 
-    public void setCmRoleid(Integer cmRoleid) {
-        this.cmRoleid = cmRoleid;
+    public void setCM_ROLEID(Integer CM_ROLEID) {
+        this.CM_ROLEID = CM_ROLEID;
     }
 }

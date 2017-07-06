@@ -40,7 +40,7 @@ public class JWT {
             return null;
         }
         if (result.size() == 1) {
-            Integer resultcode = result.get(0).getCmCode();
+            Integer resultcode = result.get(0).getCM_CODE();
             if (code.equals(resultcode)) {
                 token.setUserId(userID);
                 token.setCode(code);

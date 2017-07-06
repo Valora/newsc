@@ -2,163 +2,163 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sc.mapper.userdomain.UserDoMainMapper">
     <resultMap id="OrderState" type="com.sc.domain.userdomain.Order">
-        <result column="CM_STATE" property="cmState" jdbcType="VARCHAR"/>
+        <result column="CM_STATE" property="CM_STATE" jdbcType="VARCHAR"/>
     </resultMap>
 
     <resultMap id="MyOrdersAll" type="com.sc.domain.userdomain.MyOrders" autoMapping="true">
-        <result column="CM_CREATETIME" property="cmCreatetime" jdbcType="DATE"/>
-        <result column="CM_ORDERID" property="cmOrderid" jdbcType="VARCHAR"/>
-        <result column="CM_NUMBERSUN" property="cmNumbersun" jdbcType="DOUBLE"/>
-        <result column="CM_MONEYSUM" property="cmMoneysun" jdbcType="DOUBLE"/>
-        <result column="CM_STATE" property="cmState" jdbcType="INTEGER"/>
-        <collection property="tbOrderdetails" ofType="com.sc.domain.userdomain.MyOrderDetails">
-            <result column="CM_GOODSID2" property="cmGoodsid" jdbcType="VARCHAR"/>
-            <result column="CM_MAINFIGUREPATH" property="cmMainfigurepath" jdbcType="VARCHAR"/>
-            <result column="CM_TITLE" property="cmTitle" jdbcType="VARCHAR"/>
-            <result column="CM_PRESENTPRICE" property="cmPresentprice" jdbcType="DOUBLE"/>
-            <result column="CM_MONEY" property="cmMoney" jdbcType="DOUBLE"/>
-            <result column="CM_NUMBER" property="cmNumber" jdbcType="INTEGER"/>
-            <result column="CM_SELLERID2" property="cmSellerid" jdbcType="VARCHAR"/>
-            <result column="CM_SELLERNAME" property="cmSellername" jdbcType="VARCHAR"/>
+        <result column="CM_CREATETIME" property="CM_CREATETIME" jdbcType="DATE"/>
+        <result column="CM_ORDERID" property="CM_ORDERID" jdbcType="VARCHAR"/>
+        <result column="CM_NUMBERSUN" property="CM_NUMBERSUN" jdbcType="DOUBLE"/>
+        <result column="CM_MONEYSUM" property="CM_MONEYSUM" jdbcType="DOUBLE"/>
+        <result column="CM_STATE" property="CM_STATE" jdbcType="INTEGER"/>
+        <collection property="TB_ORDERDETAILS" ofType="com.sc.domain.userdomain.MyOrderDetails">
+            <result column="CM_GOODSID2" property="CM_GOODSID" jdbcType="VARCHAR"/>
+            <result column="CM_MAINFIGUREPATH" property="CM_MAINFIGUREPATH" jdbcType="VARCHAR"/>
+            <result column="CM_TITLE" property="CM_TITLE" jdbcType="VARCHAR"/>
+            <result column="CM_PRESENTPRICE" property="CM_PRESENTPRICE" jdbcType="DOUBLE"/>
+            <result column="CM_MONEY" property="CM_MONEY" jdbcType="DOUBLE"/>
+            <result column="CM_NUMBER" property="CM_NUMBER" jdbcType="INTEGER"/>
+            <result column="CM_SELLERID2" property="CM_SELLERID" jdbcType="VARCHAR"/>
+            <result column="CM_SELLERNAME" property="CM_SELLERNAME" jdbcType="VARCHAR"/>
         </collection>
     </resultMap>
 
     <resultMap id="MyUnpaiedOrders" type="com.sc.domain.userdomain.MyStateOrders" autoMapping="true">
-        <result column="CM_CREATETIME" property="cmCreatetime" jdbcType="DATE"/>
-        <result column="CM_ORDERID" property="cmOrderid" jdbcType="VARCHAR"/>
-        <result column="CM_NUMBERSUN" property="cmNumbersun" jdbcType="INTEGER"/>
-        <result column="CM_MONEYSUN" property="cmMoneysun" jdbcType="DOUBLE"/>
-        <result column="CM_ORDERDETAILSIDS" property="cmOrderdetailsids" jdbcType="VARCHAR"/>
-        <result column="CM_STATE" property="cmState" jdbcType="INTEGER"/>
-        <result column="CM_USERID" property="cmUserid" jdbcType="VARCHAR"/>
-        <collection property="tbOrderdetails" ofType="com.sc.domain.userdomain.MyOrderDetails">
-            <result column="CM_GOODSID2" property="cmGoodsid" jdbcType="VARCHAR"/>
-            <result column="CM_MAINFIGUREPATH" property="cmMainfigurepath" jdbcType="VARCHAR"/>
-            <result column="CM_TITLE" property="cmTitle" jdbcType="VARCHAR"/>
-            <result column="CM_PRESENTPRICE" property="cmPresentprice" jdbcType="DOUBLE"/>
-            <result column="CM_MONEY" property="cmMoney" jdbcType="DOUBLE"/>
-            <result column="CM_NUMBER" property="cmNumber" jdbcType="INTEGER"/>
-            <result column="CM_SELLERID2" property="cmSellerid" jdbcType="VARCHAR"/>
-            <result column="CM_SELLERNAME" property="cmSellername" jdbcType="VARCHAR"/>
+        <result column="CM_CREATETIME" property="CM_CREATETIME" jdbcType="DATE"/>
+        <result column="CM_ORDERID" property="CM_ORDERID" jdbcType="VARCHAR"/>
+        <result column="CM_NUMBERSUN" property="CM_NUMBERSUN" jdbcType="INTEGER"/>
+        <result column="CM_MONEYSUN" property="CM_MONEYSUN" jdbcType="DOUBLE"/>
+        <result column="CM_ORDERDETAILSIDS" property="CM_ORDERDETAILSIDS" jdbcType="VARCHAR"/>
+        <result column="CM_STATE" property="CM_STATE" jdbcType="INTEGER"/>
+        <result column="CM_USERID" property="CM_USERID" jdbcType="VARCHAR"/>
+        <collection property="TB_ORDERDETAILS" ofType="com.sc.domain.userdomain.MyOrderDetails">
+            <result column="CM_GOODSID2" property="CM_GOODSID" jdbcType="VARCHAR"/>
+            <result column="CM_MAINFIGUREPATH" property="CM_MAINFIGUREPATH" jdbcType="VARCHAR"/>
+            <result column="CM_TITLE" property="CM_TITLE" jdbcType="VARCHAR"/>
+            <result column="CM_PRESENTPRICE" property="CM_PRESENTPRICE" jdbcType="DOUBLE"/>
+            <result column="CM_MONEY" property="CM_MONEY" jdbcType="DOUBLE"/>
+            <result column="CM_NUMBER" property="CM_NUMBER" jdbcType="INTEGER"/>
+            <result column="CM_SELLERID2" property="CM_SELLERID" jdbcType="VARCHAR"/>
+            <result column="CM_SELLERNAME" property="CM_SELLERNAME" jdbcType="VARCHAR"/>
         </collection>
     </resultMap>
 
     <resultMap id="MySettlementOrders" type="com.sc.domain.userdomain.MyStateOrders" autoMapping="true">
-        <result column="CM_CREATETIME" property="cmCreatetime" jdbcType="DATE"/>
-        <result column="CM_ORDERID" property="cmOrderid" jdbcType="VARCHAR"/>
-        <result column="CM_NUMBERSUN" property="cmNumbersun" jdbcType="INTEGER"/>
-        <result column="CM_MONEYSUN" property="cmMoneysun" jdbcType="DOUBLE"/>
-        <result column="CM_ORDERDETAILSIDS" property="cmOrderdetailsids" jdbcType="VARCHAR"/>
-        <result column="CM_STATE" property="cmState" jdbcType="INTEGER"/>
-        <result column="CM_USERID" property="cmUserid" jdbcType="VARCHAR"/>
-        <collection property="tbOrderdetails" ofType="com.sc.domain.userdomain.MyOrderDetails">
-            <result column="CM_GOODSID2" property="cmGoodsid" jdbcType="VARCHAR"/>
-            <result column="CM_MAINFIGUREPATH" property="cmMainfigurepath" jdbcType="VARCHAR"/>
-            <result column="CM_TITLE" property="cmTitle" jdbcType="VARCHAR"/>
-            <result column="CM_PRESENTPRICE" property="cmPresentprice" jdbcType="DOUBLE"/>
-            <result column="CM_MONEY" property="cmMoney" jdbcType="DOUBLE"/>
-            <result column="CM_NUMBER" property="cmNumber" jdbcType="INTEGER"/>
-            <result column="CM_SELLERID2" property="cmSellerid" jdbcType="VARCHAR"/>
-            <result column="CM_SELLERNAME" property="cmSellername" jdbcType="VARCHAR"/>
+        <result column="CM_CREATETIME" property="CM_CREATETIME" jdbcType="DATE"/>
+        <result column="CM_ORDERID" property="CM_ORDERID" jdbcType="VARCHAR"/>
+        <result column="CM_NUMBERSUN" property="CM_NUMBERSUN" jdbcType="INTEGER"/>
+        <result column="CM_MONEYSUN" property="CM_MONEYSUN" jdbcType="DOUBLE"/>
+        <result column="CM_ORDERDETAILSIDS" property="CM_ORDERDETAILSIDS" jdbcType="VARCHAR"/>
+        <result column="CM_STATE" property="CM_STATE" jdbcType="INTEGER"/>
+        <result column="CM_USERID" property="CM_USERID" jdbcType="VARCHAR"/>
+        <collection property="TB_ORDERDETAILS" ofType="com.sc.domain.userdomain.MyOrderDetails">
+            <result column="CM_GOODSID2" property="CM_GOODSID" jdbcType="VARCHAR"/>
+            <result column="CM_MAINFIGUREPATH" property="CM_MAINFIGUREPATH" jdbcType="VARCHAR"/>
+            <result column="CM_TITLE" property="CM_TITLE" jdbcType="VARCHAR"/>
+            <result column="CM_PRESENTPRICE" property="CM_PRESENTPRICE" jdbcType="DOUBLE"/>
+            <result column="CM_MONEY" property="CM_MONEY" jdbcType="DOUBLE"/>
+            <result column="CM_NUMBER" property="CM_NUMBER" jdbcType="INTEGER"/>
+            <result column="CM_SELLERID2" property="CM_SELLERID" jdbcType="VARCHAR"/>
+            <result column="CM_SELLERNAME" property="CM_SELLERNAME" jdbcType="VARCHAR"/>
         </collection>
     </resultMap>
 
     <resultMap id="OrderDetails" type="com.sc.domain.userdomain.OrderDetails" autoMapping="true">
-        <result column="CM_CREATETIME" property="cmCreatetime" jdbcType="DATE"/>
-        <result column="CM_ORDERID" property="cmOrderid" jdbcType="VARCHAR"/>
-        <result column="CM_NUMBERSUN" property="cmNumbersun" jdbcType="INTEGER"/>
-        <result column="CM_MONEYSUN" property="cmMoneysun" jdbcType="DOUBLE"/>
-        <result column="CM_ORDERDETAILSIDS" property="cmOrderdetailsids" jdbcType="VARCHAR"/>
-        <result column="CM_STATE" property="cmState" jdbcType="INTEGER"/>
-        <result column="CM_USERID" property="cmUserid" jdbcType="VARCHAR"/>
-        <result column="CM_USESCORE" property="cmUsescore" jdbcType="INTEGER"/>
-        <result column="CM_NICKNAME" property="cmNickname" jdbcType="VARCHAR"/>
-        <result column="CM_PHONE" property="cmPhone" jdbcType="DOUBLE"/>
-        <result column="CM_SHOPADDRESS" property="cmShopeaddress" jdbcType="VARCHAR"/>
-        <collection property="tbOrderDetails" ofType="com.sc.domain.userdomain.TbOrderDetails">
-            <result column="CM_GOODSID2" property="cmGoodsid" jdbcType="VARCHAR"/>
-            <result column="CM_MAINFIGUREPATH" property="cmMainfigurepath" jdbcType="VARCHAR"/>
-            <result column="CM_TITLE" property="cmTitle" jdbcType="VARCHAR"/>
-            <result column="CM_PRESENTPRICE" property="cmPresentprice" jdbcType="DOUBLE"/>
-            <result column="CM_MONEY" property="cmMoney" jdbcType="DOUBLE"/>
-            <result column="CM_NUMBER" property="cmNumber" jdbcType="INTEGER"/>
-            <result column="CM_SPECNUMDETAILS" property="cmSpecnumdetails" jdbcType="VARCHAR"/>
-            <result column="CM_SELLERID2" property="cmSellerid" jdbcType="VARCHAR"/>
-            <result column="CM_SELLERNAME" property="cmSellername" jdbcType="VARCHAR"/>
-            <result column="CM_LOGISTICSID" property="cmLogisticsid" jdbcType="VARCHAR"/>
-            <result column="CM_LOGISTICSINFO" property="cmLogisticsinfo" jdbcType="VARCHAR"/>
-            <result column="CM_LOGISTICSNUM" property="cmLogisticsnum" jdbcType="VARCHAR"/>
+        <result column="CM_CREATETIME" property="CM_CREATETIME" jdbcType="DATE"/>
+        <result column="CM_ORDERID" property="CM_ORDERID" jdbcType="VARCHAR"/>
+        <result column="CM_NUMBERSUN" property="CM_NUMBERSUN" jdbcType="INTEGER"/>
+        <result column="CM_MONEYSUN" property="CM_MONEYSUN" jdbcType="DOUBLE"/>
+        <result column="CM_ORDERDETAILSIDS" property="CM_ORDERDETAILSIDS" jdbcType="VARCHAR"/>
+        <result column="CM_STATE" property="CM_STATE" jdbcType="INTEGER"/>
+        <result column="CM_USERID" property="CM_USERID" jdbcType="VARCHAR"/>
+        <result column="CM_USESCORE" property="CM_USESCORE" jdbcType="INTEGER"/>
+        <result column="CM_NICKNAME" property="CM_NICKNAME" jdbcType="VARCHAR"/>
+        <result column="CM_PHONE" property="CM_PHONE" jdbcType="DOUBLE"/>
+        <result column="CM_SHOPADDRESS" property="CM_SHOPADDRESS" jdbcType="VARCHAR"/>
+        <collection property="TB_ORDERDETAILS" ofType="com.sc.domain.userdomain.TbOrderDetails">
+            <result column="CM_GOODSID2" property="CM_GOODSID" jdbcType="VARCHAR"/>
+            <result column="CM_MAINFIGUREPATH" property="CM_MAINFIGUREPATH" jdbcType="VARCHAR"/>
+            <result column="CM_TITLE" property="CM_TITLE" jdbcType="VARCHAR"/>
+            <result column="CM_PRESENTPRICE" property="CM_PRESENTPRICE" jdbcType="DOUBLE"/>
+            <result column="CM_MONEY" property="CM_MONEY" jdbcType="DOUBLE"/>
+            <result column="CM_NUMBER" property="CM_NUMBER" jdbcType="INTEGER"/>
+            <result column="CM_SPECNUMDETAILS" property="CM_SPECNUMDETAILS" jdbcType="VARCHAR"/>
+            <result column="CM_SELLERID2" property="CM_SELLERID" jdbcType="VARCHAR"/>
+            <result column="CM_SELLERNAME" property="CM_SELLERNAME" jdbcType="VARCHAR"/>
+            <result column="CM_LOGISTICSID" property="CM_LOGISTICSID" jdbcType="VARCHAR"/>
+            <result column="CM_LOGISTICSINFO" property="CM_LOGISTICSINFO" jdbcType="VARCHAR"/>
+            <result column="CM_LOGISTICSNUM" property="CM_LOGISTICSNUM" jdbcType="VARCHAR"/>
         </collection>
     </resultMap>
 
 
     <!--queryMyCanAfterServiceM-->
     <resultMap id="OdersAndOrderdetails" type="com.sc.domain.userdomain.OdersAndOrderdetails" autoMapping="true">
-        <result column="CM_ORDER_STATE" property="cmOrderState" jdbcType="INTEGER"/>
-        <result column="CM_CREATETIME" property="cmCreatetime" jdbcType="DATE"/>
-        <result column="CM_MONEYSUN" property="cmMoneysun" jdbcType="DOUBLE"/>
-        <result column="CM_NUMBERSUN" property="cmNumbersun" jdbcType="INTEGER"/>
-        <result column="CM_ORDERID" property="cmOrderid" jdbcType="VARCHAR"/>
-        <result column="CM_ORDERDETAILSID" property="cmOrderdetailsid" jdbcType="VARCHAR"/>
-        <result column="CM_MONEY" property="cmMoney" jdbcType="DOUBLE"/>
-        <result column="CM_NUMBER" property="cmNumber" jdbcType="INTEGER"/>
-        <result column="CM_SERVICE_STATE" property="cmServiceState" jdbcType="INTEGER"/>
-        <result column="CM_GOODSID" property="cmGoodsid" jdbcType="VARCHAR"/>
-        <result column="CM_TITLE" property="cmTitle" jdbcType="VARCHAR"/>
-        <result column="CM_MAINFIGUREPATH" property="cmMainfigurepath" jdbcType="VARCHAR"/>
-        <result column="CM_PRESENTPRICE" property="cmPresentprice" jdbcType="DOUBLE"/>
-        <result column="CM_SELLERID2" property="cmSellerid2" jdbcType="VARCHAR"/>
-        <result column="CM_SELLERNAME" property="cmSellername" jdbcType="VARCHAR"/>
-        <result column="value" property="value" jdbcType="INTEGER"/>
-        <collection property="tborderdetails"
+        <result column="CM_ORDER_STATE" property="CM_ORDERSTATE" jdbcType="INTEGER"/>
+        <result column="CM_CREATETIME" property="CM_CREATETIME" jdbcType="DATE"/>
+        <result column="CM_MONEYSUN" property="CM_MONEYSUN" jdbcType="DOUBLE"/>
+        <result column="CM_NUMBERSUN" property="CM_NUMBERSUN" jdbcType="INTEGER"/>
+        <result column="CM_ORDERID" property="CM_ORDERID" jdbcType="VARCHAR"/>
+        <result column="CM_ORDERDETAILSID" property="CM_ORDERDETAILSID" jdbcType="VARCHAR"/>
+        <result column="CM_MONEY" property="CM_MONEY" jdbcType="DOUBLE"/>
+        <result column="CM_NUMBER" property="CM_NUMBER" jdbcType="INTEGER"/>
+        <result column="CM_SERVICE_STATE" property="CM_SERVICESTATE" jdbcType="INTEGER"/>
+        <result column="CM_GOODSID" property="CM_GOODSID" jdbcType="VARCHAR"/>
+        <result column="CM_TITLE" property="CM_TITLE" jdbcType="VARCHAR"/>
+        <result column="CM_MAINFIGUREPATH" property="CM_MAINFIGUREPATH" jdbcType="VARCHAR"/>
+        <result column="CM_PRESENTPRICE" property="CM_PRESENTPRICE" jdbcType="DOUBLE"/>
+        <result column="CM_SELLERID2" property="CM_SELLERID2" jdbcType="VARCHAR"/>
+        <result column="CM_SELLERNAME" property="CM_SELLERNAME" jdbcType="VARCHAR"/>
+        <result column="value" property="VALUE" jdbcType="INTEGER"/>
+        <collection property="TB_ORDERDETAILS"
                     ofType="com.sc.domain.userdomain.OrderdetailsAndGoodsAndSellers">
-            <result column="CM_ORDERDETAILSID" property="cmOrderdetailsid" jdbcType="VARCHAR"/>
-            <result column="CM_MONEY" property="cmMoney" jdbcType="DOUBLE"/>
-            <result column="CM_NUMBER" property="cmNumber" jdbcType="INTEGER"/>
-            <result column="CM_SERVICESTATE" property="cmServicestate" jdbcType="INTEGER"/>
-            <result column="CM_GOODSID" property="cmGoodsid" jdbcType="VARCHAR"/>
-            <result column="value" property="value" jdbcType="VARCHAR"/>
-            <result column="value2" property="value2" jdbcType="VARCHAR"/>
-            <result column="value3" property="value3" jdbcType="DOUBLE"/>
-            <result column="value4" property="value4" jdbcType="VARCHAR"/>
-            <result column="value5" property="value5" jdbcType="VARCHAR"/>
-            <result column="CM_ORDERID" property="cmGoodsid2" jdbcType="VARCHAR"/>
-            <result column="CM_GOODSID2" property="cmOrderid" jdbcType="VARCHAR"/>
-            <result column="CM_SELLERID" property="cmSellerid" jdbcType="VARCHAR"/>
+            <result column="CM_ORDERDETAILSID" property="CM_ORDERDETAILSID" jdbcType="VARCHAR"/>
+            <result column="CM_MONEY" property="CM_MONEY" jdbcType="DOUBLE"/>
+            <result column="CM_NUMBER" property="CM_NUMBER" jdbcType="INTEGER"/>
+            <result column="CM_SERVICESTATE" property="CM_SERVICESTATE" jdbcType="INTEGER"/>
+            <result column="CM_GOODSID" property="CM_GOODSID" jdbcType="VARCHAR"/>
+            <result column="value" property="VALUE" jdbcType="VARCHAR"/>
+            <result column="value2" property="VALUE2" jdbcType="VARCHAR"/>
+            <result column="value3" property="VALUE3" jdbcType="DOUBLE"/>
+            <result column="value4" property="VALUE4" jdbcType="VARCHAR"/>
+            <result column="value5" property="VALUE5" jdbcType="VARCHAR"/>
+            <result column="CM_ORDERID" property="CM_ORDERID" jdbcType="VARCHAR"/>
+            <result column="CM_GOODSID2" property="CM_GOODSID2" jdbcType="VARCHAR"/>
+            <result column="CM_SELLERID" property="CM_SELLERID" jdbcType="VARCHAR"/>
         </collection>
     </resultMap>
 
     <!--queryMyAfterServiceM-->
     <resultMap id="AfsAndOdtAndGoodsAndSellers" type="com.sc.domain.userdomain.AfsAndOdtAndGoodsAndSellers"
                autoMapping="true">
-        <result column="CM_ORDERID" property="cmOrderid" jdbcType="VARCHAR"/>
-        <result column="CM_AFTERSERVICEID" property="cmAfterserviceid" jdbcType="VARCHAR"/>
-        <result column="CM_GOODSID" property="cmGoodsid" jdbcType="VARCHAR"/>
-        <result column="CM_ORDERDETAILSID" property="cmOrderdetailsid" jdbcType="VARCHAR"/>
-        <result column="CM_STATE" property="cmState" jdbcType="INTEGER"/>
-        <result column="CM_CREATETIME" property="cmCreatetime" jdbcType="DATE"/>
-        <result column="CM_MAINFIGUREPATH" property="cmMainfigurepath" jdbcType="VARCHAR"/>
-        <result column="CM_TITLE" property="cmTitle" jdbcType="VARCHAR"/>
-        <result column="CM_SELLERID" property="cmSellerid" jdbcType="VARCHAR"/>
-        <result column="CM_SELLERNAME" property="cmSellername" jdbcType="VARCHAR"/>
-        <result column="CM_LOGISTICSNUM" property="cmLogisticsnum" jdbcType="VARCHAR"/>
-        <result column="CM_LOGISTICSINFO" property="cmLogisticsinfo" jdbcType="VARCHAR"/>
+        <result column="CM_ORDERID" property="CM_ORDERID" jdbcType="VARCHAR"/>
+        <result column="CM_AFTERSERVICEID" property="CM_AFTERSERVICEID" jdbcType="VARCHAR"/>
+        <result column="CM_GOODSID" property="CM_GOODSID" jdbcType="VARCHAR"/>
+        <result column="CM_ORDERDETAILSID" property="CM_ORDERDETAILSID" jdbcType="VARCHAR"/>
+        <result column="CM_STATE" property="CM_STATE" jdbcType="INTEGER"/>
+        <result column="CM_CREATETIME" property="CM_CREATETIME" jdbcType="DATE"/>
+        <result column="CM_MAINFIGUREPATH" property="CM_MAINFIGUREPATH" jdbcType="VARCHAR"/>
+        <result column="CM_TITLE" property="CM_TITLE" jdbcType="VARCHAR"/>
+        <result column="CM_SELLERID" property="CM_SELLERID" jdbcType="VARCHAR"/>
+        <result column="CM_SELLERNAME" property="CM_SELLERNAME" jdbcType="VARCHAR"/>
+        <result column="CM_LOGISTICSNUM" property="CM_LOGISTICSNUM" jdbcType="VARCHAR"/>
+        <result column="CM_LOGISTICSINFO" property="CM_LOGISTICSINFO" jdbcType="VARCHAR"/>
     </resultMap>
 
 
     <!--queryMyCollectionM-->
     <resultMap id="CollectionAndGoods" type="com.sc.domain.userdomain.CollectionAndGoods"
                autoMapping="true">
-        <result column="CM_BRANDID" property="cmBrandid" jdbcType="INTEGER"/>
-        <result column="CM_FIGURESPATH" property="cmFigurespath" jdbcType="VARCHAR"/>
-        <result column="CM_GOODSID" property="cmGoodsid" jdbcType="VARCHAR"/>
-        <result column="CM_MAINFIGUREPATH" property="cmMainfigurepath" jdbcType="VARCHAR"/>
-        <result column="CM_PRESENTPRICE" property="cmPresentprice" jdbcType="DOUBLE"/>
-        <result column="CM_ORIGINALPRICE" property="cmOriginalprice" jdbcType="DOUBLE"/>
-        <result column="CM_SALES" property="cmSales" jdbcType="INTEGER"/>
-        <result column="CM_TITLE" property="cmTitle" jdbcType="VARCHAR"/>
-        <result column="CM_JOINTIME" property="cmJointime" jdbcType="DATE"/>
-        <result column="CM_COLLECTIONID" property="cmCollectionid" jdbcType="INTEGER"/>
+        <result column="CM_BRANDID" property="CM_BRANDID" jdbcType="INTEGER"/>
+        <result column="CM_FIGURESPATH" property="CM_FIGURESPATH" jdbcType="VARCHAR"/>
+        <result column="CM_GOODSID" property="CM_GOODSID" jdbcType="VARCHAR"/>
+        <result column="CM_MAINFIGUREPATH" property="CM_MAINFIGUREPATH" jdbcType="VARCHAR"/>
+        <result column="CM_PRESENTPRICE" property="CM_PRESENTPRICE" jdbcType="DOUBLE"/>
+        <result column="CM_ORIGINALPRICE" property="CM_ORIGINALPRICE" jdbcType="DOUBLE"/>
+        <result column="CM_SALES" property="CM_SALES" jdbcType="INTEGER"/>
+        <result column="CM_TITLE" property="CM_TITLE" jdbcType="VARCHAR"/>
+        <result column="CM_JOINTIME" property="CM_JOINTIME" jdbcType="DATE"/>
+        <result column="CM_COLLECTIONID" property="CM_COLLECTIONID" jdbcType="INTEGER"/>
     </resultMap>
 
 

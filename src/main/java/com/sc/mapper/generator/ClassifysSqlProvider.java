@@ -1,13 +1,12 @@
 package com.sc.mapper.generator;
 
 import com.sc.domain.generator.Classifys;
-import com.sc.domain.generator.ClassifysExample;
 import com.sc.domain.generator.ClassifysExample.Criteria;
 import com.sc.domain.generator.ClassifysExample.Criterion;
-import org.apache.ibatis.jdbc.SQL;
-
+import com.sc.domain.generator.ClassifysExample;
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.jdbc.SQL;
 
 public class ClassifysSqlProvider {
 
@@ -29,24 +28,24 @@ public class ClassifysSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("TB_CLASSIFYS");
         
-        if (record.getCmClassifyid() != null) {
-            sql.VALUES("CM_CLASSIFYID", "#{cmClassifyid,jdbcType=INTEGER}");
+        if (record.getCM_CLASSIFYID() != null) {
+            sql.VALUES("CM_CLASSIFYID", "#{CM_CLASSIFYID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmClassifyname() != null) {
-            sql.VALUES("CM_CLASSIFYNAME", "#{cmClassifyname,jdbcType=VARCHAR}");
+        if (record.getCM_CLASSIFYNAME() != null) {
+            sql.VALUES("CM_CLASSIFYNAME", "#{CM_CLASSIFYNAME,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmParentid() != null) {
-            sql.VALUES("CM_PARENTID", "#{cmParentid,jdbcType=INTEGER}");
+        if (record.getCM_PARENTID() != null) {
+            sql.VALUES("CM_PARENTID", "#{CM_PARENTID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmImgpath() != null) {
-            sql.VALUES("CM_IMGPATH", "#{cmImgpath,jdbcType=VARCHAR}");
+        if (record.getCM_IMGPATH() != null) {
+            sql.VALUES("CM_IMGPATH", "#{CM_IMGPATH,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmSort() != null) {
-            sql.VALUES("CM_SORT", "#{cmSort,jdbcType=INTEGER}");
+        if (record.getCM_SORT() != null) {
+            sql.VALUES("CM_SORT", "#{CM_SORT,jdbcType=INTEGER}");
         }
         
         return sql.toString();
@@ -80,24 +79,24 @@ public class ClassifysSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_CLASSIFYS");
         
-        if (record.getCmClassifyid() != null) {
-            sql.SET("CM_CLASSIFYID = #{record.cmClassifyid,jdbcType=INTEGER}");
+        if (record.getCM_CLASSIFYID() != null) {
+            sql.SET("CM_CLASSIFYID = #{record.CM_CLASSIFYID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmClassifyname() != null) {
-            sql.SET("CM_CLASSIFYNAME = #{record.cmClassifyname,jdbcType=VARCHAR}");
+        if (record.getCM_CLASSIFYNAME() != null) {
+            sql.SET("CM_CLASSIFYNAME = #{record.CM_CLASSIFYNAME,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmParentid() != null) {
-            sql.SET("CM_PARENTID = #{record.cmParentid,jdbcType=INTEGER}");
+        if (record.getCM_PARENTID() != null) {
+            sql.SET("CM_PARENTID = #{record.CM_PARENTID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmImgpath() != null) {
-            sql.SET("CM_IMGPATH = #{record.cmImgpath,jdbcType=VARCHAR}");
+        if (record.getCM_IMGPATH() != null) {
+            sql.SET("CM_IMGPATH = #{record.CM_IMGPATH,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmSort() != null) {
-            sql.SET("CM_SORT = #{record.cmSort,jdbcType=INTEGER}");
+        if (record.getCM_SORT() != null) {
+            sql.SET("CM_SORT = #{record.CM_SORT,jdbcType=INTEGER}");
         }
         
         applyWhere(sql, example, true);
@@ -108,11 +107,11 @@ public class ClassifysSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_CLASSIFYS");
         
-        sql.SET("CM_CLASSIFYID = #{record.cmClassifyid,jdbcType=INTEGER}");
-        sql.SET("CM_CLASSIFYNAME = #{record.cmClassifyname,jdbcType=VARCHAR}");
-        sql.SET("CM_PARENTID = #{record.cmParentid,jdbcType=INTEGER}");
-        sql.SET("CM_IMGPATH = #{record.cmImgpath,jdbcType=VARCHAR}");
-        sql.SET("CM_SORT = #{record.cmSort,jdbcType=INTEGER}");
+        sql.SET("CM_CLASSIFYID = #{record.CM_CLASSIFYID,jdbcType=INTEGER}");
+        sql.SET("CM_CLASSIFYNAME = #{record.CM_CLASSIFYNAME,jdbcType=VARCHAR}");
+        sql.SET("CM_PARENTID = #{record.CM_PARENTID,jdbcType=INTEGER}");
+        sql.SET("CM_IMGPATH = #{record.CM_IMGPATH,jdbcType=VARCHAR}");
+        sql.SET("CM_SORT = #{record.CM_SORT,jdbcType=INTEGER}");
         
         ClassifysExample example = (ClassifysExample) parameter.get("example");
         applyWhere(sql, example, true);

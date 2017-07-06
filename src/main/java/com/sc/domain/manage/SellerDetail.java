@@ -10,22 +10,22 @@ import java.util.Date;
  */
 @Data
 public class SellerDetail {
-    private Date cmCreatetime;
-    private Long cmPhone;
-    private String cmName;
-    private String cmContactname;
-    private String cmContactphone;
-    private String cmPax;
-    private String cmStorepath;
-    private String cmCardno;
-    private String cmCardpath;
-    private Integer cmIsexamine;
-    private String cmLicensepath;
-    private String cmReason;
-    private String cmSellerid;
-    private String cmAddress;
-    private String cmSellername;
-    private Double cmLat;
-    private Double cmLon;
-    private String cmBrand;
+    private Date CM_CREATETIME;
+    private Long CM_PHONE;
+    private String CM_NAME;
+    private String CM_CONTACTNAME;
+    private String CM_CONTACTPHONE;
+    private String CM_PAX;
+    private String CM_STOREPATH;
+    private String CM_CARDNO;
+    private String CM_CARDPATH;
+    private Integer CM_ISEXMINE;
+    private String CM_LICENSEPATH;
+    private String CM_REASON;
+    private String CM_SELLERID;
+    private String CM_ADDRESS;
+    private String CM_SELLERNAME;
+    private Double CM_LAT;
+    private Double CM_LON;
+    private String CM_BRAND;
 }

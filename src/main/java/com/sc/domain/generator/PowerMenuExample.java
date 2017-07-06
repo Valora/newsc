@@ -104,183 +104,183 @@ public class PowerMenuExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andCmIdIsNull() {
+        public Criteria andCM_IDIsNull() {
             addCriterion("CM_ID is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmIdIsNotNull() {
+        public Criteria andCM_IDIsNotNull() {
             addCriterion("CM_ID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmIdEqualTo(Integer value) {
-            addCriterion("CM_ID =", value, "cmId");
+        public Criteria andCM_IDEqualTo(Integer value) {
+            addCriterion("CM_ID =", value, "CM_ID");
             return (Criteria) this;
         }
 
-        public Criteria andCmIdNotEqualTo(Integer value) {
-            addCriterion("CM_ID <>", value, "cmId");
+        public Criteria andCM_IDNotEqualTo(Integer value) {
+            addCriterion("CM_ID <>", value, "CM_ID");
             return (Criteria) this;
         }
 
-        public Criteria andCmIdGreaterThan(Integer value) {
-            addCriterion("CM_ID >", value, "cmId");
+        public Criteria andCM_IDGreaterThan(Integer value) {
+            addCriterion("CM_ID >", value, "CM_ID");
             return (Criteria) this;
         }
 
-        public Criteria andCmIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("CM_ID >=", value, "cmId");
+        public Criteria andCM_IDGreaterThanOrEqualTo(Integer value) {
+            addCriterion("CM_ID >=", value, "CM_ID");
             return (Criteria) this;
         }
 
-        public Criteria andCmIdLessThan(Integer value) {
-            addCriterion("CM_ID <", value, "cmId");
+        public Criteria andCM_IDLessThan(Integer value) {
+            addCriterion("CM_ID <", value, "CM_ID");
             return (Criteria) this;
         }
 
-        public Criteria andCmIdLessThanOrEqualTo(Integer value) {
-            addCriterion("CM_ID <=", value, "cmId");
+        public Criteria andCM_IDLessThanOrEqualTo(Integer value) {
+            addCriterion("CM_ID <=", value, "CM_ID");
             return (Criteria) this;
         }
 
-        public Criteria andCmIdIn(List<Integer> values) {
-            addCriterion("CM_ID in", values, "cmId");
+        public Criteria andCM_IDIn(List<Integer> values) {
+            addCriterion("CM_ID in", values, "CM_ID");
             return (Criteria) this;
         }
 
-        public Criteria andCmIdNotIn(List<Integer> values) {
-            addCriterion("CM_ID not in", values, "cmId");
+        public Criteria andCM_IDNotIn(List<Integer> values) {
+            addCriterion("CM_ID not in", values, "CM_ID");
             return (Criteria) this;
         }
 
-        public Criteria andCmIdBetween(Integer value1, Integer value2) {
-            addCriterion("CM_ID between", value1, value2, "cmId");
+        public Criteria andCM_IDBetween(Integer value1, Integer value2) {
+            addCriterion("CM_ID between", value1, value2, "CM_ID");
             return (Criteria) this;
         }
 
-        public Criteria andCmIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("CM_ID not between", value1, value2, "cmId");
+        public Criteria andCM_IDNotBetween(Integer value1, Integer value2) {
+            addCriterion("CM_ID not between", value1, value2, "CM_ID");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidIsNull() {
+        public Criteria andCM_MENUIDIsNull() {
             addCriterion("CM_MENUID is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidIsNotNull() {
+        public Criteria andCM_MENUIDIsNotNull() {
             addCriterion("CM_MENUID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidEqualTo(Integer value) {
-            addCriterion("CM_MENUID =", value, "cmMenuid");
+        public Criteria andCM_MENUIDEqualTo(Integer value) {
+            addCriterion("CM_MENUID =", value, "CM_MENUID");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidNotEqualTo(Integer value) {
-            addCriterion("CM_MENUID <>", value, "cmMenuid");
+        public Criteria andCM_MENUIDNotEqualTo(Integer value) {
+            addCriterion("CM_MENUID <>", value, "CM_MENUID");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidGreaterThan(Integer value) {
-            addCriterion("CM_MENUID >", value, "cmMenuid");
+        public Criteria andCM_MENUIDGreaterThan(Integer value) {
+            addCriterion("CM_MENUID >", value, "CM_MENUID");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("CM_MENUID >=", value, "cmMenuid");
+        public Criteria andCM_MENUIDGreaterThanOrEqualTo(Integer value) {
+            addCriterion("CM_MENUID >=", value, "CM_MENUID");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidLessThan(Integer value) {
-            addCriterion("CM_MENUID <", value, "cmMenuid");
+        public Criteria andCM_MENUIDLessThan(Integer value) {
+            addCriterion("CM_MENUID <", value, "CM_MENUID");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidLessThanOrEqualTo(Integer value) {
-            addCriterion("CM_MENUID <=", value, "cmMenuid");
+        public Criteria andCM_MENUIDLessThanOrEqualTo(Integer value) {
+            addCriterion("CM_MENUID <=", value, "CM_MENUID");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidIn(List<Integer> values) {
-            addCriterion("CM_MENUID in", values, "cmMenuid");
+        public Criteria andCM_MENUIDIn(List<Integer> values) {
+            addCriterion("CM_MENUID in", values, "CM_MENUID");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidNotIn(List<Integer> values) {
-            addCriterion("CM_MENUID not in", values, "cmMenuid");
+        public Criteria andCM_MENUIDNotIn(List<Integer> values) {
+            addCriterion("CM_MENUID not in", values, "CM_MENUID");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidBetween(Integer value1, Integer value2) {
-            addCriterion("CM_MENUID between", value1, value2, "cmMenuid");
+        public Criteria andCM_MENUIDBetween(Integer value1, Integer value2) {
+            addCriterion("CM_MENUID between", value1, value2, "CM_MENUID");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidNotBetween(Integer value1, Integer value2) {
-            addCriterion("CM_MENUID not between", value1, value2, "cmMenuid");
+        public Criteria andCM_MENUIDNotBetween(Integer value1, Integer value2) {
+            addCriterion("CM_MENUID not between", value1, value2, "CM_MENUID");
             return (Criteria) this;
         }
 
-        public Criteria andCmPoweridIsNull() {
+        public Criteria andCM_POWERIDIsNull() {
             addCriterion("CM_POWERID is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmPoweridIsNotNull() {
+        public Criteria andCM_POWERIDIsNotNull() {
             addCriterion("CM_POWERID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmPoweridEqualTo(Integer value) {
-            addCriterion("CM_POWERID =", value, "cmPowerid");
+        public Criteria andCM_POWERIDEqualTo(Integer value) {
+            addCriterion("CM_POWERID =", value, "CM_POWERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmPoweridNotEqualTo(Integer value) {
-            addCriterion("CM_POWERID <>", value, "cmPowerid");
+        public Criteria andCM_POWERIDNotEqualTo(Integer value) {
+            addCriterion("CM_POWERID <>", value, "CM_POWERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmPoweridGreaterThan(Integer value) {
-            addCriterion("CM_POWERID >", value, "cmPowerid");
+        public Criteria andCM_POWERIDGreaterThan(Integer value) {
+            addCriterion("CM_POWERID >", value, "CM_POWERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmPoweridGreaterThanOrEqualTo(Integer value) {
-            addCriterion("CM_POWERID >=", value, "cmPowerid");
+        public Criteria andCM_POWERIDGreaterThanOrEqualTo(Integer value) {
+            addCriterion("CM_POWERID >=", value, "CM_POWERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmPoweridLessThan(Integer value) {
-            addCriterion("CM_POWERID <", value, "cmPowerid");
+        public Criteria andCM_POWERIDLessThan(Integer value) {
+            addCriterion("CM_POWERID <", value, "CM_POWERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmPoweridLessThanOrEqualTo(Integer value) {
-            addCriterion("CM_POWERID <=", value, "cmPowerid");
+        public Criteria andCM_POWERIDLessThanOrEqualTo(Integer value) {
+            addCriterion("CM_POWERID <=", value, "CM_POWERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmPoweridIn(List<Integer> values) {
-            addCriterion("CM_POWERID in", values, "cmPowerid");
+        public Criteria andCM_POWERIDIn(List<Integer> values) {
+            addCriterion("CM_POWERID in", values, "CM_POWERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmPoweridNotIn(List<Integer> values) {
-            addCriterion("CM_POWERID not in", values, "cmPowerid");
+        public Criteria andCM_POWERIDNotIn(List<Integer> values) {
+            addCriterion("CM_POWERID not in", values, "CM_POWERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmPoweridBetween(Integer value1, Integer value2) {
-            addCriterion("CM_POWERID between", value1, value2, "cmPowerid");
+        public Criteria andCM_POWERIDBetween(Integer value1, Integer value2) {
+            addCriterion("CM_POWERID between", value1, value2, "CM_POWERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmPoweridNotBetween(Integer value1, Integer value2) {
-            addCriterion("CM_POWERID not between", value1, value2, "cmPowerid");
+        public Criteria andCM_POWERIDNotBetween(Integer value1, Integer value2) {
+            addCriterion("CM_POWERID not between", value1, value2, "CM_POWERID");
             return (Criteria) this;
         }
     }

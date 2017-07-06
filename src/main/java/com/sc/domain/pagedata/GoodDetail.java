@@ -11,24 +11,24 @@ import java.util.List;
  */
 @Data
 public class GoodDetail {
-    private String cmGoodsid;
-    private String cmTitle;
-    private Integer cmSales;
-    private String cmHtml;
-    private String cmChtml;
-    private Integer cmBrandid;
-    private String cmMainfigurepath;
-    private String cmFigurespath;
-    private Date cmCreatetime;
-    private Double cmOriginalprice;
-    private Integer cmClassifyid;
-    private String cmClassifytabs;
-    private Double cmPresentprice;
-    private Integer cmIsoff;
-    private String cmSellerid;
-    private String cmGoodsartnum;
-    private Integer cmIspromotion;
-    private String cmSellername;
-    private Integer cmIscollection;
-    private List<GoodDetailsOther> cmOther;
+    private String CM_GOODSID;
+    private String CM_TITLE;
+    private Integer CM_SALES;
+    private String CM_HTML;
+    private String CM_CHTML;
+    private Integer CM_BRANDID;
+    private String CM_MAINFIGUREPATH;
+    private String CM_FIGURESPATH;
+    private Date CM_CREATETIME;
+    private Double CM_ORIGINALPRICE;
+    private Integer CM_CLASSIFYID;
+    private String CM_CLASSIFYTABS;
+    private Double CM_PRESENTPRICE;
+    private Integer CM_ISOFF;
+    private String CM_SELLERID;
+    private String CM_GOODSARTNUM;
+    private Integer CM_ISPROMOTION;
+    private String CM_SELLERNAME;
+    private Integer CM_ISCOLLECTION;
+    private List<GoodDetailsOther> CM_OTHER;
 }

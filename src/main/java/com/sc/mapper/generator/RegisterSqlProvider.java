@@ -29,20 +29,20 @@ public class RegisterSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("TB_REGISTER");
         
-        if (record.getCmPhone() != null) {
-            sql.VALUES("CM_PHONE", "#{cmPhone,jdbcType=BIGINT}");
+        if (record.getCM_PHONE() != null) {
+            sql.VALUES("CM_PHONE", "#{CM_PHONE,jdbcType=BIGINT}");
         }
         
-        if (record.getCmCode() != null) {
-            sql.VALUES("CM_CODE", "#{cmCode,jdbcType=INTEGER}");
+        if (record.getCM_CODE() != null) {
+            sql.VALUES("CM_CODE", "#{CM_CODE,jdbcType=INTEGER}");
         }
         
-        if (record.getCmTime() != null) {
-            sql.VALUES("CM_TIME", "#{cmTime,jdbcType=TIMESTAMP}");
+        if (record.getCM_TIME() != null) {
+            sql.VALUES("CM_TIME", "#{CM_TIME,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getCmCount() != null) {
-            sql.VALUES("CM_COUNT", "#{cmCount,jdbcType=INTEGER}");
+        if (record.getCM_COUNT() != null) {
+            sql.VALUES("CM_COUNT", "#{CM_COUNT,jdbcType=INTEGER}");
         }
         
         return sql.toString();
@@ -75,20 +75,20 @@ public class RegisterSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_REGISTER");
         
-        if (record.getCmPhone() != null) {
-            sql.SET("CM_PHONE = #{record.cmPhone,jdbcType=BIGINT}");
+        if (record.getCM_PHONE() != null) {
+            sql.SET("CM_PHONE = #{record.CM_PHONE,jdbcType=BIGINT}");
         }
         
-        if (record.getCmCode() != null) {
-            sql.SET("CM_CODE = #{record.cmCode,jdbcType=INTEGER}");
+        if (record.getCM_CODE() != null) {
+            sql.SET("CM_CODE = #{record.CM_CODE,jdbcType=INTEGER}");
         }
         
-        if (record.getCmTime() != null) {
-            sql.SET("CM_TIME = #{record.cmTime,jdbcType=TIMESTAMP}");
+        if (record.getCM_TIME() != null) {
+            sql.SET("CM_TIME = #{record.CM_TIME,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getCmCount() != null) {
-            sql.SET("CM_COUNT = #{record.cmCount,jdbcType=INTEGER}");
+        if (record.getCM_COUNT() != null) {
+            sql.SET("CM_COUNT = #{record.CM_COUNT,jdbcType=INTEGER}");
         }
         
         applyWhere(sql, example, true);
@@ -99,10 +99,10 @@ public class RegisterSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_REGISTER");
         
-        sql.SET("CM_PHONE = #{record.cmPhone,jdbcType=BIGINT}");
-        sql.SET("CM_CODE = #{record.cmCode,jdbcType=INTEGER}");
-        sql.SET("CM_TIME = #{record.cmTime,jdbcType=TIMESTAMP}");
-        sql.SET("CM_COUNT = #{record.cmCount,jdbcType=INTEGER}");
+        sql.SET("CM_PHONE = #{record.CM_PHONE,jdbcType=BIGINT}");
+        sql.SET("CM_CODE = #{record.CM_CODE,jdbcType=INTEGER}");
+        sql.SET("CM_TIME = #{record.CM_TIME,jdbcType=TIMESTAMP}");
+        sql.SET("CM_COUNT = #{record.CM_COUNT,jdbcType=INTEGER}");
         
         RegisterExample example = (RegisterExample) parameter.get("example");
         applyWhere(sql, example, true);

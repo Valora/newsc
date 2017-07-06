@@ -3,63 +3,63 @@ package com.sc.domain.generator;
 import java.util.Date;
 
 public class Servicedetails {
-    private String cmSvid;
+    private String CM_SVID;
 
-    private String cmAfterserviceid;
+    private String CM_AFTERSERVICEID;
 
-    private Date cmCreatetime;
+    private Date CM_CREATETIME;
 
-    private Integer cmType;
+    private Integer CM_TYPE;
 
-    private String cmLogisticsnum;
+    private String CM_LOGISTICSNUM;
 
-    private Integer cmLogisticsid;
+    private Integer CM_LOGISTICSID;
 
-    public String getCmSvid() {
-        return cmSvid;
+    public String getCM_SVID() {
+        return CM_SVID;
     }
 
-    public void setCmSvid(String cmSvid) {
-        this.cmSvid = cmSvid == null ? null : cmSvid.trim();
+    public void setCM_SVID(String CM_SVID) {
+        this.CM_SVID = CM_SVID == null ? null : CM_SVID.trim();
     }
 
-    public String getCmAfterserviceid() {
-        return cmAfterserviceid;
+    public String getCM_AFTERSERVICEID() {
+        return CM_AFTERSERVICEID;
     }
 
-    public void setCmAfterserviceid(String cmAfterserviceid) {
-        this.cmAfterserviceid = cmAfterserviceid == null ? null : cmAfterserviceid.trim();
+    public void setCM_AFTERSERVICEID(String CM_AFTERSERVICEID) {
+        this.CM_AFTERSERVICEID = CM_AFTERSERVICEID == null ? null : CM_AFTERSERVICEID.trim();
     }
 
-    public Date getCmCreatetime() {
-        return cmCreatetime;
+    public Date getCM_CREATETIME() {
+        return CM_CREATETIME;
     }
 
-    public void setCmCreatetime(Date cmCreatetime) {
-        this.cmCreatetime = cmCreatetime;
+    public void setCM_CREATETIME(Date CM_CREATETIME) {
+        this.CM_CREATETIME = CM_CREATETIME;
     }
 
-    public Integer getCmType() {
-        return cmType;
+    public Integer getCM_TYPE() {
+        return CM_TYPE;
     }
 
-    public void setCmType(Integer cmType) {
-        this.cmType = cmType;
+    public void setCM_TYPE(Integer CM_TYPE) {
+        this.CM_TYPE = CM_TYPE;
     }
 
-    public String getCmLogisticsnum() {
-        return cmLogisticsnum;
+    public String getCM_LOGISTICSNUM() {
+        return CM_LOGISTICSNUM;
     }
 
-    public void setCmLogisticsnum(String cmLogisticsnum) {
-        this.cmLogisticsnum = cmLogisticsnum == null ? null : cmLogisticsnum.trim();
+    public void setCM_LOGISTICSNUM(String CM_LOGISTICSNUM) {
+        this.CM_LOGISTICSNUM = CM_LOGISTICSNUM == null ? null : CM_LOGISTICSNUM.trim();
     }
 
-    public Integer getCmLogisticsid() {
-        return cmLogisticsid;
+    public Integer getCM_LOGISTICSID() {
+        return CM_LOGISTICSID;
     }
 
-    public void setCmLogisticsid(Integer cmLogisticsid) {
-        this.cmLogisticsid = cmLogisticsid;
+    public void setCM_LOGISTICSID(Integer CM_LOGISTICSID) {
+        this.CM_LOGISTICSID = CM_LOGISTICSID;
     }
 }

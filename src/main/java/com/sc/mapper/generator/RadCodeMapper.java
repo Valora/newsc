@@ -2,6 +2,7 @@ package com.sc.mapper.generator;
 
 import com.sc.domain.generator.RadCode;
 import com.sc.domain.generator.RadCodeExample;
+import java.util.List;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -12,8 +13,6 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
 
-import java.util.List;
-
 public interface RadCodeMapper {
     @SelectProvider(type=RadCodeSqlProvider.class, method="countByExample")
     long countByExample(RadCodeExample example);
@@ -23,7 +22,7 @@ public interface RadCodeMapper {
 
     @Insert({
         "insert into TB_RADCODE (CM_USERID, CM_CODE)",
-        "values (#{cmUserid,jdbcType=VARCHAR}, #{cmCode,jdbcType=INTEGER})"
+        "values (#{CM_USERID,jdbcType=VARCHAR}, #{CM_CODE,jdbcType=INTEGER})"
     })
     int insert(RadCode record);
 
@@ -32,8 +31,8 @@ public interface RadCodeMapper {
 
     @SelectProvider(type=RadCodeSqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="CM_USERID", property="cmUserid", jdbcType=JdbcType.VARCHAR),
-        @Result(column="CM_CODE", property="cmCode", jdbcType=JdbcType.INTEGER)
+        @Result(column="CM_USERID", property="CM_USERID", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_CODE", property="CM_CODE", jdbcType=JdbcType.INTEGER)
     })
     List<RadCode> selectByExample(RadCodeExample example);
 

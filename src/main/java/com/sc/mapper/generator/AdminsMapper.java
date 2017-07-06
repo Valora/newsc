@@ -2,6 +2,7 @@ package com.sc.mapper.generator;
 
 import com.sc.domain.generator.Admins;
 import com.sc.domain.generator.AdminsExample;
+import java.util.List;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -11,8 +12,6 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
-
-import java.util.List;
 
 public interface AdminsMapper {
     @SelectProvider(type=AdminsSqlProvider.class, method="countByExample")
@@ -25,9 +24,9 @@ public interface AdminsMapper {
         "insert into TB_ADMINS (CM_ADMINID, CM_NAME, ",
         "CM_ACCOUNT, CM_PASSWORD, ",
         "CM_LEVEL, CM_PHONE)",
-        "values (#{cmAdminid,jdbcType=VARCHAR}, #{cmName,jdbcType=VARCHAR}, ",
-        "#{cmAccount,jdbcType=VARCHAR}, #{cmPassword,jdbcType=VARCHAR}, ",
-        "#{cmLevel,jdbcType=INTEGER}, #{cmPhone,jdbcType=BIGINT})"
+        "values (#{CM_ADMINID,jdbcType=VARCHAR}, #{CM_NAME,jdbcType=VARCHAR}, ",
+        "#{CM_ACCOUNT,jdbcType=VARCHAR}, #{CM_PASSWORD,jdbcType=VARCHAR}, ",
+        "#{CM_LEVEL,jdbcType=INTEGER}, #{CM_PHONE,jdbcType=BIGINT})"
     })
     int insert(Admins record);
 
@@ -36,12 +35,12 @@ public interface AdminsMapper {
 
     @SelectProvider(type=AdminsSqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="CM_ADMINID", property="cmAdminid", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_NAME", property="cmName", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_ACCOUNT", property="cmAccount", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_PASSWORD", property="cmPassword", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_LEVEL", property="cmLevel", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_PHONE", property="cmPhone", jdbcType= JdbcType.BIGINT)
+        @Result(column="CM_ADMINID", property="CM_ADMINID", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_NAME", property="CM_NAME", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_ACCOUNT", property="CM_ACCOUNT", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_PASSWORD", property="CM_PASSWORD", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_LEVEL", property="CM_LEVEL", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_PHONE", property="CM_PHONE", jdbcType=JdbcType.BIGINT)
     })
     List<Admins> selectByExample(AdminsExample example);
 

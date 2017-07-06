@@ -1,13 +1,12 @@
 package com.sc.mapper.generator;
 
-import com.sc.domain.generator.OrdersExample;
 import com.sc.domain.generator.OrdersExample.Criteria;
 import com.sc.domain.generator.OrdersExample.Criterion;
+import com.sc.domain.generator.OrdersExample;
 import com.sc.domain.generator.OrdersWithBLOBs;
-import org.apache.ibatis.jdbc.SQL;
-
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.jdbc.SQL;
 
 public class OrdersSqlProvider {
 
@@ -29,48 +28,48 @@ public class OrdersSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("TB_ORDERS");
         
-        if (record.getCmOrderid() != null) {
-            sql.VALUES("CM_ORDERID", "#{cmOrderid,jdbcType=VARCHAR}");
+        if (record.getCM_ORDERID() != null) {
+            sql.VALUES("CM_ORDERID", "#{CM_ORDERID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmUserid() != null) {
-            sql.VALUES("CM_USERID", "#{cmUserid,jdbcType=VARCHAR}");
+        if (record.getCM_USERID() != null) {
+            sql.VALUES("CM_USERID", "#{CM_USERID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmUsescore() != null) {
-            sql.VALUES("CM_USESCORE", "#{cmUsescore,jdbcType=INTEGER}");
+        if (record.getCM_USESCORE() != null) {
+            sql.VALUES("CM_USESCORE", "#{CM_USESCORE,jdbcType=INTEGER}");
         }
         
-        if (record.getCmNumbersun() != null) {
-            sql.VALUES("CM_NUMBERSUN", "#{cmNumbersun,jdbcType=INTEGER}");
+        if (record.getCM_NUMBERSUN() != null) {
+            sql.VALUES("CM_NUMBERSUN", "#{CM_NUMBERSUN,jdbcType=INTEGER}");
         }
         
-        if (record.getCmMoneysun() != null) {
-            sql.VALUES("CM_MONEYSUN", "#{cmMoneysun,jdbcType=DOUBLE}");
+        if (record.getCM_MONEYSUN() != null) {
+            sql.VALUES("CM_MONEYSUN", "#{CM_MONEYSUN,jdbcType=DOUBLE}");
         }
         
-        if (record.getCmCreatetime() != null) {
-            sql.VALUES("CM_CREATETIME", "#{cmCreatetime,jdbcType=TIMESTAMP}");
+        if (record.getCM_CREATETIME() != null) {
+            sql.VALUES("CM_CREATETIME", "#{CM_CREATETIME,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getCmState() != null) {
-            sql.VALUES("CM_STATE", "#{cmState,jdbcType=INTEGER}");
+        if (record.getCM_STATE() != null) {
+            sql.VALUES("CM_STATE", "#{CM_STATE,jdbcType=INTEGER}");
         }
         
-        if (record.getCmUserbalance() != null) {
-            sql.VALUES("CM_USERBALANCE", "#{cmUserbalance,jdbcType=DOUBLE}");
+        if (record.getCM_USERBALANCE() != null) {
+            sql.VALUES("CM_USERBALANCE", "#{CM_USERBALANCE,jdbcType=DOUBLE}");
         }
         
-        if (record.getCmPaytype() != null) {
-            sql.VALUES("CM_PAYTYPE", "#{cmPaytype,jdbcType=INTEGER}");
+        if (record.getCM_PAYTYPE() != null) {
+            sql.VALUES("CM_PAYTYPE", "#{CM_PAYTYPE,jdbcType=INTEGER}");
         }
         
-        if (record.getCmPayresult() != null) {
-            sql.VALUES("CM_PAYRESULT", "#{cmPayresult,jdbcType=VARCHAR}");
+        if (record.getCM_PAYRESULT() != null) {
+            sql.VALUES("CM_PAYRESULT", "#{CM_PAYRESULT,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmOrderdetailsids() != null) {
-            sql.VALUES("CM_ORDERDETAILSIDS", "#{cmOrderdetailsids,jdbcType=LONGVARCHAR}");
+        if (record.getCM_ORDERDETAILSIDS() != null) {
+            sql.VALUES("CM_ORDERDETAILSIDS", "#{CM_ORDERDETAILSIDS,jdbcType=LONGVARCHAR}");
         }
         
         return sql.toString();
@@ -136,48 +135,48 @@ public class OrdersSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_ORDERS");
         
-        if (record.getCmOrderid() != null) {
-            sql.SET("CM_ORDERID = #{record.cmOrderid,jdbcType=VARCHAR}");
+        if (record.getCM_ORDERID() != null) {
+            sql.SET("CM_ORDERID = #{record.CM_ORDERID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmUserid() != null) {
-            sql.SET("CM_USERID = #{record.cmUserid,jdbcType=VARCHAR}");
+        if (record.getCM_USERID() != null) {
+            sql.SET("CM_USERID = #{record.CM_USERID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmUsescore() != null) {
-            sql.SET("CM_USESCORE = #{record.cmUsescore,jdbcType=INTEGER}");
+        if (record.getCM_USESCORE() != null) {
+            sql.SET("CM_USESCORE = #{record.CM_USESCORE,jdbcType=INTEGER}");
         }
         
-        if (record.getCmNumbersun() != null) {
-            sql.SET("CM_NUMBERSUN = #{record.cmNumbersun,jdbcType=INTEGER}");
+        if (record.getCM_NUMBERSUN() != null) {
+            sql.SET("CM_NUMBERSUN = #{record.CM_NUMBERSUN,jdbcType=INTEGER}");
         }
         
-        if (record.getCmMoneysun() != null) {
-            sql.SET("CM_MONEYSUN = #{record.cmMoneysun,jdbcType=DOUBLE}");
+        if (record.getCM_MONEYSUN() != null) {
+            sql.SET("CM_MONEYSUN = #{record.CM_MONEYSUN,jdbcType=DOUBLE}");
         }
         
-        if (record.getCmCreatetime() != null) {
-            sql.SET("CM_CREATETIME = #{record.cmCreatetime,jdbcType=TIMESTAMP}");
+        if (record.getCM_CREATETIME() != null) {
+            sql.SET("CM_CREATETIME = #{record.CM_CREATETIME,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getCmState() != null) {
-            sql.SET("CM_STATE = #{record.cmState,jdbcType=INTEGER}");
+        if (record.getCM_STATE() != null) {
+            sql.SET("CM_STATE = #{record.CM_STATE,jdbcType=INTEGER}");
         }
         
-        if (record.getCmUserbalance() != null) {
-            sql.SET("CM_USERBALANCE = #{record.cmUserbalance,jdbcType=DOUBLE}");
+        if (record.getCM_USERBALANCE() != null) {
+            sql.SET("CM_USERBALANCE = #{record.CM_USERBALANCE,jdbcType=DOUBLE}");
         }
         
-        if (record.getCmPaytype() != null) {
-            sql.SET("CM_PAYTYPE = #{record.cmPaytype,jdbcType=INTEGER}");
+        if (record.getCM_PAYTYPE() != null) {
+            sql.SET("CM_PAYTYPE = #{record.CM_PAYTYPE,jdbcType=INTEGER}");
         }
         
-        if (record.getCmPayresult() != null) {
-            sql.SET("CM_PAYRESULT = #{record.cmPayresult,jdbcType=VARCHAR}");
+        if (record.getCM_PAYRESULT() != null) {
+            sql.SET("CM_PAYRESULT = #{record.CM_PAYRESULT,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmOrderdetailsids() != null) {
-            sql.SET("CM_ORDERDETAILSIDS = #{record.cmOrderdetailsids,jdbcType=LONGVARCHAR}");
+        if (record.getCM_ORDERDETAILSIDS() != null) {
+            sql.SET("CM_ORDERDETAILSIDS = #{record.CM_ORDERDETAILSIDS,jdbcType=LONGVARCHAR}");
         }
         
         applyWhere(sql, example, true);
@@ -188,17 +187,17 @@ public class OrdersSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_ORDERS");
         
-        sql.SET("CM_ORDERID = #{record.cmOrderid,jdbcType=VARCHAR}");
-        sql.SET("CM_USERID = #{record.cmUserid,jdbcType=VARCHAR}");
-        sql.SET("CM_USESCORE = #{record.cmUsescore,jdbcType=INTEGER}");
-        sql.SET("CM_NUMBERSUN = #{record.cmNumbersun,jdbcType=INTEGER}");
-        sql.SET("CM_MONEYSUN = #{record.cmMoneysun,jdbcType=DOUBLE}");
-        sql.SET("CM_CREATETIME = #{record.cmCreatetime,jdbcType=TIMESTAMP}");
-        sql.SET("CM_STATE = #{record.cmState,jdbcType=INTEGER}");
-        sql.SET("CM_USERBALANCE = #{record.cmUserbalance,jdbcType=DOUBLE}");
-        sql.SET("CM_PAYTYPE = #{record.cmPaytype,jdbcType=INTEGER}");
-        sql.SET("CM_PAYRESULT = #{record.cmPayresult,jdbcType=VARCHAR}");
-        sql.SET("CM_ORDERDETAILSIDS = #{record.cmOrderdetailsids,jdbcType=LONGVARCHAR}");
+        sql.SET("CM_ORDERID = #{record.CM_ORDERID,jdbcType=VARCHAR}");
+        sql.SET("CM_USERID = #{record.CM_USERID,jdbcType=VARCHAR}");
+        sql.SET("CM_USESCORE = #{record.CM_USESCORE,jdbcType=INTEGER}");
+        sql.SET("CM_NUMBERSUN = #{record.CM_NUMBERSUN,jdbcType=INTEGER}");
+        sql.SET("CM_MONEYSUN = #{record.CM_MONEYSUN,jdbcType=DOUBLE}");
+        sql.SET("CM_CREATETIME = #{record.CM_CREATETIME,jdbcType=TIMESTAMP}");
+        sql.SET("CM_STATE = #{record.CM_STATE,jdbcType=INTEGER}");
+        sql.SET("CM_USERBALANCE = #{record.CM_USERBALANCE,jdbcType=DOUBLE}");
+        sql.SET("CM_PAYTYPE = #{record.CM_PAYTYPE,jdbcType=INTEGER}");
+        sql.SET("CM_PAYRESULT = #{record.CM_PAYRESULT,jdbcType=VARCHAR}");
+        sql.SET("CM_ORDERDETAILSIDS = #{record.CM_ORDERDETAILSIDS,jdbcType=LONGVARCHAR}");
         
         OrdersExample example = (OrdersExample) parameter.get("example");
         applyWhere(sql, example, true);
@@ -209,16 +208,16 @@ public class OrdersSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_ORDERS");
         
-        sql.SET("CM_ORDERID = #{record.cmOrderid,jdbcType=VARCHAR}");
-        sql.SET("CM_USERID = #{record.cmUserid,jdbcType=VARCHAR}");
-        sql.SET("CM_USESCORE = #{record.cmUsescore,jdbcType=INTEGER}");
-        sql.SET("CM_NUMBERSUN = #{record.cmNumbersun,jdbcType=INTEGER}");
-        sql.SET("CM_MONEYSUN = #{record.cmMoneysun,jdbcType=DOUBLE}");
-        sql.SET("CM_CREATETIME = #{record.cmCreatetime,jdbcType=TIMESTAMP}");
-        sql.SET("CM_STATE = #{record.cmState,jdbcType=INTEGER}");
-        sql.SET("CM_USERBALANCE = #{record.cmUserbalance,jdbcType=DOUBLE}");
-        sql.SET("CM_PAYTYPE = #{record.cmPaytype,jdbcType=INTEGER}");
-        sql.SET("CM_PAYRESULT = #{record.cmPayresult,jdbcType=VARCHAR}");
+        sql.SET("CM_ORDERID = #{record.CM_ORDERID,jdbcType=VARCHAR}");
+        sql.SET("CM_USERID = #{record.CM_USERID,jdbcType=VARCHAR}");
+        sql.SET("CM_USESCORE = #{record.CM_USESCORE,jdbcType=INTEGER}");
+        sql.SET("CM_NUMBERSUN = #{record.CM_NUMBERSUN,jdbcType=INTEGER}");
+        sql.SET("CM_MONEYSUN = #{record.CM_MONEYSUN,jdbcType=DOUBLE}");
+        sql.SET("CM_CREATETIME = #{record.CM_CREATETIME,jdbcType=TIMESTAMP}");
+        sql.SET("CM_STATE = #{record.CM_STATE,jdbcType=INTEGER}");
+        sql.SET("CM_USERBALANCE = #{record.CM_USERBALANCE,jdbcType=DOUBLE}");
+        sql.SET("CM_PAYTYPE = #{record.CM_PAYTYPE,jdbcType=INTEGER}");
+        sql.SET("CM_PAYRESULT = #{record.CM_PAYRESULT,jdbcType=VARCHAR}");
         
         OrdersExample example = (OrdersExample) parameter.get("example");
         applyWhere(sql, example, true);

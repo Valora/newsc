@@ -50,7 +50,7 @@ public class SaleDao {
     public List<Register> selectregisterbyphone(Long phone) {
         RegisterExample registerExample = new RegisterExample();
         RegisterExample.Criteria criteria = registerExample.createCriteria();
-        criteria.andCmPhoneEqualTo(phone);
+        criteria.andCM_PHONEEqualTo(phone);
         return registerMapper.selectByExample(registerExample);
     }
 
@@ -72,7 +72,7 @@ public class SaleDao {
     public void updateregister(Register register, Long phone) {
         RegisterExample registerExample = new RegisterExample();
         RegisterExample.Criteria criteria = registerExample.createCriteria();
-        criteria.andCmPhoneEqualTo(phone);
+        criteria.andCM_PHONEEqualTo(phone);
         registerMapper.updateByExample(register, registerExample);
     }
 
@@ -88,10 +88,10 @@ public class SaleDao {
     public List<Users> selectuserByMap(double lon1, double lon2, double lat1, double lat2) {
         UsersExample usersExample = new UsersExample();
         UsersExample.Criteria criteria = usersExample.createCriteria();
-        criteria.andCmShoplonGreaterThan(lon1);
-        criteria.andCmShoplonLessThan(lon2);
-        criteria.andCmShoplatGreaterThan(lat1);
-        criteria.andCmShoplatLessThan(lat2);
+        criteria.andCM_SHOPLONGreaterThan(lon1);
+        criteria.andCM_SHOPLONLessThan(lon2);
+        criteria.andCM_SHOPLATGreaterThan(lat1);
+        criteria.andCM_SHOPLATLessThan(lat2);
         List<Users> list = usersMapper.selectByExample(usersExample);
         return list;
     }
@@ -108,10 +108,10 @@ public class SaleDao {
     public List<Sellers> selectSellersByMap(double lon1, double lon2, double lat1, double lat2) {
         SellersExample sellersExample = new SellersExample();
         SellersExample.Criteria criteria = sellersExample.createCriteria();
-        criteria.andCmLonGreaterThan(lon1);
-        criteria.andCmLonLessThan(lon2);
-        criteria.andCmLonGreaterThan(lat1);
-        criteria.andCmLatLessThan(lat2);
+        criteria.andCM_LONGreaterThan(lon1);
+        criteria.andCM_LONLessThan(lon2);
+        criteria.andCM_LONGreaterThan(lat1);
+        criteria.andCM_LATLessThan(lat2);
         List<Sellers> list = sellersMapper.selectByExample(sellersExample);
         return list;
     }
@@ -125,7 +125,7 @@ public class SaleDao {
     public Admins selectadminbyphone(Long phone) {
         AdminsExample adminsExample = new AdminsExample();
         AdminsExample.Criteria criteria = adminsExample.createCriteria();
-        criteria.andCmPhoneEqualTo(phone);
+        criteria.andCM_PHONEEqualTo(phone);
         List<Admins> list = adminsMapper.selectByExample(adminsExample);
         Admins admins = list.get(0);
         return admins;
@@ -140,7 +140,7 @@ public class SaleDao {
     public void updateAdminPassword(Admins admins) {
         AdminsExample adminsExample = new AdminsExample();
         AdminsExample.Criteria criteria = adminsExample.createCriteria();
-        criteria.andCmAdminidEqualTo(admins.getCmAdminid());
+        criteria.andCM_ADMINIDEqualTo(admins.getCM_ADMINID());
         adminsMapper.updateByExample(admins, adminsExample);
     }
 
@@ -154,10 +154,10 @@ public class SaleDao {
     public Admins selectadminbyphone_and_Level(Long phone, int i) {
         AdminsExample adminsExample = new AdminsExample();
         AdminsExample.Criteria criteria = adminsExample.createCriteria();
-        criteria.andCmPhoneEqualTo(phone);
+        criteria.andCM_PHONEEqualTo(phone);
         List<Integer> list = new ArrayList<Integer>();
         list.add(i);
-        criteria.andCmLevelNotIn(list);
+        criteria.andCM_LEVELNotIn(list);
         List<Admins> list2 = adminsMapper.selectByExample(adminsExample);
         if (list2 != null && list2.size() > 0) {
             return list2.get(0);
@@ -174,7 +174,7 @@ public class SaleDao {
     public Admins getAdminByAdminId(String userId) {
         AdminsExample adminsExample = new AdminsExample();
         AdminsExample.Criteria criteria = adminsExample.createCriteria();
-        criteria.andCmAdminidEqualTo(userId);
+        criteria.andCM_ADMINIDEqualTo(userId);
         Admins admins = adminsMapper.selectByExample(adminsExample).get(0);
         if (admins == null) {
             return null;
@@ -185,18 +185,20 @@ public class SaleDao {
 
     /**
      * 检查当前手机号有没有注册(商家)
+     *
      * @param phone
      * @return
      */
     public int getUserCount(Long phone) {
         UsersExample example = new UsersExample();
         UsersExample.Criteria criteria = example.createCriteria();
-        criteria.andCmPhoneEqualTo(phone);
+        criteria.andCM_PHONEEqualTo(phone);
         return (int) usersMapper.countByExample(example);
     }
 
     /**
      * 账号值
+     *
      * @return
      */
     public Long getUserMaxAccount() {
@@ -206,6 +208,7 @@ public class SaleDao {
 
     /**
      * 商家申请
+     *
      * @param users
      */
     public void userApplication(Users users) {
@@ -214,18 +217,20 @@ public class SaleDao {
 
     /**
      * 检查当前手机号有没有注册(厂家)
+     *
      * @param phone
      * @return
      */
     public int getSellerCount(Long phone) {
         SellersExample example = new SellersExample();
         SellersExample.Criteria criteria = example.createCriteria();
-        criteria.andCmPhoneEqualTo(phone);
+        criteria.andCM_PHONEEqualTo(phone);
         return (int) sellersMapper.countByExample(example);
     }
 
     /**
      * 厂家账号值
+     *
      * @return
      */
     public Long getSellerMaxAccount() {
@@ -235,6 +240,7 @@ public class SaleDao {
 
     /**
      * 厂家申请
+     *
      * @param sellers
      */
     public void sellerApplication(Sellers sellers) {

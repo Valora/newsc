@@ -10,16 +10,16 @@ import java.util.Date;
  */
 @Data
 public class SellerInfo {
-    private String cmAccount;
-    private String cmSellername;
-    private String cmPax;
-    private String cmTelephone;
-    private String cmContactphone;
-    private String cmContactname;
-    private String cmName;
-    private String cmSellerid;
-    private String cmAddress;
-    private Long cmPhone;
-    private Date cmCreatetime;
+    private String CM_ACCOUNT;
+    private String CM_SELLERNAME;
+    private String CM_PAX;
+    private String CM_TELEPHONE;
+    private String CM_CONTACTPHONE;
+    private String CM_CONTACTNAME;
+    private String CM_NAME;
+    private String CM_SELLERID;
+    private String CM_ADDRESS;
+    private Long CM_PHONE;
+    private Date CM_CREATETIME;
     
 }

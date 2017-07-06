@@ -15,10 +15,10 @@ import java.util.List;
 public interface SellerLoginMapper {
     @SelectProvider(type = SellerLoginSqlProvider.class, method = "selectLoginInfo")
     @Results({
-            @Result(column = "CM_SELLERID", property = "cmSellerid", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_CODE", property = "cmCode", jdbcType = JdbcType.INTEGER),
-            @Result(column = "CM_SELLERNAME", property = "cmSellerName", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_PHONE", property = "cmPhone", jdbcType = JdbcType.BIGINT)
+            @Result(column = "CM_SELLERID", property = "CM_SELLERID", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_CODE", property = "CM_CODE", jdbcType = JdbcType.INTEGER),
+            @Result(column = "CM_SELLERNAME", property = "CM_SELLERNAME", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_PHONE", property = "CM_PHONE", jdbcType = JdbcType.BIGINT)
     })
     List<SellerLogin> selectLoginInfo(String account, String password); 
 }

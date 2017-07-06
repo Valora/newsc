@@ -65,20 +65,20 @@ public class ManageService {
     public Result addEmployee(String name, String password, Long phone, Integer type, String adminId) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminId);
-            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             Long act = manageDao.getAct();
             String account = act.toString() + "1"; //account 自加1
             Admins admins = new Admins();
-            admins.setCmAccount(account);
+            admins.setCM_ACCOUNT(account);
             String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
             String adminsId = date + GetRandomNumber.genRandomNum(3);
-            admins.setCmAdminid(adminsId);
-            admins.setCmLevel(type);
-            admins.setCmName(name);
-            admins.setCmPassword(password);
-            admins.setCmPhone(phone);
+            admins.setCM_ADMINID(adminsId);
+            admins.setCM_LEVEL(type);
+            admins.setCM_NAME(name);
+            admins.setCM_PASSWORD(password);
+            admins.setCM_PHONE(phone);
             manageDao.insertAdmin(admins);
             return GetResult.toJson(0, null, jwt.createJWT(adminId), account, 0);
 
@@ -97,7 +97,7 @@ public class ManageService {
     public Result delEmployee(int id, String adminId) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminId);
-            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             int i = manageDao.delEmployee(id);
@@ -118,7 +118,7 @@ public class ManageService {
     public Result queryEmployees(Integer pagenum, Integer pagesize, String adminId) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminId);
-            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             List<AdminsInfo> results = manageDao.queryEmployees(pagenum, pagesize);
@@ -141,7 +141,7 @@ public class ManageService {
     public Result queryUsers(Integer pagenum, Integer pagesize, String adminId) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminId);
-            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             List<UserInfo> results = manageDao.queryUsers(pagenum, pagesize);
@@ -164,7 +164,7 @@ public class ManageService {
     public Result querySellers(Integer pagenum, Integer pagesize, String adminId) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminId);
-            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             List<SellerInfo> results = manageDao.querySellers(pagenum, pagesize);
@@ -187,7 +187,7 @@ public class ManageService {
     public Result queryUserInfo(String userid, String adminid) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
-            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
 
@@ -209,7 +209,7 @@ public class ManageService {
     public Result querySellerInfo(String sellerid, String adminid) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
-            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
 
@@ -234,7 +234,7 @@ public class ManageService {
     public Result queryEmployeesByUserInfo(String Content, Integer pagenum, Integer pagesize, String adminid) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
-            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             AdminsInfo adminsInfo = manageDao.queryEmployeeByUserInfo(Content, pagenum, pagesize);
@@ -256,7 +256,7 @@ public class ManageService {
     public Result queryUserByUserInfo(String Content, Integer pagenum, Integer pagesize, String adminid) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
-            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             UserDetail userDetail = manageDao.queryUserByUserInfo(Content, pagenum, pagesize);
@@ -278,7 +278,7 @@ public class ManageService {
     public Result querySellersBySellerInfo(String Content, Integer pagenum, Integer pagesize, String adminid) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
-            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             SellerDetail sellerDetail = manageDao.querySellersBySellerInfo(Content, pagenum, pagesize);
@@ -301,18 +301,18 @@ public class ManageService {
     public Result addClassify(String classifyname, String type, String parentid, String adminid, MultipartFile[] files) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
-            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             String filename = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmss")) + GetRandomNumber.genRandomNum(4);
             if (files.length > 0) {
                 try {
-                    storageService.store(files[0], root+filename);
+                    storageService.store(files[0], root + filename);
                 } catch (Exception ex) {
                     return GetResult.toJson(47, null, null, null, 0);
                 }
             }
-            manageDao.addClassify(classifyname, type, parentid, "/upload/" +root + filename);
+            manageDao.addClassify(classifyname, type, parentid, "/upload/" + root + filename);
             return GetResult.toJson(0, null, jwt.createJWT(adminid), null, 0);
         } catch (Exception ex) {
             return GetResult.toJson(200, null, null, null, 0);
@@ -333,7 +333,7 @@ public class ManageService {
     public Result reviceClassify(String classifyid, String classifyname, String type, String parentid, String adminid, MultipartFile[] files) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
-            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             int id = Integer.parseInt(classifyid);
@@ -345,13 +345,13 @@ public class ManageService {
             String imgpath = "";
             if (files.length > 0) {
                 try {
-                    storageService.store(files[0], root+filename);
+                    storageService.store(files[0], root + filename);
                 } catch (Exception ex) {
                     return GetResult.toJson(47, null, null, null, 0);
                 }
                 imgpath = root + filename;
             }
-            manageDao.reviceClassify(classifyname, type, parentid, "/upload/"+imgpath);
+            manageDao.reviceClassify(classifyname, type, parentid, "/upload/" + imgpath);
             return GetResult.toJson(0, null, jwt.createJWT(adminid), null, 0);
         } catch (Exception ex) {
             return GetResult.toJson(200, null, null, null, 0);
@@ -395,7 +395,7 @@ public class ManageService {
     public Result classifySort(Integer classifyid, Integer sort, String adminid) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
-            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             Integer i = manageDao.classifySort(sort, classifyid);
@@ -415,7 +415,7 @@ public class ManageService {
     public Result delClassify(Integer classifyid, String adminid) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
-            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             int i = manageDao.delClassify(classifyid);
@@ -455,7 +455,7 @@ public class ManageService {
     public Result addBrand(String adminid, String brand, String introduce) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
-            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             manageDao.addBrands(brand, introduce);
@@ -475,7 +475,7 @@ public class ManageService {
     public Result delBrands(String adminid, Integer brandid) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
-            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             int i = manageDao.delBrands(brandid);
@@ -497,7 +497,7 @@ public class ManageService {
     public Result queryApplications(Integer pagenum, Integer pagesize, String adminid) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
-            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             List<Users> users = manageDao.queryApplications(pagenum, pagesize);
@@ -518,7 +518,7 @@ public class ManageService {
     public Result queryApplicationDetail(String userid, String adminid) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
-            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             List<Users> results = manageDao.queryApplicationDetails(userid);
@@ -539,7 +539,7 @@ public class ManageService {
     public Result throughAudit(String adminid, String userid) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
-            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             Users users = manageDao.throughAudit(userid);
@@ -587,7 +587,7 @@ public class ManageService {
     public Result queryNotices(Integer pagenum, Integer pagesize, String adminid) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
-            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             List<Notices> results = manageDao.queryNotices(pagenum, pagesize);
@@ -613,17 +613,17 @@ public class ManageService {
     public Result addNotices(String adminid, String title, String content, String creator, String other, LocalDate deadLine) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
-            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             //LocalDate转成Date
             Date time = Date.from(deadLine.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
             Notices notices = new Notices();
-            notices.setCmTitle(title);
-            notices.setCmContent(content);
-            notices.setCmCreator(creator);
-            notices.setCmOther(other);
-            notices.setCmDeadline(time);
+            notices.setCM_TITLE(title);
+            notices.setCM_CONTENT(content);
+            notices.setCM_CREATOR(creator);
+            notices.setCM_OTHER(other);
+            notices.setCM_DEADLINE(time);
             manageDao.addNotices(notices);
             return GetResult.toJson(0, null, jwt.createJWT(adminid), null, 0);
         } catch (Exception ex) {
@@ -641,7 +641,7 @@ public class ManageService {
     public Result delNotices(String adminid, Integer noticeid) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
-            if (result.isEmpty() || result.get(0).getCmLevel() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             Integer i = manageDao.delNotices(noticeid);

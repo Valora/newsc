@@ -105,673 +105,673 @@ public class AfterservicesExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andCmAfterserviceidIsNull() {
+        public Criteria andCM_AFTERSERVICEIDIsNull() {
             addCriterion("CM_AFTERSERVICEID is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmAfterserviceidIsNotNull() {
+        public Criteria andCM_AFTERSERVICEIDIsNotNull() {
             addCriterion("CM_AFTERSERVICEID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmAfterserviceidEqualTo(String value) {
-            addCriterion("CM_AFTERSERVICEID =", value, "cmAfterserviceid");
+        public Criteria andCM_AFTERSERVICEIDEqualTo(String value) {
+            addCriterion("CM_AFTERSERVICEID =", value, "CM_AFTERSERVICEID");
             return (Criteria) this;
         }
 
-        public Criteria andCmAfterserviceidNotEqualTo(String value) {
-            addCriterion("CM_AFTERSERVICEID <>", value, "cmAfterserviceid");
+        public Criteria andCM_AFTERSERVICEIDNotEqualTo(String value) {
+            addCriterion("CM_AFTERSERVICEID <>", value, "CM_AFTERSERVICEID");
             return (Criteria) this;
         }
 
-        public Criteria andCmAfterserviceidGreaterThan(String value) {
-            addCriterion("CM_AFTERSERVICEID >", value, "cmAfterserviceid");
+        public Criteria andCM_AFTERSERVICEIDGreaterThan(String value) {
+            addCriterion("CM_AFTERSERVICEID >", value, "CM_AFTERSERVICEID");
             return (Criteria) this;
         }
 
-        public Criteria andCmAfterserviceidGreaterThanOrEqualTo(String value) {
-            addCriterion("CM_AFTERSERVICEID >=", value, "cmAfterserviceid");
+        public Criteria andCM_AFTERSERVICEIDGreaterThanOrEqualTo(String value) {
+            addCriterion("CM_AFTERSERVICEID >=", value, "CM_AFTERSERVICEID");
             return (Criteria) this;
         }
 
-        public Criteria andCmAfterserviceidLessThan(String value) {
-            addCriterion("CM_AFTERSERVICEID <", value, "cmAfterserviceid");
+        public Criteria andCM_AFTERSERVICEIDLessThan(String value) {
+            addCriterion("CM_AFTERSERVICEID <", value, "CM_AFTERSERVICEID");
             return (Criteria) this;
         }
 
-        public Criteria andCmAfterserviceidLessThanOrEqualTo(String value) {
-            addCriterion("CM_AFTERSERVICEID <=", value, "cmAfterserviceid");
+        public Criteria andCM_AFTERSERVICEIDLessThanOrEqualTo(String value) {
+            addCriterion("CM_AFTERSERVICEID <=", value, "CM_AFTERSERVICEID");
             return (Criteria) this;
         }
 
-        public Criteria andCmAfterserviceidLike(String value) {
-            addCriterion("CM_AFTERSERVICEID like", value, "cmAfterserviceid");
+        public Criteria andCM_AFTERSERVICEIDLike(String value) {
+            addCriterion("CM_AFTERSERVICEID like", value, "CM_AFTERSERVICEID");
             return (Criteria) this;
         }
 
-        public Criteria andCmAfterserviceidNotLike(String value) {
-            addCriterion("CM_AFTERSERVICEID not like", value, "cmAfterserviceid");
+        public Criteria andCM_AFTERSERVICEIDNotLike(String value) {
+            addCriterion("CM_AFTERSERVICEID not like", value, "CM_AFTERSERVICEID");
             return (Criteria) this;
         }
 
-        public Criteria andCmAfterserviceidIn(List<String> values) {
-            addCriterion("CM_AFTERSERVICEID in", values, "cmAfterserviceid");
+        public Criteria andCM_AFTERSERVICEIDIn(List<String> values) {
+            addCriterion("CM_AFTERSERVICEID in", values, "CM_AFTERSERVICEID");
             return (Criteria) this;
         }
 
-        public Criteria andCmAfterserviceidNotIn(List<String> values) {
-            addCriterion("CM_AFTERSERVICEID not in", values, "cmAfterserviceid");
+        public Criteria andCM_AFTERSERVICEIDNotIn(List<String> values) {
+            addCriterion("CM_AFTERSERVICEID not in", values, "CM_AFTERSERVICEID");
             return (Criteria) this;
         }
 
-        public Criteria andCmAfterserviceidBetween(String value1, String value2) {
-            addCriterion("CM_AFTERSERVICEID between", value1, value2, "cmAfterserviceid");
+        public Criteria andCM_AFTERSERVICEIDBetween(String value1, String value2) {
+            addCriterion("CM_AFTERSERVICEID between", value1, value2, "CM_AFTERSERVICEID");
             return (Criteria) this;
         }
 
-        public Criteria andCmAfterserviceidNotBetween(String value1, String value2) {
-            addCriterion("CM_AFTERSERVICEID not between", value1, value2, "cmAfterserviceid");
+        public Criteria andCM_AFTERSERVICEIDNotBetween(String value1, String value2) {
+            addCriterion("CM_AFTERSERVICEID not between", value1, value2, "CM_AFTERSERVICEID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSelleridIsNull() {
+        public Criteria andCM_SELLERIDIsNull() {
             addCriterion("CM_SELLERID is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmSelleridIsNotNull() {
+        public Criteria andCM_SELLERIDIsNotNull() {
             addCriterion("CM_SELLERID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmSelleridEqualTo(String value) {
-            addCriterion("CM_SELLERID =", value, "cmSellerid");
+        public Criteria andCM_SELLERIDEqualTo(String value) {
+            addCriterion("CM_SELLERID =", value, "CM_SELLERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSelleridNotEqualTo(String value) {
-            addCriterion("CM_SELLERID <>", value, "cmSellerid");
+        public Criteria andCM_SELLERIDNotEqualTo(String value) {
+            addCriterion("CM_SELLERID <>", value, "CM_SELLERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSelleridGreaterThan(String value) {
-            addCriterion("CM_SELLERID >", value, "cmSellerid");
+        public Criteria andCM_SELLERIDGreaterThan(String value) {
+            addCriterion("CM_SELLERID >", value, "CM_SELLERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSelleridGreaterThanOrEqualTo(String value) {
-            addCriterion("CM_SELLERID >=", value, "cmSellerid");
+        public Criteria andCM_SELLERIDGreaterThanOrEqualTo(String value) {
+            addCriterion("CM_SELLERID >=", value, "CM_SELLERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSelleridLessThan(String value) {
-            addCriterion("CM_SELLERID <", value, "cmSellerid");
+        public Criteria andCM_SELLERIDLessThan(String value) {
+            addCriterion("CM_SELLERID <", value, "CM_SELLERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSelleridLessThanOrEqualTo(String value) {
-            addCriterion("CM_SELLERID <=", value, "cmSellerid");
+        public Criteria andCM_SELLERIDLessThanOrEqualTo(String value) {
+            addCriterion("CM_SELLERID <=", value, "CM_SELLERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSelleridLike(String value) {
-            addCriterion("CM_SELLERID like", value, "cmSellerid");
+        public Criteria andCM_SELLERIDLike(String value) {
+            addCriterion("CM_SELLERID like", value, "CM_SELLERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSelleridNotLike(String value) {
-            addCriterion("CM_SELLERID not like", value, "cmSellerid");
+        public Criteria andCM_SELLERIDNotLike(String value) {
+            addCriterion("CM_SELLERID not like", value, "CM_SELLERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSelleridIn(List<String> values) {
-            addCriterion("CM_SELLERID in", values, "cmSellerid");
+        public Criteria andCM_SELLERIDIn(List<String> values) {
+            addCriterion("CM_SELLERID in", values, "CM_SELLERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSelleridNotIn(List<String> values) {
-            addCriterion("CM_SELLERID not in", values, "cmSellerid");
+        public Criteria andCM_SELLERIDNotIn(List<String> values) {
+            addCriterion("CM_SELLERID not in", values, "CM_SELLERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSelleridBetween(String value1, String value2) {
-            addCriterion("CM_SELLERID between", value1, value2, "cmSellerid");
+        public Criteria andCM_SELLERIDBetween(String value1, String value2) {
+            addCriterion("CM_SELLERID between", value1, value2, "CM_SELLERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSelleridNotBetween(String value1, String value2) {
-            addCriterion("CM_SELLERID not between", value1, value2, "cmSellerid");
+        public Criteria andCM_SELLERIDNotBetween(String value1, String value2) {
+            addCriterion("CM_SELLERID not between", value1, value2, "CM_SELLERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmCreatetimeIsNull() {
+        public Criteria andCM_CREATETIMEIsNull() {
             addCriterion("CM_CREATETIME is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmCreatetimeIsNotNull() {
+        public Criteria andCM_CREATETIMEIsNotNull() {
             addCriterion("CM_CREATETIME is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmCreatetimeEqualTo(Date value) {
-            addCriterion("CM_CREATETIME =", value, "cmCreatetime");
+        public Criteria andCM_CREATETIMEEqualTo(Date value) {
+            addCriterion("CM_CREATETIME =", value, "CM_CREATETIME");
             return (Criteria) this;
         }
 
-        public Criteria andCmCreatetimeNotEqualTo(Date value) {
-            addCriterion("CM_CREATETIME <>", value, "cmCreatetime");
+        public Criteria andCM_CREATETIMENotEqualTo(Date value) {
+            addCriterion("CM_CREATETIME <>", value, "CM_CREATETIME");
             return (Criteria) this;
         }
 
-        public Criteria andCmCreatetimeGreaterThan(Date value) {
-            addCriterion("CM_CREATETIME >", value, "cmCreatetime");
+        public Criteria andCM_CREATETIMEGreaterThan(Date value) {
+            addCriterion("CM_CREATETIME >", value, "CM_CREATETIME");
             return (Criteria) this;
         }
 
-        public Criteria andCmCreatetimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("CM_CREATETIME >=", value, "cmCreatetime");
+        public Criteria andCM_CREATETIMEGreaterThanOrEqualTo(Date value) {
+            addCriterion("CM_CREATETIME >=", value, "CM_CREATETIME");
             return (Criteria) this;
         }
 
-        public Criteria andCmCreatetimeLessThan(Date value) {
-            addCriterion("CM_CREATETIME <", value, "cmCreatetime");
+        public Criteria andCM_CREATETIMELessThan(Date value) {
+            addCriterion("CM_CREATETIME <", value, "CM_CREATETIME");
             return (Criteria) this;
         }
 
-        public Criteria andCmCreatetimeLessThanOrEqualTo(Date value) {
-            addCriterion("CM_CREATETIME <=", value, "cmCreatetime");
+        public Criteria andCM_CREATETIMELessThanOrEqualTo(Date value) {
+            addCriterion("CM_CREATETIME <=", value, "CM_CREATETIME");
             return (Criteria) this;
         }
 
-        public Criteria andCmCreatetimeIn(List<Date> values) {
-            addCriterion("CM_CREATETIME in", values, "cmCreatetime");
+        public Criteria andCM_CREATETIMEIn(List<Date> values) {
+            addCriterion("CM_CREATETIME in", values, "CM_CREATETIME");
             return (Criteria) this;
         }
 
-        public Criteria andCmCreatetimeNotIn(List<Date> values) {
-            addCriterion("CM_CREATETIME not in", values, "cmCreatetime");
+        public Criteria andCM_CREATETIMENotIn(List<Date> values) {
+            addCriterion("CM_CREATETIME not in", values, "CM_CREATETIME");
             return (Criteria) this;
         }
 
-        public Criteria andCmCreatetimeBetween(Date value1, Date value2) {
-            addCriterion("CM_CREATETIME between", value1, value2, "cmCreatetime");
+        public Criteria andCM_CREATETIMEBetween(Date value1, Date value2) {
+            addCriterion("CM_CREATETIME between", value1, value2, "CM_CREATETIME");
             return (Criteria) this;
         }
 
-        public Criteria andCmCreatetimeNotBetween(Date value1, Date value2) {
-            addCriterion("CM_CREATETIME not between", value1, value2, "cmCreatetime");
+        public Criteria andCM_CREATETIMENotBetween(Date value1, Date value2) {
+            addCriterion("CM_CREATETIME not between", value1, value2, "CM_CREATETIME");
             return (Criteria) this;
         }
 
-        public Criteria andCmUseridIsNull() {
+        public Criteria andCM_USERIDIsNull() {
             addCriterion("CM_USERID is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmUseridIsNotNull() {
+        public Criteria andCM_USERIDIsNotNull() {
             addCriterion("CM_USERID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmUseridEqualTo(String value) {
-            addCriterion("CM_USERID =", value, "cmUserid");
+        public Criteria andCM_USERIDEqualTo(String value) {
+            addCriterion("CM_USERID =", value, "CM_USERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmUseridNotEqualTo(String value) {
-            addCriterion("CM_USERID <>", value, "cmUserid");
+        public Criteria andCM_USERIDNotEqualTo(String value) {
+            addCriterion("CM_USERID <>", value, "CM_USERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmUseridGreaterThan(String value) {
-            addCriterion("CM_USERID >", value, "cmUserid");
+        public Criteria andCM_USERIDGreaterThan(String value) {
+            addCriterion("CM_USERID >", value, "CM_USERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmUseridGreaterThanOrEqualTo(String value) {
-            addCriterion("CM_USERID >=", value, "cmUserid");
+        public Criteria andCM_USERIDGreaterThanOrEqualTo(String value) {
+            addCriterion("CM_USERID >=", value, "CM_USERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmUseridLessThan(String value) {
-            addCriterion("CM_USERID <", value, "cmUserid");
+        public Criteria andCM_USERIDLessThan(String value) {
+            addCriterion("CM_USERID <", value, "CM_USERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmUseridLessThanOrEqualTo(String value) {
-            addCriterion("CM_USERID <=", value, "cmUserid");
+        public Criteria andCM_USERIDLessThanOrEqualTo(String value) {
+            addCriterion("CM_USERID <=", value, "CM_USERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmUseridLike(String value) {
-            addCriterion("CM_USERID like", value, "cmUserid");
+        public Criteria andCM_USERIDLike(String value) {
+            addCriterion("CM_USERID like", value, "CM_USERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmUseridNotLike(String value) {
-            addCriterion("CM_USERID not like", value, "cmUserid");
+        public Criteria andCM_USERIDNotLike(String value) {
+            addCriterion("CM_USERID not like", value, "CM_USERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmUseridIn(List<String> values) {
-            addCriterion("CM_USERID in", values, "cmUserid");
+        public Criteria andCM_USERIDIn(List<String> values) {
+            addCriterion("CM_USERID in", values, "CM_USERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmUseridNotIn(List<String> values) {
-            addCriterion("CM_USERID not in", values, "cmUserid");
+        public Criteria andCM_USERIDNotIn(List<String> values) {
+            addCriterion("CM_USERID not in", values, "CM_USERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmUseridBetween(String value1, String value2) {
-            addCriterion("CM_USERID between", value1, value2, "cmUserid");
+        public Criteria andCM_USERIDBetween(String value1, String value2) {
+            addCriterion("CM_USERID between", value1, value2, "CM_USERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmUseridNotBetween(String value1, String value2) {
-            addCriterion("CM_USERID not between", value1, value2, "cmUserid");
+        public Criteria andCM_USERIDNotBetween(String value1, String value2) {
+            addCriterion("CM_USERID not between", value1, value2, "CM_USERID");
             return (Criteria) this;
         }
 
-        public Criteria andCmOrderdetailsidIsNull() {
+        public Criteria andCM_ORDERDETAILSIDIsNull() {
             addCriterion("CM_ORDERDETAILSID is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmOrderdetailsidIsNotNull() {
+        public Criteria andCM_ORDERDETAILSIDIsNotNull() {
             addCriterion("CM_ORDERDETAILSID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmOrderdetailsidEqualTo(String value) {
-            addCriterion("CM_ORDERDETAILSID =", value, "cmOrderdetailsid");
+        public Criteria andCM_ORDERDETAILSIDEqualTo(String value) {
+            addCriterion("CM_ORDERDETAILSID =", value, "CM_ORDERDETAILSID");
             return (Criteria) this;
         }
 
-        public Criteria andCmOrderdetailsidNotEqualTo(String value) {
-            addCriterion("CM_ORDERDETAILSID <>", value, "cmOrderdetailsid");
+        public Criteria andCM_ORDERDETAILSIDNotEqualTo(String value) {
+            addCriterion("CM_ORDERDETAILSID <>", value, "CM_ORDERDETAILSID");
             return (Criteria) this;
         }
 
-        public Criteria andCmOrderdetailsidGreaterThan(String value) {
-            addCriterion("CM_ORDERDETAILSID >", value, "cmOrderdetailsid");
+        public Criteria andCM_ORDERDETAILSIDGreaterThan(String value) {
+            addCriterion("CM_ORDERDETAILSID >", value, "CM_ORDERDETAILSID");
             return (Criteria) this;
         }
 
-        public Criteria andCmOrderdetailsidGreaterThanOrEqualTo(String value) {
-            addCriterion("CM_ORDERDETAILSID >=", value, "cmOrderdetailsid");
+        public Criteria andCM_ORDERDETAILSIDGreaterThanOrEqualTo(String value) {
+            addCriterion("CM_ORDERDETAILSID >=", value, "CM_ORDERDETAILSID");
             return (Criteria) this;
         }
 
-        public Criteria andCmOrderdetailsidLessThan(String value) {
-            addCriterion("CM_ORDERDETAILSID <", value, "cmOrderdetailsid");
+        public Criteria andCM_ORDERDETAILSIDLessThan(String value) {
+            addCriterion("CM_ORDERDETAILSID <", value, "CM_ORDERDETAILSID");
             return (Criteria) this;
         }
 
-        public Criteria andCmOrderdetailsidLessThanOrEqualTo(String value) {
-            addCriterion("CM_ORDERDETAILSID <=", value, "cmOrderdetailsid");
+        public Criteria andCM_ORDERDETAILSIDLessThanOrEqualTo(String value) {
+            addCriterion("CM_ORDERDETAILSID <=", value, "CM_ORDERDETAILSID");
             return (Criteria) this;
         }
 
-        public Criteria andCmOrderdetailsidLike(String value) {
-            addCriterion("CM_ORDERDETAILSID like", value, "cmOrderdetailsid");
+        public Criteria andCM_ORDERDETAILSIDLike(String value) {
+            addCriterion("CM_ORDERDETAILSID like", value, "CM_ORDERDETAILSID");
             return (Criteria) this;
         }
 
-        public Criteria andCmOrderdetailsidNotLike(String value) {
-            addCriterion("CM_ORDERDETAILSID not like", value, "cmOrderdetailsid");
+        public Criteria andCM_ORDERDETAILSIDNotLike(String value) {
+            addCriterion("CM_ORDERDETAILSID not like", value, "CM_ORDERDETAILSID");
             return (Criteria) this;
         }
 
-        public Criteria andCmOrderdetailsidIn(List<String> values) {
-            addCriterion("CM_ORDERDETAILSID in", values, "cmOrderdetailsid");
+        public Criteria andCM_ORDERDETAILSIDIn(List<String> values) {
+            addCriterion("CM_ORDERDETAILSID in", values, "CM_ORDERDETAILSID");
             return (Criteria) this;
         }
 
-        public Criteria andCmOrderdetailsidNotIn(List<String> values) {
-            addCriterion("CM_ORDERDETAILSID not in", values, "cmOrderdetailsid");
+        public Criteria andCM_ORDERDETAILSIDNotIn(List<String> values) {
+            addCriterion("CM_ORDERDETAILSID not in", values, "CM_ORDERDETAILSID");
             return (Criteria) this;
         }
 
-        public Criteria andCmOrderdetailsidBetween(String value1, String value2) {
-            addCriterion("CM_ORDERDETAILSID between", value1, value2, "cmOrderdetailsid");
+        public Criteria andCM_ORDERDETAILSIDBetween(String value1, String value2) {
+            addCriterion("CM_ORDERDETAILSID between", value1, value2, "CM_ORDERDETAILSID");
             return (Criteria) this;
         }
 
-        public Criteria andCmOrderdetailsidNotBetween(String value1, String value2) {
-            addCriterion("CM_ORDERDETAILSID not between", value1, value2, "cmOrderdetailsid");
+        public Criteria andCM_ORDERDETAILSIDNotBetween(String value1, String value2) {
+            addCriterion("CM_ORDERDETAILSID not between", value1, value2, "CM_ORDERDETAILSID");
             return (Criteria) this;
         }
 
-        public Criteria andCmReasonIsNull() {
+        public Criteria andCM_REASONIsNull() {
             addCriterion("CM_REASON is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmReasonIsNotNull() {
+        public Criteria andCM_REASONIsNotNull() {
             addCriterion("CM_REASON is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmReasonEqualTo(String value) {
-            addCriterion("CM_REASON =", value, "cmReason");
+        public Criteria andCM_REASONEqualTo(String value) {
+            addCriterion("CM_REASON =", value, "CM_REASON");
             return (Criteria) this;
         }
 
-        public Criteria andCmReasonNotEqualTo(String value) {
-            addCriterion("CM_REASON <>", value, "cmReason");
+        public Criteria andCM_REASONNotEqualTo(String value) {
+            addCriterion("CM_REASON <>", value, "CM_REASON");
             return (Criteria) this;
         }
 
-        public Criteria andCmReasonGreaterThan(String value) {
-            addCriterion("CM_REASON >", value, "cmReason");
+        public Criteria andCM_REASONGreaterThan(String value) {
+            addCriterion("CM_REASON >", value, "CM_REASON");
             return (Criteria) this;
         }
 
-        public Criteria andCmReasonGreaterThanOrEqualTo(String value) {
-            addCriterion("CM_REASON >=", value, "cmReason");
+        public Criteria andCM_REASONGreaterThanOrEqualTo(String value) {
+            addCriterion("CM_REASON >=", value, "CM_REASON");
             return (Criteria) this;
         }
 
-        public Criteria andCmReasonLessThan(String value) {
-            addCriterion("CM_REASON <", value, "cmReason");
+        public Criteria andCM_REASONLessThan(String value) {
+            addCriterion("CM_REASON <", value, "CM_REASON");
             return (Criteria) this;
         }
 
-        public Criteria andCmReasonLessThanOrEqualTo(String value) {
-            addCriterion("CM_REASON <=", value, "cmReason");
+        public Criteria andCM_REASONLessThanOrEqualTo(String value) {
+            addCriterion("CM_REASON <=", value, "CM_REASON");
             return (Criteria) this;
         }
 
-        public Criteria andCmReasonLike(String value) {
-            addCriterion("CM_REASON like", value, "cmReason");
+        public Criteria andCM_REASONLike(String value) {
+            addCriterion("CM_REASON like", value, "CM_REASON");
             return (Criteria) this;
         }
 
-        public Criteria andCmReasonNotLike(String value) {
-            addCriterion("CM_REASON not like", value, "cmReason");
+        public Criteria andCM_REASONNotLike(String value) {
+            addCriterion("CM_REASON not like", value, "CM_REASON");
             return (Criteria) this;
         }
 
-        public Criteria andCmReasonIn(List<String> values) {
-            addCriterion("CM_REASON in", values, "cmReason");
+        public Criteria andCM_REASONIn(List<String> values) {
+            addCriterion("CM_REASON in", values, "CM_REASON");
             return (Criteria) this;
         }
 
-        public Criteria andCmReasonNotIn(List<String> values) {
-            addCriterion("CM_REASON not in", values, "cmReason");
+        public Criteria andCM_REASONNotIn(List<String> values) {
+            addCriterion("CM_REASON not in", values, "CM_REASON");
             return (Criteria) this;
         }
 
-        public Criteria andCmReasonBetween(String value1, String value2) {
-            addCriterion("CM_REASON between", value1, value2, "cmReason");
+        public Criteria andCM_REASONBetween(String value1, String value2) {
+            addCriterion("CM_REASON between", value1, value2, "CM_REASON");
             return (Criteria) this;
         }
 
-        public Criteria andCmReasonNotBetween(String value1, String value2) {
-            addCriterion("CM_REASON not between", value1, value2, "cmReason");
+        public Criteria andCM_REASONNotBetween(String value1, String value2) {
+            addCriterion("CM_REASON not between", value1, value2, "CM_REASON");
             return (Criteria) this;
         }
 
-        public Criteria andCmTypeIsNull() {
+        public Criteria andCM_TYPEIsNull() {
             addCriterion("CM_TYPE is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmTypeIsNotNull() {
+        public Criteria andCM_TYPEIsNotNull() {
             addCriterion("CM_TYPE is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmTypeEqualTo(Integer value) {
-            addCriterion("CM_TYPE =", value, "cmType");
+        public Criteria andCM_TYPEEqualTo(Integer value) {
+            addCriterion("CM_TYPE =", value, "CM_TYPE");
             return (Criteria) this;
         }
 
-        public Criteria andCmTypeNotEqualTo(Integer value) {
-            addCriterion("CM_TYPE <>", value, "cmType");
+        public Criteria andCM_TYPENotEqualTo(Integer value) {
+            addCriterion("CM_TYPE <>", value, "CM_TYPE");
             return (Criteria) this;
         }
 
-        public Criteria andCmTypeGreaterThan(Integer value) {
-            addCriterion("CM_TYPE >", value, "cmType");
+        public Criteria andCM_TYPEGreaterThan(Integer value) {
+            addCriterion("CM_TYPE >", value, "CM_TYPE");
             return (Criteria) this;
         }
 
-        public Criteria andCmTypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("CM_TYPE >=", value, "cmType");
+        public Criteria andCM_TYPEGreaterThanOrEqualTo(Integer value) {
+            addCriterion("CM_TYPE >=", value, "CM_TYPE");
             return (Criteria) this;
         }
 
-        public Criteria andCmTypeLessThan(Integer value) {
-            addCriterion("CM_TYPE <", value, "cmType");
+        public Criteria andCM_TYPELessThan(Integer value) {
+            addCriterion("CM_TYPE <", value, "CM_TYPE");
             return (Criteria) this;
         }
 
-        public Criteria andCmTypeLessThanOrEqualTo(Integer value) {
-            addCriterion("CM_TYPE <=", value, "cmType");
+        public Criteria andCM_TYPELessThanOrEqualTo(Integer value) {
+            addCriterion("CM_TYPE <=", value, "CM_TYPE");
             return (Criteria) this;
         }
 
-        public Criteria andCmTypeIn(List<Integer> values) {
-            addCriterion("CM_TYPE in", values, "cmType");
+        public Criteria andCM_TYPEIn(List<Integer> values) {
+            addCriterion("CM_TYPE in", values, "CM_TYPE");
             return (Criteria) this;
         }
 
-        public Criteria andCmTypeNotIn(List<Integer> values) {
-            addCriterion("CM_TYPE not in", values, "cmType");
+        public Criteria andCM_TYPENotIn(List<Integer> values) {
+            addCriterion("CM_TYPE not in", values, "CM_TYPE");
             return (Criteria) this;
         }
 
-        public Criteria andCmTypeBetween(Integer value1, Integer value2) {
-            addCriterion("CM_TYPE between", value1, value2, "cmType");
+        public Criteria andCM_TYPEBetween(Integer value1, Integer value2) {
+            addCriterion("CM_TYPE between", value1, value2, "CM_TYPE");
             return (Criteria) this;
         }
 
-        public Criteria andCmTypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("CM_TYPE not between", value1, value2, "cmType");
+        public Criteria andCM_TYPENotBetween(Integer value1, Integer value2) {
+            addCriterion("CM_TYPE not between", value1, value2, "CM_TYPE");
             return (Criteria) this;
         }
 
-        public Criteria andCmStateIsNull() {
+        public Criteria andCM_STATEIsNull() {
             addCriterion("CM_STATE is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmStateIsNotNull() {
+        public Criteria andCM_STATEIsNotNull() {
             addCriterion("CM_STATE is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmStateEqualTo(Integer value) {
-            addCriterion("CM_STATE =", value, "cmState");
+        public Criteria andCM_STATEEqualTo(Integer value) {
+            addCriterion("CM_STATE =", value, "CM_STATE");
             return (Criteria) this;
         }
 
-        public Criteria andCmStateNotEqualTo(Integer value) {
-            addCriterion("CM_STATE <>", value, "cmState");
+        public Criteria andCM_STATENotEqualTo(Integer value) {
+            addCriterion("CM_STATE <>", value, "CM_STATE");
             return (Criteria) this;
         }
 
-        public Criteria andCmStateGreaterThan(Integer value) {
-            addCriterion("CM_STATE >", value, "cmState");
+        public Criteria andCM_STATEGreaterThan(Integer value) {
+            addCriterion("CM_STATE >", value, "CM_STATE");
             return (Criteria) this;
         }
 
-        public Criteria andCmStateGreaterThanOrEqualTo(Integer value) {
-            addCriterion("CM_STATE >=", value, "cmState");
+        public Criteria andCM_STATEGreaterThanOrEqualTo(Integer value) {
+            addCriterion("CM_STATE >=", value, "CM_STATE");
             return (Criteria) this;
         }
 
-        public Criteria andCmStateLessThan(Integer value) {
-            addCriterion("CM_STATE <", value, "cmState");
+        public Criteria andCM_STATELessThan(Integer value) {
+            addCriterion("CM_STATE <", value, "CM_STATE");
             return (Criteria) this;
         }
 
-        public Criteria andCmStateLessThanOrEqualTo(Integer value) {
-            addCriterion("CM_STATE <=", value, "cmState");
+        public Criteria andCM_STATELessThanOrEqualTo(Integer value) {
+            addCriterion("CM_STATE <=", value, "CM_STATE");
             return (Criteria) this;
         }
 
-        public Criteria andCmStateIn(List<Integer> values) {
-            addCriterion("CM_STATE in", values, "cmState");
+        public Criteria andCM_STATEIn(List<Integer> values) {
+            addCriterion("CM_STATE in", values, "CM_STATE");
             return (Criteria) this;
         }
 
-        public Criteria andCmStateNotIn(List<Integer> values) {
-            addCriterion("CM_STATE not in", values, "cmState");
+        public Criteria andCM_STATENotIn(List<Integer> values) {
+            addCriterion("CM_STATE not in", values, "CM_STATE");
             return (Criteria) this;
         }
 
-        public Criteria andCmStateBetween(Integer value1, Integer value2) {
-            addCriterion("CM_STATE between", value1, value2, "cmState");
+        public Criteria andCM_STATEBetween(Integer value1, Integer value2) {
+            addCriterion("CM_STATE between", value1, value2, "CM_STATE");
             return (Criteria) this;
         }
 
-        public Criteria andCmStateNotBetween(Integer value1, Integer value2) {
-            addCriterion("CM_STATE not between", value1, value2, "cmState");
+        public Criteria andCM_STATENotBetween(Integer value1, Integer value2) {
+            addCriterion("CM_STATE not between", value1, value2, "CM_STATE");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathsIsNull() {
+        public Criteria andCM_IMGPATHSIsNull() {
             addCriterion("CM_IMGPATHS is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathsIsNotNull() {
+        public Criteria andCM_IMGPATHSIsNotNull() {
             addCriterion("CM_IMGPATHS is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathsEqualTo(String value) {
-            addCriterion("CM_IMGPATHS =", value, "cmImgpaths");
+        public Criteria andCM_IMGPATHSEqualTo(String value) {
+            addCriterion("CM_IMGPATHS =", value, "CM_IMGPATHS");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathsNotEqualTo(String value) {
-            addCriterion("CM_IMGPATHS <>", value, "cmImgpaths");
+        public Criteria andCM_IMGPATHSNotEqualTo(String value) {
+            addCriterion("CM_IMGPATHS <>", value, "CM_IMGPATHS");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathsGreaterThan(String value) {
-            addCriterion("CM_IMGPATHS >", value, "cmImgpaths");
+        public Criteria andCM_IMGPATHSGreaterThan(String value) {
+            addCriterion("CM_IMGPATHS >", value, "CM_IMGPATHS");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathsGreaterThanOrEqualTo(String value) {
-            addCriterion("CM_IMGPATHS >=", value, "cmImgpaths");
+        public Criteria andCM_IMGPATHSGreaterThanOrEqualTo(String value) {
+            addCriterion("CM_IMGPATHS >=", value, "CM_IMGPATHS");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathsLessThan(String value) {
-            addCriterion("CM_IMGPATHS <", value, "cmImgpaths");
+        public Criteria andCM_IMGPATHSLessThan(String value) {
+            addCriterion("CM_IMGPATHS <", value, "CM_IMGPATHS");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathsLessThanOrEqualTo(String value) {
-            addCriterion("CM_IMGPATHS <=", value, "cmImgpaths");
+        public Criteria andCM_IMGPATHSLessThanOrEqualTo(String value) {
+            addCriterion("CM_IMGPATHS <=", value, "CM_IMGPATHS");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathsLike(String value) {
-            addCriterion("CM_IMGPATHS like", value, "cmImgpaths");
+        public Criteria andCM_IMGPATHSLike(String value) {
+            addCriterion("CM_IMGPATHS like", value, "CM_IMGPATHS");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathsNotLike(String value) {
-            addCriterion("CM_IMGPATHS not like", value, "cmImgpaths");
+        public Criteria andCM_IMGPATHSNotLike(String value) {
+            addCriterion("CM_IMGPATHS not like", value, "CM_IMGPATHS");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathsIn(List<String> values) {
-            addCriterion("CM_IMGPATHS in", values, "cmImgpaths");
+        public Criteria andCM_IMGPATHSIn(List<String> values) {
+            addCriterion("CM_IMGPATHS in", values, "CM_IMGPATHS");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathsNotIn(List<String> values) {
-            addCriterion("CM_IMGPATHS not in", values, "cmImgpaths");
+        public Criteria andCM_IMGPATHSNotIn(List<String> values) {
+            addCriterion("CM_IMGPATHS not in", values, "CM_IMGPATHS");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathsBetween(String value1, String value2) {
-            addCriterion("CM_IMGPATHS between", value1, value2, "cmImgpaths");
+        public Criteria andCM_IMGPATHSBetween(String value1, String value2) {
+            addCriterion("CM_IMGPATHS between", value1, value2, "CM_IMGPATHS");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathsNotBetween(String value1, String value2) {
-            addCriterion("CM_IMGPATHS not between", value1, value2, "cmImgpaths");
+        public Criteria andCM_IMGPATHSNotBetween(String value1, String value2) {
+            addCriterion("CM_IMGPATHS not between", value1, value2, "CM_IMGPATHS");
             return (Criteria) this;
         }
 
-        public Criteria andCmSvidIsNull() {
+        public Criteria andCM_SVIDIsNull() {
             addCriterion("CM_SVID is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmSvidIsNotNull() {
+        public Criteria andCM_SVIDIsNotNull() {
             addCriterion("CM_SVID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmSvidEqualTo(String value) {
-            addCriterion("CM_SVID =", value, "cmSvid");
+        public Criteria andCM_SVIDEqualTo(String value) {
+            addCriterion("CM_SVID =", value, "CM_SVID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSvidNotEqualTo(String value) {
-            addCriterion("CM_SVID <>", value, "cmSvid");
+        public Criteria andCM_SVIDNotEqualTo(String value) {
+            addCriterion("CM_SVID <>", value, "CM_SVID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSvidGreaterThan(String value) {
-            addCriterion("CM_SVID >", value, "cmSvid");
+        public Criteria andCM_SVIDGreaterThan(String value) {
+            addCriterion("CM_SVID >", value, "CM_SVID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSvidGreaterThanOrEqualTo(String value) {
-            addCriterion("CM_SVID >=", value, "cmSvid");
+        public Criteria andCM_SVIDGreaterThanOrEqualTo(String value) {
+            addCriterion("CM_SVID >=", value, "CM_SVID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSvidLessThan(String value) {
-            addCriterion("CM_SVID <", value, "cmSvid");
+        public Criteria andCM_SVIDLessThan(String value) {
+            addCriterion("CM_SVID <", value, "CM_SVID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSvidLessThanOrEqualTo(String value) {
-            addCriterion("CM_SVID <=", value, "cmSvid");
+        public Criteria andCM_SVIDLessThanOrEqualTo(String value) {
+            addCriterion("CM_SVID <=", value, "CM_SVID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSvidLike(String value) {
-            addCriterion("CM_SVID like", value, "cmSvid");
+        public Criteria andCM_SVIDLike(String value) {
+            addCriterion("CM_SVID like", value, "CM_SVID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSvidNotLike(String value) {
-            addCriterion("CM_SVID not like", value, "cmSvid");
+        public Criteria andCM_SVIDNotLike(String value) {
+            addCriterion("CM_SVID not like", value, "CM_SVID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSvidIn(List<String> values) {
-            addCriterion("CM_SVID in", values, "cmSvid");
+        public Criteria andCM_SVIDIn(List<String> values) {
+            addCriterion("CM_SVID in", values, "CM_SVID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSvidNotIn(List<String> values) {
-            addCriterion("CM_SVID not in", values, "cmSvid");
+        public Criteria andCM_SVIDNotIn(List<String> values) {
+            addCriterion("CM_SVID not in", values, "CM_SVID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSvidBetween(String value1, String value2) {
-            addCriterion("CM_SVID between", value1, value2, "cmSvid");
+        public Criteria andCM_SVIDBetween(String value1, String value2) {
+            addCriterion("CM_SVID between", value1, value2, "CM_SVID");
             return (Criteria) this;
         }
 
-        public Criteria andCmSvidNotBetween(String value1, String value2) {
-            addCriterion("CM_SVID not between", value1, value2, "cmSvid");
+        public Criteria andCM_SVIDNotBetween(String value1, String value2) {
+            addCriterion("CM_SVID not between", value1, value2, "CM_SVID");
             return (Criteria) this;
         }
     }

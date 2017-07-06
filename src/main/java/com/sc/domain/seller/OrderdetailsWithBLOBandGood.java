@@ -9,15 +9,15 @@ import java.util.Date;
  */
 @Data
 public class OrderdetailsWithBLOBandGood {
-    private String cmGoodsid;
-    private String cmOrderdetailsid;
-    private String cmMainfigurepath;
-    private String cmTitle;
-    private Date cmOrdercreatetime;
-    private Double cmPresentprice;
-    private Double cmOriginalprice;
-    private Integer cmNumber;
-    private Double cmMoney;
-    private String cmSpecnumdetails;
-    private Integer cmSellerstate;
+    private String CM_GOODSID;
+    private String CM_ORDERDETAILSID;
+    private String CM_MAINFIGUREPATH;
+    private String CM_TITLE;
+    private Date CM_ORDERCREATETIME;
+    private Double CM_PRESENTPRICE;
+    private Double CM_ORIGINALPRICE;
+    private Integer CM_NUMBER;
+    private Double CM_MONEY;
+    private String CM_SPECNUMDETAILS;
+    private Integer CM_SELLERSTATE;
 }

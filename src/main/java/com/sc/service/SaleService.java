@@ -60,13 +60,13 @@ public class SaleService {
             LocalDate time = LocalDate.now();
             if (SendCode.sendCode(phone.toString(), code, type)) {
                 Register register = new Register();
-                register.setCmCode(code);
+                register.setCM_CODE(code);
                 Date date = Date.from(time.atStartOfDay(ZoneId.systemDefault()).toInstant());
-                register.setCmTime(date);
-                register.setCmCount(0);
+                register.setCM_TIME(date);
+                register.setCM_COUNT(0);
                 //如果是新用户，则新增
                 if (list.get(0) == null) {
-                    register.setCmPhone(phone);
+                    register.setCM_PHONE(phone);
                     saleDao.addregister(register);
                 } else {
                     //如果不是新用户，就update
@@ -154,11 +154,11 @@ public class SaleService {
             List<Register> list = saleDao.selectregisterbyphone(phone);
             Register register = list.get(0);
             //业务人员不存在
-            if (register == null || register.getCmCode() != code) {
+            if (register == null || register.getCM_CODE() != code) {
                 return GetResult.toJson(8, null, null, list, 0);
             }
             Admins admins = saleDao.selectadminbyphone(phone);
-            admins.setCmPassword(newpassword);
+            admins.setCM_PASSWORD(newpassword);
             //update业务人员密码
             saleDao.updateAdminPassword(admins);
             return GetResult.toJson(0, null, null, list, 0);
@@ -179,11 +179,11 @@ public class SaleService {
             List<Register> list = saleDao.selectregisterbyphone(phone);
             Register register = list.get(0);
             //业务人员不存在
-            if (register == null || register.getCmCode() != code) {
+            if (register == null || register.getCM_CODE() != code) {
                 return GetResult.toJson(8, null, null, list, 0);
             }
             Admins admins = saleDao.selectadminbyphone_and_Level(phone, 1);
-            return GetResult.toJson(0, null, null, admins == null ? admins.getCmAccount() : null, 0);
+            return GetResult.toJson(0, null, null, admins == null ? admins.getCM_ACCOUNT() : null, 0);
         } catch (Exception e) {
             return GetResult.toJson(200, null, null, null, 0);
         }
@@ -212,14 +212,14 @@ public class SaleService {
     public Result UserApplication(String userId, Long phone, Integer code, String address, Double lon, Double lat, String pwd, String cardno, String shopname, String personname, String contactname, String contactphone, String telephone, String pax, List<MultipartFile> files) {
         try {
             Admins admins = saleDao.getAdminByAdminId(userId);
-            if (admins == null || (admins.getCmLevel() != 2 && admins.getCmLevel() != 1)) {
+            if (admins == null || (admins.getCM_LEVEL() != 2 && admins.getCM_LEVEL() != 1)) {
                 return GetResult.toJson(45, null, null, null, 0);
             }
             Register register = saleDao.selectregisterbyphone(phone).get(0);
             if (register == null) {
                 return GetResult.toJson(7, null, null, null, 0);
             }
-            if (!Objects.equals(register.getCmCode(), code)) {
+            if (!Objects.equals(register.getCM_CODE(), code)) {
                 return GetResult.toJson(8, null, null, null, 0);
             }
             //检查手机号是否被注册
@@ -255,28 +255,28 @@ public class SaleService {
             Long act = saleDao.getUserMaxAccount();
             String account = String.valueOf(act + 1).replace("4", "5");
             Users users = new Users();
-            users.setCmUserid(DateUtils.todayYyyyMmDdHhMmSs());
-            users.setCmAccount(account);
-            users.setCmBalance((double) 0);
-            users.setCmCreatetime(now);
-            users.setCmIntegral(0);
-            users.setCmIsexamine(0);
-            users.setCmLevel(0);
-            users.setCmCardpath(card);
-            users.setCmStorepath(store);
-            users.setCmLicensepath(license);
-            users.setCmPhone(phone);
-            users.setCmPassword(pwd);
-            users.setCmShopeaddress(address);
-            users.setCmShopname(shopname);
-            users.setCmShoplat(lat);
-            users.setCmShoplon(lon);
-            users.setCmCardno(cardno);
-            users.setCmName(personname);
-            users.setCmContactname(contactname);
-            users.setCmContactphone(contactphone);
-            users.setCmTelephone(telephone);
-            users.setCmPax(pax);
+            users.setCM_USERID(DateUtils.todayYyyyMmDdHhMmSs());
+            users.setCM_ACCOUNT(account);
+            users.setCM_BALANCE((double) 0);
+            users.setCM_CREATETIME(now);
+            users.setCM_INTEGRAL(0);
+            users.setCM_ISEXAMINE(0);
+            users.setCM_LEVEL(0);
+            users.setCM_CARDPATH(card);
+            users.setCM_STOREPATH(store);
+            users.setCM_LICENSEPATH(license);
+            users.setCM_PHONE(phone);
+            users.setCM_PASSWORD(pwd);
+            users.setCM_SHOPEADDRESS(address);
+            users.setCM_SHOPNAME(shopname);
+            users.setCM_SHOPLAT(lat);
+            users.setCM_SHOPLON(lon);
+            users.setCM_CARDNO(cardno);
+            users.setCM_NAME(personname);
+            users.setCM_CONTACTNAME(contactname);
+            users.setCM_CONTACTPHONE(contactphone);
+            users.setCM_TELEPHONE(telephone);
+            users.setCM_PAX(pax);
 
             saleDao.userApplication(users);
             return GetResult.toJson(0, null, jwt.createJWT(userId), account, 0);
@@ -308,14 +308,14 @@ public class SaleService {
     public Result SellerApplication(String userId, Long phone, Integer code, String address, Double lon, Double lat, String pwd, String cardno, String companyname, String personname, String contactname, String contactphone, String telephone, String pax, List<MultipartFile> files) {
         try {
             Admins admins = saleDao.getAdminByAdminId(userId);
-            if (admins == null || (admins.getCmLevel() != 2 && admins.getCmLevel() != 1)) {
+            if (admins == null || (admins.getCM_LEVEL() != 2 && admins.getCM_LEVEL() != 1)) {
                 return GetResult.toJson(45, null, null, null, 0);
             }
             Register register = saleDao.selectregisterbyphone(phone).get(0);
             if (register == null) {
                 return GetResult.toJson(7, null, null, null, 0);
             }
-            if (!Objects.equals(register.getCmCode(), code)) {
+            if (!Objects.equals(register.getCM_CODE(), code)) {
                 return GetResult.toJson(8, null, null, null, 0);
             }
             //检查手机号是否被注册
@@ -351,25 +351,25 @@ public class SaleService {
             Long act = saleDao.getSellerMaxAccount();
             String account = String.valueOf(act + 1).replace("4", "5");
             Sellers sellers = new Sellers();
-            sellers.setCmAccount(account);
-            sellers.setCmCreatetime(now);
-            sellers.setCmIsexamine(0);
-            sellers.setCmCardpath(card);
-            sellers.setCmStorepath(store);
-            sellers.setCmLicensepath(license);
-            sellers.setCmPhone(phone);
-            sellers.setCmPassword(pwd);
-            sellers.setCmAddress(address);
-            sellers.setCmSellerid(DateUtils.todayYyyyMmDdHhMmSs());
-            sellers.setCmSellername(companyname);
-            sellers.setCmLat(lat);
-            sellers.setCmLon(lon);
-            sellers.setCmCardno(cardno);
-            sellers.setCmName(personname);
-            sellers.setCmContactname(contactname);
-            sellers.setCmContactphone(contactphone);
-            sellers.setCmTelephone(telephone);
-            sellers.setCmPax(pax);
+            sellers.setCM_ACCOUNT(account);
+            sellers.setCM_CREATETIME(now);
+            sellers.setCM_ISEXAMINE(0);
+            sellers.setCM_CARDPATH(card);
+            sellers.setCM_STOREPATH(store);
+            sellers.setCM_LICENSEPATH(license);
+            sellers.setCM_PHONE(phone);
+            sellers.setCM_PASSWORD(pwd);
+            sellers.setCM_ADDRESS(address);
+            sellers.setCM_SELLERID(DateUtils.todayYyyyMmDdHhMmSs());
+            sellers.setCM_SELLERNAME(companyname);
+            sellers.setCM_LAT(lat);
+            sellers.setCM_LON(lon);
+            sellers.setCM_CARDNO(cardno);
+            sellers.setCM_NAME(personname);
+            sellers.setCM_CONTACTNAME(contactname);
+            sellers.setCM_CONTACTPHONE(contactphone);
+            sellers.setCM_TELEPHONE(telephone);
+            sellers.setCM_PAX(pax);
             saleDao.sellerApplication(sellers);
             return GetResult.toJson(0, null, jwt.createJWT(userId), account, 0);
         } catch (Exception e) {

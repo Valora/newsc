@@ -14,25 +14,25 @@ import java.util.List;
 public interface QueryCustomerServiceMapper {
     @SelectProvider(type = QueryCustomerServiceSqlProvider.class, method = "queryCustomerServiceMi")
     @Results({
-            @Result(column = "CM_ORDERDETAILSID", property = "cmOrderdetailsid", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_AFTERSERVICEID", property = "cmAfterserviceid", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_STATE", property = "cmState", jdbcType = JdbcType.INTEGER),
-            @Result(column = "CM_TYPE", property = "cmType", jdbcType = JdbcType.INTEGER),
-            @Result(column = "CM_CREATETIME", property = "cmCreatetime", jdbcType = JdbcType.DATE),
+            @Result(column = "CM_ORDERDETAILSID", property = "CM_ORDERDETAILSID", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_AFTERSERVICEID", property = "CM_AFTERSERVICEID", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_STATE", property = "CM_STATE", jdbcType = JdbcType.INTEGER),
+            @Result(column = "CM_TYPE", property = "CM_TYPE", jdbcType = JdbcType.INTEGER),
+            @Result(column = "CM_CREATETIME", property = "CM_CREATETIME", jdbcType = JdbcType.DATE),
 
-            @Result(column = "CM_GOODSID", property = "cmGoodsid", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_NUMBER", property = "cmNumber", jdbcType = JdbcType.INTEGER),
-            @Result(column = "CM_MONEY", property = "cmMoney", jdbcType = JdbcType.DOUBLE),
-            @Result(column = "CM_SELLERSTATE", property = "cmSellerstate", jdbcType = JdbcType.INTEGER),
-            @Result(column = "CM_SERVICESTATE", property = "cmServicestate", jdbcType = JdbcType.INTEGER),
-            @Result(column = "CM_SPECNUMDETAILS", property = "cmSpecnumdetails", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_SPECNUMDETAILS", property = "cmTitle", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_GOODSID", property = "CM_GOODSID", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_NUMBER", property = "CM_NUMBER", jdbcType = JdbcType.INTEGER),
+            @Result(column = "CM_MONEY", property = "CM_MONEY", jdbcType = JdbcType.DOUBLE),
+            @Result(column = "CM_SELLERSTATE", property = "CM_SELLERSTATE", jdbcType = JdbcType.INTEGER),
+            @Result(column = "CM_SERVICESTATE", property = "CM_SERVICESTATE", jdbcType = JdbcType.INTEGER),
+            @Result(column = "CM_SPECNUMDETAILS", property = "CM_SPECNUMDETAILS", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_SPECNUMDETAILS", property = "CM_SPECNUMDETAILS", jdbcType = JdbcType.VARCHAR),
 
-            @Result(column = "CM_MAINFIGUREPATH", property = "cmMainfigurepath", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_MAINFIGUREPATH", property = "CM_MAINFIGUREPATH", jdbcType = JdbcType.VARCHAR),
 
-            @Result(column = "CM_NAME", property = "cmName", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_SHOPEADDRESS", property = "cmShopeaddress", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_PHONE", property = "cmPhone", jdbcType = JdbcType.DECIMAL)
+            @Result(column = "CM_NAME", property = "CM_NAME", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_SHOPEADDRESS", property = "CM_SHOPEADDRESS", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_PHONE", property = "CM_PHONE", jdbcType = JdbcType.DECIMAL)
     })
     List<AfterserviceAndOdtAndGoodsAndusers> queryCustomerServiceM(String sellerId, Integer serverstate, String starttime, String endtime);
 }

@@ -11,12 +11,12 @@ import java.util.List;
  */
 @Data
 public class MyStateOrders {
-    private Date cmCreatetime;
-    private String cmOrderid;
-    private Integer cmNumbersun;
-    private Double cmMoneysun;
-    private String cmOrderdetailsids;
-    private Integer cmState;
-    private String cmUserid;
-    private List<MyOrderDetails> tbOrderdetails;
+    private Date CM_CREATETIME;
+    private String CM_ORDERID;
+    private Integer CM_NUMBERSUN;
+    private Double CM_MONEYSUN;
+    private String CM_ORDERDETAILSIDS;
+    private Integer CM_STATE;
+    private String CM_USERID;
+    private List<MyOrderDetails> TB_ORDERDETAILS;
 }

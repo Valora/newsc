@@ -1,13 +1,12 @@
 package com.sc.mapper.generator;
 
 import com.sc.domain.generator.Roles;
-import com.sc.domain.generator.RolesExample;
 import com.sc.domain.generator.RolesExample.Criteria;
 import com.sc.domain.generator.RolesExample.Criterion;
-import org.apache.ibatis.jdbc.SQL;
-
+import com.sc.domain.generator.RolesExample;
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.jdbc.SQL;
 
 public class RolesSqlProvider {
 
@@ -29,12 +28,12 @@ public class RolesSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("TB_ROLES");
         
-        if (record.getCmRoleid() != null) {
-            sql.VALUES("CM_ROLEID", "#{cmRoleid,jdbcType=INTEGER}");
+        if (record.getCM_ROLEID() != null) {
+            sql.VALUES("CM_ROLEID", "#{CM_ROLEID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmRolename() != null) {
-            sql.VALUES("CM_ROLENAME", "#{cmRolename,jdbcType=VARCHAR}");
+        if (record.getCM_ROLENAME() != null) {
+            sql.VALUES("CM_ROLENAME", "#{CM_ROLENAME,jdbcType=VARCHAR}");
         }
         
         return sql.toString();
@@ -65,12 +64,12 @@ public class RolesSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_ROLES");
         
-        if (record.getCmRoleid() != null) {
-            sql.SET("CM_ROLEID = #{record.cmRoleid,jdbcType=INTEGER}");
+        if (record.getCM_ROLEID() != null) {
+            sql.SET("CM_ROLEID = #{record.CM_ROLEID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmRolename() != null) {
-            sql.SET("CM_ROLENAME = #{record.cmRolename,jdbcType=VARCHAR}");
+        if (record.getCM_ROLENAME() != null) {
+            sql.SET("CM_ROLENAME = #{record.CM_ROLENAME,jdbcType=VARCHAR}");
         }
         
         applyWhere(sql, example, true);
@@ -81,8 +80,8 @@ public class RolesSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_ROLES");
         
-        sql.SET("CM_ROLEID = #{record.cmRoleid,jdbcType=INTEGER}");
-        sql.SET("CM_ROLENAME = #{record.cmRolename,jdbcType=VARCHAR}");
+        sql.SET("CM_ROLEID = #{record.CM_ROLEID,jdbcType=INTEGER}");
+        sql.SET("CM_ROLENAME = #{record.CM_ROLENAME,jdbcType=VARCHAR}");
         
         RolesExample example = (RolesExample) parameter.get("example");
         applyWhere(sql, example, true);

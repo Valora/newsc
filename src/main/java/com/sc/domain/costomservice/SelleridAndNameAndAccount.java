@@ -7,7 +7,7 @@ import lombok.Data;
  */
 @Data
 public class SelleridAndNameAndAccount {
-    private String cmSellerid;
-    private String cmSellername;
-    private String cmAccount;
+    private String CM_SELLERID;
+    private String CM_SELLERNAME;
+    private String CM_ACCOUNT;
 }

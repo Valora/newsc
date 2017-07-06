@@ -2,6 +2,7 @@ package com.sc.mapper.generator;
 
 import com.sc.domain.generator.Notices;
 import com.sc.domain.generator.NoticesExample;
+import java.util.List;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -11,8 +12,6 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
-
-import java.util.List;
 
 public interface NoticesMapper {
     @SelectProvider(type=NoticesSqlProvider.class, method="countByExample")
@@ -26,10 +25,10 @@ public interface NoticesMapper {
         "CM_CONTENT, CM_OTHER, ",
         "CM_CREATOR, CM_DEADLINE, ",
         "CM_ADMINID, CM_CREATETIME)",
-        "values (#{cmNoticeiid,jdbcType=INTEGER}, #{cmTitle,jdbcType=VARCHAR}, ",
-        "#{cmContent,jdbcType=VARCHAR}, #{cmOther,jdbcType=VARCHAR}, ",
-        "#{cmCreator,jdbcType=VARCHAR}, #{cmDeadline,jdbcType=TIMESTAMP}, ",
-        "#{cmAdminid,jdbcType=VARCHAR}, #{cmCreatetime,jdbcType=TIMESTAMP})"
+        "values (#{CM_NOTICEIID,jdbcType=INTEGER}, #{CM_TITLE,jdbcType=VARCHAR}, ",
+        "#{CM_CONTENT,jdbcType=VARCHAR}, #{CM_OTHER,jdbcType=VARCHAR}, ",
+        "#{CM_CREATOR,jdbcType=VARCHAR}, #{CM_DEADLINE,jdbcType=TIMESTAMP}, ",
+        "#{CM_ADMINID,jdbcType=VARCHAR}, #{CM_CREATETIME,jdbcType=TIMESTAMP})"
     })
     int insert(Notices record);
 
@@ -38,14 +37,14 @@ public interface NoticesMapper {
 
     @SelectProvider(type=NoticesSqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="CM_NOTICEIID", property="cmNoticeiid", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_TITLE", property="cmTitle", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_CONTENT", property="cmContent", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_OTHER", property="cmOther", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_CREATOR", property="cmCreator", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_DEADLINE", property="cmDeadline", jdbcType= JdbcType.TIMESTAMP),
-        @Result(column="CM_ADMINID", property="cmAdminid", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_CREATETIME", property="cmCreatetime", jdbcType= JdbcType.TIMESTAMP)
+        @Result(column="CM_NOTICEIID", property="CM_NOTICEIID", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_TITLE", property="CM_TITLE", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_CONTENT", property="CM_CONTENT", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_OTHER", property="CM_OTHER", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_CREATOR", property="CM_CREATOR", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_DEADLINE", property="CM_DEADLINE", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="CM_ADMINID", property="CM_ADMINID", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_CREATETIME", property="CM_CREATETIME", jdbcType=JdbcType.TIMESTAMP)
     })
     List<Notices> selectByExample(NoticesExample example);
 

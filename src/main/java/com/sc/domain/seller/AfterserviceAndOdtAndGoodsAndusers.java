@@ -9,23 +9,23 @@ import java.util.Date;
  */
 @Data
 public class AfterserviceAndOdtAndGoodsAndusers {
-    private String cmAfterserviceid;
-    private Integer cmType;
-    private Integer cmState;
-    private Date cmCreatetime;
-    private String cmOrderdetailsid;
+    private String CM_AFTERSERVICEID;
+    private Integer CM_TYPE;
+    private Integer CM_STATE;
+    private Date CM_CREATETIME;
+    private String CM_ORDERDETAILSID;
 
-    private String cmGoodsid;
-    private Integer cmNumber;
-    private Double cmMoney;
-    private Integer cmServicestate;
-    private Integer cmSellerstate;
-    private String cmSpecnumdetails;
-    private String cmTitle;
+    private String CM_GOODSID;
+    private Integer CM_NUMBER;
+    private Double CM_MONEY;
+    private Integer CM_SERVICESTATE;
+    private Integer CM_SELLERSTATE;
+    private String CM_SPECNUMDETAILS;
+    private String CM_TITLE;
 
-    private String cmMainfigurepath;
+    private String CM_MAINFIGUREPATH;
 
-    private String cmName;
-    private String cmShopeaddress;
-    private Long cmPhone;
+    private String CM_NAME;
+    private String CM_SHOPEADDRESS;
+    private Long CM_PHONE;
 }

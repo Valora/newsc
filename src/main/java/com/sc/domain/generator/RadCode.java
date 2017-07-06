@@ -1,23 +1,23 @@
 package com.sc.domain.generator;
 
 public class RadCode {
-    private String cmUserid;
+    private String CM_USERID;
 
-    private Integer cmCode;
+    private Integer CM_CODE;
 
-    public String getCmUserid() {
-        return cmUserid;
+    public String getCM_USERID() {
+        return CM_USERID;
     }
 
-    public void setCmUserid(String cmUserid) {
-        this.cmUserid = cmUserid == null ? null : cmUserid.trim();
+    public void setCM_USERID(String CM_USERID) {
+        this.CM_USERID = CM_USERID == null ? null : CM_USERID.trim();
     }
 
-    public Integer getCmCode() {
-        return cmCode;
+    public Integer getCM_CODE() {
+        return CM_CODE;
     }
 
-    public void setCmCode(Integer cmCode) {
-        this.cmCode = cmCode;
+    public void setCM_CODE(Integer CM_CODE) {
+        this.CM_CODE = CM_CODE;
     }
 }

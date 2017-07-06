@@ -2,6 +2,7 @@ package com.sc.mapper.generator;
 
 import com.sc.domain.generator.PowerMenu;
 import com.sc.domain.generator.PowerMenuExample;
+import java.util.List;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -11,8 +12,6 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
-
-import java.util.List;
 
 public interface PowerMenuMapper {
     @SelectProvider(type=PowerMenuSqlProvider.class, method="countByExample")
@@ -24,8 +23,8 @@ public interface PowerMenuMapper {
     @Insert({
         "insert into TB_POWER_MENU (CM_ID, CM_MENUID, ",
         "CM_POWERID)",
-        "values (#{cmId,jdbcType=INTEGER}, #{cmMenuid,jdbcType=INTEGER}, ",
-        "#{cmPowerid,jdbcType=INTEGER})"
+        "values (#{CM_ID,jdbcType=INTEGER}, #{CM_MENUID,jdbcType=INTEGER}, ",
+        "#{CM_POWERID,jdbcType=INTEGER})"
     })
     int insert(PowerMenu record);
 
@@ -34,9 +33,9 @@ public interface PowerMenuMapper {
 
     @SelectProvider(type=PowerMenuSqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="CM_ID", property="cmId", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_MENUID", property="cmMenuid", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_POWERID", property="cmPowerid", jdbcType= JdbcType.INTEGER)
+        @Result(column="CM_ID", property="CM_ID", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_MENUID", property="CM_MENUID", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_POWERID", property="CM_POWERID", jdbcType=JdbcType.INTEGER)
     })
     List<PowerMenu> selectByExample(PowerMenuExample example);
 

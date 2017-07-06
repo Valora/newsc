@@ -1,13 +1,12 @@
 package com.sc.mapper.generator;
 
 import com.sc.domain.generator.Afterservices;
-import com.sc.domain.generator.AfterservicesExample;
 import com.sc.domain.generator.AfterservicesExample.Criteria;
 import com.sc.domain.generator.AfterservicesExample.Criterion;
-import org.apache.ibatis.jdbc.SQL;
-
+import com.sc.domain.generator.AfterservicesExample;
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.jdbc.SQL;
 
 public class AfterservicesSqlProvider {
 
@@ -29,44 +28,44 @@ public class AfterservicesSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("TB_AFTERSERVICES");
         
-        if (record.getCmAfterserviceid() != null) {
-            sql.VALUES("CM_AFTERSERVICEID", "#{cmAfterserviceid,jdbcType=VARCHAR}");
+        if (record.getCM_AFTERSERVICEID() != null) {
+            sql.VALUES("CM_AFTERSERVICEID", "#{CM_AFTERSERVICEID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmSellerid() != null) {
-            sql.VALUES("CM_SELLERID", "#{cmSellerid,jdbcType=VARCHAR}");
+        if (record.getCM_SELLERID() != null) {
+            sql.VALUES("CM_SELLERID", "#{CM_SELLERID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmCreatetime() != null) {
-            sql.VALUES("CM_CREATETIME", "#{cmCreatetime,jdbcType=TIMESTAMP}");
+        if (record.getCM_CREATETIME() != null) {
+            sql.VALUES("CM_CREATETIME", "#{CM_CREATETIME,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getCmUserid() != null) {
-            sql.VALUES("CM_USERID", "#{cmUserid,jdbcType=VARCHAR}");
+        if (record.getCM_USERID() != null) {
+            sql.VALUES("CM_USERID", "#{CM_USERID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmOrderdetailsid() != null) {
-            sql.VALUES("CM_ORDERDETAILSID", "#{cmOrderdetailsid,jdbcType=VARCHAR}");
+        if (record.getCM_ORDERDETAILSID() != null) {
+            sql.VALUES("CM_ORDERDETAILSID", "#{CM_ORDERDETAILSID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmReason() != null) {
-            sql.VALUES("CM_REASON", "#{cmReason,jdbcType=VARCHAR}");
+        if (record.getCM_REASON() != null) {
+            sql.VALUES("CM_REASON", "#{CM_REASON,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmType() != null) {
-            sql.VALUES("CM_TYPE", "#{cmType,jdbcType=INTEGER}");
+        if (record.getCM_TYPE() != null) {
+            sql.VALUES("CM_TYPE", "#{CM_TYPE,jdbcType=INTEGER}");
         }
         
-        if (record.getCmState() != null) {
-            sql.VALUES("CM_STATE", "#{cmState,jdbcType=INTEGER}");
+        if (record.getCM_STATE() != null) {
+            sql.VALUES("CM_STATE", "#{CM_STATE,jdbcType=INTEGER}");
         }
         
-        if (record.getCmImgpaths() != null) {
-            sql.VALUES("CM_IMGPATHS", "#{cmImgpaths,jdbcType=VARCHAR}");
+        if (record.getCM_IMGPATHS() != null) {
+            sql.VALUES("CM_IMGPATHS", "#{CM_IMGPATHS,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmSvid() != null) {
-            sql.VALUES("CM_SVID", "#{cmSvid,jdbcType=VARCHAR}");
+        if (record.getCM_SVID() != null) {
+            sql.VALUES("CM_SVID", "#{CM_SVID,jdbcType=VARCHAR}");
         }
         
         return sql.toString();
@@ -105,44 +104,44 @@ public class AfterservicesSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_AFTERSERVICES");
         
-        if (record.getCmAfterserviceid() != null) {
-            sql.SET("CM_AFTERSERVICEID = #{record.cmAfterserviceid,jdbcType=VARCHAR}");
+        if (record.getCM_AFTERSERVICEID() != null) {
+            sql.SET("CM_AFTERSERVICEID = #{record.CM_AFTERSERVICEID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmSellerid() != null) {
-            sql.SET("CM_SELLERID = #{record.cmSellerid,jdbcType=VARCHAR}");
+        if (record.getCM_SELLERID() != null) {
+            sql.SET("CM_SELLERID = #{record.CM_SELLERID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmCreatetime() != null) {
-            sql.SET("CM_CREATETIME = #{record.cmCreatetime,jdbcType=TIMESTAMP}");
+        if (record.getCM_CREATETIME() != null) {
+            sql.SET("CM_CREATETIME = #{record.CM_CREATETIME,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getCmUserid() != null) {
-            sql.SET("CM_USERID = #{record.cmUserid,jdbcType=VARCHAR}");
+        if (record.getCM_USERID() != null) {
+            sql.SET("CM_USERID = #{record.CM_USERID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmOrderdetailsid() != null) {
-            sql.SET("CM_ORDERDETAILSID = #{record.cmOrderdetailsid,jdbcType=VARCHAR}");
+        if (record.getCM_ORDERDETAILSID() != null) {
+            sql.SET("CM_ORDERDETAILSID = #{record.CM_ORDERDETAILSID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmReason() != null) {
-            sql.SET("CM_REASON = #{record.cmReason,jdbcType=VARCHAR}");
+        if (record.getCM_REASON() != null) {
+            sql.SET("CM_REASON = #{record.CM_REASON,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmType() != null) {
-            sql.SET("CM_TYPE = #{record.cmType,jdbcType=INTEGER}");
+        if (record.getCM_TYPE() != null) {
+            sql.SET("CM_TYPE = #{record.CM_TYPE,jdbcType=INTEGER}");
         }
         
-        if (record.getCmState() != null) {
-            sql.SET("CM_STATE = #{record.cmState,jdbcType=INTEGER}");
+        if (record.getCM_STATE() != null) {
+            sql.SET("CM_STATE = #{record.CM_STATE,jdbcType=INTEGER}");
         }
         
-        if (record.getCmImgpaths() != null) {
-            sql.SET("CM_IMGPATHS = #{record.cmImgpaths,jdbcType=VARCHAR}");
+        if (record.getCM_IMGPATHS() != null) {
+            sql.SET("CM_IMGPATHS = #{record.CM_IMGPATHS,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmSvid() != null) {
-            sql.SET("CM_SVID = #{record.cmSvid,jdbcType=VARCHAR}");
+        if (record.getCM_SVID() != null) {
+            sql.SET("CM_SVID = #{record.CM_SVID,jdbcType=VARCHAR}");
         }
         
         applyWhere(sql, example, true);
@@ -153,16 +152,16 @@ public class AfterservicesSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_AFTERSERVICES");
         
-        sql.SET("CM_AFTERSERVICEID = #{record.cmAfterserviceid,jdbcType=VARCHAR}");
-        sql.SET("CM_SELLERID = #{record.cmSellerid,jdbcType=VARCHAR}");
-        sql.SET("CM_CREATETIME = #{record.cmCreatetime,jdbcType=TIMESTAMP}");
-        sql.SET("CM_USERID = #{record.cmUserid,jdbcType=VARCHAR}");
-        sql.SET("CM_ORDERDETAILSID = #{record.cmOrderdetailsid,jdbcType=VARCHAR}");
-        sql.SET("CM_REASON = #{record.cmReason,jdbcType=VARCHAR}");
-        sql.SET("CM_TYPE = #{record.cmType,jdbcType=INTEGER}");
-        sql.SET("CM_STATE = #{record.cmState,jdbcType=INTEGER}");
-        sql.SET("CM_IMGPATHS = #{record.cmImgpaths,jdbcType=VARCHAR}");
-        sql.SET("CM_SVID = #{record.cmSvid,jdbcType=VARCHAR}");
+        sql.SET("CM_AFTERSERVICEID = #{record.CM_AFTERSERVICEID,jdbcType=VARCHAR}");
+        sql.SET("CM_SELLERID = #{record.CM_SELLERID,jdbcType=VARCHAR}");
+        sql.SET("CM_CREATETIME = #{record.CM_CREATETIME,jdbcType=TIMESTAMP}");
+        sql.SET("CM_USERID = #{record.CM_USERID,jdbcType=VARCHAR}");
+        sql.SET("CM_ORDERDETAILSID = #{record.CM_ORDERDETAILSID,jdbcType=VARCHAR}");
+        sql.SET("CM_REASON = #{record.CM_REASON,jdbcType=VARCHAR}");
+        sql.SET("CM_TYPE = #{record.CM_TYPE,jdbcType=INTEGER}");
+        sql.SET("CM_STATE = #{record.CM_STATE,jdbcType=INTEGER}");
+        sql.SET("CM_IMGPATHS = #{record.CM_IMGPATHS,jdbcType=VARCHAR}");
+        sql.SET("CM_SVID = #{record.CM_SVID,jdbcType=VARCHAR}");
         
         AfterservicesExample example = (AfterservicesExample) parameter.get("example");
         applyWhere(sql, example, true);

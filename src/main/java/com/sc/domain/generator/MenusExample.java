@@ -104,203 +104,203 @@ public class MenusExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andCmMenuidIsNull() {
+        public Criteria andCM_MENUIDIsNull() {
             addCriterion("CM_MENUID is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidIsNotNull() {
+        public Criteria andCM_MENUIDIsNotNull() {
             addCriterion("CM_MENUID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidEqualTo(Integer value) {
-            addCriterion("CM_MENUID =", value, "cmMenuid");
+        public Criteria andCM_MENUIDEqualTo(Integer value) {
+            addCriterion("CM_MENUID =", value, "CM_MENUID");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidNotEqualTo(Integer value) {
-            addCriterion("CM_MENUID <>", value, "cmMenuid");
+        public Criteria andCM_MENUIDNotEqualTo(Integer value) {
+            addCriterion("CM_MENUID <>", value, "CM_MENUID");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidGreaterThan(Integer value) {
-            addCriterion("CM_MENUID >", value, "cmMenuid");
+        public Criteria andCM_MENUIDGreaterThan(Integer value) {
+            addCriterion("CM_MENUID >", value, "CM_MENUID");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("CM_MENUID >=", value, "cmMenuid");
+        public Criteria andCM_MENUIDGreaterThanOrEqualTo(Integer value) {
+            addCriterion("CM_MENUID >=", value, "CM_MENUID");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidLessThan(Integer value) {
-            addCriterion("CM_MENUID <", value, "cmMenuid");
+        public Criteria andCM_MENUIDLessThan(Integer value) {
+            addCriterion("CM_MENUID <", value, "CM_MENUID");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidLessThanOrEqualTo(Integer value) {
-            addCriterion("CM_MENUID <=", value, "cmMenuid");
+        public Criteria andCM_MENUIDLessThanOrEqualTo(Integer value) {
+            addCriterion("CM_MENUID <=", value, "CM_MENUID");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidIn(List<Integer> values) {
-            addCriterion("CM_MENUID in", values, "cmMenuid");
+        public Criteria andCM_MENUIDIn(List<Integer> values) {
+            addCriterion("CM_MENUID in", values, "CM_MENUID");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidNotIn(List<Integer> values) {
-            addCriterion("CM_MENUID not in", values, "cmMenuid");
+        public Criteria andCM_MENUIDNotIn(List<Integer> values) {
+            addCriterion("CM_MENUID not in", values, "CM_MENUID");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidBetween(Integer value1, Integer value2) {
-            addCriterion("CM_MENUID between", value1, value2, "cmMenuid");
+        public Criteria andCM_MENUIDBetween(Integer value1, Integer value2) {
+            addCriterion("CM_MENUID between", value1, value2, "CM_MENUID");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuidNotBetween(Integer value1, Integer value2) {
-            addCriterion("CM_MENUID not between", value1, value2, "cmMenuid");
+        public Criteria andCM_MENUIDNotBetween(Integer value1, Integer value2) {
+            addCriterion("CM_MENUID not between", value1, value2, "CM_MENUID");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenunameIsNull() {
+        public Criteria andCM_MENUNAMEIsNull() {
             addCriterion("CM_MENUNAME is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenunameIsNotNull() {
+        public Criteria andCM_MENUNAMEIsNotNull() {
             addCriterion("CM_MENUNAME is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenunameEqualTo(String value) {
-            addCriterion("CM_MENUNAME =", value, "cmMenuname");
+        public Criteria andCM_MENUNAMEEqualTo(String value) {
+            addCriterion("CM_MENUNAME =", value, "CM_MENUNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenunameNotEqualTo(String value) {
-            addCriterion("CM_MENUNAME <>", value, "cmMenuname");
+        public Criteria andCM_MENUNAMENotEqualTo(String value) {
+            addCriterion("CM_MENUNAME <>", value, "CM_MENUNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenunameGreaterThan(String value) {
-            addCriterion("CM_MENUNAME >", value, "cmMenuname");
+        public Criteria andCM_MENUNAMEGreaterThan(String value) {
+            addCriterion("CM_MENUNAME >", value, "CM_MENUNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenunameGreaterThanOrEqualTo(String value) {
-            addCriterion("CM_MENUNAME >=", value, "cmMenuname");
+        public Criteria andCM_MENUNAMEGreaterThanOrEqualTo(String value) {
+            addCriterion("CM_MENUNAME >=", value, "CM_MENUNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenunameLessThan(String value) {
-            addCriterion("CM_MENUNAME <", value, "cmMenuname");
+        public Criteria andCM_MENUNAMELessThan(String value) {
+            addCriterion("CM_MENUNAME <", value, "CM_MENUNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenunameLessThanOrEqualTo(String value) {
-            addCriterion("CM_MENUNAME <=", value, "cmMenuname");
+        public Criteria andCM_MENUNAMELessThanOrEqualTo(String value) {
+            addCriterion("CM_MENUNAME <=", value, "CM_MENUNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenunameLike(String value) {
-            addCriterion("CM_MENUNAME like", value, "cmMenuname");
+        public Criteria andCM_MENUNAMELike(String value) {
+            addCriterion("CM_MENUNAME like", value, "CM_MENUNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenunameNotLike(String value) {
-            addCriterion("CM_MENUNAME not like", value, "cmMenuname");
+        public Criteria andCM_MENUNAMENotLike(String value) {
+            addCriterion("CM_MENUNAME not like", value, "CM_MENUNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenunameIn(List<String> values) {
-            addCriterion("CM_MENUNAME in", values, "cmMenuname");
+        public Criteria andCM_MENUNAMEIn(List<String> values) {
+            addCriterion("CM_MENUNAME in", values, "CM_MENUNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenunameNotIn(List<String> values) {
-            addCriterion("CM_MENUNAME not in", values, "cmMenuname");
+        public Criteria andCM_MENUNAMENotIn(List<String> values) {
+            addCriterion("CM_MENUNAME not in", values, "CM_MENUNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenunameBetween(String value1, String value2) {
-            addCriterion("CM_MENUNAME between", value1, value2, "cmMenuname");
+        public Criteria andCM_MENUNAMEBetween(String value1, String value2) {
+            addCriterion("CM_MENUNAME between", value1, value2, "CM_MENUNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenunameNotBetween(String value1, String value2) {
-            addCriterion("CM_MENUNAME not between", value1, value2, "cmMenuname");
+        public Criteria andCM_MENUNAMENotBetween(String value1, String value2) {
+            addCriterion("CM_MENUNAME not between", value1, value2, "CM_MENUNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuurlIsNull() {
+        public Criteria andCM_MENUURLIsNull() {
             addCriterion("CM_MENUURL is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuurlIsNotNull() {
+        public Criteria andCM_MENUURLIsNotNull() {
             addCriterion("CM_MENUURL is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuurlEqualTo(String value) {
-            addCriterion("CM_MENUURL =", value, "cmMenuurl");
+        public Criteria andCM_MENUURLEqualTo(String value) {
+            addCriterion("CM_MENUURL =", value, "CM_MENUURL");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuurlNotEqualTo(String value) {
-            addCriterion("CM_MENUURL <>", value, "cmMenuurl");
+        public Criteria andCM_MENUURLNotEqualTo(String value) {
+            addCriterion("CM_MENUURL <>", value, "CM_MENUURL");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuurlGreaterThan(String value) {
-            addCriterion("CM_MENUURL >", value, "cmMenuurl");
+        public Criteria andCM_MENUURLGreaterThan(String value) {
+            addCriterion("CM_MENUURL >", value, "CM_MENUURL");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuurlGreaterThanOrEqualTo(String value) {
-            addCriterion("CM_MENUURL >=", value, "cmMenuurl");
+        public Criteria andCM_MENUURLGreaterThanOrEqualTo(String value) {
+            addCriterion("CM_MENUURL >=", value, "CM_MENUURL");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuurlLessThan(String value) {
-            addCriterion("CM_MENUURL <", value, "cmMenuurl");
+        public Criteria andCM_MENUURLLessThan(String value) {
+            addCriterion("CM_MENUURL <", value, "CM_MENUURL");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuurlLessThanOrEqualTo(String value) {
-            addCriterion("CM_MENUURL <=", value, "cmMenuurl");
+        public Criteria andCM_MENUURLLessThanOrEqualTo(String value) {
+            addCriterion("CM_MENUURL <=", value, "CM_MENUURL");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuurlLike(String value) {
-            addCriterion("CM_MENUURL like", value, "cmMenuurl");
+        public Criteria andCM_MENUURLLike(String value) {
+            addCriterion("CM_MENUURL like", value, "CM_MENUURL");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuurlNotLike(String value) {
-            addCriterion("CM_MENUURL not like", value, "cmMenuurl");
+        public Criteria andCM_MENUURLNotLike(String value) {
+            addCriterion("CM_MENUURL not like", value, "CM_MENUURL");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuurlIn(List<String> values) {
-            addCriterion("CM_MENUURL in", values, "cmMenuurl");
+        public Criteria andCM_MENUURLIn(List<String> values) {
+            addCriterion("CM_MENUURL in", values, "CM_MENUURL");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuurlNotIn(List<String> values) {
-            addCriterion("CM_MENUURL not in", values, "cmMenuurl");
+        public Criteria andCM_MENUURLNotIn(List<String> values) {
+            addCriterion("CM_MENUURL not in", values, "CM_MENUURL");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuurlBetween(String value1, String value2) {
-            addCriterion("CM_MENUURL between", value1, value2, "cmMenuurl");
+        public Criteria andCM_MENUURLBetween(String value1, String value2) {
+            addCriterion("CM_MENUURL between", value1, value2, "CM_MENUURL");
             return (Criteria) this;
         }
 
-        public Criteria andCmMenuurlNotBetween(String value1, String value2) {
-            addCriterion("CM_MENUURL not between", value1, value2, "cmMenuurl");
+        public Criteria andCM_MENUURLNotBetween(String value1, String value2) {
+            addCriterion("CM_MENUURL not between", value1, value2, "CM_MENUURL");
             return (Criteria) this;
         }
     }

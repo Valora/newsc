@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sc.mapper.login.LoginMapper">
     <resultMap id="AdminLoginInfo" type="com.sc.domain.login.AdminLogin" autoMapping="true">
-        <result column="CM_ADMINID" property="cmAdminid" jdbcType="VARCHAR"/>
-        <result column="CM_LEVEL" property="cmLevel" jdbcType="INTEGER"/>
-        <result column="CM_NAME" property="cmName" jdbcType="VARCHAR"/>
-        <association property="tbMenu" javaType="com.sc.domain.login.MenuInfo">
-            <result column="CM_MENUURL" property="cmMenuurl" jdbcType="VARCHAR"/>
-            <result column="CM_MENUNAME" property="cmMenename" jdbcType="VARCHAR"/>
+        <result column="CM_ADMINID" property="CM_ADMINID" jdbcType="VARCHAR"/>
+        <result column="CM_LEVEL" property="CM_LEVEL" jdbcType="INTEGER"/>
+        <result column="CM_NAME" property="CM_NAME" jdbcType="VARCHAR"/>
+        <association property="TB_MENU" javaType="com.sc.domain.login.MenuInfo">
+            <result column="CM_MENUURL" property="CM_MENUURL" jdbcType="VARCHAR"/>
+            <result column="CM_MENUNAME" property="CM_MENUNAME" jdbcType="VARCHAR"/>
         </association>
     </resultMap>
-    
+
     <select id="getAdminLoginInfo" resultMap="AdminLoginInfo">
         SELECT
             t0.CM_ADMINID,

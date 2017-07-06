@@ -9,6 +9,7 @@ import com.sc.domain.userdomain.OdersAndOrderdetails;
 import com.sc.domain.userdomain.Order;
 import com.sc.domain.userdomain.OrderDetails;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ import java.util.List;
 @Mapper
 public interface UserDoMainMapper {
 
-    List<Order> getOrderState(String cmGoodsid, String cmUserid);
+    List<Order> getOrderState(@Param("cmGoodsid") String cmGoodsid, @Param("cmUserid") String cmUserid);
 
     List<MyOrders> getMyOrdersAll(String userId);
 

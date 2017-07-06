@@ -45,7 +45,7 @@ public class LoginService {
         if (result.size() == 0) {
             return GetResult.toJson(6, null, null, null, 0);
         }
-        String userID = result.get(0).getCmUserid();
+        String userID = result.get(0).getCM_USERID();
         return GetResult.toJson(0, null, jwt.createJWT(userID), null, 0);
     }
 
@@ -62,17 +62,47 @@ public class LoginService {
         if (userLoginInfo == null) {
             return GetResult.toJson(6, null, null, null, 0);
         }
-        if (userLoginInfo.getCmCode() == null) {
+        if (userLoginInfo.getCM_CODE() == null) {
             return GetResult.toJson(7, null, null, null, 0);
         }
-        if (!userLoginInfo.getCmCode().equals(code)) {
+        if (!userLoginInfo.getCM_CODE().equals(code)) {
             return GetResult.toJson(8, null, null, null, 0);
         }
-
         //更新code值
-        loginDao.deleteCode(userLoginInfo.getCmPhone());
+        loginDao.deleteCode(userLoginInfo.getCM_PHONE());
 
-        return GetResult.toJson(0, null, jwt.createJWT(userLoginInfo.getCmUserid()), userLoginInfo, 0);
+        return GetResult.toJson(0, null, jwt.createJWT(userLoginInfo.getCM_USERID()), userLoginInfo, 0);
+    }
+
+    /**
+     * 商家（用户）只用账号密码登录
+     *
+     * @param account  账号
+     * @param password 密码
+     * @return
+     */
+    public Result userLoginByAccountAndPasswordS(String account, String password) {
+        UserLogin userLoginInfo = loginDao.getUserLoginInfo(account, password);
+        if (userLoginInfo == null) {
+            return GetResult.toJson(6, null, null, null, 0);
+        }
+        return GetResult.toJson(0, null, jwt.createJWT(userLoginInfo.getCM_USERID()), userLoginInfo, 0);
+    }
+
+    /**
+     * 商家（用户）只用手机号和验证码登入
+     *
+     * @param phone
+     * @param code
+     * @return
+     */
+    public Result userLoginByPhoneAndCodeS(String phone, String code) {
+        Register register = loginDao.selectByPhoneAndCodeD(phone, code);
+        if (register == null) {
+            return GetResult.toJson(6, null, null, null, 0);
+        }
+        Users users = loginDao.getUserLoginInfoByPhone(phone);
+        return GetResult.toJson(0, null, jwt.createJWT(users.getCM_USERID()), users, 0);
     }
 
     /**
@@ -88,16 +118,16 @@ public class LoginService {
         if (sellerLoginInfo == null) {
             return GetResult.toJson(6, null, null, null, 0);
         }
-        if (sellerLoginInfo.getCmCode() == null) {
+        if (sellerLoginInfo.getCM_CODE() == null) {
             return GetResult.toJson(7, null, null, null, 0);
         }
-        if (!sellerLoginInfo.getCmCode().equals(code)) {
+        if (!sellerLoginInfo.getCM_CODE().equals(code)) {
             return GetResult.toJson(8, null, null, null, 0);
         }
 
-        loginDao.deleteCode(sellerLoginInfo.getCmPhone());
+        loginDao.deleteCode(sellerLoginInfo.getCM_PHONE());
 
-        return GetResult.toJson(0, null, jwt.createJWT(sellerLoginInfo.getCmSellerid()), sellerLoginInfo, 0);
+        return GetResult.toJson(0, null, jwt.createJWT(sellerLoginInfo.getCM_SELLERID()), sellerLoginInfo, 0);
     }
 
     /**
@@ -113,7 +143,7 @@ public class LoginService {
             if (adminLoginInfo == null) {
                 return GetResult.toJson(6, null, null, null, 0);
             }
-            return GetResult.toJson(0, null, jwt.createJWT(adminLoginInfo.getCmAdminid()), adminLoginInfo, 0);
+            return GetResult.toJson(0, null, jwt.createJWT(adminLoginInfo.getCM_ADMINID()), adminLoginInfo, 0);
         } catch (Exception e) {
             e.printStackTrace();
             return GetResult.toJson(200, null, null, null, 0);
@@ -122,8 +152,9 @@ public class LoginService {
 
     /**
      * 发送验证码
+     *
      * @param phone 手机号码
-     * @param type 类型
+     * @param type  类型
      */
     public Result send(String phone, int type) {
         try {
@@ -139,9 +170,12 @@ public class LoginService {
                 return GetResult.toJson(0, null, null, null, 0);
             } else {
                 return GetResult.toJson(2, null, null, null, 0);
-            } 
+            }
         } catch (Exception ex) {
+            ex.printStackTrace();
             return GetResult.toJson(200, null, null, null, 0);
         }
     }
+
+
 }

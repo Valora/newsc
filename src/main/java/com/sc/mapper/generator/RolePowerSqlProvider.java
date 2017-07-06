@@ -1,13 +1,12 @@
 package com.sc.mapper.generator;
 
 import com.sc.domain.generator.RolePower;
-import com.sc.domain.generator.RolePowerExample;
 import com.sc.domain.generator.RolePowerExample.Criteria;
 import com.sc.domain.generator.RolePowerExample.Criterion;
-import org.apache.ibatis.jdbc.SQL;
-
+import com.sc.domain.generator.RolePowerExample;
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.jdbc.SQL;
 
 public class RolePowerSqlProvider {
 
@@ -29,16 +28,16 @@ public class RolePowerSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("TB_ROLE_POWER");
         
-        if (record.getCmId() != null) {
-            sql.VALUES("CM_ID", "#{cmId,jdbcType=INTEGER}");
+        if (record.getCM_ID() != null) {
+            sql.VALUES("CM_ID", "#{CM_ID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmRoleid() != null) {
-            sql.VALUES("CM_ROLEID", "#{cmRoleid,jdbcType=INTEGER}");
+        if (record.getCM_ROLEID() != null) {
+            sql.VALUES("CM_ROLEID", "#{CM_ROLEID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmPowerid() != null) {
-            sql.VALUES("CM_POWERID", "#{cmPowerid,jdbcType=INTEGER}");
+        if (record.getCM_POWERID() != null) {
+            sql.VALUES("CM_POWERID", "#{CM_POWERID,jdbcType=INTEGER}");
         }
         
         return sql.toString();
@@ -70,16 +69,16 @@ public class RolePowerSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_ROLE_POWER");
         
-        if (record.getCmId() != null) {
-            sql.SET("CM_ID = #{record.cmId,jdbcType=INTEGER}");
+        if (record.getCM_ID() != null) {
+            sql.SET("CM_ID = #{record.CM_ID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmRoleid() != null) {
-            sql.SET("CM_ROLEID = #{record.cmRoleid,jdbcType=INTEGER}");
+        if (record.getCM_ROLEID() != null) {
+            sql.SET("CM_ROLEID = #{record.CM_ROLEID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmPowerid() != null) {
-            sql.SET("CM_POWERID = #{record.cmPowerid,jdbcType=INTEGER}");
+        if (record.getCM_POWERID() != null) {
+            sql.SET("CM_POWERID = #{record.CM_POWERID,jdbcType=INTEGER}");
         }
         
         applyWhere(sql, example, true);
@@ -90,9 +89,9 @@ public class RolePowerSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_ROLE_POWER");
         
-        sql.SET("CM_ID = #{record.cmId,jdbcType=INTEGER}");
-        sql.SET("CM_ROLEID = #{record.cmRoleid,jdbcType=INTEGER}");
-        sql.SET("CM_POWERID = #{record.cmPowerid,jdbcType=INTEGER}");
+        sql.SET("CM_ID = #{record.CM_ID,jdbcType=INTEGER}");
+        sql.SET("CM_ROLEID = #{record.CM_ROLEID,jdbcType=INTEGER}");
+        sql.SET("CM_POWERID = #{record.CM_POWERID,jdbcType=INTEGER}");
         
         RolePowerExample example = (RolePowerExample) parameter.get("example");
         applyWhere(sql, example, true);

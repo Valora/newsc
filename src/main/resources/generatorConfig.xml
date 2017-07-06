@@ -10,122 +10,125 @@
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
         <commentGenerator>
-            <property name="suppressAllComments" value="true" />
+            <property name="suppressAllComments" value="true"/>
         </commentGenerator>
-        
-        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/SC?useSSL=false" userId="root" password="">
+
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://192.168.0.126:3306/SC?useSSL=false" userId="root"
+                        password="TZhlkj123456!">
         </jdbcConnection>
-        
+
         <javaModelGenerator targetPackage="com.sc.domain.generator" targetProject="src/main/java">
-            <property name="enableSubPackages" value="true" />
-            <property name="trimStrings" value="true" />
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
         </javaModelGenerator>
-        
+
         <sqlMapGenerator targetProject="com.sc.mapper.generator" targetPackage="src/main/java">
-            <property name="enableSubPackages" value="true" />
+            <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
-        
-        <javaClientGenerator targetPackage="com.sc.mapper.generator" type="ANNOTATEDMAPPER" targetProject="src/main/java">
+
+        <javaClientGenerator targetPackage="com.sc.mapper.generator" type="ANNOTATEDMAPPER"
+                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
         <table tableName="TB_ADDRESSES" domainObjectName="Addresses">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table tableName="TB_ADMIN_ROLE" domainObjectName="AdminRole">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table tableName="TB_ADMINS" domainObjectName="Admins">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table tableName="TB_AFTERSERVICES" domainObjectName="Afterservices">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table tableName="TB_BRANDS" domainObjectName="Brands">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table tableName="TB_CLASSIFYS" domainObjectName="Classifys">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table tableName="TB_COLLECTIONS" domainObjectName="Collections">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
-        
+
         <table tableName="TB_GOODS" domainObjectName="Goods">
-            
+            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table tableName="TB_GOODSDETAILS" domainObjectName="Gooddetails">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table tableName="TB_LOGISTICSS" domainObjectName="Logisticss">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
         <table tableName="TB_MENUS" domainObjectName="Menus">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table tableName="TB_NOTICES" domainObjectName="Notices">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table tableName="TB_ORDERDETAILS" domainObjectName="Orderdetails">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
         <table tableName="TB_ORDERS" domainObjectName="Orders">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table tableName="TB_PAYS" domainObjectName="Pays">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table tableName="TB_POWER_MENU" domainObjectName="PowerMenu">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table tableName="TB_RADCODE" domainObjectName="Radcode">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table tableName="TB_REGISTER" domainObjectName="Register">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table tableName="TB_ROLE_POWER" domainObjectName="RolePower">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table tableName="TB_ROLES" domainObjectName="Roles">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table tableName="TB_SELLERS" domainObjectName="Sellers">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table tableName="TB_SERVICEDETAILS" domainObjectName="Servicedetails">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table tableName="TB_SHOWS" domainObjectName="Shows">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table tableName="TB_USERAPPLICATIONS" domainObjectName="Userapplications">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table tableName="TB_USERS" domainObjectName="Users">
-
+            <property name="useActualColumnNames" value="true"/>
         </table>
     </context>
- 
+
 </generatorConfiguration>

@@ -104,133 +104,133 @@ public class LogisticssExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andCmLogisticsidIsNull() {
+        public Criteria andCM_LOGISTICSIDIsNull() {
             addCriterion("CM_LOGISTICSID is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsidIsNotNull() {
+        public Criteria andCM_LOGISTICSIDIsNotNull() {
             addCriterion("CM_LOGISTICSID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsidEqualTo(Integer value) {
-            addCriterion("CM_LOGISTICSID =", value, "cmLogisticsid");
+        public Criteria andCM_LOGISTICSIDEqualTo(Integer value) {
+            addCriterion("CM_LOGISTICSID =", value, "CM_LOGISTICSID");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsidNotEqualTo(Integer value) {
-            addCriterion("CM_LOGISTICSID <>", value, "cmLogisticsid");
+        public Criteria andCM_LOGISTICSIDNotEqualTo(Integer value) {
+            addCriterion("CM_LOGISTICSID <>", value, "CM_LOGISTICSID");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsidGreaterThan(Integer value) {
-            addCriterion("CM_LOGISTICSID >", value, "cmLogisticsid");
+        public Criteria andCM_LOGISTICSIDGreaterThan(Integer value) {
+            addCriterion("CM_LOGISTICSID >", value, "CM_LOGISTICSID");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("CM_LOGISTICSID >=", value, "cmLogisticsid");
+        public Criteria andCM_LOGISTICSIDGreaterThanOrEqualTo(Integer value) {
+            addCriterion("CM_LOGISTICSID >=", value, "CM_LOGISTICSID");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsidLessThan(Integer value) {
-            addCriterion("CM_LOGISTICSID <", value, "cmLogisticsid");
+        public Criteria andCM_LOGISTICSIDLessThan(Integer value) {
+            addCriterion("CM_LOGISTICSID <", value, "CM_LOGISTICSID");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsidLessThanOrEqualTo(Integer value) {
-            addCriterion("CM_LOGISTICSID <=", value, "cmLogisticsid");
+        public Criteria andCM_LOGISTICSIDLessThanOrEqualTo(Integer value) {
+            addCriterion("CM_LOGISTICSID <=", value, "CM_LOGISTICSID");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsidIn(List<Integer> values) {
-            addCriterion("CM_LOGISTICSID in", values, "cmLogisticsid");
+        public Criteria andCM_LOGISTICSIDIn(List<Integer> values) {
+            addCriterion("CM_LOGISTICSID in", values, "CM_LOGISTICSID");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsidNotIn(List<Integer> values) {
-            addCriterion("CM_LOGISTICSID not in", values, "cmLogisticsid");
+        public Criteria andCM_LOGISTICSIDNotIn(List<Integer> values) {
+            addCriterion("CM_LOGISTICSID not in", values, "CM_LOGISTICSID");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsidBetween(Integer value1, Integer value2) {
-            addCriterion("CM_LOGISTICSID between", value1, value2, "cmLogisticsid");
+        public Criteria andCM_LOGISTICSIDBetween(Integer value1, Integer value2) {
+            addCriterion("CM_LOGISTICSID between", value1, value2, "CM_LOGISTICSID");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsidNotBetween(Integer value1, Integer value2) {
-            addCriterion("CM_LOGISTICSID not between", value1, value2, "cmLogisticsid");
+        public Criteria andCM_LOGISTICSIDNotBetween(Integer value1, Integer value2) {
+            addCriterion("CM_LOGISTICSID not between", value1, value2, "CM_LOGISTICSID");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsnameIsNull() {
+        public Criteria andCM_LOGISTICSNAMEIsNull() {
             addCriterion("CM_LOGISTICSNAME is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsnameIsNotNull() {
+        public Criteria andCM_LOGISTICSNAMEIsNotNull() {
             addCriterion("CM_LOGISTICSNAME is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsnameEqualTo(String value) {
-            addCriterion("CM_LOGISTICSNAME =", value, "cmLogisticsname");
+        public Criteria andCM_LOGISTICSNAMEEqualTo(String value) {
+            addCriterion("CM_LOGISTICSNAME =", value, "CM_LOGISTICSNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsnameNotEqualTo(String value) {
-            addCriterion("CM_LOGISTICSNAME <>", value, "cmLogisticsname");
+        public Criteria andCM_LOGISTICSNAMENotEqualTo(String value) {
+            addCriterion("CM_LOGISTICSNAME <>", value, "CM_LOGISTICSNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsnameGreaterThan(String value) {
-            addCriterion("CM_LOGISTICSNAME >", value, "cmLogisticsname");
+        public Criteria andCM_LOGISTICSNAMEGreaterThan(String value) {
+            addCriterion("CM_LOGISTICSNAME >", value, "CM_LOGISTICSNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsnameGreaterThanOrEqualTo(String value) {
-            addCriterion("CM_LOGISTICSNAME >=", value, "cmLogisticsname");
+        public Criteria andCM_LOGISTICSNAMEGreaterThanOrEqualTo(String value) {
+            addCriterion("CM_LOGISTICSNAME >=", value, "CM_LOGISTICSNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsnameLessThan(String value) {
-            addCriterion("CM_LOGISTICSNAME <", value, "cmLogisticsname");
+        public Criteria andCM_LOGISTICSNAMELessThan(String value) {
+            addCriterion("CM_LOGISTICSNAME <", value, "CM_LOGISTICSNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsnameLessThanOrEqualTo(String value) {
-            addCriterion("CM_LOGISTICSNAME <=", value, "cmLogisticsname");
+        public Criteria andCM_LOGISTICSNAMELessThanOrEqualTo(String value) {
+            addCriterion("CM_LOGISTICSNAME <=", value, "CM_LOGISTICSNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsnameLike(String value) {
-            addCriterion("CM_LOGISTICSNAME like", value, "cmLogisticsname");
+        public Criteria andCM_LOGISTICSNAMELike(String value) {
+            addCriterion("CM_LOGISTICSNAME like", value, "CM_LOGISTICSNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsnameNotLike(String value) {
-            addCriterion("CM_LOGISTICSNAME not like", value, "cmLogisticsname");
+        public Criteria andCM_LOGISTICSNAMENotLike(String value) {
+            addCriterion("CM_LOGISTICSNAME not like", value, "CM_LOGISTICSNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsnameIn(List<String> values) {
-            addCriterion("CM_LOGISTICSNAME in", values, "cmLogisticsname");
+        public Criteria andCM_LOGISTICSNAMEIn(List<String> values) {
+            addCriterion("CM_LOGISTICSNAME in", values, "CM_LOGISTICSNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsnameNotIn(List<String> values) {
-            addCriterion("CM_LOGISTICSNAME not in", values, "cmLogisticsname");
+        public Criteria andCM_LOGISTICSNAMENotIn(List<String> values) {
+            addCriterion("CM_LOGISTICSNAME not in", values, "CM_LOGISTICSNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsnameBetween(String value1, String value2) {
-            addCriterion("CM_LOGISTICSNAME between", value1, value2, "cmLogisticsname");
+        public Criteria andCM_LOGISTICSNAMEBetween(String value1, String value2) {
+            addCriterion("CM_LOGISTICSNAME between", value1, value2, "CM_LOGISTICSNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmLogisticsnameNotBetween(String value1, String value2) {
-            addCriterion("CM_LOGISTICSNAME not between", value1, value2, "cmLogisticsname");
+        public Criteria andCM_LOGISTICSNAMENotBetween(String value1, String value2) {
+            addCriterion("CM_LOGISTICSNAME not between", value1, value2, "CM_LOGISTICSNAME");
             return (Criteria) this;
         }
     }

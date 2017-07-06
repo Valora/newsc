@@ -17,25 +17,25 @@ import java.util.List;
 public interface ManageMapper {
     @SelectProvider(type = ManageSqlProvider.class, method = "getSellerDetail")
     @Results({
-            @Result(column = "CM_CREATETIME", property = "cmCreatetime", jdbcType = JdbcType.DATE),
-            @Result(column = "CM_PHONE", property = "cmPhone", jdbcType = JdbcType.DECIMAL),
-            @Result(column = "CM_NAME", property = "cmName", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_CONTACTNAME", property = "cmContactname", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_CONTACTPHONE", property = "cmContactphone", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_TELEPHONE", property = "cmTelephone", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_PAX", property = "cmPax", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_STOREPATH", property = "cmStorepath", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_CARDNO", property = "cmCardno", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_CARDPATH", property = "cmCardpath", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_ISEXAMINE", property = "cmIsexamine", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_LICENSEPATH", property = "cmLicensepath", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_REASON", property = "cmReason", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_SELLERID", property = "cmSellerid", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_ADDRESS", property = "cmAddress", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_SELLERNAME", property = "cmSellername", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_LAT", property = "cmLat", jdbcType = JdbcType.DOUBLE),
-            @Result(column = "CM_LON", property = "cmLon", jdbcType = JdbcType.DOUBLE),
-            @Result(column = "CM_BRAND", property = "cmBrand", jdbcType = JdbcType.VARCHAR)
+            @Result(column = "CM_CREATETIME", property = "CM_CREATETIME", jdbcType = JdbcType.DATE),
+            @Result(column = "CM_PHONE", property = "CM_PHONE", jdbcType = JdbcType.DECIMAL),
+            @Result(column = "CM_NAME", property = "CM_NAME", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_CONTACTNAME", property = "CM_CONTACTNAME", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_CONTACTPHONE", property = "CM_CONTACTPHONE", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_TELEPHONE", property = "CM_TELEPHONE", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_PAX", property = "CM_PAX", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_STOREPATH", property = "CM_STOREPATH", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_CARDNO", property = "CM_CARDNO", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_CARDPATH", property = "CM_CARDPATH", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_ISEXAMINE", property = "CM_ISEXAMINE", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_LICENSEPATH", property = "CM_LICENSEPATH", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_REASON", property = "CM_REASON", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_SELLERID", property = "CM_SELLERID", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_ADDRESS", property = "CM_ADDRESS", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_SELLERNAME", property = "CM_SELLERNAME", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_LAT", property = "CM_LAT", jdbcType = JdbcType.DOUBLE),
+            @Result(column = "CM_LON", property = "CM_LON", jdbcType = JdbcType.DOUBLE),
+            @Result(column = "CM_BRAND", property = "CM_BRAND", jdbcType = JdbcType.VARCHAR)
     })
     List<SellerDetail> getSellerDetail(String sellerid);
 }

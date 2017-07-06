@@ -8,12 +8,12 @@ import lombok.Data;
  */
 @Data
 public class MyOrderDetails {
-    private String cmGoodsid;
-    private String cmMainfigurepath;
-    private String cmTitle;
-    private Double cmPresentprice;
-    private Double cmMoney;
-    private Integer cmNumber;
-    private String cmSellerid;
-    private String cmSellername;
+    private String CM_GOODSID;
+    private String CM_MAINFIGUREPATH;
+    private String CM_TITLE;
+    private Double CM_PRESENTPRICE;
+    private Double CM_MONEY;
+    private Integer CM_NUMBER;
+    private String CM_SELLERID;
+    private String CM_SELLERNAME;
 }

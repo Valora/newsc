@@ -2,6 +2,7 @@ package com.sc.mapper.generator;
 
 import com.sc.domain.generator.Shows;
 import com.sc.domain.generator.ShowsExample;
+import java.util.List;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -11,8 +12,6 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
-
-import java.util.List;
 
 public interface ShowsMapper {
     @SelectProvider(type=ShowsSqlProvider.class, method="countByExample")
@@ -25,9 +24,9 @@ public interface ShowsMapper {
         "insert into TB_SHOWS (CM_SHOWID, CM_PATH, ",
         "CM_GOODSID, CM_ISTOP, ",
         "CM_URL)",
-        "values (#{cmShowid,jdbcType=INTEGER}, #{cmPath,jdbcType=VARCHAR}, ",
-        "#{cmGoodsid,jdbcType=VARCHAR}, #{cmIstop,jdbcType=INTEGER}, ",
-        "#{cmUrl,jdbcType=VARCHAR})"
+        "values (#{CM_SHOWID,jdbcType=INTEGER}, #{CM_PATH,jdbcType=VARCHAR}, ",
+        "#{CM_GOODSID,jdbcType=VARCHAR}, #{CM_ISTOP,jdbcType=INTEGER}, ",
+        "#{CM_URL,jdbcType=VARCHAR})"
     })
     int insert(Shows record);
 
@@ -36,11 +35,11 @@ public interface ShowsMapper {
 
     @SelectProvider(type=ShowsSqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="CM_SHOWID", property="cmShowid", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_PATH", property="cmPath", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_GOODSID", property="cmGoodsid", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_ISTOP", property="cmIstop", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_URL", property="cmUrl", jdbcType= JdbcType.VARCHAR)
+        @Result(column="CM_SHOWID", property="CM_SHOWID", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_PATH", property="CM_PATH", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_GOODSID", property="CM_GOODSID", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_ISTOP", property="CM_ISTOP", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_URL", property="CM_URL", jdbcType=JdbcType.VARCHAR)
     })
     List<Shows> selectByExample(ShowsExample example);
 

@@ -1,13 +1,12 @@
 package com.sc.mapper.generator;
 
 import com.sc.domain.generator.Menus;
-import com.sc.domain.generator.MenusExample;
 import com.sc.domain.generator.MenusExample.Criteria;
 import com.sc.domain.generator.MenusExample.Criterion;
-import org.apache.ibatis.jdbc.SQL;
-
+import com.sc.domain.generator.MenusExample;
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.jdbc.SQL;
 
 public class MenusSqlProvider {
 
@@ -29,16 +28,16 @@ public class MenusSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("TB_MENUS");
         
-        if (record.getCmMenuid() != null) {
-            sql.VALUES("CM_MENUID", "#{cmMenuid,jdbcType=INTEGER}");
+        if (record.getCM_MENUID() != null) {
+            sql.VALUES("CM_MENUID", "#{CM_MENUID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmMenuname() != null) {
-            sql.VALUES("CM_MENUNAME", "#{cmMenuname,jdbcType=VARCHAR}");
+        if (record.getCM_MENUNAME() != null) {
+            sql.VALUES("CM_MENUNAME", "#{CM_MENUNAME,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmMenuurl() != null) {
-            sql.VALUES("CM_MENUURL", "#{cmMenuurl,jdbcType=VARCHAR}");
+        if (record.getCM_MENUURL() != null) {
+            sql.VALUES("CM_MENUURL", "#{CM_MENUURL,jdbcType=VARCHAR}");
         }
         
         return sql.toString();
@@ -70,16 +69,16 @@ public class MenusSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_MENUS");
         
-        if (record.getCmMenuid() != null) {
-            sql.SET("CM_MENUID = #{record.cmMenuid,jdbcType=INTEGER}");
+        if (record.getCM_MENUID() != null) {
+            sql.SET("CM_MENUID = #{record.CM_MENUID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmMenuname() != null) {
-            sql.SET("CM_MENUNAME = #{record.cmMenuname,jdbcType=VARCHAR}");
+        if (record.getCM_MENUNAME() != null) {
+            sql.SET("CM_MENUNAME = #{record.CM_MENUNAME,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmMenuurl() != null) {
-            sql.SET("CM_MENUURL = #{record.cmMenuurl,jdbcType=VARCHAR}");
+        if (record.getCM_MENUURL() != null) {
+            sql.SET("CM_MENUURL = #{record.CM_MENUURL,jdbcType=VARCHAR}");
         }
         
         applyWhere(sql, example, true);
@@ -90,9 +89,9 @@ public class MenusSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_MENUS");
         
-        sql.SET("CM_MENUID = #{record.cmMenuid,jdbcType=INTEGER}");
-        sql.SET("CM_MENUNAME = #{record.cmMenuname,jdbcType=VARCHAR}");
-        sql.SET("CM_MENUURL = #{record.cmMenuurl,jdbcType=VARCHAR}");
+        sql.SET("CM_MENUID = #{record.CM_MENUID,jdbcType=INTEGER}");
+        sql.SET("CM_MENUNAME = #{record.CM_MENUNAME,jdbcType=VARCHAR}");
+        sql.SET("CM_MENUURL = #{record.CM_MENUURL,jdbcType=VARCHAR}");
         
         MenusExample example = (MenusExample) parameter.get("example");
         applyWhere(sql, example, true);

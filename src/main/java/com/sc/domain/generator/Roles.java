@@ -1,23 +1,23 @@
 package com.sc.domain.generator;
 
 public class Roles {
-    private Integer cmRoleid;
+    private Integer CM_ROLEID;
 
-    private String cmRolename;
+    private String CM_ROLENAME;
 
-    public Integer getCmRoleid() {
-        return cmRoleid;
+    public Integer getCM_ROLEID() {
+        return CM_ROLEID;
     }
 
-    public void setCmRoleid(Integer cmRoleid) {
-        this.cmRoleid = cmRoleid;
+    public void setCM_ROLEID(Integer CM_ROLEID) {
+        this.CM_ROLEID = CM_ROLEID;
     }
 
-    public String getCmRolename() {
-        return cmRolename;
+    public String getCM_ROLENAME() {
+        return CM_ROLENAME;
     }
 
-    public void setCmRolename(String cmRolename) {
-        this.cmRolename = cmRolename == null ? null : cmRolename.trim();
+    public void setCM_ROLENAME(String CM_ROLENAME) {
+        this.CM_ROLENAME = CM_ROLENAME == null ? null : CM_ROLENAME.trim();
     }
 }

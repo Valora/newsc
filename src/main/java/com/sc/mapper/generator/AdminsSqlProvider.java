@@ -1,13 +1,12 @@
 package com.sc.mapper.generator;
 
 import com.sc.domain.generator.Admins;
-import com.sc.domain.generator.AdminsExample;
 import com.sc.domain.generator.AdminsExample.Criteria;
 import com.sc.domain.generator.AdminsExample.Criterion;
-import org.apache.ibatis.jdbc.SQL;
-
+import com.sc.domain.generator.AdminsExample;
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.jdbc.SQL;
 
 public class AdminsSqlProvider {
 
@@ -29,28 +28,28 @@ public class AdminsSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("TB_ADMINS");
         
-        if (record.getCmAdminid() != null) {
-            sql.VALUES("CM_ADMINID", "#{cmAdminid,jdbcType=VARCHAR}");
+        if (record.getCM_ADMINID() != null) {
+            sql.VALUES("CM_ADMINID", "#{CM_ADMINID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmName() != null) {
-            sql.VALUES("CM_NAME", "#{cmName,jdbcType=VARCHAR}");
+        if (record.getCM_NAME() != null) {
+            sql.VALUES("CM_NAME", "#{CM_NAME,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmAccount() != null) {
-            sql.VALUES("CM_ACCOUNT", "#{cmAccount,jdbcType=VARCHAR}");
+        if (record.getCM_ACCOUNT() != null) {
+            sql.VALUES("CM_ACCOUNT", "#{CM_ACCOUNT,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmPassword() != null) {
-            sql.VALUES("CM_PASSWORD", "#{cmPassword,jdbcType=VARCHAR}");
+        if (record.getCM_PASSWORD() != null) {
+            sql.VALUES("CM_PASSWORD", "#{CM_PASSWORD,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmLevel() != null) {
-            sql.VALUES("CM_LEVEL", "#{cmLevel,jdbcType=INTEGER}");
+        if (record.getCM_LEVEL() != null) {
+            sql.VALUES("CM_LEVEL", "#{CM_LEVEL,jdbcType=INTEGER}");
         }
         
-        if (record.getCmPhone() != null) {
-            sql.VALUES("CM_PHONE", "#{cmPhone,jdbcType=BIGINT}");
+        if (record.getCM_PHONE() != null) {
+            sql.VALUES("CM_PHONE", "#{CM_PHONE,jdbcType=BIGINT}");
         }
         
         return sql.toString();
@@ -85,28 +84,28 @@ public class AdminsSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_ADMINS");
         
-        if (record.getCmAdminid() != null) {
-            sql.SET("CM_ADMINID = #{record.cmAdminid,jdbcType=VARCHAR}");
+        if (record.getCM_ADMINID() != null) {
+            sql.SET("CM_ADMINID = #{record.CM_ADMINID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmName() != null) {
-            sql.SET("CM_NAME = #{record.cmName,jdbcType=VARCHAR}");
+        if (record.getCM_NAME() != null) {
+            sql.SET("CM_NAME = #{record.CM_NAME,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmAccount() != null) {
-            sql.SET("CM_ACCOUNT = #{record.cmAccount,jdbcType=VARCHAR}");
+        if (record.getCM_ACCOUNT() != null) {
+            sql.SET("CM_ACCOUNT = #{record.CM_ACCOUNT,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmPassword() != null) {
-            sql.SET("CM_PASSWORD = #{record.cmPassword,jdbcType=VARCHAR}");
+        if (record.getCM_PASSWORD() != null) {
+            sql.SET("CM_PASSWORD = #{record.CM_PASSWORD,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmLevel() != null) {
-            sql.SET("CM_LEVEL = #{record.cmLevel,jdbcType=INTEGER}");
+        if (record.getCM_LEVEL() != null) {
+            sql.SET("CM_LEVEL = #{record.CM_LEVEL,jdbcType=INTEGER}");
         }
         
-        if (record.getCmPhone() != null) {
-            sql.SET("CM_PHONE = #{record.cmPhone,jdbcType=BIGINT}");
+        if (record.getCM_PHONE() != null) {
+            sql.SET("CM_PHONE = #{record.CM_PHONE,jdbcType=BIGINT}");
         }
         
         applyWhere(sql, example, true);
@@ -117,12 +116,12 @@ public class AdminsSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_ADMINS");
         
-        sql.SET("CM_ADMINID = #{record.cmAdminid,jdbcType=VARCHAR}");
-        sql.SET("CM_NAME = #{record.cmName,jdbcType=VARCHAR}");
-        sql.SET("CM_ACCOUNT = #{record.cmAccount,jdbcType=VARCHAR}");
-        sql.SET("CM_PASSWORD = #{record.cmPassword,jdbcType=VARCHAR}");
-        sql.SET("CM_LEVEL = #{record.cmLevel,jdbcType=INTEGER}");
-        sql.SET("CM_PHONE = #{record.cmPhone,jdbcType=BIGINT}");
+        sql.SET("CM_ADMINID = #{record.CM_ADMINID,jdbcType=VARCHAR}");
+        sql.SET("CM_NAME = #{record.CM_NAME,jdbcType=VARCHAR}");
+        sql.SET("CM_ACCOUNT = #{record.CM_ACCOUNT,jdbcType=VARCHAR}");
+        sql.SET("CM_PASSWORD = #{record.CM_PASSWORD,jdbcType=VARCHAR}");
+        sql.SET("CM_LEVEL = #{record.CM_LEVEL,jdbcType=INTEGER}");
+        sql.SET("CM_PHONE = #{record.CM_PHONE,jdbcType=BIGINT}");
         
         AdminsExample example = (AdminsExample) parameter.get("example");
         applyWhere(sql, example, true);

@@ -8,5 +8,5 @@ import lombok.Data;
  */
 @Data
 public class Order {
-    private String cmState;
+    private String CM_STATE;
 }

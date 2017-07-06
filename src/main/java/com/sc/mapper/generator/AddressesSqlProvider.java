@@ -1,13 +1,12 @@
 package com.sc.mapper.generator;
 
 import com.sc.domain.generator.Addresses;
-import com.sc.domain.generator.AddressesExample;
 import com.sc.domain.generator.AddressesExample.Criteria;
 import com.sc.domain.generator.AddressesExample.Criterion;
-import org.apache.ibatis.jdbc.SQL;
-
+import com.sc.domain.generator.AddressesExample;
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.jdbc.SQL;
 
 public class AddressesSqlProvider {
 
@@ -29,28 +28,28 @@ public class AddressesSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("TB_ADDRESSES");
         
-        if (record.getCmAddressid() != null) {
-            sql.VALUES("CM_ADDRESSID", "#{cmAddressid,jdbcType=INTEGER}");
+        if (record.getCM_ADDRESSID() != null) {
+            sql.VALUES("CM_ADDRESSID", "#{CM_ADDRESSID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmAddress() != null) {
-            sql.VALUES("CM_ADDRESS", "#{cmAddress,jdbcType=VARCHAR}");
+        if (record.getCM_ADDRESS() != null) {
+            sql.VALUES("CM_ADDRESS", "#{CM_ADDRESS,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmUserid() != null) {
-            sql.VALUES("CM_USERID", "#{cmUserid,jdbcType=VARCHAR}");
+        if (record.getCM_USERID() != null) {
+            sql.VALUES("CM_USERID", "#{CM_USERID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmIsfirst() != null) {
-            sql.VALUES("CM_ISFIRST", "#{cmIsfirst,jdbcType=INTEGER}");
+        if (record.getCM_ISFIRST() != null) {
+            sql.VALUES("CM_ISFIRST", "#{CM_ISFIRST,jdbcType=INTEGER}");
         }
         
-        if (record.getCmName() != null) {
-            sql.VALUES("CM_NAME", "#{cmName,jdbcType=VARCHAR}");
+        if (record.getCM_NAME() != null) {
+            sql.VALUES("CM_NAME", "#{CM_NAME,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmPhone() != null) {
-            sql.VALUES("CM_PHONE", "#{cmPhone,jdbcType=BIGINT}");
+        if (record.getCM_PHONE() != null) {
+            sql.VALUES("CM_PHONE", "#{CM_PHONE,jdbcType=BIGINT}");
         }
         
         return sql.toString();
@@ -85,28 +84,28 @@ public class AddressesSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_ADDRESSES");
         
-        if (record.getCmAddressid() != null) {
-            sql.SET("CM_ADDRESSID = #{record.cmAddressid,jdbcType=INTEGER}");
+        if (record.getCM_ADDRESSID() != null) {
+            sql.SET("CM_ADDRESSID = #{record.CM_ADDRESSID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmAddress() != null) {
-            sql.SET("CM_ADDRESS = #{record.cmAddress,jdbcType=VARCHAR}");
+        if (record.getCM_ADDRESS() != null) {
+            sql.SET("CM_ADDRESS = #{record.CM_ADDRESS,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmUserid() != null) {
-            sql.SET("CM_USERID = #{record.cmUserid,jdbcType=VARCHAR}");
+        if (record.getCM_USERID() != null) {
+            sql.SET("CM_USERID = #{record.CM_USERID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmIsfirst() != null) {
-            sql.SET("CM_ISFIRST = #{record.cmIsfirst,jdbcType=INTEGER}");
+        if (record.getCM_ISFIRST() != null) {
+            sql.SET("CM_ISFIRST = #{record.CM_ISFIRST,jdbcType=INTEGER}");
         }
         
-        if (record.getCmName() != null) {
-            sql.SET("CM_NAME = #{record.cmName,jdbcType=VARCHAR}");
+        if (record.getCM_NAME() != null) {
+            sql.SET("CM_NAME = #{record.CM_NAME,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmPhone() != null) {
-            sql.SET("CM_PHONE = #{record.cmPhone,jdbcType=BIGINT}");
+        if (record.getCM_PHONE() != null) {
+            sql.SET("CM_PHONE = #{record.CM_PHONE,jdbcType=BIGINT}");
         }
         
         applyWhere(sql, example, true);
@@ -117,12 +116,12 @@ public class AddressesSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_ADDRESSES");
         
-        sql.SET("CM_ADDRESSID = #{record.cmAddressid,jdbcType=INTEGER}");
-        sql.SET("CM_ADDRESS = #{record.cmAddress,jdbcType=VARCHAR}");
-        sql.SET("CM_USERID = #{record.cmUserid,jdbcType=VARCHAR}");
-        sql.SET("CM_ISFIRST = #{record.cmIsfirst,jdbcType=INTEGER}");
-        sql.SET("CM_NAME = #{record.cmName,jdbcType=VARCHAR}");
-        sql.SET("CM_PHONE = #{record.cmPhone,jdbcType=BIGINT}");
+        sql.SET("CM_ADDRESSID = #{record.CM_ADDRESSID,jdbcType=INTEGER}");
+        sql.SET("CM_ADDRESS = #{record.CM_ADDRESS,jdbcType=VARCHAR}");
+        sql.SET("CM_USERID = #{record.CM_USERID,jdbcType=VARCHAR}");
+        sql.SET("CM_ISFIRST = #{record.CM_ISFIRST,jdbcType=INTEGER}");
+        sql.SET("CM_NAME = #{record.CM_NAME,jdbcType=VARCHAR}");
+        sql.SET("CM_PHONE = #{record.CM_PHONE,jdbcType=BIGINT}");
         
         AddressesExample example = (AddressesExample) parameter.get("example");
         applyWhere(sql, example, true);

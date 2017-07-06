@@ -8,8 +8,8 @@ import lombok.Data;
  */
 @Data
 public class SellerLogin {
-    private String cmSellerid;
-    private Integer cmCode;
-    private String cmSellerName;
-    private Long cmPhone;
+    private String CM_SELLERID;
+    private Integer CM_CODE;
+    private String CM_SELLERNAME;
+    private Long CM_PHONE;
 }

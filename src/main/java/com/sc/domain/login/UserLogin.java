@@ -8,11 +8,11 @@ import lombok.Data;
  */
 @Data
 public class UserLogin {
-    private String cmUserid;
-    private Double cmBalance; 
-    private Long cmPhone;
-    private Integer cmLevel;
-    private String cmNickname;
-    private Integer cmIntegral;
-    private Integer cmCode;
+    private String CM_USERID;
+    private Double CM_BALANCE; 
+    private Long CM_PHONE;
+    private Integer CM_LEVEL;
+    private String CM_NICKNAME;
+    private Integer CM_INTEGRAL;
+    private Integer CM_CODE;
 }

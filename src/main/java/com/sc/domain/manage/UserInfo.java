@@ -10,14 +10,14 @@ import java.util.Date;
  */
 @Data
 public class UserInfo {
-    private String cmShopname;
-    private String cmPax;
-    private String cmTelephone;
-    private String cmContactphone;
-    private String cmContactname;
-    private String cmName;
-    private String cmUserid;
-    private String cmShopaddress;
-    private Long cmPhone;
-    private Date cmCreatetime;
+    private String CM_SHOPNAME;
+    private String CM_PAX;
+    private String CM_TELEPHONE;
+    private String CM_CONTACTPHONE;
+    private String CM_CONTACTNAME;
+    private String CM_NAME;
+    private String CM_USERID;
+    private String CM_SHOPADDRESS;
+    private Long CM_PHONE;
+    private Date CM_CREATETIME;
 }

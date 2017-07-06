@@ -17,7 +17,6 @@ public class GetResult {
             res.setResult(obj);
             res.setToken(token);
         }
-
         return res;
     }
 }

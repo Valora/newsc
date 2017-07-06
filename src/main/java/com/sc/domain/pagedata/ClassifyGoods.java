@@ -9,7 +9,7 @@ import java.util.Date;
  */
 @Data
 public class ClassifyGoods {
-    private String cmGoodsid;
-    private String cmMainfigurepath;
-    private Date cmCreatetime;
+    private String CM_GOODSID;
+    private String CM_MAINFIGUREPATH;
+    private Date CM_CREATETIME;
 }

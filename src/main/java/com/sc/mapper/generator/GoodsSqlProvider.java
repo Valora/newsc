@@ -1,13 +1,12 @@
 package com.sc.mapper.generator;
 
-import com.sc.domain.generator.GoodsExample;
 import com.sc.domain.generator.GoodsExample.Criteria;
 import com.sc.domain.generator.GoodsExample.Criterion;
+import com.sc.domain.generator.GoodsExample;
 import com.sc.domain.generator.GoodsWithBLOBs;
-import org.apache.ibatis.jdbc.SQL;
-
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.jdbc.SQL;
 
 public class GoodsSqlProvider {
 
@@ -29,80 +28,80 @@ public class GoodsSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("TB_GOODS");
         
-        if (record.getCmGoodsid() != null) {
-            sql.VALUES("CM_GOODSID", "#{cmGoodsid,jdbcType=VARCHAR}");
+        if (record.getCM_GOODSID() != null) {
+            sql.VALUES("CM_GOODSID", "#{CM_GOODSID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmGoodsartnum() != null) {
-            sql.VALUES("CM_GOODSARTNUM", "#{cmGoodsartnum,jdbcType=VARCHAR}");
+        if (record.getCM_GOODSARTNUM() != null) {
+            sql.VALUES("CM_GOODSARTNUM", "#{CM_GOODSARTNUM,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmSellerid() != null) {
-            sql.VALUES("CM_SELLERID", "#{cmSellerid,jdbcType=VARCHAR}");
+        if (record.getCM_SELLERID() != null) {
+            sql.VALUES("CM_SELLERID", "#{CM_SELLERID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmClassifyid() != null) {
-            sql.VALUES("CM_CLASSIFYID", "#{cmClassifyid,jdbcType=INTEGER}");
+        if (record.getCM_CLASSIFYID() != null) {
+            sql.VALUES("CM_CLASSIFYID", "#{CM_CLASSIFYID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmClassifytabs() != null) {
-            sql.VALUES("CM_CLASSIFYTABS", "#{cmClassifytabs,jdbcType=VARCHAR}");
+        if (record.getCM_CLASSIFYTABS() != null) {
+            sql.VALUES("CM_CLASSIFYTABS", "#{CM_CLASSIFYTABS,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmBrandid() != null) {
-            sql.VALUES("CM_BRANDID", "#{cmBrandid,jdbcType=INTEGER}");
+        if (record.getCM_BRANDID() != null) {
+            sql.VALUES("CM_BRANDID", "#{CM_BRANDID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmTitle() != null) {
-            sql.VALUES("CM_TITLE", "#{cmTitle,jdbcType=VARCHAR}");
+        if (record.getCM_TITLE() != null) {
+            sql.VALUES("CM_TITLE", "#{CM_TITLE,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmSales() != null) {
-            sql.VALUES("CM_SALES", "#{cmSales,jdbcType=INTEGER}");
+        if (record.getCM_SALES() != null) {
+            sql.VALUES("CM_SALES", "#{CM_SALES,jdbcType=INTEGER}");
         }
         
-        if (record.getCmOriginalprice() != null) {
-            sql.VALUES("CM_ORIGINALPRICE", "#{cmOriginalprice,jdbcType=DOUBLE}");
+        if (record.getCM_ORIGINALPRICE() != null) {
+            sql.VALUES("CM_ORIGINALPRICE", "#{CM_ORIGINALPRICE,jdbcType=DOUBLE}");
         }
         
-        if (record.getCmPresentprice() != null) {
-            sql.VALUES("CM_PRESENTPRICE", "#{cmPresentprice,jdbcType=DOUBLE}");
+        if (record.getCM_PRESENTPRICE() != null) {
+            sql.VALUES("CM_PRESENTPRICE", "#{CM_PRESENTPRICE,jdbcType=DOUBLE}");
         }
         
-        if (record.getCmMainfigurepath() != null) {
-            sql.VALUES("CM_MAINFIGUREPATH", "#{cmMainfigurepath,jdbcType=VARCHAR}");
+        if (record.getCM_MAINFIGUREPATH() != null) {
+            sql.VALUES("CM_MAINFIGUREPATH", "#{CM_MAINFIGUREPATH,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmHorizontalpath() != null) {
-            sql.VALUES("CM_HORIZONTALPATH", "#{cmHorizontalpath,jdbcType=VARCHAR}");
+        if (record.getCM_HORIZONTALPATH() != null) {
+            sql.VALUES("CM_HORIZONTALPATH", "#{CM_HORIZONTALPATH,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmCreatetime() != null) {
-            sql.VALUES("CM_CREATETIME", "#{cmCreatetime,jdbcType=TIMESTAMP}");
+        if (record.getCM_CREATETIME() != null) {
+            sql.VALUES("CM_CREATETIME", "#{CM_CREATETIME,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getCmIsoff() != null) {
-            sql.VALUES("CM_ISOFF", "#{cmIsoff,jdbcType=INTEGER}");
+        if (record.getCM_ISOFF() != null) {
+            sql.VALUES("CM_ISOFF", "#{CM_ISOFF,jdbcType=INTEGER}");
         }
         
-        if (record.getCmIspromotion() != null) {
-            sql.VALUES("CM_ISPROMOTION", "#{cmIspromotion,jdbcType=INTEGER}");
+        if (record.getCM_ISPROMOTION() != null) {
+            sql.VALUES("CM_ISPROMOTION", "#{CM_ISPROMOTION,jdbcType=INTEGER}");
         }
         
-        if (record.getCmSpec() != null) {
-            sql.VALUES("CM_SPEC", "#{cmSpec,jdbcType=VARCHAR}");
+        if (record.getCM_SPEC() != null) {
+            sql.VALUES("CM_SPEC", "#{CM_SPEC,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmHtml() != null) {
-            sql.VALUES("CM_HTML", "#{cmHtml,jdbcType=LONGVARCHAR}");
+        if (record.getCM_HTML() != null) {
+            sql.VALUES("CM_HTML", "#{CM_HTML,jdbcType=LONGVARCHAR}");
         }
         
-        if (record.getCmChtml() != null) {
-            sql.VALUES("CM_CHTML", "#{cmChtml,jdbcType=LONGVARCHAR}");
+        if (record.getCM_CHTML() != null) {
+            sql.VALUES("CM_CHTML", "#{CM_CHTML,jdbcType=LONGVARCHAR}");
         }
         
-        if (record.getCmFigurespath() != null) {
-            sql.VALUES("CM_FIGURESPATH", "#{cmFigurespath,jdbcType=LONGVARCHAR}");
+        if (record.getCM_FIGURESPATH() != null) {
+            sql.VALUES("CM_FIGURESPATH", "#{CM_FIGURESPATH,jdbcType=LONGVARCHAR}");
         }
         
         return sql.toString();
@@ -182,80 +181,80 @@ public class GoodsSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_GOODS");
         
-        if (record.getCmGoodsid() != null) {
-            sql.SET("CM_GOODSID = #{record.cmGoodsid,jdbcType=VARCHAR}");
+        if (record.getCM_GOODSID() != null) {
+            sql.SET("CM_GOODSID = #{record.CM_GOODSID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmGoodsartnum() != null) {
-            sql.SET("CM_GOODSARTNUM = #{record.cmGoodsartnum,jdbcType=VARCHAR}");
+        if (record.getCM_GOODSARTNUM() != null) {
+            sql.SET("CM_GOODSARTNUM = #{record.CM_GOODSARTNUM,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmSellerid() != null) {
-            sql.SET("CM_SELLERID = #{record.cmSellerid,jdbcType=VARCHAR}");
+        if (record.getCM_SELLERID() != null) {
+            sql.SET("CM_SELLERID = #{record.CM_SELLERID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmClassifyid() != null) {
-            sql.SET("CM_CLASSIFYID = #{record.cmClassifyid,jdbcType=INTEGER}");
+        if (record.getCM_CLASSIFYID() != null) {
+            sql.SET("CM_CLASSIFYID = #{record.CM_CLASSIFYID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmClassifytabs() != null) {
-            sql.SET("CM_CLASSIFYTABS = #{record.cmClassifytabs,jdbcType=VARCHAR}");
+        if (record.getCM_CLASSIFYTABS() != null) {
+            sql.SET("CM_CLASSIFYTABS = #{record.CM_CLASSIFYTABS,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmBrandid() != null) {
-            sql.SET("CM_BRANDID = #{record.cmBrandid,jdbcType=INTEGER}");
+        if (record.getCM_BRANDID() != null) {
+            sql.SET("CM_BRANDID = #{record.CM_BRANDID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmTitle() != null) {
-            sql.SET("CM_TITLE = #{record.cmTitle,jdbcType=VARCHAR}");
+        if (record.getCM_TITLE() != null) {
+            sql.SET("CM_TITLE = #{record.CM_TITLE,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmSales() != null) {
-            sql.SET("CM_SALES = #{record.cmSales,jdbcType=INTEGER}");
+        if (record.getCM_SALES() != null) {
+            sql.SET("CM_SALES = #{record.CM_SALES,jdbcType=INTEGER}");
         }
         
-        if (record.getCmOriginalprice() != null) {
-            sql.SET("CM_ORIGINALPRICE = #{record.cmOriginalprice,jdbcType=DOUBLE}");
+        if (record.getCM_ORIGINALPRICE() != null) {
+            sql.SET("CM_ORIGINALPRICE = #{record.CM_ORIGINALPRICE,jdbcType=DOUBLE}");
         }
         
-        if (record.getCmPresentprice() != null) {
-            sql.SET("CM_PRESENTPRICE = #{record.cmPresentprice,jdbcType=DOUBLE}");
+        if (record.getCM_PRESENTPRICE() != null) {
+            sql.SET("CM_PRESENTPRICE = #{record.CM_PRESENTPRICE,jdbcType=DOUBLE}");
         }
         
-        if (record.getCmMainfigurepath() != null) {
-            sql.SET("CM_MAINFIGUREPATH = #{record.cmMainfigurepath,jdbcType=VARCHAR}");
+        if (record.getCM_MAINFIGUREPATH() != null) {
+            sql.SET("CM_MAINFIGUREPATH = #{record.CM_MAINFIGUREPATH,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmHorizontalpath() != null) {
-            sql.SET("CM_HORIZONTALPATH = #{record.cmHorizontalpath,jdbcType=VARCHAR}");
+        if (record.getCM_HORIZONTALPATH() != null) {
+            sql.SET("CM_HORIZONTALPATH = #{record.CM_HORIZONTALPATH,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmCreatetime() != null) {
-            sql.SET("CM_CREATETIME = #{record.cmCreatetime,jdbcType=TIMESTAMP}");
+        if (record.getCM_CREATETIME() != null) {
+            sql.SET("CM_CREATETIME = #{record.CM_CREATETIME,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getCmIsoff() != null) {
-            sql.SET("CM_ISOFF = #{record.cmIsoff,jdbcType=INTEGER}");
+        if (record.getCM_ISOFF() != null) {
+            sql.SET("CM_ISOFF = #{record.CM_ISOFF,jdbcType=INTEGER}");
         }
         
-        if (record.getCmIspromotion() != null) {
-            sql.SET("CM_ISPROMOTION = #{record.cmIspromotion,jdbcType=INTEGER}");
+        if (record.getCM_ISPROMOTION() != null) {
+            sql.SET("CM_ISPROMOTION = #{record.CM_ISPROMOTION,jdbcType=INTEGER}");
         }
         
-        if (record.getCmSpec() != null) {
-            sql.SET("CM_SPEC = #{record.cmSpec,jdbcType=VARCHAR}");
+        if (record.getCM_SPEC() != null) {
+            sql.SET("CM_SPEC = #{record.CM_SPEC,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmHtml() != null) {
-            sql.SET("CM_HTML = #{record.cmHtml,jdbcType=LONGVARCHAR}");
+        if (record.getCM_HTML() != null) {
+            sql.SET("CM_HTML = #{record.CM_HTML,jdbcType=LONGVARCHAR}");
         }
         
-        if (record.getCmChtml() != null) {
-            sql.SET("CM_CHTML = #{record.cmChtml,jdbcType=LONGVARCHAR}");
+        if (record.getCM_CHTML() != null) {
+            sql.SET("CM_CHTML = #{record.CM_CHTML,jdbcType=LONGVARCHAR}");
         }
         
-        if (record.getCmFigurespath() != null) {
-            sql.SET("CM_FIGURESPATH = #{record.cmFigurespath,jdbcType=LONGVARCHAR}");
+        if (record.getCM_FIGURESPATH() != null) {
+            sql.SET("CM_FIGURESPATH = #{record.CM_FIGURESPATH,jdbcType=LONGVARCHAR}");
         }
         
         applyWhere(sql, example, true);
@@ -266,25 +265,25 @@ public class GoodsSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_GOODS");
         
-        sql.SET("CM_GOODSID = #{record.cmGoodsid,jdbcType=VARCHAR}");
-        sql.SET("CM_GOODSARTNUM = #{record.cmGoodsartnum,jdbcType=VARCHAR}");
-        sql.SET("CM_SELLERID = #{record.cmSellerid,jdbcType=VARCHAR}");
-        sql.SET("CM_CLASSIFYID = #{record.cmClassifyid,jdbcType=INTEGER}");
-        sql.SET("CM_CLASSIFYTABS = #{record.cmClassifytabs,jdbcType=VARCHAR}");
-        sql.SET("CM_BRANDID = #{record.cmBrandid,jdbcType=INTEGER}");
-        sql.SET("CM_TITLE = #{record.cmTitle,jdbcType=VARCHAR}");
-        sql.SET("CM_SALES = #{record.cmSales,jdbcType=INTEGER}");
-        sql.SET("CM_ORIGINALPRICE = #{record.cmOriginalprice,jdbcType=DOUBLE}");
-        sql.SET("CM_PRESENTPRICE = #{record.cmPresentprice,jdbcType=DOUBLE}");
-        sql.SET("CM_MAINFIGUREPATH = #{record.cmMainfigurepath,jdbcType=VARCHAR}");
-        sql.SET("CM_HORIZONTALPATH = #{record.cmHorizontalpath,jdbcType=VARCHAR}");
-        sql.SET("CM_CREATETIME = #{record.cmCreatetime,jdbcType=TIMESTAMP}");
-        sql.SET("CM_ISOFF = #{record.cmIsoff,jdbcType=INTEGER}");
-        sql.SET("CM_ISPROMOTION = #{record.cmIspromotion,jdbcType=INTEGER}");
-        sql.SET("CM_SPEC = #{record.cmSpec,jdbcType=VARCHAR}");
-        sql.SET("CM_HTML = #{record.cmHtml,jdbcType=LONGVARCHAR}");
-        sql.SET("CM_CHTML = #{record.cmChtml,jdbcType=LONGVARCHAR}");
-        sql.SET("CM_FIGURESPATH = #{record.cmFigurespath,jdbcType=LONGVARCHAR}");
+        sql.SET("CM_GOODSID = #{record.CM_GOODSID,jdbcType=VARCHAR}");
+        sql.SET("CM_GOODSARTNUM = #{record.CM_GOODSARTNUM,jdbcType=VARCHAR}");
+        sql.SET("CM_SELLERID = #{record.CM_SELLERID,jdbcType=VARCHAR}");
+        sql.SET("CM_CLASSIFYID = #{record.CM_CLASSIFYID,jdbcType=INTEGER}");
+        sql.SET("CM_CLASSIFYTABS = #{record.CM_CLASSIFYTABS,jdbcType=VARCHAR}");
+        sql.SET("CM_BRANDID = #{record.CM_BRANDID,jdbcType=INTEGER}");
+        sql.SET("CM_TITLE = #{record.CM_TITLE,jdbcType=VARCHAR}");
+        sql.SET("CM_SALES = #{record.CM_SALES,jdbcType=INTEGER}");
+        sql.SET("CM_ORIGINALPRICE = #{record.CM_ORIGINALPRICE,jdbcType=DOUBLE}");
+        sql.SET("CM_PRESENTPRICE = #{record.CM_PRESENTPRICE,jdbcType=DOUBLE}");
+        sql.SET("CM_MAINFIGUREPATH = #{record.CM_MAINFIGUREPATH,jdbcType=VARCHAR}");
+        sql.SET("CM_HORIZONTALPATH = #{record.CM_HORIZONTALPATH,jdbcType=VARCHAR}");
+        sql.SET("CM_CREATETIME = #{record.CM_CREATETIME,jdbcType=TIMESTAMP}");
+        sql.SET("CM_ISOFF = #{record.CM_ISOFF,jdbcType=INTEGER}");
+        sql.SET("CM_ISPROMOTION = #{record.CM_ISPROMOTION,jdbcType=INTEGER}");
+        sql.SET("CM_SPEC = #{record.CM_SPEC,jdbcType=VARCHAR}");
+        sql.SET("CM_HTML = #{record.CM_HTML,jdbcType=LONGVARCHAR}");
+        sql.SET("CM_CHTML = #{record.CM_CHTML,jdbcType=LONGVARCHAR}");
+        sql.SET("CM_FIGURESPATH = #{record.CM_FIGURESPATH,jdbcType=LONGVARCHAR}");
         
         GoodsExample example = (GoodsExample) parameter.get("example");
         applyWhere(sql, example, true);
@@ -295,22 +294,22 @@ public class GoodsSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_GOODS");
         
-        sql.SET("CM_GOODSID = #{record.cmGoodsid,jdbcType=VARCHAR}");
-        sql.SET("CM_GOODSARTNUM = #{record.cmGoodsartnum,jdbcType=VARCHAR}");
-        sql.SET("CM_SELLERID = #{record.cmSellerid,jdbcType=VARCHAR}");
-        sql.SET("CM_CLASSIFYID = #{record.cmClassifyid,jdbcType=INTEGER}");
-        sql.SET("CM_CLASSIFYTABS = #{record.cmClassifytabs,jdbcType=VARCHAR}");
-        sql.SET("CM_BRANDID = #{record.cmBrandid,jdbcType=INTEGER}");
-        sql.SET("CM_TITLE = #{record.cmTitle,jdbcType=VARCHAR}");
-        sql.SET("CM_SALES = #{record.cmSales,jdbcType=INTEGER}");
-        sql.SET("CM_ORIGINALPRICE = #{record.cmOriginalprice,jdbcType=DOUBLE}");
-        sql.SET("CM_PRESENTPRICE = #{record.cmPresentprice,jdbcType=DOUBLE}");
-        sql.SET("CM_MAINFIGUREPATH = #{record.cmMainfigurepath,jdbcType=VARCHAR}");
-        sql.SET("CM_HORIZONTALPATH = #{record.cmHorizontalpath,jdbcType=VARCHAR}");
-        sql.SET("CM_CREATETIME = #{record.cmCreatetime,jdbcType=TIMESTAMP}");
-        sql.SET("CM_ISOFF = #{record.cmIsoff,jdbcType=INTEGER}");
-        sql.SET("CM_ISPROMOTION = #{record.cmIspromotion,jdbcType=INTEGER}");
-        sql.SET("CM_SPEC = #{record.cmSpec,jdbcType=VARCHAR}");
+        sql.SET("CM_GOODSID = #{record.CM_GOODSID,jdbcType=VARCHAR}");
+        sql.SET("CM_GOODSARTNUM = #{record.CM_GOODSARTNUM,jdbcType=VARCHAR}");
+        sql.SET("CM_SELLERID = #{record.CM_SELLERID,jdbcType=VARCHAR}");
+        sql.SET("CM_CLASSIFYID = #{record.CM_CLASSIFYID,jdbcType=INTEGER}");
+        sql.SET("CM_CLASSIFYTABS = #{record.CM_CLASSIFYTABS,jdbcType=VARCHAR}");
+        sql.SET("CM_BRANDID = #{record.CM_BRANDID,jdbcType=INTEGER}");
+        sql.SET("CM_TITLE = #{record.CM_TITLE,jdbcType=VARCHAR}");
+        sql.SET("CM_SALES = #{record.CM_SALES,jdbcType=INTEGER}");
+        sql.SET("CM_ORIGINALPRICE = #{record.CM_ORIGINALPRICE,jdbcType=DOUBLE}");
+        sql.SET("CM_PRESENTPRICE = #{record.CM_PRESENTPRICE,jdbcType=DOUBLE}");
+        sql.SET("CM_MAINFIGUREPATH = #{record.CM_MAINFIGUREPATH,jdbcType=VARCHAR}");
+        sql.SET("CM_HORIZONTALPATH = #{record.CM_HORIZONTALPATH,jdbcType=VARCHAR}");
+        sql.SET("CM_CREATETIME = #{record.CM_CREATETIME,jdbcType=TIMESTAMP}");
+        sql.SET("CM_ISOFF = #{record.CM_ISOFF,jdbcType=INTEGER}");
+        sql.SET("CM_ISPROMOTION = #{record.CM_ISPROMOTION,jdbcType=INTEGER}");
+        sql.SET("CM_SPEC = #{record.CM_SPEC,jdbcType=VARCHAR}");
         
         GoodsExample example = (GoodsExample) parameter.get("example");
         applyWhere(sql, example, true);

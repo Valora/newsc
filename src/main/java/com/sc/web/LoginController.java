@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
     private static final String URL = "/api/Login/";
-    
+
     private final LoginService loginService;
 
     @Autowired
@@ -47,7 +48,7 @@ public class LoginController {
     })
 
     public Result getToken(@RequestParam(value = "account") String account, @RequestParam(value = "password") String password) {
-        if (account.isEmpty() || password.isEmpty()){
+        if (account.isEmpty() || password.isEmpty()) {
             return GetResult.toJson(1, null, null, null, 0);
         }
         return loginService.GetToken(account, password);
@@ -60,11 +61,35 @@ public class LoginController {
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "code", value = "验证码", required = true, dataType = "Integer", paramType = "query"),
     })
-    public Result userLogin(@RequestParam(value = "account") String account, @RequestParam(value = "password") String password, @RequestParam(value = "code") Integer code){
+    public Result userLogin(@RequestParam(value = "account") String account, @RequestParam(value = "password") String password, @RequestParam(value = "code") Integer code) {
         if (account.isEmpty() || password.isEmpty()) {
             return GetResult.toJson(1, null, null, null, 0);
         }
         return loginService.userLogin(account, password, code);
+    }
+
+    //新增
+    @RequestMapping(value = URL + "UserLoginByAccountAndPassword", method = RequestMethod.GET)
+    @ApiOperation("商家（用户）只用账号密码登录")
+    @ApiImplicitParams({@ApiImplicitParam(name = "account", value = "账号", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "query"),
+    })
+    public Result userLoginByAccountAndPassword(@RequestParam(value = "account") String account, @RequestParam(value = "password") String password) {
+        if (StringUtils.isBlank(account) || StringUtils.isBlank(password)) {
+            return GetResult.toJson(1, null, null, null, 0);
+        }
+        return loginService.userLoginByAccountAndPasswordS(account, password);
+    }
+
+    //新增
+    @RequestMapping(value = URL + "UserLoginByPhoneAndCode", method = RequestMethod.GET)
+    @ApiOperation("商家（用户）只用电话号码和验证码登入")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "phone", value = "手机号码", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "code", value = "验证码", required = true, dataType = "String", paramType = "query"),
+    })
+    public Result userLoginByPhoneAndCode(@RequestParam(value = "phone") String phone, @RequestParam(value = "code") String code) {
+        return loginService.userLoginByPhoneAndCodeS(phone, code);
     }
 
     @RequestMapping(value = URL + "SellerLogin", method = RequestMethod.GET)
@@ -74,7 +99,7 @@ public class LoginController {
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "code", value = "验证码", required = true, dataType = "Integer", paramType = "query"),
     })
-    public Result sellerLogin(@RequestParam(value = "account") String account, @RequestParam(value = "password") String password, @RequestParam(value = "code") Integer code){
+    public Result sellerLogin(@RequestParam(value = "account") String account, @RequestParam(value = "password") String password, @RequestParam(value = "code") Integer code) {
         if (account.isEmpty() || password.isEmpty()) {
             return GetResult.toJson(1, null, null, null, 0);
         }
@@ -87,7 +112,7 @@ public class LoginController {
             @ApiImplicitParam(name = "account", value = "账号", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "query")
     })
-    public Result adminLogin(@RequestParam(value = "account") String account, @RequestParam(value = "password") String password){
+    public Result adminLogin(@RequestParam(value = "account") String account, @RequestParam(value = "password") String password) {
         if (account.isEmpty() || password.isEmpty()) {
             return GetResult.toJson(1, null, null, null, 0);
         }

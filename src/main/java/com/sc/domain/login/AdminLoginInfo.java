@@ -7,9 +7,9 @@ import lombok.Data;
  */
 @Data
 public class AdminLoginInfo {
-    private String cmAdminid;
-    private Integer cmLevel;
-    private String cmName;
-    private String cmMenuurl;
-    private String cmMenuname;
+    private String CM_ADMINID;
+    private Integer CM_LEVEL;
+    private String CM_NAME;
+    private String CM_MENUURL;
+    private String CM_MENUNAME;
 }

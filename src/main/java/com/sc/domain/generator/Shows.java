@@ -1,53 +1,53 @@
 package com.sc.domain.generator;
 
 public class Shows {
-    private Integer cmShowid;
+    private Integer CM_SHOWID;
 
-    private String cmPath;
+    private String CM_PATH;
 
-    private String cmGoodsid;
+    private String CM_GOODSID;
 
-    private Integer cmIstop;
+    private Integer CM_ISTOP;
 
-    private String cmUrl;
+    private String CM_URL;
 
-    public Integer getCmShowid() {
-        return cmShowid;
+    public Integer getCM_SHOWID() {
+        return CM_SHOWID;
     }
 
-    public void setCmShowid(Integer cmShowid) {
-        this.cmShowid = cmShowid;
+    public void setCM_SHOWID(Integer CM_SHOWID) {
+        this.CM_SHOWID = CM_SHOWID;
     }
 
-    public String getCmPath() {
-        return cmPath;
+    public String getCM_PATH() {
+        return CM_PATH;
     }
 
-    public void setCmPath(String cmPath) {
-        this.cmPath = cmPath == null ? null : cmPath.trim();
+    public void setCM_PATH(String CM_PATH) {
+        this.CM_PATH = CM_PATH == null ? null : CM_PATH.trim();
     }
 
-    public String getCmGoodsid() {
-        return cmGoodsid;
+    public String getCM_GOODSID() {
+        return CM_GOODSID;
     }
 
-    public void setCmGoodsid(String cmGoodsid) {
-        this.cmGoodsid = cmGoodsid == null ? null : cmGoodsid.trim();
+    public void setCM_GOODSID(String CM_GOODSID) {
+        this.CM_GOODSID = CM_GOODSID == null ? null : CM_GOODSID.trim();
     }
 
-    public Integer getCmIstop() {
-        return cmIstop;
+    public Integer getCM_ISTOP() {
+        return CM_ISTOP;
     }
 
-    public void setCmIstop(Integer cmIstop) {
-        this.cmIstop = cmIstop;
+    public void setCM_ISTOP(Integer CM_ISTOP) {
+        this.CM_ISTOP = CM_ISTOP;
     }
 
-    public String getCmUrl() {
-        return cmUrl;
+    public String getCM_URL() {
+        return CM_URL;
     }
 
-    public void setCmUrl(String cmUrl) {
-        this.cmUrl = cmUrl == null ? null : cmUrl.trim();
+    public void setCM_URL(String CM_URL) {
+        this.CM_URL = CM_URL == null ? null : CM_URL.trim();
     }
 }

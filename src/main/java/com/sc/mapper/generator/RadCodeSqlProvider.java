@@ -1,13 +1,12 @@
 package com.sc.mapper.generator;
 
 import com.sc.domain.generator.RadCode;
-import com.sc.domain.generator.RadCodeExample;
 import com.sc.domain.generator.RadCodeExample.Criteria;
 import com.sc.domain.generator.RadCodeExample.Criterion;
-import org.apache.ibatis.jdbc.SQL;
-
+import com.sc.domain.generator.RadCodeExample;
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.jdbc.SQL;
 
 public class RadCodeSqlProvider {
 
@@ -29,12 +28,12 @@ public class RadCodeSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("TB_RADCODE");
         
-        if (record.getCmUserid() != null) {
-            sql.VALUES("CM_USERID", "#{cmUserid,jdbcType=VARCHAR}");
+        if (record.getCM_USERID() != null) {
+            sql.VALUES("CM_USERID", "#{CM_USERID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmCode() != null) {
-            sql.VALUES("CM_CODE", "#{cmCode,jdbcType=INTEGER}");
+        if (record.getCM_CODE() != null) {
+            sql.VALUES("CM_CODE", "#{CM_CODE,jdbcType=INTEGER}");
         }
         
         return sql.toString();
@@ -65,12 +64,12 @@ public class RadCodeSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_RADCODE");
         
-        if (record.getCmUserid() != null) {
-            sql.SET("CM_USERID = #{record.cmUserid,jdbcType=VARCHAR}");
+        if (record.getCM_USERID() != null) {
+            sql.SET("CM_USERID = #{record.CM_USERID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmCode() != null) {
-            sql.SET("CM_CODE = #{record.cmCode,jdbcType=INTEGER}");
+        if (record.getCM_CODE() != null) {
+            sql.SET("CM_CODE = #{record.CM_CODE,jdbcType=INTEGER}");
         }
         
         applyWhere(sql, example, true);
@@ -81,8 +80,8 @@ public class RadCodeSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_RADCODE");
         
-        sql.SET("CM_USERID = #{record.cmUserid,jdbcType=VARCHAR}");
-        sql.SET("CM_CODE = #{record.cmCode,jdbcType=INTEGER}");
+        sql.SET("CM_USERID = #{record.CM_USERID,jdbcType=VARCHAR}");
+        sql.SET("CM_CODE = #{record.CM_CODE,jdbcType=INTEGER}");
         
         RadCodeExample example = (RadCodeExample) parameter.get("example");
         applyWhere(sql, example, true);

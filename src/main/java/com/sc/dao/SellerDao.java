@@ -87,7 +87,7 @@ public class SellerDao {
     public Afterservices selectafterserviceD(String afierserviceid) {
         AfterservicesExample afterservicesExample = new AfterservicesExample();
         AfterservicesExample.Criteria criteria = afterservicesExample.createCriteria();
-        criteria.andCmAfterserviceidEqualTo(afierserviceid);
+        criteria.andCM_AFTERSERVICEIDEqualTo(afierserviceid);
         Afterservices afterservices = null;
         List<Afterservices> list = afterservicesMapper.selectByExample(afterservicesExample);
         if (list != null && list.size() > 0) {
@@ -105,7 +105,7 @@ public class SellerDao {
     public Orderdetails selectordertails(String cmOrderdetailsid) {
         OrderdetailsExample orderdetailsExample = new OrderdetailsExample();
         OrderdetailsExample.Criteria criteria = orderdetailsExample.createCriteria();
-        criteria.andCmOrderdetailsidEqualTo(cmOrderdetailsid);
+        criteria.andCM_ORDERDETAILSIDEqualTo(cmOrderdetailsid);
         List<Orderdetails> list = orderdetailsMapper.selectByExample(orderdetailsExample);
         Orderdetails orderdetails = null;
         if (list != null && list.size() > 0) {
@@ -123,7 +123,7 @@ public class SellerDao {
     public void updateAfterservice(Afterservices afterservices, String afierserviceid) {
         AfterservicesExample afterservicesExample = new AfterservicesExample();
         AfterservicesExample.Criteria criteria = afterservicesExample.createCriteria();
-        criteria.andCmAfterserviceidEqualTo(afierserviceid);
+        criteria.andCM_AFTERSERVICEIDEqualTo(afierserviceid);
         afterservicesMapper.updateByExample(afterservices, afterservicesExample);
     }
 
@@ -136,7 +136,7 @@ public class SellerDao {
     public void updateOrderdetails(Orderdetails orderdetails, String cmOrderdetailsid) {
         OrderdetailsExample orderdetailsExample = new OrderdetailsExample();
         OrderdetailsExample.Criteria criteria = orderdetailsExample.createCriteria();
-        criteria.andCmOrderdetailsidEqualTo(cmOrderdetailsid);
+        criteria.andCM_ORDERDETAILSIDEqualTo(cmOrderdetailsid);
         orderdetailsMapper.updateByExample(orderdetails, orderdetailsExample);
     }
 
@@ -158,7 +158,7 @@ public class SellerDao {
     public Orders selectOrderbyOrderid(String cmOrderid) {
         OrdersExample ordersExample = new OrdersExample();
         OrdersExample.Criteria criteria = ordersExample.createCriteria();
-        criteria.andCmOrderidEqualTo(cmOrderid);
+        criteria.andCM_ORDERIDEqualTo(cmOrderid);
         Orders orders = ordersMapper.selectByExample(ordersExample).get(0);
         return orders;
     }
@@ -172,7 +172,7 @@ public class SellerDao {
     public List<Orderdetails> selectOrdertailsByOrderid(String cmOrderid) {
         OrderdetailsExample orderdetailsExample = new OrderdetailsExample();
         OrderdetailsExample.Criteria criteria = orderdetailsExample.createCriteria();
-        criteria.andCmOrderidEqualTo(cmOrderid);
+        criteria.andCM_ORDERIDEqualTo(cmOrderid);
         List<Orderdetails> list = orderdetailsMapper.selectByExample(orderdetailsExample);
         return list;
     }
@@ -186,7 +186,7 @@ public class SellerDao {
     public void updateOrder(Orders orders, String cmOrderid) {
         OrdersExample ordersExample = new OrdersExample();
         OrdersExample.Criteria criteria = ordersExample.createCriteria();
-        criteria.andCmOrderidEqualTo(cmOrderid);
+        criteria.andCM_ORDERIDEqualTo(cmOrderid);
         ordersMapper.updateByExample(orders, ordersExample);
     }
 
@@ -199,7 +199,7 @@ public class SellerDao {
     public Users selectUsersByOrderdetailsid(String ordcerdetailsid) {
         UsersExample usersExample = new UsersExample();
         UsersExample.Criteria criteria = usersExample.createCriteria();
-        criteria.andCmUseridEqualTo(ordcerdetailsid);
+        criteria.andCM_USERIDEqualTo(ordcerdetailsid);
         List<Users> list = usersMapper.selectByExample(usersExample);
         Users users = null;
         if (list != null && list.size() > 0) {
@@ -217,7 +217,7 @@ public class SellerDao {
     public List<Goods> sellerGoodsBySellerid(String sellerId) {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        criteria.andCmSelleridEqualTo(sellerId);
+        criteria.andCM_SELLERIDEqualTo(sellerId);
         goodsExample.setOrderByClause("CM_CREATETIME desc");
         return goodsMapper.selectByExample(goodsExample);
     }
@@ -231,7 +231,7 @@ public class SellerDao {
     public Sellers selectSellerBysellerid(String sellerId) {
         SellersExample sellersExample = new SellersExample();
         SellersExample.Criteria criteria = sellersExample.createCriteria();
-        criteria.andCmSelleridEqualTo(sellerId);
+        criteria.andCM_SELLERIDEqualTo(sellerId);
         List<Sellers> list = sellersMapper.selectByExample(sellersExample);
         Sellers sellers = null;
         if (list != null && list.size() > 0) {
@@ -248,7 +248,7 @@ public class SellerDao {
     public void updateseller(Sellers sellers) {
         SellersExample sellersExample = new SellersExample();
         SellersExample.Criteria criteria = sellersExample.createCriteria();
-        criteria.andCmSelleridEqualTo(sellers.getCmSellerid());
+        criteria.andCM_SELLERIDEqualTo(sellers.getCM_SELLERID());
         sellersMapper.updateByExample(sellers, sellersExample);
     }
 
@@ -261,7 +261,7 @@ public class SellerDao {
     public Register selectRegisterByPhone(Long phone) {
         RegisterExample registerExample = new RegisterExample();
         RegisterExample.Criteria criteria = registerExample.createCriteria();
-        criteria.andCmPhoneEqualTo(phone);
+        criteria.andCM_PHONEEqualTo(phone);
         List<Register> list = registerMapper.selectByExample(registerExample);
         Register register = null;
         if (list != null && list.size() > 0) {
@@ -288,7 +288,7 @@ public class SellerDao {
     public void updateregister(Register register, Long phone) {
         RegisterExample registerExample = new RegisterExample();
         RegisterExample.Criteria criteria = registerExample.createCriteria();
-        criteria.andCmPhoneEqualTo(phone);
+        criteria.andCM_PHONEEqualTo(phone);
         registerMapper.updateByExample(register, registerExample);
     }
 
@@ -301,7 +301,7 @@ public class SellerDao {
     public Sellers selectSellerBysellerPhone(Long phone) {
         SellersExample sellersExample = new SellersExample();
         SellersExample.Criteria criteria = sellersExample.createCriteria();
-        criteria.andCmPasswordEqualTo(phone.toString());
+        criteria.andCM_PASSWORDEqualTo(phone.toString());
         List<Sellers> list = sellersMapper.selectByExample(sellersExample);
         Sellers sellers = null;
         if (list != null && list.size() > 0) {

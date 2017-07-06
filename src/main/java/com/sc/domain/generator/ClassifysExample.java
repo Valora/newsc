@@ -104,323 +104,323 @@ public class ClassifysExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andCmClassifyidIsNull() {
+        public Criteria andCM_CLASSIFYIDIsNull() {
             addCriterion("CM_CLASSIFYID is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifyidIsNotNull() {
+        public Criteria andCM_CLASSIFYIDIsNotNull() {
             addCriterion("CM_CLASSIFYID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifyidEqualTo(Integer value) {
-            addCriterion("CM_CLASSIFYID =", value, "cmClassifyid");
+        public Criteria andCM_CLASSIFYIDEqualTo(Integer value) {
+            addCriterion("CM_CLASSIFYID =", value, "CM_CLASSIFYID");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifyidNotEqualTo(Integer value) {
-            addCriterion("CM_CLASSIFYID <>", value, "cmClassifyid");
+        public Criteria andCM_CLASSIFYIDNotEqualTo(Integer value) {
+            addCriterion("CM_CLASSIFYID <>", value, "CM_CLASSIFYID");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifyidGreaterThan(Integer value) {
-            addCriterion("CM_CLASSIFYID >", value, "cmClassifyid");
+        public Criteria andCM_CLASSIFYIDGreaterThan(Integer value) {
+            addCriterion("CM_CLASSIFYID >", value, "CM_CLASSIFYID");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifyidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("CM_CLASSIFYID >=", value, "cmClassifyid");
+        public Criteria andCM_CLASSIFYIDGreaterThanOrEqualTo(Integer value) {
+            addCriterion("CM_CLASSIFYID >=", value, "CM_CLASSIFYID");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifyidLessThan(Integer value) {
-            addCriterion("CM_CLASSIFYID <", value, "cmClassifyid");
+        public Criteria andCM_CLASSIFYIDLessThan(Integer value) {
+            addCriterion("CM_CLASSIFYID <", value, "CM_CLASSIFYID");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifyidLessThanOrEqualTo(Integer value) {
-            addCriterion("CM_CLASSIFYID <=", value, "cmClassifyid");
+        public Criteria andCM_CLASSIFYIDLessThanOrEqualTo(Integer value) {
+            addCriterion("CM_CLASSIFYID <=", value, "CM_CLASSIFYID");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifyidIn(List<Integer> values) {
-            addCriterion("CM_CLASSIFYID in", values, "cmClassifyid");
+        public Criteria andCM_CLASSIFYIDIn(List<Integer> values) {
+            addCriterion("CM_CLASSIFYID in", values, "CM_CLASSIFYID");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifyidNotIn(List<Integer> values) {
-            addCriterion("CM_CLASSIFYID not in", values, "cmClassifyid");
+        public Criteria andCM_CLASSIFYIDNotIn(List<Integer> values) {
+            addCriterion("CM_CLASSIFYID not in", values, "CM_CLASSIFYID");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifyidBetween(Integer value1, Integer value2) {
-            addCriterion("CM_CLASSIFYID between", value1, value2, "cmClassifyid");
+        public Criteria andCM_CLASSIFYIDBetween(Integer value1, Integer value2) {
+            addCriterion("CM_CLASSIFYID between", value1, value2, "CM_CLASSIFYID");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifyidNotBetween(Integer value1, Integer value2) {
-            addCriterion("CM_CLASSIFYID not between", value1, value2, "cmClassifyid");
+        public Criteria andCM_CLASSIFYIDNotBetween(Integer value1, Integer value2) {
+            addCriterion("CM_CLASSIFYID not between", value1, value2, "CM_CLASSIFYID");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifynameIsNull() {
+        public Criteria andCM_CLASSIFYNAMEIsNull() {
             addCriterion("CM_CLASSIFYNAME is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifynameIsNotNull() {
+        public Criteria andCM_CLASSIFYNAMEIsNotNull() {
             addCriterion("CM_CLASSIFYNAME is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifynameEqualTo(String value) {
-            addCriterion("CM_CLASSIFYNAME =", value, "cmClassifyname");
+        public Criteria andCM_CLASSIFYNAMEEqualTo(String value) {
+            addCriterion("CM_CLASSIFYNAME =", value, "CM_CLASSIFYNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifynameNotEqualTo(String value) {
-            addCriterion("CM_CLASSIFYNAME <>", value, "cmClassifyname");
+        public Criteria andCM_CLASSIFYNAMENotEqualTo(String value) {
+            addCriterion("CM_CLASSIFYNAME <>", value, "CM_CLASSIFYNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifynameGreaterThan(String value) {
-            addCriterion("CM_CLASSIFYNAME >", value, "cmClassifyname");
+        public Criteria andCM_CLASSIFYNAMEGreaterThan(String value) {
+            addCriterion("CM_CLASSIFYNAME >", value, "CM_CLASSIFYNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifynameGreaterThanOrEqualTo(String value) {
-            addCriterion("CM_CLASSIFYNAME >=", value, "cmClassifyname");
+        public Criteria andCM_CLASSIFYNAMEGreaterThanOrEqualTo(String value) {
+            addCriterion("CM_CLASSIFYNAME >=", value, "CM_CLASSIFYNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifynameLessThan(String value) {
-            addCriterion("CM_CLASSIFYNAME <", value, "cmClassifyname");
+        public Criteria andCM_CLASSIFYNAMELessThan(String value) {
+            addCriterion("CM_CLASSIFYNAME <", value, "CM_CLASSIFYNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifynameLessThanOrEqualTo(String value) {
-            addCriterion("CM_CLASSIFYNAME <=", value, "cmClassifyname");
+        public Criteria andCM_CLASSIFYNAMELessThanOrEqualTo(String value) {
+            addCriterion("CM_CLASSIFYNAME <=", value, "CM_CLASSIFYNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifynameLike(String value) {
-            addCriterion("CM_CLASSIFYNAME like", value, "cmClassifyname");
+        public Criteria andCM_CLASSIFYNAMELike(String value) {
+            addCriterion("CM_CLASSIFYNAME like", value, "CM_CLASSIFYNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifynameNotLike(String value) {
-            addCriterion("CM_CLASSIFYNAME not like", value, "cmClassifyname");
+        public Criteria andCM_CLASSIFYNAMENotLike(String value) {
+            addCriterion("CM_CLASSIFYNAME not like", value, "CM_CLASSIFYNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifynameIn(List<String> values) {
-            addCriterion("CM_CLASSIFYNAME in", values, "cmClassifyname");
+        public Criteria andCM_CLASSIFYNAMEIn(List<String> values) {
+            addCriterion("CM_CLASSIFYNAME in", values, "CM_CLASSIFYNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifynameNotIn(List<String> values) {
-            addCriterion("CM_CLASSIFYNAME not in", values, "cmClassifyname");
+        public Criteria andCM_CLASSIFYNAMENotIn(List<String> values) {
+            addCriterion("CM_CLASSIFYNAME not in", values, "CM_CLASSIFYNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifynameBetween(String value1, String value2) {
-            addCriterion("CM_CLASSIFYNAME between", value1, value2, "cmClassifyname");
+        public Criteria andCM_CLASSIFYNAMEBetween(String value1, String value2) {
+            addCriterion("CM_CLASSIFYNAME between", value1, value2, "CM_CLASSIFYNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmClassifynameNotBetween(String value1, String value2) {
-            addCriterion("CM_CLASSIFYNAME not between", value1, value2, "cmClassifyname");
+        public Criteria andCM_CLASSIFYNAMENotBetween(String value1, String value2) {
+            addCriterion("CM_CLASSIFYNAME not between", value1, value2, "CM_CLASSIFYNAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmParentidIsNull() {
+        public Criteria andCM_PARENTIDIsNull() {
             addCriterion("CM_PARENTID is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmParentidIsNotNull() {
+        public Criteria andCM_PARENTIDIsNotNull() {
             addCriterion("CM_PARENTID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmParentidEqualTo(Integer value) {
-            addCriterion("CM_PARENTID =", value, "cmParentid");
+        public Criteria andCM_PARENTIDEqualTo(Integer value) {
+            addCriterion("CM_PARENTID =", value, "CM_PARENTID");
             return (Criteria) this;
         }
 
-        public Criteria andCmParentidNotEqualTo(Integer value) {
-            addCriterion("CM_PARENTID <>", value, "cmParentid");
+        public Criteria andCM_PARENTIDNotEqualTo(Integer value) {
+            addCriterion("CM_PARENTID <>", value, "CM_PARENTID");
             return (Criteria) this;
         }
 
-        public Criteria andCmParentidGreaterThan(Integer value) {
-            addCriterion("CM_PARENTID >", value, "cmParentid");
+        public Criteria andCM_PARENTIDGreaterThan(Integer value) {
+            addCriterion("CM_PARENTID >", value, "CM_PARENTID");
             return (Criteria) this;
         }
 
-        public Criteria andCmParentidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("CM_PARENTID >=", value, "cmParentid");
+        public Criteria andCM_PARENTIDGreaterThanOrEqualTo(Integer value) {
+            addCriterion("CM_PARENTID >=", value, "CM_PARENTID");
             return (Criteria) this;
         }
 
-        public Criteria andCmParentidLessThan(Integer value) {
-            addCriterion("CM_PARENTID <", value, "cmParentid");
+        public Criteria andCM_PARENTIDLessThan(Integer value) {
+            addCriterion("CM_PARENTID <", value, "CM_PARENTID");
             return (Criteria) this;
         }
 
-        public Criteria andCmParentidLessThanOrEqualTo(Integer value) {
-            addCriterion("CM_PARENTID <=", value, "cmParentid");
+        public Criteria andCM_PARENTIDLessThanOrEqualTo(Integer value) {
+            addCriterion("CM_PARENTID <=", value, "CM_PARENTID");
             return (Criteria) this;
         }
 
-        public Criteria andCmParentidIn(List<Integer> values) {
-            addCriterion("CM_PARENTID in", values, "cmParentid");
+        public Criteria andCM_PARENTIDIn(List<Integer> values) {
+            addCriterion("CM_PARENTID in", values, "CM_PARENTID");
             return (Criteria) this;
         }
 
-        public Criteria andCmParentidNotIn(List<Integer> values) {
-            addCriterion("CM_PARENTID not in", values, "cmParentid");
+        public Criteria andCM_PARENTIDNotIn(List<Integer> values) {
+            addCriterion("CM_PARENTID not in", values, "CM_PARENTID");
             return (Criteria) this;
         }
 
-        public Criteria andCmParentidBetween(Integer value1, Integer value2) {
-            addCriterion("CM_PARENTID between", value1, value2, "cmParentid");
+        public Criteria andCM_PARENTIDBetween(Integer value1, Integer value2) {
+            addCriterion("CM_PARENTID between", value1, value2, "CM_PARENTID");
             return (Criteria) this;
         }
 
-        public Criteria andCmParentidNotBetween(Integer value1, Integer value2) {
-            addCriterion("CM_PARENTID not between", value1, value2, "cmParentid");
+        public Criteria andCM_PARENTIDNotBetween(Integer value1, Integer value2) {
+            addCriterion("CM_PARENTID not between", value1, value2, "CM_PARENTID");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathIsNull() {
+        public Criteria andCM_IMGPATHIsNull() {
             addCriterion("CM_IMGPATH is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathIsNotNull() {
+        public Criteria andCM_IMGPATHIsNotNull() {
             addCriterion("CM_IMGPATH is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathEqualTo(String value) {
-            addCriterion("CM_IMGPATH =", value, "cmImgpath");
+        public Criteria andCM_IMGPATHEqualTo(String value) {
+            addCriterion("CM_IMGPATH =", value, "CM_IMGPATH");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathNotEqualTo(String value) {
-            addCriterion("CM_IMGPATH <>", value, "cmImgpath");
+        public Criteria andCM_IMGPATHNotEqualTo(String value) {
+            addCriterion("CM_IMGPATH <>", value, "CM_IMGPATH");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathGreaterThan(String value) {
-            addCriterion("CM_IMGPATH >", value, "cmImgpath");
+        public Criteria andCM_IMGPATHGreaterThan(String value) {
+            addCriterion("CM_IMGPATH >", value, "CM_IMGPATH");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathGreaterThanOrEqualTo(String value) {
-            addCriterion("CM_IMGPATH >=", value, "cmImgpath");
+        public Criteria andCM_IMGPATHGreaterThanOrEqualTo(String value) {
+            addCriterion("CM_IMGPATH >=", value, "CM_IMGPATH");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathLessThan(String value) {
-            addCriterion("CM_IMGPATH <", value, "cmImgpath");
+        public Criteria andCM_IMGPATHLessThan(String value) {
+            addCriterion("CM_IMGPATH <", value, "CM_IMGPATH");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathLessThanOrEqualTo(String value) {
-            addCriterion("CM_IMGPATH <=", value, "cmImgpath");
+        public Criteria andCM_IMGPATHLessThanOrEqualTo(String value) {
+            addCriterion("CM_IMGPATH <=", value, "CM_IMGPATH");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathLike(String value) {
-            addCriterion("CM_IMGPATH like", value, "cmImgpath");
+        public Criteria andCM_IMGPATHLike(String value) {
+            addCriterion("CM_IMGPATH like", value, "CM_IMGPATH");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathNotLike(String value) {
-            addCriterion("CM_IMGPATH not like", value, "cmImgpath");
+        public Criteria andCM_IMGPATHNotLike(String value) {
+            addCriterion("CM_IMGPATH not like", value, "CM_IMGPATH");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathIn(List<String> values) {
-            addCriterion("CM_IMGPATH in", values, "cmImgpath");
+        public Criteria andCM_IMGPATHIn(List<String> values) {
+            addCriterion("CM_IMGPATH in", values, "CM_IMGPATH");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathNotIn(List<String> values) {
-            addCriterion("CM_IMGPATH not in", values, "cmImgpath");
+        public Criteria andCM_IMGPATHNotIn(List<String> values) {
+            addCriterion("CM_IMGPATH not in", values, "CM_IMGPATH");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathBetween(String value1, String value2) {
-            addCriterion("CM_IMGPATH between", value1, value2, "cmImgpath");
+        public Criteria andCM_IMGPATHBetween(String value1, String value2) {
+            addCriterion("CM_IMGPATH between", value1, value2, "CM_IMGPATH");
             return (Criteria) this;
         }
 
-        public Criteria andCmImgpathNotBetween(String value1, String value2) {
-            addCriterion("CM_IMGPATH not between", value1, value2, "cmImgpath");
+        public Criteria andCM_IMGPATHNotBetween(String value1, String value2) {
+            addCriterion("CM_IMGPATH not between", value1, value2, "CM_IMGPATH");
             return (Criteria) this;
         }
 
-        public Criteria andCmSortIsNull() {
+        public Criteria andCM_SORTIsNull() {
             addCriterion("CM_SORT is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmSortIsNotNull() {
+        public Criteria andCM_SORTIsNotNull() {
             addCriterion("CM_SORT is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmSortEqualTo(Integer value) {
-            addCriterion("CM_SORT =", value, "cmSort");
+        public Criteria andCM_SORTEqualTo(Integer value) {
+            addCriterion("CM_SORT =", value, "CM_SORT");
             return (Criteria) this;
         }
 
-        public Criteria andCmSortNotEqualTo(Integer value) {
-            addCriterion("CM_SORT <>", value, "cmSort");
+        public Criteria andCM_SORTNotEqualTo(Integer value) {
+            addCriterion("CM_SORT <>", value, "CM_SORT");
             return (Criteria) this;
         }
 
-        public Criteria andCmSortGreaterThan(Integer value) {
-            addCriterion("CM_SORT >", value, "cmSort");
+        public Criteria andCM_SORTGreaterThan(Integer value) {
+            addCriterion("CM_SORT >", value, "CM_SORT");
             return (Criteria) this;
         }
 
-        public Criteria andCmSortGreaterThanOrEqualTo(Integer value) {
-            addCriterion("CM_SORT >=", value, "cmSort");
+        public Criteria andCM_SORTGreaterThanOrEqualTo(Integer value) {
+            addCriterion("CM_SORT >=", value, "CM_SORT");
             return (Criteria) this;
         }
 
-        public Criteria andCmSortLessThan(Integer value) {
-            addCriterion("CM_SORT <", value, "cmSort");
+        public Criteria andCM_SORTLessThan(Integer value) {
+            addCriterion("CM_SORT <", value, "CM_SORT");
             return (Criteria) this;
         }
 
-        public Criteria andCmSortLessThanOrEqualTo(Integer value) {
-            addCriterion("CM_SORT <=", value, "cmSort");
+        public Criteria andCM_SORTLessThanOrEqualTo(Integer value) {
+            addCriterion("CM_SORT <=", value, "CM_SORT");
             return (Criteria) this;
         }
 
-        public Criteria andCmSortIn(List<Integer> values) {
-            addCriterion("CM_SORT in", values, "cmSort");
+        public Criteria andCM_SORTIn(List<Integer> values) {
+            addCriterion("CM_SORT in", values, "CM_SORT");
             return (Criteria) this;
         }
 
-        public Criteria andCmSortNotIn(List<Integer> values) {
-            addCriterion("CM_SORT not in", values, "cmSort");
+        public Criteria andCM_SORTNotIn(List<Integer> values) {
+            addCriterion("CM_SORT not in", values, "CM_SORT");
             return (Criteria) this;
         }
 
-        public Criteria andCmSortBetween(Integer value1, Integer value2) {
-            addCriterion("CM_SORT between", value1, value2, "cmSort");
+        public Criteria andCM_SORTBetween(Integer value1, Integer value2) {
+            addCriterion("CM_SORT between", value1, value2, "CM_SORT");
             return (Criteria) this;
         }
 
-        public Criteria andCmSortNotBetween(Integer value1, Integer value2) {
-            addCriterion("CM_SORT not between", value1, value2, "cmSort");
+        public Criteria andCM_SORTNotBetween(Integer value1, Integer value2) {
+            addCriterion("CM_SORT not between", value1, value2, "CM_SORT");
             return (Criteria) this;
         }
     }

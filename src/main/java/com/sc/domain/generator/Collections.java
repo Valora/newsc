@@ -3,43 +3,43 @@ package com.sc.domain.generator;
 import java.util.Date;
 
 public class Collections {
-    private Integer cmCollectionid;
+    private Integer CM_COLLECTIONID;
 
-    private String cmUserid;
+    private String CM_USERID;
 
-    private String cmGoodsid;
+    private String CM_GOODSID;
 
-    private Date cmJointime;
+    private Date CM_JOINTIME;
 
-    public Integer getCmCollectionid() {
-        return cmCollectionid;
+    public Integer getCM_COLLECTIONID() {
+        return CM_COLLECTIONID;
     }
 
-    public void setCmCollectionid(Integer cmCollectionid) {
-        this.cmCollectionid = cmCollectionid;
+    public void setCM_COLLECTIONID(Integer CM_COLLECTIONID) {
+        this.CM_COLLECTIONID = CM_COLLECTIONID;
     }
 
-    public String getCmUserid() {
-        return cmUserid;
+    public String getCM_USERID() {
+        return CM_USERID;
     }
 
-    public void setCmUserid(String cmUserid) {
-        this.cmUserid = cmUserid == null ? null : cmUserid.trim();
+    public void setCM_USERID(String CM_USERID) {
+        this.CM_USERID = CM_USERID == null ? null : CM_USERID.trim();
     }
 
-    public String getCmGoodsid() {
-        return cmGoodsid;
+    public String getCM_GOODSID() {
+        return CM_GOODSID;
     }
 
-    public void setCmGoodsid(String cmGoodsid) {
-        this.cmGoodsid = cmGoodsid == null ? null : cmGoodsid.trim();
+    public void setCM_GOODSID(String CM_GOODSID) {
+        this.CM_GOODSID = CM_GOODSID == null ? null : CM_GOODSID.trim();
     }
 
-    public Date getCmJointime() {
-        return cmJointime;
+    public Date getCM_JOINTIME() {
+        return CM_JOINTIME;
     }
 
-    public void setCmJointime(Date cmJointime) {
-        this.cmJointime = cmJointime;
+    public void setCM_JOINTIME(Date CM_JOINTIME) {
+        this.CM_JOINTIME = CM_JOINTIME;
     }
 }

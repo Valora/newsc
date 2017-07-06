@@ -1,13 +1,12 @@
 package com.sc.mapper.generator;
 
 import com.sc.domain.generator.Logisticss;
-import com.sc.domain.generator.LogisticssExample;
 import com.sc.domain.generator.LogisticssExample.Criteria;
 import com.sc.domain.generator.LogisticssExample.Criterion;
-import org.apache.ibatis.jdbc.SQL;
-
+import com.sc.domain.generator.LogisticssExample;
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.jdbc.SQL;
 
 public class LogisticssSqlProvider {
 
@@ -29,12 +28,12 @@ public class LogisticssSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("TB_LOGISTICSS");
         
-        if (record.getCmLogisticsid() != null) {
-            sql.VALUES("CM_LOGISTICSID", "#{cmLogisticsid,jdbcType=INTEGER}");
+        if (record.getCM_LOGISTICSID() != null) {
+            sql.VALUES("CM_LOGISTICSID", "#{CM_LOGISTICSID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmLogisticsname() != null) {
-            sql.VALUES("CM_LOGISTICSNAME", "#{cmLogisticsname,jdbcType=VARCHAR}");
+        if (record.getCM_LOGISTICSNAME() != null) {
+            sql.VALUES("CM_LOGISTICSNAME", "#{CM_LOGISTICSNAME,jdbcType=VARCHAR}");
         }
         
         return sql.toString();
@@ -65,12 +64,12 @@ public class LogisticssSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_LOGISTICSS");
         
-        if (record.getCmLogisticsid() != null) {
-            sql.SET("CM_LOGISTICSID = #{record.cmLogisticsid,jdbcType=INTEGER}");
+        if (record.getCM_LOGISTICSID() != null) {
+            sql.SET("CM_LOGISTICSID = #{record.CM_LOGISTICSID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmLogisticsname() != null) {
-            sql.SET("CM_LOGISTICSNAME = #{record.cmLogisticsname,jdbcType=VARCHAR}");
+        if (record.getCM_LOGISTICSNAME() != null) {
+            sql.SET("CM_LOGISTICSNAME = #{record.CM_LOGISTICSNAME,jdbcType=VARCHAR}");
         }
         
         applyWhere(sql, example, true);
@@ -81,8 +80,8 @@ public class LogisticssSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_LOGISTICSS");
         
-        sql.SET("CM_LOGISTICSID = #{record.cmLogisticsid,jdbcType=INTEGER}");
-        sql.SET("CM_LOGISTICSNAME = #{record.cmLogisticsname,jdbcType=VARCHAR}");
+        sql.SET("CM_LOGISTICSID = #{record.CM_LOGISTICSID,jdbcType=INTEGER}");
+        sql.SET("CM_LOGISTICSNAME = #{record.CM_LOGISTICSNAME,jdbcType=VARCHAR}");
         
         LogisticssExample example = (LogisticssExample) parameter.get("example");
         applyWhere(sql, example, true);

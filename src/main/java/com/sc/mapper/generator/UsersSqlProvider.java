@@ -1,13 +1,12 @@
 package com.sc.mapper.generator;
 
 import com.sc.domain.generator.Users;
-import com.sc.domain.generator.UsersExample;
 import com.sc.domain.generator.UsersExample.Criteria;
 import com.sc.domain.generator.UsersExample.Criterion;
-import org.apache.ibatis.jdbc.SQL;
-
+import com.sc.domain.generator.UsersExample;
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.jdbc.SQL;
 
 public class UsersSqlProvider {
 
@@ -29,96 +28,96 @@ public class UsersSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("TB_USERS");
         
-        if (record.getCmUserid() != null) {
-            sql.VALUES("CM_USERID", "#{cmUserid,jdbcType=VARCHAR}");
+        if (record.getCM_USERID() != null) {
+            sql.VALUES("CM_USERID", "#{CM_USERID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmShopname() != null) {
-            sql.VALUES("CM_SHOPNAME", "#{cmShopname,jdbcType=VARCHAR}");
+        if (record.getCM_SHOPNAME() != null) {
+            sql.VALUES("CM_SHOPNAME", "#{CM_SHOPNAME,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmPhone() != null) {
-            sql.VALUES("CM_PHONE", "#{cmPhone,jdbcType=BIGINT}");
+        if (record.getCM_PHONE() != null) {
+            sql.VALUES("CM_PHONE", "#{CM_PHONE,jdbcType=BIGINT}");
         }
         
-        if (record.getCmAccount() != null) {
-            sql.VALUES("CM_ACCOUNT", "#{cmAccount,jdbcType=VARCHAR}");
+        if (record.getCM_ACCOUNT() != null) {
+            sql.VALUES("CM_ACCOUNT", "#{CM_ACCOUNT,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmPassword() != null) {
-            sql.VALUES("CM_PASSWORD", "#{cmPassword,jdbcType=VARCHAR}");
+        if (record.getCM_PASSWORD() != null) {
+            sql.VALUES("CM_PASSWORD", "#{CM_PASSWORD,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmIntegral() != null) {
-            sql.VALUES("CM_INTEGRAL", "#{cmIntegral,jdbcType=INTEGER}");
+        if (record.getCM_INTEGRAL() != null) {
+            sql.VALUES("CM_INTEGRAL", "#{CM_INTEGRAL,jdbcType=INTEGER}");
         }
         
-        if (record.getCmBalance() != null) {
-            sql.VALUES("CM_BALANCE", "#{cmBalance,jdbcType=DOUBLE}");
+        if (record.getCM_BALANCE() != null) {
+            sql.VALUES("CM_BALANCE", "#{CM_BALANCE,jdbcType=DOUBLE}");
         }
         
-        if (record.getCmCardpath() != null) {
-            sql.VALUES("CM_CARDPATH", "#{cmCardpath,jdbcType=VARCHAR}");
+        if (record.getCM_CARDPATH() != null) {
+            sql.VALUES("CM_CARDPATH", "#{CM_CARDPATH,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmStorepath() != null) {
-            sql.VALUES("CM_STOREPATH", "#{cmStorepath,jdbcType=VARCHAR}");
+        if (record.getCM_STOREPATH() != null) {
+            sql.VALUES("CM_STOREPATH", "#{CM_STOREPATH,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmLicensepath() != null) {
-            sql.VALUES("CM_LICENSEPATH", "#{cmLicensepath,jdbcType=VARCHAR}");
+        if (record.getCM_LICENSEPATH() != null) {
+            sql.VALUES("CM_LICENSEPATH", "#{CM_LICENSEPATH,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmShopeaddress() != null) {
-            sql.VALUES("CM_SHOPEADDRESS", "#{cmShopeaddress,jdbcType=VARCHAR}");
+        if (record.getCM_SHOPEADDRESS() != null) {
+            sql.VALUES("CM_SHOPEADDRESS", "#{CM_SHOPEADDRESS,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmShoplon() != null) {
-            sql.VALUES("CM_SHOPLON", "#{cmShoplon,jdbcType=DOUBLE}");
+        if (record.getCM_SHOPLON() != null) {
+            sql.VALUES("CM_SHOPLON", "#{CM_SHOPLON,jdbcType=DOUBLE}");
         }
         
-        if (record.getCmShoplat() != null) {
-            sql.VALUES("CM_SHOPLAT", "#{cmShoplat,jdbcType=DOUBLE}");
+        if (record.getCM_SHOPLAT() != null) {
+            sql.VALUES("CM_SHOPLAT", "#{CM_SHOPLAT,jdbcType=DOUBLE}");
         }
         
-        if (record.getCmLevel() != null) {
-            sql.VALUES("CM_LEVEL", "#{cmLevel,jdbcType=INTEGER}");
+        if (record.getCM_LEVEL() != null) {
+            sql.VALUES("CM_LEVEL", "#{CM_LEVEL,jdbcType=INTEGER}");
         }
         
-        if (record.getCmCreatetime() != null) {
-            sql.VALUES("CM_CREATETIME", "#{cmCreatetime,jdbcType=TIMESTAMP}");
+        if (record.getCM_CREATETIME() != null) {
+            sql.VALUES("CM_CREATETIME", "#{CM_CREATETIME,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getCmIsexamine() != null) {
-            sql.VALUES("CM_ISEXAMINE", "#{cmIsexamine,jdbcType=INTEGER}");
+        if (record.getCM_ISEXAMINE() != null) {
+            sql.VALUES("CM_ISEXAMINE", "#{CM_ISEXAMINE,jdbcType=INTEGER}");
         }
         
-        if (record.getCmReason() != null) {
-            sql.VALUES("CM_REASON", "#{cmReason,jdbcType=VARCHAR}");
+        if (record.getCM_REASON() != null) {
+            sql.VALUES("CM_REASON", "#{CM_REASON,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmCardno() != null) {
-            sql.VALUES("CM_CARDNO", "#{cmCardno,jdbcType=VARCHAR}");
+        if (record.getCM_CARDNO() != null) {
+            sql.VALUES("CM_CARDNO", "#{CM_CARDNO,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmName() != null) {
-            sql.VALUES("CM_NAME", "#{cmName,jdbcType=VARCHAR}");
+        if (record.getCM_NAME() != null) {
+            sql.VALUES("CM_NAME", "#{CM_NAME,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmContactname() != null) {
-            sql.VALUES("CM_CONTACTNAME", "#{cmContactname,jdbcType=VARCHAR}");
+        if (record.getCM_CONTACTNAME() != null) {
+            sql.VALUES("CM_CONTACTNAME", "#{CM_CONTACTNAME,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmContactphone() != null) {
-            sql.VALUES("CM_CONTACTPHONE", "#{cmContactphone,jdbcType=VARCHAR}");
+        if (record.getCM_CONTACTPHONE() != null) {
+            sql.VALUES("CM_CONTACTPHONE", "#{CM_CONTACTPHONE,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmTelephone() != null) {
-            sql.VALUES("CM_TELEPHONE", "#{cmTelephone,jdbcType=VARCHAR}");
+        if (record.getCM_TELEPHONE() != null) {
+            sql.VALUES("CM_TELEPHONE", "#{CM_TELEPHONE,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmPax() != null) {
-            sql.VALUES("CM_PAX", "#{cmPax,jdbcType=VARCHAR}");
+        if (record.getCM_PAX() != null) {
+            sql.VALUES("CM_PAX", "#{CM_PAX,jdbcType=VARCHAR}");
         }
         
         return sql.toString();
@@ -170,96 +169,96 @@ public class UsersSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_USERS");
         
-        if (record.getCmUserid() != null) {
-            sql.SET("CM_USERID = #{record.cmUserid,jdbcType=VARCHAR}");
+        if (record.getCM_USERID() != null) {
+            sql.SET("CM_USERID = #{record.CM_USERID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmShopname() != null) {
-            sql.SET("CM_SHOPNAME = #{record.cmShopname,jdbcType=VARCHAR}");
+        if (record.getCM_SHOPNAME() != null) {
+            sql.SET("CM_SHOPNAME = #{record.CM_SHOPNAME,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmPhone() != null) {
-            sql.SET("CM_PHONE = #{record.cmPhone,jdbcType=BIGINT}");
+        if (record.getCM_PHONE() != null) {
+            sql.SET("CM_PHONE = #{record.CM_PHONE,jdbcType=BIGINT}");
         }
         
-        if (record.getCmAccount() != null) {
-            sql.SET("CM_ACCOUNT = #{record.cmAccount,jdbcType=VARCHAR}");
+        if (record.getCM_ACCOUNT() != null) {
+            sql.SET("CM_ACCOUNT = #{record.CM_ACCOUNT,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmPassword() != null) {
-            sql.SET("CM_PASSWORD = #{record.cmPassword,jdbcType=VARCHAR}");
+        if (record.getCM_PASSWORD() != null) {
+            sql.SET("CM_PASSWORD = #{record.CM_PASSWORD,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmIntegral() != null) {
-            sql.SET("CM_INTEGRAL = #{record.cmIntegral,jdbcType=INTEGER}");
+        if (record.getCM_INTEGRAL() != null) {
+            sql.SET("CM_INTEGRAL = #{record.CM_INTEGRAL,jdbcType=INTEGER}");
         }
         
-        if (record.getCmBalance() != null) {
-            sql.SET("CM_BALANCE = #{record.cmBalance,jdbcType=DOUBLE}");
+        if (record.getCM_BALANCE() != null) {
+            sql.SET("CM_BALANCE = #{record.CM_BALANCE,jdbcType=DOUBLE}");
         }
         
-        if (record.getCmCardpath() != null) {
-            sql.SET("CM_CARDPATH = #{record.cmCardpath,jdbcType=VARCHAR}");
+        if (record.getCM_CARDPATH() != null) {
+            sql.SET("CM_CARDPATH = #{record.CM_CARDPATH,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmStorepath() != null) {
-            sql.SET("CM_STOREPATH = #{record.cmStorepath,jdbcType=VARCHAR}");
+        if (record.getCM_STOREPATH() != null) {
+            sql.SET("CM_STOREPATH = #{record.CM_STOREPATH,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmLicensepath() != null) {
-            sql.SET("CM_LICENSEPATH = #{record.cmLicensepath,jdbcType=VARCHAR}");
+        if (record.getCM_LICENSEPATH() != null) {
+            sql.SET("CM_LICENSEPATH = #{record.CM_LICENSEPATH,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmShopeaddress() != null) {
-            sql.SET("CM_SHOPEADDRESS = #{record.cmShopeaddress,jdbcType=VARCHAR}");
+        if (record.getCM_SHOPEADDRESS() != null) {
+            sql.SET("CM_SHOPEADDRESS = #{record.CM_SHOPEADDRESS,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmShoplon() != null) {
-            sql.SET("CM_SHOPLON = #{record.cmShoplon,jdbcType=DOUBLE}");
+        if (record.getCM_SHOPLON() != null) {
+            sql.SET("CM_SHOPLON = #{record.CM_SHOPLON,jdbcType=DOUBLE}");
         }
         
-        if (record.getCmShoplat() != null) {
-            sql.SET("CM_SHOPLAT = #{record.cmShoplat,jdbcType=DOUBLE}");
+        if (record.getCM_SHOPLAT() != null) {
+            sql.SET("CM_SHOPLAT = #{record.CM_SHOPLAT,jdbcType=DOUBLE}");
         }
         
-        if (record.getCmLevel() != null) {
-            sql.SET("CM_LEVEL = #{record.cmLevel,jdbcType=INTEGER}");
+        if (record.getCM_LEVEL() != null) {
+            sql.SET("CM_LEVEL = #{record.CM_LEVEL,jdbcType=INTEGER}");
         }
         
-        if (record.getCmCreatetime() != null) {
-            sql.SET("CM_CREATETIME = #{record.cmCreatetime,jdbcType=TIMESTAMP}");
+        if (record.getCM_CREATETIME() != null) {
+            sql.SET("CM_CREATETIME = #{record.CM_CREATETIME,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getCmIsexamine() != null) {
-            sql.SET("CM_ISEXAMINE = #{record.cmIsexamine,jdbcType=INTEGER}");
+        if (record.getCM_ISEXAMINE() != null) {
+            sql.SET("CM_ISEXAMINE = #{record.CM_ISEXAMINE,jdbcType=INTEGER}");
         }
         
-        if (record.getCmReason() != null) {
-            sql.SET("CM_REASON = #{record.cmReason,jdbcType=VARCHAR}");
+        if (record.getCM_REASON() != null) {
+            sql.SET("CM_REASON = #{record.CM_REASON,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmCardno() != null) {
-            sql.SET("CM_CARDNO = #{record.cmCardno,jdbcType=VARCHAR}");
+        if (record.getCM_CARDNO() != null) {
+            sql.SET("CM_CARDNO = #{record.CM_CARDNO,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmName() != null) {
-            sql.SET("CM_NAME = #{record.cmName,jdbcType=VARCHAR}");
+        if (record.getCM_NAME() != null) {
+            sql.SET("CM_NAME = #{record.CM_NAME,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmContactname() != null) {
-            sql.SET("CM_CONTACTNAME = #{record.cmContactname,jdbcType=VARCHAR}");
+        if (record.getCM_CONTACTNAME() != null) {
+            sql.SET("CM_CONTACTNAME = #{record.CM_CONTACTNAME,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmContactphone() != null) {
-            sql.SET("CM_CONTACTPHONE = #{record.cmContactphone,jdbcType=VARCHAR}");
+        if (record.getCM_CONTACTPHONE() != null) {
+            sql.SET("CM_CONTACTPHONE = #{record.CM_CONTACTPHONE,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmTelephone() != null) {
-            sql.SET("CM_TELEPHONE = #{record.cmTelephone,jdbcType=VARCHAR}");
+        if (record.getCM_TELEPHONE() != null) {
+            sql.SET("CM_TELEPHONE = #{record.CM_TELEPHONE,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmPax() != null) {
-            sql.SET("CM_PAX = #{record.cmPax,jdbcType=VARCHAR}");
+        if (record.getCM_PAX() != null) {
+            sql.SET("CM_PAX = #{record.CM_PAX,jdbcType=VARCHAR}");
         }
         
         applyWhere(sql, example, true);
@@ -270,29 +269,29 @@ public class UsersSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_USERS");
         
-        sql.SET("CM_USERID = #{record.cmUserid,jdbcType=VARCHAR}");
-        sql.SET("CM_SHOPNAME = #{record.cmShopname,jdbcType=VARCHAR}");
-        sql.SET("CM_PHONE = #{record.cmPhone,jdbcType=BIGINT}");
-        sql.SET("CM_ACCOUNT = #{record.cmAccount,jdbcType=VARCHAR}");
-        sql.SET("CM_PASSWORD = #{record.cmPassword,jdbcType=VARCHAR}");
-        sql.SET("CM_INTEGRAL = #{record.cmIntegral,jdbcType=INTEGER}");
-        sql.SET("CM_BALANCE = #{record.cmBalance,jdbcType=DOUBLE}");
-        sql.SET("CM_CARDPATH = #{record.cmCardpath,jdbcType=VARCHAR}");
-        sql.SET("CM_STOREPATH = #{record.cmStorepath,jdbcType=VARCHAR}");
-        sql.SET("CM_LICENSEPATH = #{record.cmLicensepath,jdbcType=VARCHAR}");
-        sql.SET("CM_SHOPEADDRESS = #{record.cmShopeaddress,jdbcType=VARCHAR}");
-        sql.SET("CM_SHOPLON = #{record.cmShoplon,jdbcType=DOUBLE}");
-        sql.SET("CM_SHOPLAT = #{record.cmShoplat,jdbcType=DOUBLE}");
-        sql.SET("CM_LEVEL = #{record.cmLevel,jdbcType=INTEGER}");
-        sql.SET("CM_CREATETIME = #{record.cmCreatetime,jdbcType=TIMESTAMP}");
-        sql.SET("CM_ISEXAMINE = #{record.cmIsexamine,jdbcType=INTEGER}");
-        sql.SET("CM_REASON = #{record.cmReason,jdbcType=VARCHAR}");
-        sql.SET("CM_CARDNO = #{record.cmCardno,jdbcType=VARCHAR}");
-        sql.SET("CM_NAME = #{record.cmName,jdbcType=VARCHAR}");
-        sql.SET("CM_CONTACTNAME = #{record.cmContactname,jdbcType=VARCHAR}");
-        sql.SET("CM_CONTACTPHONE = #{record.cmContactphone,jdbcType=VARCHAR}");
-        sql.SET("CM_TELEPHONE = #{record.cmTelephone,jdbcType=VARCHAR}");
-        sql.SET("CM_PAX = #{record.cmPax,jdbcType=VARCHAR}");
+        sql.SET("CM_USERID = #{record.CM_USERID,jdbcType=VARCHAR}");
+        sql.SET("CM_SHOPNAME = #{record.CM_SHOPNAME,jdbcType=VARCHAR}");
+        sql.SET("CM_PHONE = #{record.CM_PHONE,jdbcType=BIGINT}");
+        sql.SET("CM_ACCOUNT = #{record.CM_ACCOUNT,jdbcType=VARCHAR}");
+        sql.SET("CM_PASSWORD = #{record.CM_PASSWORD,jdbcType=VARCHAR}");
+        sql.SET("CM_INTEGRAL = #{record.CM_INTEGRAL,jdbcType=INTEGER}");
+        sql.SET("CM_BALANCE = #{record.CM_BALANCE,jdbcType=DOUBLE}");
+        sql.SET("CM_CARDPATH = #{record.CM_CARDPATH,jdbcType=VARCHAR}");
+        sql.SET("CM_STOREPATH = #{record.CM_STOREPATH,jdbcType=VARCHAR}");
+        sql.SET("CM_LICENSEPATH = #{record.CM_LICENSEPATH,jdbcType=VARCHAR}");
+        sql.SET("CM_SHOPEADDRESS = #{record.CM_SHOPEADDRESS,jdbcType=VARCHAR}");
+        sql.SET("CM_SHOPLON = #{record.CM_SHOPLON,jdbcType=DOUBLE}");
+        sql.SET("CM_SHOPLAT = #{record.CM_SHOPLAT,jdbcType=DOUBLE}");
+        sql.SET("CM_LEVEL = #{record.CM_LEVEL,jdbcType=INTEGER}");
+        sql.SET("CM_CREATETIME = #{record.CM_CREATETIME,jdbcType=TIMESTAMP}");
+        sql.SET("CM_ISEXAMINE = #{record.CM_ISEXAMINE,jdbcType=INTEGER}");
+        sql.SET("CM_REASON = #{record.CM_REASON,jdbcType=VARCHAR}");
+        sql.SET("CM_CARDNO = #{record.CM_CARDNO,jdbcType=VARCHAR}");
+        sql.SET("CM_NAME = #{record.CM_NAME,jdbcType=VARCHAR}");
+        sql.SET("CM_CONTACTNAME = #{record.CM_CONTACTNAME,jdbcType=VARCHAR}");
+        sql.SET("CM_CONTACTPHONE = #{record.CM_CONTACTPHONE,jdbcType=VARCHAR}");
+        sql.SET("CM_TELEPHONE = #{record.CM_TELEPHONE,jdbcType=VARCHAR}");
+        sql.SET("CM_PAX = #{record.CM_PAX,jdbcType=VARCHAR}");
         
         UsersExample example = (UsersExample) parameter.get("example");
         applyWhere(sql, example, true);

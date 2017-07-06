@@ -1,23 +1,23 @@
 package com.sc.domain.generator;
 
 public class OrderdetailsWithBLOBs extends Orderdetails {
-    private String cmSpecnumdetails;
+    private String CM_SPECNUMDETAILS;
 
-    private String cmLogisticsinfo;
+    private String CM_LOGISTICSINFO;
 
-    public String getCmSpecnumdetails() {
-        return cmSpecnumdetails;
+    public String getCM_SPECNUMDETAILS() {
+        return CM_SPECNUMDETAILS;
     }
 
-    public void setCmSpecnumdetails(String cmSpecnumdetails) {
-        this.cmSpecnumdetails = cmSpecnumdetails == null ? null : cmSpecnumdetails.trim();
+    public void setCM_SPECNUMDETAILS(String CM_SPECNUMDETAILS) {
+        this.CM_SPECNUMDETAILS = CM_SPECNUMDETAILS == null ? null : CM_SPECNUMDETAILS.trim();
     }
 
-    public String getCmLogisticsinfo() {
-        return cmLogisticsinfo;
+    public String getCM_LOGISTICSINFO() {
+        return CM_LOGISTICSINFO;
     }
 
-    public void setCmLogisticsinfo(String cmLogisticsinfo) {
-        this.cmLogisticsinfo = cmLogisticsinfo == null ? null : cmLogisticsinfo.trim();
+    public void setCM_LOGISTICSINFO(String CM_LOGISTICSINFO) {
+        this.CM_LOGISTICSINFO = CM_LOGISTICSINFO == null ? null : CM_LOGISTICSINFO.trim();
     }
 }

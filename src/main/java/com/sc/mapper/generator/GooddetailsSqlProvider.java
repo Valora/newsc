@@ -1,13 +1,12 @@
 package com.sc.mapper.generator;
 
-import com.sc.domain.generator.GooddetailsExample;
 import com.sc.domain.generator.GooddetailsExample.Criteria;
 import com.sc.domain.generator.GooddetailsExample.Criterion;
+import com.sc.domain.generator.GooddetailsExample;
 import com.sc.domain.generator.GooddetailsWithBLOBs;
-import org.apache.ibatis.jdbc.SQL;
-
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.jdbc.SQL;
 
 public class GooddetailsSqlProvider {
 
@@ -29,24 +28,24 @@ public class GooddetailsSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("TB_GOODSDETAILS");
         
-        if (record.getCmGoodsdetailsid() != null) {
-            sql.VALUES("CM_GOODSDETAILSID", "#{cmGoodsdetailsid,jdbcType=INTEGER}");
+        if (record.getCM_GOODSDETAILSID() != null) {
+            sql.VALUES("CM_GOODSDETAILSID", "#{CM_GOODSDETAILSID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmGoodsid() != null) {
-            sql.VALUES("CM_GOODSID", "#{cmGoodsid,jdbcType=VARCHAR}");
+        if (record.getCM_GOODSID() != null) {
+            sql.VALUES("CM_GOODSID", "#{CM_GOODSID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmColor() != null) {
-            sql.VALUES("CM_COLOR", "#{cmColor,jdbcType=VARCHAR}");
+        if (record.getCM_COLOR() != null) {
+            sql.VALUES("CM_COLOR", "#{CM_COLOR,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmImagepath() != null) {
-            sql.VALUES("CM_IMAGEPATH", "#{cmImagepath,jdbcType=VARCHAR}");
+        if (record.getCM_IMAGEPATH() != null) {
+            sql.VALUES("CM_IMAGEPATH", "#{CM_IMAGEPATH,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmSpecStock() != null) {
-            sql.VALUES("CM_SPEC_STOCK", "#{cmSpecStock,jdbcType=LONGVARCHAR}");
+        if (record.getCM_SPEC_STOCK() != null) {
+            sql.VALUES("CM_SPEC_STOCK", "#{CM_SPEC_STOCK,jdbcType=LONGVARCHAR}");
         }
         
         return sql.toString();
@@ -100,24 +99,24 @@ public class GooddetailsSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_GOODSDETAILS");
         
-        if (record.getCmGoodsdetailsid() != null) {
-            sql.SET("CM_GOODSDETAILSID = #{record.cmGoodsdetailsid,jdbcType=INTEGER}");
+        if (record.getCM_GOODSDETAILSID() != null) {
+            sql.SET("CM_GOODSDETAILSID = #{record.CM_GOODSDETAILSID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmGoodsid() != null) {
-            sql.SET("CM_GOODSID = #{record.cmGoodsid,jdbcType=VARCHAR}");
+        if (record.getCM_GOODSID() != null) {
+            sql.SET("CM_GOODSID = #{record.CM_GOODSID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmColor() != null) {
-            sql.SET("CM_COLOR = #{record.cmColor,jdbcType=VARCHAR}");
+        if (record.getCM_COLOR() != null) {
+            sql.SET("CM_COLOR = #{record.CM_COLOR,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmImagepath() != null) {
-            sql.SET("CM_IMAGEPATH = #{record.cmImagepath,jdbcType=VARCHAR}");
+        if (record.getCM_IMAGEPATH() != null) {
+            sql.SET("CM_IMAGEPATH = #{record.CM_IMAGEPATH,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmSpecStock() != null) {
-            sql.SET("CM_SPEC_STOCK = #{record.cmSpecStock,jdbcType=LONGVARCHAR}");
+        if (record.getCM_SPEC_STOCK() != null) {
+            sql.SET("CM_SPEC_STOCK = #{record.CM_SPEC_STOCK,jdbcType=LONGVARCHAR}");
         }
         
         applyWhere(sql, example, true);
@@ -128,11 +127,11 @@ public class GooddetailsSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_GOODSDETAILS");
         
-        sql.SET("CM_GOODSDETAILSID = #{record.cmGoodsdetailsid,jdbcType=INTEGER}");
-        sql.SET("CM_GOODSID = #{record.cmGoodsid,jdbcType=VARCHAR}");
-        sql.SET("CM_COLOR = #{record.cmColor,jdbcType=VARCHAR}");
-        sql.SET("CM_IMAGEPATH = #{record.cmImagepath,jdbcType=VARCHAR}");
-        sql.SET("CM_SPEC_STOCK = #{record.cmSpecStock,jdbcType=LONGVARCHAR}");
+        sql.SET("CM_GOODSDETAILSID = #{record.CM_GOODSDETAILSID,jdbcType=INTEGER}");
+        sql.SET("CM_GOODSID = #{record.CM_GOODSID,jdbcType=VARCHAR}");
+        sql.SET("CM_COLOR = #{record.CM_COLOR,jdbcType=VARCHAR}");
+        sql.SET("CM_IMAGEPATH = #{record.CM_IMAGEPATH,jdbcType=VARCHAR}");
+        sql.SET("CM_SPEC_STOCK = #{record.CM_SPEC_STOCK,jdbcType=LONGVARCHAR}");
         
         GooddetailsExample example = (GooddetailsExample) parameter.get("example");
         applyWhere(sql, example, true);
@@ -143,10 +142,10 @@ public class GooddetailsSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_GOODSDETAILS");
         
-        sql.SET("CM_GOODSDETAILSID = #{record.cmGoodsdetailsid,jdbcType=INTEGER}");
-        sql.SET("CM_GOODSID = #{record.cmGoodsid,jdbcType=VARCHAR}");
-        sql.SET("CM_COLOR = #{record.cmColor,jdbcType=VARCHAR}");
-        sql.SET("CM_IMAGEPATH = #{record.cmImagepath,jdbcType=VARCHAR}");
+        sql.SET("CM_GOODSDETAILSID = #{record.CM_GOODSDETAILSID,jdbcType=INTEGER}");
+        sql.SET("CM_GOODSID = #{record.CM_GOODSID,jdbcType=VARCHAR}");
+        sql.SET("CM_COLOR = #{record.CM_COLOR,jdbcType=VARCHAR}");
+        sql.SET("CM_IMAGEPATH = #{record.CM_IMAGEPATH,jdbcType=VARCHAR}");
         
         GooddetailsExample example = (GooddetailsExample) parameter.get("example");
         applyWhere(sql, example, true);

@@ -9,9 +9,9 @@ import java.util.ArrayList;
  */
 @Data
 public class Classify {
-    private String cmClassifyname;
-    private String cmImgpath;
-    private String cmClassifyid;
-    private String cmSort;
-    private ArrayList<Subclass> tbSubclass;
+    private String CM_CLASSIFYNAME;
+    private String CM_IMGPATH;
+    private String CM_CLASSIFYID;
+    private String CM_SORT;
+    private ArrayList<Subclass> TB_SUBCLASS;
 }

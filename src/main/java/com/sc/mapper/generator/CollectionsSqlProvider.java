@@ -1,13 +1,12 @@
 package com.sc.mapper.generator;
 
 import com.sc.domain.generator.Collections;
-import com.sc.domain.generator.CollectionsExample;
 import com.sc.domain.generator.CollectionsExample.Criteria;
 import com.sc.domain.generator.CollectionsExample.Criterion;
-import org.apache.ibatis.jdbc.SQL;
-
+import com.sc.domain.generator.CollectionsExample;
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.jdbc.SQL;
 
 public class CollectionsSqlProvider {
 
@@ -29,20 +28,20 @@ public class CollectionsSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("TB_COLLECTIONS");
         
-        if (record.getCmCollectionid() != null) {
-            sql.VALUES("CM_COLLECTIONID", "#{cmCollectionid,jdbcType=INTEGER}");
+        if (record.getCM_COLLECTIONID() != null) {
+            sql.VALUES("CM_COLLECTIONID", "#{CM_COLLECTIONID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmUserid() != null) {
-            sql.VALUES("CM_USERID", "#{cmUserid,jdbcType=VARCHAR}");
+        if (record.getCM_USERID() != null) {
+            sql.VALUES("CM_USERID", "#{CM_USERID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmGoodsid() != null) {
-            sql.VALUES("CM_GOODSID", "#{cmGoodsid,jdbcType=VARCHAR}");
+        if (record.getCM_GOODSID() != null) {
+            sql.VALUES("CM_GOODSID", "#{CM_GOODSID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmJointime() != null) {
-            sql.VALUES("CM_JOINTIME", "#{cmJointime,jdbcType=TIMESTAMP}");
+        if (record.getCM_JOINTIME() != null) {
+            sql.VALUES("CM_JOINTIME", "#{CM_JOINTIME,jdbcType=TIMESTAMP}");
         }
         
         return sql.toString();
@@ -75,20 +74,20 @@ public class CollectionsSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_COLLECTIONS");
         
-        if (record.getCmCollectionid() != null) {
-            sql.SET("CM_COLLECTIONID = #{record.cmCollectionid,jdbcType=INTEGER}");
+        if (record.getCM_COLLECTIONID() != null) {
+            sql.SET("CM_COLLECTIONID = #{record.CM_COLLECTIONID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmUserid() != null) {
-            sql.SET("CM_USERID = #{record.cmUserid,jdbcType=VARCHAR}");
+        if (record.getCM_USERID() != null) {
+            sql.SET("CM_USERID = #{record.CM_USERID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmGoodsid() != null) {
-            sql.SET("CM_GOODSID = #{record.cmGoodsid,jdbcType=VARCHAR}");
+        if (record.getCM_GOODSID() != null) {
+            sql.SET("CM_GOODSID = #{record.CM_GOODSID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmJointime() != null) {
-            sql.SET("CM_JOINTIME = #{record.cmJointime,jdbcType=TIMESTAMP}");
+        if (record.getCM_JOINTIME() != null) {
+            sql.SET("CM_JOINTIME = #{record.CM_JOINTIME,jdbcType=TIMESTAMP}");
         }
         
         applyWhere(sql, example, true);
@@ -99,10 +98,10 @@ public class CollectionsSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_COLLECTIONS");
         
-        sql.SET("CM_COLLECTIONID = #{record.cmCollectionid,jdbcType=INTEGER}");
-        sql.SET("CM_USERID = #{record.cmUserid,jdbcType=VARCHAR}");
-        sql.SET("CM_GOODSID = #{record.cmGoodsid,jdbcType=VARCHAR}");
-        sql.SET("CM_JOINTIME = #{record.cmJointime,jdbcType=TIMESTAMP}");
+        sql.SET("CM_COLLECTIONID = #{record.CM_COLLECTIONID,jdbcType=INTEGER}");
+        sql.SET("CM_USERID = #{record.CM_USERID,jdbcType=VARCHAR}");
+        sql.SET("CM_GOODSID = #{record.CM_GOODSID,jdbcType=VARCHAR}");
+        sql.SET("CM_JOINTIME = #{record.CM_JOINTIME,jdbcType=TIMESTAMP}");
         
         CollectionsExample example = (CollectionsExample) parameter.get("example");
         applyWhere(sql, example, true);

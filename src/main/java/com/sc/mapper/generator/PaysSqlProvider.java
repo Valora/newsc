@@ -1,13 +1,12 @@
 package com.sc.mapper.generator;
 
 import com.sc.domain.generator.Pays;
-import com.sc.domain.generator.PaysExample;
 import com.sc.domain.generator.PaysExample.Criteria;
 import com.sc.domain.generator.PaysExample.Criterion;
-import org.apache.ibatis.jdbc.SQL;
-
+import com.sc.domain.generator.PaysExample;
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.jdbc.SQL;
 
 public class PaysSqlProvider {
 
@@ -29,24 +28,24 @@ public class PaysSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("TB_PAYS");
         
-        if (record.getCmPayid() != null) {
-            sql.VALUES("CM_PAYID", "#{cmPayid,jdbcType=INTEGER}");
+        if (record.getCM_PAYID() != null) {
+            sql.VALUES("CM_PAYID", "#{CM_PAYID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmOrderid() != null) {
-            sql.VALUES("CM_ORDERID", "#{cmOrderid,jdbcType=VARCHAR}");
+        if (record.getCM_ORDERID() != null) {
+            sql.VALUES("CM_ORDERID", "#{CM_ORDERID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmPayjson() != null) {
-            sql.VALUES("CM_PAYJSON", "#{cmPayjson,jdbcType=VARCHAR}");
+        if (record.getCM_PAYJSON() != null) {
+            sql.VALUES("CM_PAYJSON", "#{CM_PAYJSON,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmTime() != null) {
-            sql.VALUES("CM_TIME", "#{cmTime,jdbcType=TIMESTAMP}");
+        if (record.getCM_TIME() != null) {
+            sql.VALUES("CM_TIME", "#{CM_TIME,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getCmPaytype() != null) {
-            sql.VALUES("CM_PAYTYPE", "#{cmPaytype,jdbcType=INTEGER}");
+        if (record.getCM_PAYTYPE() != null) {
+            sql.VALUES("CM_PAYTYPE", "#{CM_PAYTYPE,jdbcType=INTEGER}");
         }
         
         return sql.toString();
@@ -80,24 +79,24 @@ public class PaysSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_PAYS");
         
-        if (record.getCmPayid() != null) {
-            sql.SET("CM_PAYID = #{record.cmPayid,jdbcType=INTEGER}");
+        if (record.getCM_PAYID() != null) {
+            sql.SET("CM_PAYID = #{record.CM_PAYID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmOrderid() != null) {
-            sql.SET("CM_ORDERID = #{record.cmOrderid,jdbcType=VARCHAR}");
+        if (record.getCM_ORDERID() != null) {
+            sql.SET("CM_ORDERID = #{record.CM_ORDERID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmPayjson() != null) {
-            sql.SET("CM_PAYJSON = #{record.cmPayjson,jdbcType=VARCHAR}");
+        if (record.getCM_PAYJSON() != null) {
+            sql.SET("CM_PAYJSON = #{record.CM_PAYJSON,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmTime() != null) {
-            sql.SET("CM_TIME = #{record.cmTime,jdbcType=TIMESTAMP}");
+        if (record.getCM_TIME() != null) {
+            sql.SET("CM_TIME = #{record.CM_TIME,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getCmPaytype() != null) {
-            sql.SET("CM_PAYTYPE = #{record.cmPaytype,jdbcType=INTEGER}");
+        if (record.getCM_PAYTYPE() != null) {
+            sql.SET("CM_PAYTYPE = #{record.CM_PAYTYPE,jdbcType=INTEGER}");
         }
         
         applyWhere(sql, example, true);
@@ -108,11 +107,11 @@ public class PaysSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_PAYS");
         
-        sql.SET("CM_PAYID = #{record.cmPayid,jdbcType=INTEGER}");
-        sql.SET("CM_ORDERID = #{record.cmOrderid,jdbcType=VARCHAR}");
-        sql.SET("CM_PAYJSON = #{record.cmPayjson,jdbcType=VARCHAR}");
-        sql.SET("CM_TIME = #{record.cmTime,jdbcType=TIMESTAMP}");
-        sql.SET("CM_PAYTYPE = #{record.cmPaytype,jdbcType=INTEGER}");
+        sql.SET("CM_PAYID = #{record.CM_PAYID,jdbcType=INTEGER}");
+        sql.SET("CM_ORDERID = #{record.CM_ORDERID,jdbcType=VARCHAR}");
+        sql.SET("CM_PAYJSON = #{record.CM_PAYJSON,jdbcType=VARCHAR}");
+        sql.SET("CM_TIME = #{record.CM_TIME,jdbcType=TIMESTAMP}");
+        sql.SET("CM_PAYTYPE = #{record.CM_PAYTYPE,jdbcType=INTEGER}");
         
         PaysExample example = (PaysExample) parameter.get("example");
         applyWhere(sql, example, true);

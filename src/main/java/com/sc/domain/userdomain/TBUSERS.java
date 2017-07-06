@@ -7,5 +7,5 @@ import lombok.Data;
  */
 @Data
 public class TBUSERS {
-    private String cmUserid;
+    private String CM_USERID;
 }

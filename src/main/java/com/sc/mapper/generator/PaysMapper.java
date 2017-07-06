@@ -2,6 +2,7 @@ package com.sc.mapper.generator;
 
 import com.sc.domain.generator.Pays;
 import com.sc.domain.generator.PaysExample;
+import java.util.List;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -11,8 +12,6 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
-
-import java.util.List;
 
 public interface PaysMapper {
     @SelectProvider(type=PaysSqlProvider.class, method="countByExample")
@@ -25,9 +24,9 @@ public interface PaysMapper {
         "insert into TB_PAYS (CM_PAYID, CM_ORDERID, ",
         "CM_PAYJSON, CM_TIME, ",
         "CM_PAYTYPE)",
-        "values (#{cmPayid,jdbcType=INTEGER}, #{cmOrderid,jdbcType=VARCHAR}, ",
-        "#{cmPayjson,jdbcType=VARCHAR}, #{cmTime,jdbcType=TIMESTAMP}, ",
-        "#{cmPaytype,jdbcType=INTEGER})"
+        "values (#{CM_PAYID,jdbcType=INTEGER}, #{CM_ORDERID,jdbcType=VARCHAR}, ",
+        "#{CM_PAYJSON,jdbcType=VARCHAR}, #{CM_TIME,jdbcType=TIMESTAMP}, ",
+        "#{CM_PAYTYPE,jdbcType=INTEGER})"
     })
     int insert(Pays record);
 
@@ -36,11 +35,11 @@ public interface PaysMapper {
 
     @SelectProvider(type=PaysSqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="CM_PAYID", property="cmPayid", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_ORDERID", property="cmOrderid", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_PAYJSON", property="cmPayjson", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_TIME", property="cmTime", jdbcType= JdbcType.TIMESTAMP),
-        @Result(column="CM_PAYTYPE", property="cmPaytype", jdbcType= JdbcType.INTEGER)
+        @Result(column="CM_PAYID", property="CM_PAYID", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_ORDERID", property="CM_ORDERID", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_PAYJSON", property="CM_PAYJSON", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_TIME", property="CM_TIME", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="CM_PAYTYPE", property="CM_PAYTYPE", jdbcType=JdbcType.INTEGER)
     })
     List<Pays> selectByExample(PaysExample example);
 

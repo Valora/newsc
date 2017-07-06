@@ -32,7 +32,7 @@ public class PageDataDao {
     private final ClassifysMapper classifysMapper;
 
     private final PageDataMapper pageDataMapper;
-    
+
     @Autowired
     public PageDataDao(GoodsMapper goodsMapper, ClassifysMapper classifysMapper, PageDataMapper pageDataMapper) {
         this.goodsMapper = goodsMapper;
@@ -49,16 +49,16 @@ public class PageDataDao {
     public List<PageShow> queryShows() {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        criteria.andCmIsoffEqualTo(0);
+        criteria.andCM_ISOFFEqualTo(0);
         goodsExample.setOrderByClause("CM_CREATETIME DESC");
         PageHelper.startPage(1, 10);
         List<Goods> shows = goodsMapper.selectByExample(goodsExample);
         List<PageShow> pageShows = new ArrayList<>();
         for (Goods show : shows) {
             PageShow pageShow = new PageShow();
-            pageShow.setCmGoodsid(show.getCmGoodsid());
-            pageShow.setCmCreatetime(show.getCmCreatetime());
-            pageShow.setCmMainfigurepath(show.getCmMainfigurepath());
+            pageShow.setCM_GOODSID(show.getCM_GOODSID());
+            pageShow.setCM_CREATETIME(show.getCM_CREATETIME());
+            pageShow.setCM_MAINFIGUREPATH(show.getCM_MAINFIGUREPATH());
             pageShows.add(pageShow);
         }
         return pageShows;
@@ -74,7 +74,7 @@ public class PageDataDao {
     public List<PageGoods> queryGoods(Integer pageNum, Integer pageSize, String Order) {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        criteria.andCmIsoffEqualTo(0);
+        criteria.andCM_ISOFFEqualTo(0);
         goodsExample.setOrderByClause(Order + " DESC");
         PageHelper.startPage(pageNum, pageSize);
         List<GoodsWithBLOBs> goods = goodsMapper.selectByExampleWithBLOBs(goodsExample);
@@ -91,18 +91,18 @@ public class PageDataDao {
         List<PageGoods> pageGoods = new ArrayList<>();
         for (Goods good : goods) {
             PageGoods pageGood = new PageGoods();
-            pageGood.setCmBrandid(good.getCmBrandid());
-            pageGood.setCmFigurespath(good.getCmHorizontalpath());
-            pageGood.setCmGoodsid(good.getCmGoodsid());
-            pageGood.setCmMainfigurepath(good.getCmMainfigurepath());
-            pageGood.setCmPresentprice(good.getCmPresentprice());
-            pageGood.setCmOriginalprice(good.getCmOriginalprice());
-            pageGood.setCmSales(good.getCmSales());
-            pageGood.setCmTitle(good.getCmTitle());
-            pageGood.setCmCreatetime(good.getCmCreatetime());
-            pageGood.setCmIsoff(good.getCmIsoff());
-            pageGood.setCmSellerid(good.getCmSellerid());
-            pageGood.setCmGoodsartnum(good.getCmGoodsartnum());
+            pageGood.setCM_BRANDID(good.getCM_BRANDID());
+            pageGood.setCM_FIGURESPATH(good.getCM_HORIZONTALPATH());
+            pageGood.setCM_GOODSID(good.getCM_GOODSID());
+            pageGood.setCM_MAINFIGUREPATH(good.getCM_MAINFIGUREPATH());
+            pageGood.setCM_PRESENTPRICE(good.getCM_PRESENTPRICE());
+            pageGood.setCM_ORIGINALPRICE(good.getCM_ORIGINALPRICE());
+            pageGood.setCM_SALES(good.getCM_SALES());
+            pageGood.setCM_TITILE(good.getCM_TITLE());
+            pageGood.setCM_CREATETIME(good.getCM_CREATETIME());
+            pageGood.setCM_ISOFF(good.getCM_ISOFF());
+            pageGood.setCM_SELLERID(good.getCM_SELLERID());
+            pageGood.setCM_GOODSARTNUM(good.getCM_GOODSARTNUM());
             pageGoods.add(pageGood);
         }
         return pageGoods;
@@ -116,7 +116,7 @@ public class PageDataDao {
     public Long getGoodsCount() {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        criteria.andCmIsoffEqualTo(0);
+        criteria.andCM_ISOFFEqualTo(0);
         return goodsMapper.countByExample(goodsExample);
     }
 
@@ -129,7 +129,7 @@ public class PageDataDao {
     public Long getGoodsCount(Integer classifyID) {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        criteria.andCmClassifyidEqualTo(classifyID);
+        criteria.andCM_CLASSIFYIDEqualTo(classifyID);
         return goodsMapper.countByExample(goodsExample);
     }
 
@@ -142,7 +142,7 @@ public class PageDataDao {
     public Long getGoodsCount(String classifyid) {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        criteria.andCmClassifytabsLike("%" + classifyid + "%");
+        criteria.andCM_CLASSIFYTABSLike("%" + classifyid + "%");
         return goodsMapper.countByExample(goodsExample);
     }
 
@@ -181,7 +181,7 @@ public class PageDataDao {
     public List<PageGoods> queryClassifyData(Integer classifyID, Integer pageNum, Integer pageSize) {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        criteria.andCmClassifyidEqualTo(classifyID);
+        criteria.andCM_CLASSIFYIDEqualTo(classifyID);
         goodsExample.setOrderByClause("CM_CREATETIME DESC");
         PageHelper.startPage(pageNum, pageSize);
         List<GoodsWithBLOBs> goods = goodsMapper.selectByExampleWithBLOBs(goodsExample);
@@ -199,7 +199,7 @@ public class PageDataDao {
     public List<PageGoods> queryClassifyData(String classifyid, Integer pageNum, Integer pageSize) {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        criteria.andCmClassifytabsLike("%" + classifyid + "%");
+        criteria.andCM_CLASSIFYTABSLike("%" + classifyid + "%");
         goodsExample.setOrderByClause("CM_CREATETIME DESC");
         PageHelper.startPage(pageNum, pageSize);
         List<GoodsWithBLOBs> goods = goodsMapper.selectByExampleWithBLOBs(goodsExample);
@@ -208,14 +208,15 @@ public class PageDataDao {
 
     /**
      * 查询推荐商品
-     * @param pageNum 页码
+     *
+     * @param pageNum  页码
      * @param pageSize 页面大小
      * @return 推荐商品
      */
     public List<PageGoods> queryPromotionData(Integer pageNum, Integer pageSize) {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        criteria.andCmIspromotionEqualTo(1);
+        criteria.andCM_ISPROMOTIONEqualTo(1);
         goodsExample.setOrderByClause("CM_CREATETIME DESC");
         PageHelper.startPage(pageNum, pageSize);
         List<GoodsWithBLOBs> goods = goodsMapper.selectByExampleWithBLOBs(goodsExample);
@@ -224,27 +225,29 @@ public class PageDataDao {
 
     /**
      * 查询推荐商品数量
+     *
      * @return 推荐商品数量
      */
     public Integer getPromotionDataCount() {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        criteria.andCmIspromotionEqualTo(1);
+        criteria.andCM_ISPROMOTIONEqualTo(1);
         return Math.toIntExact(goodsMapper.countByExample(goodsExample));
     }
 
     /**
      * 查询推荐商品
-     * @param pageNum 页码
-     * @param pageSize 页面大小
+     *
+     * @param pageNum    页码
+     * @param pageSize   页面大小
      * @param classifyID 分类ID
      * @return 商品列表
      */
     public List<PageGoods> queryPromotionData(Integer pageNum, Integer pageSize, Integer classifyID) {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        criteria.andCmIspromotionEqualTo(1);
-        criteria.andCmClassifyidEqualTo(classifyID);
+        criteria.andCM_ISPROMOTIONEqualTo(1);
+        criteria.andCM_CLASSIFYIDEqualTo(classifyID);
         goodsExample.setOrderByClause("CM_CREATETIME DESC");
         PageHelper.startPage(pageNum, pageSize);
         List<GoodsWithBLOBs> goods = goodsMapper.selectByExampleWithBLOBs(goodsExample);
@@ -253,29 +256,31 @@ public class PageDataDao {
 
     /**
      * 获得分类商品数量
+     *
      * @param classifyID 分类ID
      * @return 商品列表
      */
     public Integer getPromotionDataCount(Integer classifyID) {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        criteria.andCmIspromotionEqualTo(1);
-        criteria.andCmClassifyidEqualTo(classifyID);
+        criteria.andCM_ISPROMOTIONEqualTo(1);
+        criteria.andCM_CLASSIFYIDEqualTo(classifyID);
         return Math.toIntExact(goodsMapper.countByExample(goodsExample));
     }
 
     /**
      * 查询推荐商品
-     * @param pageNum 页码
-     * @param pageSize 页面大小
+     *
+     * @param pageNum    页码
+     * @param pageSize   页面大小
      * @param classifyid 分类ID
      * @return 商品列表
      */
     public List<PageGoods> queryPromotionData(Integer pageNum, Integer pageSize, String classifyid) {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        criteria.andCmIspromotionEqualTo(1);
-        criteria.andCmClassifytabsLike("%" + classifyid + "%");
+        criteria.andCM_ISPROMOTIONEqualTo(1);
+        criteria.andCM_CLASSIFYTABSLike("%" + classifyid + "%");
         goodsExample.setOrderByClause("CM_CREATETIME DESC");
         PageHelper.startPage(pageNum, pageSize);
         List<GoodsWithBLOBs> goods = goodsMapper.selectByExampleWithBLOBs(goodsExample);
@@ -284,29 +289,31 @@ public class PageDataDao {
 
     /**
      * 获得分类商品数量
+     *
      * @param classifyid 分类ID
      * @return 商品列表
      */
     public Integer getPromotionDataCount(String classifyid) {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        criteria.andCmIspromotionEqualTo(1);
-        criteria.andCmClassifytabsLike("%" + classifyid + "%");
+        criteria.andCM_ISPROMOTIONEqualTo(1);
+        criteria.andCM_CLASSIFYTABSLike("%" + classifyid + "%");
         return Math.toIntExact(goodsMapper.countByExample(goodsExample));
     }
 
     /**
      * 搜索商品
-     * @param content 商品编号或品牌
-     * @param pageNum 页码
+     *
+     * @param content  商品编号或品牌
+     * @param pageNum  页码
      * @param pageSize 页面大小
      * @return 商品列表
      */
     public List<PageGoods> searchGoods(String content, Integer pageNum, Integer pageSize) {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        goodsExample.or(criteria.andCmGoodsartnumLike("%" + content + "%"));
-        goodsExample.or(criteria.andCmTitleLike("%"+ content + "%"));
+        goodsExample.or(criteria.andCM_GOODSARTNUMLike("%" + content + "%"));
+        goodsExample.or(criteria.andCM_TITLELike("%" + content + "%"));
         PageHelper.startPage(pageNum, pageSize);
         List<GoodsWithBLOBs> goods = goodsMapper.selectByExampleWithBLOBs(goodsExample);
         return goodsToPageGoods(goods);
@@ -314,32 +321,35 @@ public class PageDataDao {
 
     /**
      * 获得搜多商品数量
+     *
      * @param content 商品编号或品牌
      * @return 数量
      */
     public Long getSearchGoodsCount(String content) {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        goodsExample.or(criteria.andCmGoodsartnumLike("%" + content + "%"));
-        goodsExample.or(criteria.andCmTitleLike("%"+ content + "%"));
+        goodsExample.or(criteria.andCM_GOODSARTNUMLike("%" + content + "%"));
+        goodsExample.or(criteria.andCM_TITLELike("%" + content + "%"));
         return goodsMapper.countByExample(goodsExample);
     }
 
     /**
-     *  获取分类/二级分类
+     * 获取分类/二级分类
+     *
      * @param classifyid 查询类型（1：大类,2：子类）
      * @return 分类/二级分类
      */
     public List<Classifys> getSunClassification(Integer classifyid) {
         ClassifysExample classifysExample = new ClassifysExample();
         ClassifysExample.Criteria criteria = classifysExample.createCriteria();
-        criteria.andCmClassifyidEqualTo(classifyid);
+        criteria.andCM_CLASSIFYIDEqualTo(classifyid);
         classifysExample.setOrderByClause("CM_SORT");
         return classifysMapper.selectByExample(classifysExample);
     }
 
     /**
      * 查询商品详情(有ID)
+     *
      * @param id
      * @param userId
      */
@@ -349,6 +359,7 @@ public class PageDataDao {
 
     /**
      * 查询商品详情(没有ID)
+     *
      * @param goodsid
      * @return
      */
@@ -358,6 +369,7 @@ public class PageDataDao {
 
     /**
      * 获取所有分类
+     *
      * @return
      */
     public ArrayList<Classify> getClassify() {

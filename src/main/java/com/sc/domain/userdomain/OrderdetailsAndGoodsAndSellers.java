@@ -7,17 +7,17 @@ import lombok.Data;
  */
 @Data
 public class OrderdetailsAndGoodsAndSellers {
-    private String cmOrderdetailsid;
-    private Double cmMoney;
-    private Integer cmNumber;
-    private Integer cmServicestate;
-    private String cmGoodsid;
-    private String value;
-    private String value2;
-    private Double value3;
-    private String value4;
-    private String value5;
-    private String cmGoodsid2;
-    private String cmOrderid;
-    private String cmSellerid;
+    private String CM_ORDERDETAILSID;
+    private Double CM_MONEY;
+    private Integer CM_NUMBER;
+    private Integer CM_SERVICESTATE;
+    private String CM_GOODSID;
+    private String VALUE;
+    private String VALUE2;
+    private Double VALUE3;
+    private String VALUE4;
+    private String VALUE5;
+    private String CM_GOODSID2;
+    private String CM_ORDERID;
+    private String CM_SELLERID;
 }

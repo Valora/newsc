@@ -3,163 +3,163 @@ package com.sc.domain.generator;
 import java.util.Date;
 
 public class Goods {
-    private String cmGoodsid;
+    private String CM_GOODSID;
 
-    private String cmGoodsartnum;
+    private String CM_GOODSARTNUM;
 
-    private String cmSellerid;
+    private String CM_SELLERID;
 
-    private Integer cmClassifyid;
+    private Integer CM_CLASSIFYID;
 
-    private String cmClassifytabs;
+    private String CM_CLASSIFYTABS;
 
-    private Integer cmBrandid;
+    private Integer CM_BRANDID;
 
-    private String cmTitle;
+    private String CM_TITLE;
 
-    private Integer cmSales;
+    private Integer CM_SALES;
 
-    private Double cmOriginalprice;
+    private Double CM_ORIGINALPRICE;
 
-    private Double cmPresentprice;
+    private Double CM_PRESENTPRICE;
 
-    private String cmMainfigurepath;
+    private String CM_MAINFIGUREPATH;
 
-    private String cmHorizontalpath;
+    private String CM_HORIZONTALPATH;
 
-    private Date cmCreatetime;
+    private Date CM_CREATETIME;
 
-    private Integer cmIsoff;
+    private Integer CM_ISOFF;
 
-    private Integer cmIspromotion;
+    private Integer CM_ISPROMOTION;
 
-    private String cmSpec;
+    private String CM_SPEC;
 
-    public String getCmGoodsid() {
-        return cmGoodsid;
+    public String getCM_GOODSID() {
+        return CM_GOODSID;
     }
 
-    public void setCmGoodsid(String cmGoodsid) {
-        this.cmGoodsid = cmGoodsid == null ? null : cmGoodsid.trim();
+    public void setCM_GOODSID(String CM_GOODSID) {
+        this.CM_GOODSID = CM_GOODSID == null ? null : CM_GOODSID.trim();
     }
 
-    public String getCmGoodsartnum() {
-        return cmGoodsartnum;
+    public String getCM_GOODSARTNUM() {
+        return CM_GOODSARTNUM;
     }
 
-    public void setCmGoodsartnum(String cmGoodsartnum) {
-        this.cmGoodsartnum = cmGoodsartnum == null ? null : cmGoodsartnum.trim();
+    public void setCM_GOODSARTNUM(String CM_GOODSARTNUM) {
+        this.CM_GOODSARTNUM = CM_GOODSARTNUM == null ? null : CM_GOODSARTNUM.trim();
     }
 
-    public String getCmSellerid() {
-        return cmSellerid;
+    public String getCM_SELLERID() {
+        return CM_SELLERID;
     }
 
-    public void setCmSellerid(String cmSellerid) {
-        this.cmSellerid = cmSellerid == null ? null : cmSellerid.trim();
+    public void setCM_SELLERID(String CM_SELLERID) {
+        this.CM_SELLERID = CM_SELLERID == null ? null : CM_SELLERID.trim();
     }
 
-    public Integer getCmClassifyid() {
-        return cmClassifyid;
+    public Integer getCM_CLASSIFYID() {
+        return CM_CLASSIFYID;
     }
 
-    public void setCmClassifyid(Integer cmClassifyid) {
-        this.cmClassifyid = cmClassifyid;
+    public void setCM_CLASSIFYID(Integer CM_CLASSIFYID) {
+        this.CM_CLASSIFYID = CM_CLASSIFYID;
     }
 
-    public String getCmClassifytabs() {
-        return cmClassifytabs;
+    public String getCM_CLASSIFYTABS() {
+        return CM_CLASSIFYTABS;
     }
 
-    public void setCmClassifytabs(String cmClassifytabs) {
-        this.cmClassifytabs = cmClassifytabs == null ? null : cmClassifytabs.trim();
+    public void setCM_CLASSIFYTABS(String CM_CLASSIFYTABS) {
+        this.CM_CLASSIFYTABS = CM_CLASSIFYTABS == null ? null : CM_CLASSIFYTABS.trim();
     }
 
-    public Integer getCmBrandid() {
-        return cmBrandid;
+    public Integer getCM_BRANDID() {
+        return CM_BRANDID;
     }
 
-    public void setCmBrandid(Integer cmBrandid) {
-        this.cmBrandid = cmBrandid;
+    public void setCM_BRANDID(Integer CM_BRANDID) {
+        this.CM_BRANDID = CM_BRANDID;
     }
 
-    public String getCmTitle() {
-        return cmTitle;
+    public String getCM_TITLE() {
+        return CM_TITLE;
     }
 
-    public void setCmTitle(String cmTitle) {
-        this.cmTitle = cmTitle == null ? null : cmTitle.trim();
+    public void setCM_TITLE(String CM_TITLE) {
+        this.CM_TITLE = CM_TITLE == null ? null : CM_TITLE.trim();
     }
 
-    public Integer getCmSales() {
-        return cmSales;
+    public Integer getCM_SALES() {
+        return CM_SALES;
     }
 
-    public void setCmSales(Integer cmSales) {
-        this.cmSales = cmSales;
+    public void setCM_SALES(Integer CM_SALES) {
+        this.CM_SALES = CM_SALES;
     }
 
-    public Double getCmOriginalprice() {
-        return cmOriginalprice;
+    public Double getCM_ORIGINALPRICE() {
+        return CM_ORIGINALPRICE;
     }
 
-    public void setCmOriginalprice(Double cmOriginalprice) {
-        this.cmOriginalprice = cmOriginalprice;
+    public void setCM_ORIGINALPRICE(Double CM_ORIGINALPRICE) {
+        this.CM_ORIGINALPRICE = CM_ORIGINALPRICE;
     }
 
-    public Double getCmPresentprice() {
-        return cmPresentprice;
+    public Double getCM_PRESENTPRICE() {
+        return CM_PRESENTPRICE;
     }
 
-    public void setCmPresentprice(Double cmPresentprice) {
-        this.cmPresentprice = cmPresentprice;
+    public void setCM_PRESENTPRICE(Double CM_PRESENTPRICE) {
+        this.CM_PRESENTPRICE = CM_PRESENTPRICE;
     }
 
-    public String getCmMainfigurepath() {
-        return cmMainfigurepath;
+    public String getCM_MAINFIGUREPATH() {
+        return CM_MAINFIGUREPATH;
     }
 
-    public void setCmMainfigurepath(String cmMainfigurepath) {
-        this.cmMainfigurepath = cmMainfigurepath == null ? null : cmMainfigurepath.trim();
+    public void setCM_MAINFIGUREPATH(String CM_MAINFIGUREPATH) {
+        this.CM_MAINFIGUREPATH = CM_MAINFIGUREPATH == null ? null : CM_MAINFIGUREPATH.trim();
     }
 
-    public String getCmHorizontalpath() {
-        return cmHorizontalpath;
+    public String getCM_HORIZONTALPATH() {
+        return CM_HORIZONTALPATH;
     }
 
-    public void setCmHorizontalpath(String cmHorizontalpath) {
-        this.cmHorizontalpath = cmHorizontalpath == null ? null : cmHorizontalpath.trim();
+    public void setCM_HORIZONTALPATH(String CM_HORIZONTALPATH) {
+        this.CM_HORIZONTALPATH = CM_HORIZONTALPATH == null ? null : CM_HORIZONTALPATH.trim();
     }
 
-    public Date getCmCreatetime() {
-        return cmCreatetime;
+    public Date getCM_CREATETIME() {
+        return CM_CREATETIME;
     }
 
-    public void setCmCreatetime(Date cmCreatetime) {
-        this.cmCreatetime = cmCreatetime;
+    public void setCM_CREATETIME(Date CM_CREATETIME) {
+        this.CM_CREATETIME = CM_CREATETIME;
     }
 
-    public Integer getCmIsoff() {
-        return cmIsoff;
+    public Integer getCM_ISOFF() {
+        return CM_ISOFF;
     }
 
-    public void setCmIsoff(Integer cmIsoff) {
-        this.cmIsoff = cmIsoff;
+    public void setCM_ISOFF(Integer CM_ISOFF) {
+        this.CM_ISOFF = CM_ISOFF;
     }
 
-    public Integer getCmIspromotion() {
-        return cmIspromotion;
+    public Integer getCM_ISPROMOTION() {
+        return CM_ISPROMOTION;
     }
 
-    public void setCmIspromotion(Integer cmIspromotion) {
-        this.cmIspromotion = cmIspromotion;
+    public void setCM_ISPROMOTION(Integer CM_ISPROMOTION) {
+        this.CM_ISPROMOTION = CM_ISPROMOTION;
     }
 
-    public String getCmSpec() {
-        return cmSpec;
+    public String getCM_SPEC() {
+        return CM_SPEC;
     }
 
-    public void setCmSpec(String cmSpec) {
-        this.cmSpec = cmSpec == null ? null : cmSpec.trim();
+    public void setCM_SPEC(String CM_SPEC) {
+        this.CM_SPEC = CM_SPEC == null ? null : CM_SPEC.trim();
     }
 }

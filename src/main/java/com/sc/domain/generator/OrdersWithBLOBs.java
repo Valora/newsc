@@ -1,13 +1,13 @@
 package com.sc.domain.generator;
 
 public class OrdersWithBLOBs extends Orders {
-    private String cmOrderdetailsids;
+    private String CM_ORDERDETAILSIDS;
 
-    public String getCmOrderdetailsids() {
-        return cmOrderdetailsids;
+    public String getCM_ORDERDETAILSIDS() {
+        return CM_ORDERDETAILSIDS;
     }
 
-    public void setCmOrderdetailsids(String cmOrderdetailsids) {
-        this.cmOrderdetailsids = cmOrderdetailsids == null ? null : cmOrderdetailsids.trim();
+    public void setCM_ORDERDETAILSIDS(String CM_ORDERDETAILSIDS) {
+        this.CM_ORDERDETAILSIDS = CM_ORDERDETAILSIDS == null ? null : CM_ORDERDETAILSIDS.trim();
     }
 }

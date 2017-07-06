@@ -9,14 +9,14 @@ import java.util.Date;
  */
 @Data
 public class CollectionAndGoods {
-    private Integer cmBrandid;
-    private String cmFigurespath;
-    private String cmGoodsid;
-    private String cmMainfigurepath;
-    private Double cmPresentprice;
-    private Double cmOriginalprice;
-    private Integer cmSales;
-    private String cmTitle;
-    private Date cmJointime;
-    private Integer cmCollectionid;
+    private Integer CM_BRANDID;
+    private String CM_FIGURESPATH;
+    private String CM_GOODSID;
+    private String CM_MAINFIGUREPATH;
+    private Double CM_PRESENTPRICE;
+    private Double CM_ORIGINALPRICE;
+    private Integer CM_SALES;
+    private String CM_TITLE;
+    private Date CM_JOINTIME;
+    private Integer CM_COLLECTIONID;
 }

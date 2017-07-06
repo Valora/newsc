@@ -14,17 +14,17 @@ import java.util.List;
 public interface QueryMySaleOrderMapper {
     @SelectProvider(type = QueryMySaleOrderSqlProvider.class, method = "QueryMySaleOrderMi")
     @Results({
-            @Result(column = "CM_GOODSID", property = "cmGoodsid", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_ORDERDETAILSID", property = "cmOrderdetailsid", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_MAINFIGUREPATH", property = "cmMainfigurepath", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_TITLE", property = "cmTitle", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_CREATETIME", property = "cmOrdercreatetime", jdbcType = JdbcType.DATE),
-            @Result(column = "CM_PRESENTPRICE", property = "cmPresentprice", jdbcType = JdbcType.DOUBLE),
-            @Result(column = "CM_ORIGINALPRICE", property = "cmOriginalprice", jdbcType = JdbcType.DOUBLE),
-            @Result(column = "CM_NUMBER", property = "cmNumber", jdbcType = JdbcType.INTEGER),
-            @Result(column = "CM_MONEY", property = "cmMoney", jdbcType = JdbcType.DOUBLE),
-            @Result(column = "CM_SPECNUMDETAILS", property = "cmSpecnumdetails", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_SELLERSTATE", property = "cmSellerstate", jdbcType = JdbcType.INTEGER)
+            @Result(column = "CM_GOODSID", property = "CM_GOODSID", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_ORDERDETAILSID", property = "CM_ORDERDETAILSID", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_MAINFIGUREPATH", property = "CM_MAINFIGUREPATH", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_TITLE", property = "CM_TITLE", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_CREATETIME", property = "CM_CREATETIME", jdbcType = JdbcType.DATE),
+            @Result(column = "CM_PRESENTPRICE", property = "CM_PRESENTPRICE", jdbcType = JdbcType.DOUBLE),
+            @Result(column = "CM_ORIGINALPRICE", property = "CM_ORIGINALPRICE", jdbcType = JdbcType.DOUBLE),
+            @Result(column = "CM_NUMBER", property = "CM_NUMBER", jdbcType = JdbcType.INTEGER),
+            @Result(column = "CM_MONEY", property = "CM_MONEY", jdbcType = JdbcType.DOUBLE),
+            @Result(column = "CM_SPECNUMDETAILS", property = "CM_SPECNUMDETAILS", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_SELLERSTATE", property = "CM_SELLERSTATE", jdbcType = JdbcType.INTEGER)
     })
     List<OrderdetailsWithBLOBandGood> QueryMySaleOrderM(String sellerid, String starttime, String endtime, Integer orderState);
 }

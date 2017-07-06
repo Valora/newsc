@@ -10,18 +10,18 @@ import java.util.List;
  */
 @Data
 public class GoodDetailWithOutUserid {
-    private String cmGoodsid;
-    private String cmTitle;
-    private Integer cmSales;
-    private String cmHtml;
-    private Integer cmBrandid;
-    private String cmMainfigurepath;
-    private String cmFigurespath;
-    private Date cmCreatetime;
-    private Double cmOriginalprice;
-    private String cmPresentprice;
-    private Integer cmIsoff;
-    private String cmSellerid;
-    private String cmSellername;
-    private List<GoodDetailsOther> cmOther;
+    private String CM_GOODSID;
+    private String CM_TITLE;
+    private Integer CM_SALES;
+    private String CM_HTML;
+    private Integer CM_BRANDID;
+    private String CM_MAINFIGUREPATH;
+    private String CM_FIGURESPATH;
+    private Date CM_CREATETIME;
+    private Double CM_ORIGINALPRICE;
+    private String CM_PRESENTPRICE;
+    private Integer CM_ISOFF;
+    private String CM_SELLERID;
+    private String CM_SELLERNAME;
+    private List<GoodDetailsOther> CM_OTHER;
 }

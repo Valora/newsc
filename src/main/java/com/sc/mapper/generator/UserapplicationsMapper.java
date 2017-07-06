@@ -2,6 +2,7 @@ package com.sc.mapper.generator;
 
 import com.sc.domain.generator.Userapplications;
 import com.sc.domain.generator.UserapplicationsExample;
+import java.util.List;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -11,8 +12,6 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
-
-import java.util.List;
 
 public interface UserapplicationsMapper {
     @SelectProvider(type=UserapplicationsSqlProvider.class, method="countByExample")
@@ -29,13 +28,13 @@ public interface UserapplicationsMapper {
         "CM_SHOPLON, CM_SHOPLAT, ",
         "CM_STATE, CM_REASON, ",
         "CM_TYPE)",
-        "values (#{cmId,jdbcType=INTEGER}, #{cmName,jdbcType=VARCHAR}, ",
-        "#{cmPhone,jdbcType=BIGINT}, #{cmCardfacepath,jdbcType=VARCHAR}, ",
-        "#{cmCardbackpath,jdbcType=VARCHAR}, #{cmPersonalpath,jdbcType=VARCHAR}, ",
-        "#{cmLicensepath,jdbcType=VARCHAR}, #{cmShopeaddress,jdbcType=VARCHAR}, ",
-        "#{cmShoplon,jdbcType=DOUBLE}, #{cmShoplat,jdbcType=DOUBLE}, ",
-        "#{cmState,jdbcType=INTEGER}, #{cmReason,jdbcType=VARCHAR}, ",
-        "#{cmType,jdbcType=INTEGER})"
+        "values (#{CM_ID,jdbcType=INTEGER}, #{CM_NAME,jdbcType=VARCHAR}, ",
+        "#{CM_PHONE,jdbcType=BIGINT}, #{CM_CARDFACEPATH,jdbcType=VARCHAR}, ",
+        "#{CM_CARDBACKPATH,jdbcType=VARCHAR}, #{CM_PERSONALPATH,jdbcType=VARCHAR}, ",
+        "#{CM_LICENSEPATH,jdbcType=VARCHAR}, #{CM_SHOPEADDRESS,jdbcType=VARCHAR}, ",
+        "#{CM_SHOPLON,jdbcType=DOUBLE}, #{CM_SHOPLAT,jdbcType=DOUBLE}, ",
+        "#{CM_STATE,jdbcType=INTEGER}, #{CM_REASON,jdbcType=VARCHAR}, ",
+        "#{CM_TYPE,jdbcType=INTEGER})"
     })
     int insert(Userapplications record);
 
@@ -44,19 +43,19 @@ public interface UserapplicationsMapper {
 
     @SelectProvider(type=UserapplicationsSqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="CM_ID", property="cmId", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_NAME", property="cmName", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_PHONE", property="cmPhone", jdbcType= JdbcType.BIGINT),
-        @Result(column="CM_CARDFACEPATH", property="cmCardfacepath", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_CARDBACKPATH", property="cmCardbackpath", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_PERSONALPATH", property="cmPersonalpath", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_LICENSEPATH", property="cmLicensepath", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_SHOPEADDRESS", property="cmShopeaddress", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_SHOPLON", property="cmShoplon", jdbcType= JdbcType.DOUBLE),
-        @Result(column="CM_SHOPLAT", property="cmShoplat", jdbcType= JdbcType.DOUBLE),
-        @Result(column="CM_STATE", property="cmState", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_REASON", property="cmReason", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_TYPE", property="cmType", jdbcType= JdbcType.INTEGER)
+        @Result(column="CM_ID", property="CM_ID", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_NAME", property="CM_NAME", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_PHONE", property="CM_PHONE", jdbcType=JdbcType.BIGINT),
+        @Result(column="CM_CARDFACEPATH", property="CM_CARDFACEPATH", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_CARDBACKPATH", property="CM_CARDBACKPATH", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_PERSONALPATH", property="CM_PERSONALPATH", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_LICENSEPATH", property="CM_LICENSEPATH", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_SHOPEADDRESS", property="CM_SHOPEADDRESS", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_SHOPLON", property="CM_SHOPLON", jdbcType=JdbcType.DOUBLE),
+        @Result(column="CM_SHOPLAT", property="CM_SHOPLAT", jdbcType=JdbcType.DOUBLE),
+        @Result(column="CM_STATE", property="CM_STATE", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_REASON", property="CM_REASON", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_TYPE", property="CM_TYPE", jdbcType=JdbcType.INTEGER)
     })
     List<Userapplications> selectByExample(UserapplicationsExample example);
 

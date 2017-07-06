@@ -1,23 +1,23 @@
 package com.sc.domain.generator;
 
 public class Logisticss {
-    private Integer cmLogisticsid;
+    private Integer CM_LOGISTICSID;
 
-    private String cmLogisticsname;
+    private String CM_LOGISTICSNAME;
 
-    public Integer getCmLogisticsid() {
-        return cmLogisticsid;
+    public Integer getCM_LOGISTICSID() {
+        return CM_LOGISTICSID;
     }
 
-    public void setCmLogisticsid(Integer cmLogisticsid) {
-        this.cmLogisticsid = cmLogisticsid;
+    public void setCM_LOGISTICSID(Integer CM_LOGISTICSID) {
+        this.CM_LOGISTICSID = CM_LOGISTICSID;
     }
 
-    public String getCmLogisticsname() {
-        return cmLogisticsname;
+    public String getCM_LOGISTICSNAME() {
+        return CM_LOGISTICSNAME;
     }
 
-    public void setCmLogisticsname(String cmLogisticsname) {
-        this.cmLogisticsname = cmLogisticsname == null ? null : cmLogisticsname.trim();
+    public void setCM_LOGISTICSNAME(String CM_LOGISTICSNAME) {
+        this.CM_LOGISTICSNAME = CM_LOGISTICSNAME == null ? null : CM_LOGISTICSNAME.trim();
     }
 }

@@ -8,16 +8,16 @@ import lombok.Data;
  */
 @Data
 public class TbOrderDetails {
-    private String cmGoodsid;
-    private String cmMainfigurepath;
-    private String cmTitle;
-    private Double cmPresentprice;
-    private Double cmMoney;
-    private Integer cmNumber;
-    private String cmSpecnumdetails;
-    private String cmSellerid;
-    private String cmSellername;
-    private Integer cmLogisticsid;
-    private String cmLogisticsinfo;
-    private String cmLogisticsnum;
+    private String CM_GOODSID;
+    private String CM_MAINFIGUREPATH;
+    private String CM_TITLE;
+    private Double CM_PRESENTPRICE;
+    private Double CM_MONEY;
+    private Integer CM_NUMBER;
+    private String CM_SPECNUMDETAILS;
+    private String CM_SELLERID;
+    private String CM_SELLERNAME;
+    private Integer CM_LOGISTICSID;
+    private String CM_LOGISTICSINFO;
+    private String CM_LOGISTICSNUM;
 }

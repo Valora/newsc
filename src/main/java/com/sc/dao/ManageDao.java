@@ -66,7 +66,7 @@ public class ManageDao {
     public List<Admins> selectAdminsByAdminId(String adminId) {
         AdminsExample adminsExample = new AdminsExample();
         AdminsExample.Criteria criteria = adminsExample.createCriteria();
-        criteria.andCmAdminidEqualTo(adminId);
+        criteria.andCM_ADMINIDEqualTo(adminId);
         return adminsMapper.selectByExample(adminsExample);
     }
 
@@ -79,7 +79,7 @@ public class ManageDao {
     public List<Users> selectUsersByUserId(String userid) {
         UsersExample usersExample = new UsersExample();
         UsersExample.Criteria criteria = usersExample.createCriteria();
-        criteria.andCmUseridEqualTo(userid);
+        criteria.andCM_USERIDEqualTo(userid);
         return usersMapper.selectByExample(usersExample);
     }
 
@@ -112,7 +112,7 @@ public class ManageDao {
     public int delEmployee(int id) {
         AdminsExample adminsExample = new AdminsExample();
         AdminsExample.Criteria criteria = adminsExample.createCriteria();
-        criteria.andCmAdminidEqualTo(Integer.toString(id));
+        criteria.andCM_ADMINIDEqualTo(Integer.toString(id));
         return adminsMapper.deleteByExample(adminsExample);
     }
 
@@ -126,17 +126,17 @@ public class ManageDao {
     public List<AdminsInfo> queryEmployees(int pagenum, int pagesize) {
         AdminsExample adminsExample = new AdminsExample();
         AdminsExample.Criteria criteria = adminsExample.createCriteria();
-        criteria.andCmLevelNotEqualTo(1);
+        criteria.andCM_LEVELNotEqualTo(1);
         PageHelper.startPage(pagenum, pagesize);
         List<Admins> results = adminsMapper.selectByExample(adminsExample);
         List<AdminsInfo> result = new ArrayList<>();
         if (!results.isEmpty()) {
             for (Admins result1 : results) {
                 AdminsInfo adminsInfo = new AdminsInfo();
-                adminsInfo.setCmLevel(result1.getCmLevel());
-                adminsInfo.setCmAdminid(result1.getCmAdminid());
-                adminsInfo.setCmName(result1.getCmName());
-                adminsInfo.setCmPhone(result1.getCmPhone());
+                adminsInfo.setCM_LEVEL(result1.getCM_LEVEL());
+                adminsInfo.setCM_ADMINID(result1.getCM_ADMINID());
+                adminsInfo.setCM_NAME(result1.getCM_NAME());
+                adminsInfo.setCM_PHONE(result1.getCM_PHONE());
                 result.add(adminsInfo);
             }
         }
@@ -151,7 +151,7 @@ public class ManageDao {
     public Long getAdminCount() {
         AdminsExample adminsExample = new AdminsExample();
         AdminsExample.Criteria criteria = adminsExample.createCriteria();
-        criteria.andCmLevelNotEqualTo(1);
+        criteria.andCM_LEVELNotEqualTo(1);
         return adminsMapper.countByExample(adminsExample);
     }
 
@@ -170,16 +170,16 @@ public class ManageDao {
         if (!results.isEmpty()) {
             for (Users result1 : results) {
                 UserInfo userInfo = new UserInfo();
-                userInfo.setCmShopname(result1.getCmShopname());
-                userInfo.setCmPax(result1.getCmPax());
-                userInfo.setCmTelephone(result1.getCmTelephone());
-                userInfo.setCmContactphone(result1.getCmContactphone());
-                userInfo.setCmContactname(result1.getCmContactname());
-                userInfo.setCmName(result1.getCmName());
-                userInfo.setCmUserid(result1.getCmUserid());
-                userInfo.setCmShopaddress(result1.getCmShopeaddress());
-                userInfo.setCmPhone(result1.getCmPhone());
-                userInfo.setCmCreatetime(result1.getCmCreatetime());
+                userInfo.setCM_SHOPNAME(result1.getCM_SHOPNAME());
+                userInfo.setCM_PAX(result1.getCM_PAX());
+                userInfo.setCM_TELEPHONE(result1.getCM_TELEPHONE());
+                userInfo.setCM_CONTACTPHONE(result1.getCM_CONTACTPHONE());
+                userInfo.setCM_CONTACTNAME(result1.getCM_CONTACTNAME());
+                userInfo.setCM_NAME(result1.getCM_NAME());
+                userInfo.setCM_USERID(result1.getCM_USERID());
+                userInfo.setCM_SHOPADDRESS(result1.getCM_SHOPEADDRESS());
+                userInfo.setCM_PHONE(result1.getCM_PHONE());
+                userInfo.setCM_CREATETIME(result1.getCM_CREATETIME());
                 result.add(userInfo);
             }
         }
@@ -211,17 +211,17 @@ public class ManageDao {
         if (!results.isEmpty()) {
             SellerInfo sellerInfo = new SellerInfo();
             for (Sellers result1 : results) {
-                sellerInfo.setCmSellername(result1.getCmSellername());
-                sellerInfo.setCmPax(result1.getCmPax());
-                sellerInfo.setCmTelephone(result1.getCmTelephone());
-                sellerInfo.setCmContactname(result1.getCmSellername());
-                sellerInfo.setCmContactphone(result1.getCmContactphone());
-                sellerInfo.setCmName(result1.getCmName());
-                sellerInfo.setCmSellerid(result1.getCmSellerid());
-                sellerInfo.setCmAddress(result1.getCmAddress());
-                sellerInfo.setCmPhone(result1.getCmPhone());
-                sellerInfo.setCmCreatetime(result1.getCmCreatetime());
-                sellerInfo.setCmAccount(result1.getCmAccount().substring(3, 7));
+                sellerInfo.setCM_SELLERNAME(result1.getCM_SELLERNAME());
+                sellerInfo.setCM_PAX(result1.getCM_PAX());
+                sellerInfo.setCM_TELEPHONE(result1.getCM_TELEPHONE());
+                sellerInfo.setCM_CONTACTNAME(result1.getCM_SELLERNAME());
+                sellerInfo.setCM_CONTACTPHONE(result1.getCM_CONTACTPHONE());
+                sellerInfo.setCM_NAME(result1.getCM_NAME());
+                sellerInfo.setCM_SELLERID(result1.getCM_SELLERID());
+                sellerInfo.setCM_ADDRESS(result1.getCM_ADDRESS());
+                sellerInfo.setCM_PHONE(result1.getCM_PHONE());
+                sellerInfo.setCM_CREATETIME(result1.getCM_CREATETIME());
+                sellerInfo.setCM_ACCOUNT(result1.getCM_ACCOUNT().substring(3, 7));
                 result.add(sellerInfo);
             }
         }
@@ -246,31 +246,30 @@ public class ManageDao {
     public List<UserDetail> queryUserInfo(String userid) {
         UsersExample usersExample = new UsersExample();
         UsersExample.Criteria criteria = usersExample.createCriteria();
-        criteria.andCmUseridEqualTo(userid);
+        criteria.andCM_USERIDEqualTo(userid);
         List<Users> results = usersMapper.selectByExample(usersExample);
         List<UserDetail> result = new ArrayList<>();
         if (!results.isEmpty()) {
             for (Users result1 : results) {
                 UserDetail userDetail = new UserDetail();
-                userDetail.setCmUserid(result1.getCmUserid());
-                userDetail.setCmCreatetime(result1.getCmCreatetime());
-                userDetail.setCmPhone(result1.getCmPhone());
-                userDetail.setCmShopaddress(result1.getCmShopeaddress());
-                userDetail.setCmName(result1.getCmName());
-                userDetail.setCmContactname(result1.getCmContactname());
-                userDetail.setCmContactphone(result1.getCmContactphone());
-                userDetail.setCmTelephone(result1.getCmTelephone());
-                userDetail.setCmPax(result1.getCmPax());
-                userDetail.setCmShopname(result1.getCmShopname());
-                userDetail.setCmStorepath(result1.getCmStorepath());
-                userDetail.setCmCardno(result1.getCmCardno());
-                userDetail.setCmCardpath(result1.getCmCardno());
-                userDetail.setCmCardpath(result1.getCmCardpath());
-                userDetail.setCmIsexamine(result1.getCmIsexamine());
-                userDetail.setCmLevel(result1.getCmLevel());
-                userDetail.setCmLicensepath(result1.getCmLicensepath());
-                userDetail.setCmShoplat(result1.getCmShoplat());
-                userDetail.setCmShoplon(result1.getCmShoplon());
+                userDetail.setCM_USERID(result1.getCM_USERID());
+                userDetail.setCM_CREATETIME(result1.getCM_CREATETIME());
+                userDetail.setCM_PHONE(result1.getCM_PHONE());
+                userDetail.setCM_SHOPADDRESS(result1.getCM_SHOPEADDRESS());
+                userDetail.setCM_NAME(result1.getCM_NAME());
+                userDetail.setCM_CONTACTNAME(result1.getCM_CONTACTNAME());
+                userDetail.setCM_CONTACTPHONE(result1.getCM_CONTACTPHONE());
+                userDetail.setCM_TELEPHONE(result1.getCM_TELEPHONE());
+                userDetail.setCM_PAX(result1.getCM_PAX());
+                userDetail.setCM_SHOPNAME(result1.getCM_SHOPNAME());
+                userDetail.setCM_STOREPATH(result1.getCM_STOREPATH());
+                userDetail.setCM_CARDNO(result1.getCM_CARDNO());
+                userDetail.setCM_CARDPATH(result1.getCM_CARDPATH());
+                userDetail.setCM_ISEXAMINE(result1.getCM_ISEXAMINE());
+                userDetail.setCM_LEVEL(result1.getCM_LEVEL());
+                userDetail.setCMLICENSEPATH(result1.getCM_LICENSEPATH());
+                userDetail.setCM_SHOPLAT(result1.getCM_SHOPLAT());
+                userDetail.setCM_SHOPLON(result1.getCM_SHOPLON());
                 result.add(userDetail);
             }
         }
@@ -344,9 +343,9 @@ public class ManageDao {
      */
     public void addClassify(String classifyname, String type, String parentid, String imagepath) {
         Classifys classifys = new Classifys();
-        classifys.setCmClassifyname(classifyname);
-        classifys.setCmParentid(Objects.equals(type, "0") ? 0 : Integer.parseInt(parentid));
-        classifys.setCmImgpath(imagepath);
+        classifys.setCM_CLASSIFYNAME(classifyname);
+        classifys.setCM_PARENTID(Objects.equals(type, "0") ? 0 : Integer.parseInt(parentid));
+        classifys.setCM_IMGPATH(imagepath);
         classifysMapper.insert(classifys);
     }
 
@@ -359,7 +358,7 @@ public class ManageDao {
     public List<Classifys> selectClassifysByClassifyid(Integer classifyid) {
         ClassifysExample classifysExample = new ClassifysExample();
         ClassifysExample.Criteria criteria = classifysExample.createCriteria();
-        criteria.andCmClassifyidEqualTo(classifyid);
+        criteria.andCM_CLASSIFYIDEqualTo(classifyid);
         return classifysMapper.selectByExample(classifysExample);
     }
 
@@ -373,9 +372,9 @@ public class ManageDao {
      */
     public void reviceClassify(String classifyname, String type, String parentid, String imgpath) {
         Classifys classifys = new Classifys();
-        classifys.setCmImgpath(imgpath);
-        classifys.setCmClassifyname(classifyname);
-        classifys.setCmParentid(Objects.equals(type, "0") ? 0 : Integer.parseInt(parentid));
+        classifys.setCM_IMGPATH(imgpath);
+        classifys.setCM_CLASSIFYNAME(classifyname);
+        classifys.setCM_PARENTID(Objects.equals(type, "0") ? 0 : Integer.parseInt(parentid));
         classifysMapper.updateByExample(classifys, new ClassifysExample());
     }
 
@@ -389,7 +388,7 @@ public class ManageDao {
     public List<Classifys> queryClassifies(Integer pagenum, Integer pagesize, Integer parentid) {
         ClassifysExample classifysExample = new ClassifysExample();
         ClassifysExample.Criteria criteria = classifysExample.createCriteria();
-        criteria.andCmParentidEqualTo(parentid);
+        criteria.andCM_PARENTIDEqualTo(parentid);
         PageHelper.startPage(pagenum, pagesize);
         return classifysMapper.selectByExample(classifysExample);
     }
@@ -403,10 +402,10 @@ public class ManageDao {
         ClassifysExample classifysExample = new ClassifysExample();
         ClassifysExample.Criteria criteria = classifysExample.createCriteria();
         if (type == 1) {
-            criteria.andCmParentidEqualTo(0);
+            criteria.andCM_PARENTIDEqualTo(0);
         }
         if (type == 2) {
-            criteria.andCmParentidNotEqualTo(0);
+            criteria.andCM_PARENTIDNotEqualTo(0);
         }
         return classifysMapper.countByExample(classifysExample);
     }
@@ -420,10 +419,10 @@ public class ManageDao {
      */
     public Integer classifySort(Integer sort, Integer classifyid) {
         Classifys classifys = new Classifys();
-        classifys.setCmSort(sort);
+        classifys.setCM_SORT(sort);
         ClassifysExample classifysExample = new ClassifysExample();
         ClassifysExample.Criteria criteria = classifysExample.createCriteria();
-        criteria.andCmClassifyidEqualTo(classifyid);
+        criteria.andCM_CLASSIFYIDEqualTo(classifyid);
         return classifysMapper.updateByExampleSelective(classifys, classifysExample);
     }
 
@@ -436,7 +435,7 @@ public class ManageDao {
     public int delClassify(Integer classifyid) {
         ClassifysExample classifysExample = new ClassifysExample();
         ClassifysExample.Criteria criteria = classifysExample.createCriteria();
-        criteria.andCmClassifyidEqualTo(classifyid);
+        criteria.andCM_CLASSIFYIDEqualTo(classifyid);
         return classifysMapper.deleteByExample(classifysExample);
     }
 
@@ -472,8 +471,8 @@ public class ManageDao {
      */
     public void addBrands(String brand, String introduce) {
         Brands brands = new Brands();
-        brands.setCmBrand(brand);
-        brands.setCmOther(introduce);
+        brands.setCM_BRAND(brand);
+        brands.setCM_OTHER(introduce);
         brandsMapper.insert(brands);
     }
 
@@ -486,7 +485,7 @@ public class ManageDao {
     public int delBrands(Integer brandid) {
         BrandsExample brandsExample = new BrandsExample();
         BrandsExample.Criteria criteria = brandsExample.createCriteria();
-        criteria.andCmBrandidEqualTo(brandid);
+        criteria.andCM_BRANDIDEqualTo(brandid);
         return brandsMapper.deleteByExample(brandsExample);
     }
 
@@ -501,7 +500,7 @@ public class ManageDao {
         UsersExample usersExample = new UsersExample();
         usersExample.setOrderByClause("CM_CREATETIME");
         UsersExample.Criteria criteria = usersExample.createCriteria();
-        criteria.andCmIsexamineNotEqualTo(2);
+        criteria.andCM_ISEXAMINENotEqualTo(2);
         PageHelper.startPage(pagenum, pagesize);
         return usersMapper.selectByExample(usersExample);
     }
@@ -515,7 +514,7 @@ public class ManageDao {
     public List<Users> queryApplicationDetails(String userid) {
         UsersExample usersExample = new UsersExample();
         UsersExample.Criteria criteria = usersExample.createCriteria();
-        criteria.andCmUseridEqualTo(userid);
+        criteria.andCM_USERIDEqualTo(userid);
         return usersMapper.selectByExample(usersExample);
     }
 
@@ -528,7 +527,7 @@ public class ManageDao {
     public Users throughAudit(String userid) {
         UsersExample usersExample = new UsersExample();
         UsersExample.Criteria criteria = usersExample.createCriteria();
-        criteria.andCmUseridEqualTo(userid);
+        criteria.andCM_USERIDEqualTo(userid);
         List<Users> result = usersMapper.selectByExample(usersExample);
         if (result.isEmpty()) {
             return null;
@@ -545,9 +544,9 @@ public class ManageDao {
     public void updateAudit(String userid) {
         UsersExample usersExample = new UsersExample();
         UsersExample.Criteria criteria = usersExample.createCriteria();
-        criteria.andCmUseridEqualTo(userid);
+        criteria.andCM_USERIDEqualTo(userid);
         Users users = new Users();
-        users.setCmIsexamine(2);
+        users.setCM_ISEXAMINE(2);
         usersMapper.updateByExample(users, usersExample);
     }
 
@@ -560,10 +559,10 @@ public class ManageDao {
     public void auditFailure(String reason, String userid) {
         UsersExample usersExample = new UsersExample();
         UsersExample.Criteria criteria = usersExample.createCriteria();
-        criteria.andCmUseridEqualTo(userid);
+        criteria.andCM_USERIDEqualTo(userid);
         Users users = new Users();
-        users.setCmIsexamine(1);
-        users.setCmReason(reason);
+        users.setCM_ISEXAMINE(1);
+        users.setCM_REASON(reason);
         usersMapper.updateByExample(users, usersExample);
     }
 
@@ -599,7 +598,7 @@ public class ManageDao {
     public Integer delNotices(Integer noticeid) {
         NoticesExample noticesExample = new NoticesExample();
         NoticesExample.Criteria criteria = noticesExample.createCriteria();
-        criteria.andCmNoticeiidEqualTo(noticeid);
+        criteria.andCM_NOTICEIIDEqualTo(noticeid);
         return noticesMapper.deleteByExample(noticesExample);
     }
 }

@@ -59,7 +59,7 @@ public class UserDoMainDao {
     public Goods getGoodByGoodId(String goodsid) {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        criteria.andCmGoodsidEqualTo(goodsid);
+        criteria.andCM_GOODSARTNUMEqualTo(goodsid);
         return goodsMapper.selectByExample(goodsExample).get(0);
     }
 
@@ -72,7 +72,7 @@ public class UserDoMainDao {
     public List<GooddetailsWithBLOBs> getGoodsDetails(String cmGoodsid) {
         GooddetailsExample gooddetailsExample = new GooddetailsExample();
         GooddetailsExample.Criteria criteria = gooddetailsExample.createCriteria();
-        criteria.andCmGoodsidEqualTo(cmGoodsid);
+        criteria.andCM_GOODSIDEqualTo(cmGoodsid);
         return gooddetailsMapper.selectByExampleWithBLOBs(gooddetailsExample);
     }
 
@@ -87,33 +87,33 @@ public class UserDoMainDao {
         //User
         UsersExample usersExample1 = new UsersExample();
         UsersExample.Criteria criteria1 = usersExample1.createCriteria();
-        criteria1.andCmUseridEqualTo(userId);
+        criteria1.andCM_USERIDEqualTo(userId);
         List<Users> users1 = usersMapper.selectByExample(usersExample1);
         Users user1 = users1 == null ? null : users1.get(0);
 
         //TBUSERS
         UsersExample usersExample2 = new UsersExample();
         UsersExample.Criteria criteria2 = usersExample2.createCriteria();
-        criteria2.andCmUseridNotEqualTo(userId);
-        criteria2.andCmShoplonGreaterThan(user.getCmShoplon() - 0.01);
-        criteria2.andCmShoplonLessThan(user.getCmShoplon() + 0.01);
-        criteria2.andCmShoplatGreaterThan(user.getCmShoplat() - 0.01);
-        criteria2.andCmShoplonLessThan(user.getCmShoplat() + 0.01);
+        criteria2.andCM_USERIDNotEqualTo(userId);
+        criteria2.andCM_SHOPLONGreaterThan(user.getCM_SHOPLON() - 0.01);
+        criteria2.andCM_SHOPLONLessThan(user.getCM_SHOPLON() + 0.01);
+        criteria2.andCM_SHOPLATGreaterThan(user.getCM_SHOPLAT() - 0.01);
+        criteria2.andCM_SHOPLONLessThan(user.getCM_SHOPLAT() + 0.01);
         List<Users> users2 = usersMapper.selectByExample(usersExample2);
         List<TBUSERS> tbusers = new ArrayList<>();
         for (Users users : users2) {
             TBUSERS tb_users = new TBUSERS();
-            tb_users.setCmUserid(users.getCmUserid());
+            tb_users.setCM_USERID(users.getCM_USERID());
             tbusers.add(tb_users);
         }
 
         //change to user
-        user.setCmUserid(user1.getCmUserid());
-        user.setCmShoplon(user1.getCmShoplon());
-        user.setCmShoplat(user1.getCmShoplat());
-        user.setCmBalance(user1.getCmBalance());
-        user.setCmIntegral(user1.getCmIntegral());
-        user.setTbUsers(tbusers);
+        user.setCM_USERID(user1.getCM_USERID());
+        user.setCM_SHOPLON(user1.getCM_SHOPLON());
+        user.setCM_SHOPLAT(user1.getCM_SHOPLAT());
+        user.setCM_BLANCE(user1.getCM_BALANCE());
+        user.setCM_INTEGRAL(user1.getCM_INTEGRAL());
+        user.setTB_USERS(tbusers);
 
         return user;
     }
@@ -137,10 +137,10 @@ public class UserDoMainDao {
      */
     public void updateSpecStock(String icc, Integer cmGoodsdetailsid) {
         GooddetailsWithBLOBs gooddetails = new GooddetailsWithBLOBs();
-        gooddetails.setCmSpecStock(icc);
+        gooddetails.setCM_SPEC_STOCK(icc);
         GooddetailsExample gooddetailsExample = new GooddetailsExample();
         GooddetailsExample.Criteria criteria = gooddetailsExample.createCriteria();
-        criteria.andCmGoodsdetailsidEqualTo(cmGoodsdetailsid);
+        criteria.andCM_GOODSDETAILSIDEqualTo(cmGoodsdetailsid);
         gooddetailsMapper.updateByExampleWithBLOBs(gooddetails, gooddetailsExample);
     }
 
@@ -152,7 +152,7 @@ public class UserDoMainDao {
     public void updateOrderDetails(OrderdetailsWithBLOBs orderdetails) {
         OrderdetailsExample orderdetailsExample = new OrderdetailsExample();
         OrderdetailsExample.Criteria criteria = orderdetailsExample.createCriteria();
-        criteria.andCmOrderdetailsidEqualTo(orderdetails.getCmOrderdetailsid());
+        criteria.andCM_ORDERDETAILSIDEqualTo(orderdetails.getCM_ORDERDETAILSID());
         orderdetailsMapper.updateByExample(orderdetails, orderdetailsExample);
     }
 
@@ -224,7 +224,7 @@ public class UserDoMainDao {
     public Orders getOrdersByOrderId(String orderid) {
         OrdersExample ordersExample = new OrdersExample();
         OrdersExample.Criteria criteria = ordersExample.createCriteria();
-        criteria.andCmOrderidEqualTo(orderid);
+        criteria.andCM_ORDERIDEqualTo(orderid);
         List<Orders> orders = ordersMapper.selectByExample(ordersExample);
         return orders.size() > 0 ? orders.get(0) : null;
     }
@@ -237,7 +237,7 @@ public class UserDoMainDao {
     public void delMyOrder(String orderid) {
         OrdersExample ordersExample = new OrdersExample();
         OrdersExample.Criteria criteria = ordersExample.createCriteria();
-        criteria.andCmOrderidEqualTo(orderid);
+        criteria.andCM_ORDERIDEqualTo(orderid);
         ordersMapper.deleteByExample(ordersExample);
     }
 
@@ -251,8 +251,8 @@ public class UserDoMainDao {
     public Orderdetails getOrderDetails(String userID, Long orderdetailid) {
         OrderdetailsExample orderdetailsExample = new OrderdetailsExample();
         OrderdetailsExample.Criteria criteria = orderdetailsExample.createCriteria();
-        criteria.andCmUseridEqualTo(userID);
-        criteria.andCmOrderdetailsidEqualTo(orderdetailid.toString());
+        criteria.andCM_USERIDEqualTo(userID);
+        criteria.andCM_ORDERDETAILSIDEqualTo(orderdetailid.toString());
         List<Orderdetails> orderdetails = orderdetailsMapper.selectByExample(orderdetailsExample);
         return orderdetails.size() > 0 ? orderdetails.get(0) : null;
     }
@@ -276,9 +276,9 @@ public class UserDoMainDao {
     public void updateOrderDetailByDetailid(String orderdetailid) {
         OrderdetailsExample orderdetailsExample = new OrderdetailsExample();
         OrderdetailsExample.Criteria criteria = orderdetailsExample.createCriteria();
-        criteria.andCmOrderidEqualTo(orderdetailid);
+        criteria.andCM_ORDERIDEqualTo(orderdetailid);
         OrderdetailsWithBLOBs orderdetails = new OrderdetailsWithBLOBs();
-        orderdetails.setCmSellerstate(4);
+        orderdetails.setCM_SELLERSTATE(4);
         orderdetailsMapper.updateByExampleWithBLOBs(orderdetails, orderdetailsExample);
     }
 
@@ -291,8 +291,8 @@ public class UserDoMainDao {
         OrdersExample ordersExample = new OrdersExample();
         OrdersExample.Criteria criteria = ordersExample.createCriteria();
         Orders orders = new Orders();
-        orders.setCmState(4);
-        criteria.andCmOrderidEqualTo(orderid);
+        orders.setCM_STATE(4);
+        criteria.andCM_ORDERIDEqualTo(orderid);
         ordersMapper.updateByExample(orders, ordersExample);
     }
 
@@ -306,8 +306,8 @@ public class UserDoMainDao {
     public List<OrdersWithBLOBs> getOrdersByOrderIdAndUserId(String orderid, String userId) {
         OrdersExample ordersExample = new OrdersExample();
         OrdersExample.Criteria criteria = ordersExample.createCriteria();
-        criteria.andCmOrderidEqualTo(orderid);
-        criteria.andCmUseridEqualTo(userId);
+        criteria.andCM_ORDERIDEqualTo(orderid);
+        criteria.andCM_USERIDEqualTo(userId);
         return ordersMapper.selectByExampleWithBLOBs(ordersExample);
     }
 
@@ -320,8 +320,8 @@ public class UserDoMainDao {
         OrderdetailsExample orderdetailsExample = new OrderdetailsExample();
         OrderdetailsExample.Criteria criteria = orderdetailsExample.createCriteria();
         Orderdetails orderdetails = new Orderdetails();
-        orderdetails.setCmSellerstate(4);
-        criteria.andCmOrderdetailsidEqualTo(orderid);
+        orderdetails.setCM_SELLERSTATE(4);
+        criteria.andCM_ORDERDETAILSIDEqualTo(orderid);
         orderdetailsMapper.updateByExample(orderdetails, orderdetailsExample);
     }
 
@@ -354,7 +354,7 @@ public class UserDoMainDao {
     public List<Afterservices> selectAfterserviceByAfterserviceid(String afierserviceid) {
         AfterservicesExample afterservicesExample = new AfterservicesExample();
         AfterservicesExample.Criteria criteria = afterservicesExample.createCriteria();
-        criteria.andCmAfterserviceidEqualTo(afierserviceid);
+        criteria.andCM_AFTERSERVICEIDEqualTo(afierserviceid);
         return afterservicesMapper.selectByExample(afterservicesExample);
     }
 
@@ -367,7 +367,7 @@ public class UserDoMainDao {
     public List<OrderdetailsWithBLOBs> selectOrderdetailsByorderdetailsid(String cmOrderdetailsid) {
         OrderdetailsExample orderdetailsExample = new OrderdetailsExample();
         OrderdetailsExample.Criteria criteria = orderdetailsExample.createCriteria();
-        criteria.andCmOrderdetailsidEqualTo(cmOrderdetailsid);
+        criteria.andCM_ORDERDETAILSIDEqualTo(cmOrderdetailsid);
         return orderdetailsMapper.selectByExampleWithBLOBs(orderdetailsExample);
     }
 
@@ -388,7 +388,7 @@ public class UserDoMainDao {
     public void updateAfterservice(Afterservices afterservices) {
         AfterservicesExample afterservicesExample = new AfterservicesExample();
         AfterservicesExample.Criteria criteria = afterservicesExample.createCriteria();
-        criteria.andCmAfterserviceidEqualTo(afterservices.getCmAfterserviceid());
+        criteria.andCM_AFTERSERVICEIDEqualTo(afterservices.getCM_AFTERSERVICEID());
         afterservicesMapper.updateByExample(afterservices, afterservicesExample);
     }
 
@@ -400,7 +400,7 @@ public class UserDoMainDao {
     public void updateOrderdetails(String cmOrderdetailsid, Orderdetails orderdetails) {
         OrderdetailsExample orderdetailsExample = new OrderdetailsExample();
         OrderdetailsExample.Criteria criteria = orderdetailsExample.createCriteria();
-        criteria.andCmOrderidEqualTo(cmOrderdetailsid);
+        criteria.andCM_ORDERIDEqualTo(cmOrderdetailsid);
         orderdetailsMapper.updateByExample(orderdetails, orderdetailsExample);
     }
 
@@ -424,8 +424,8 @@ public class UserDoMainDao {
     public int delMyCollectionD(String goodsid, String userId) {
         CollectionsExample collectionsExample = new CollectionsExample();
         CollectionsExample.Criteria criteria = collectionsExample.createCriteria();
-        criteria.andCmUseridEqualTo(userId);
-        criteria.andCmGoodsidEqualTo(goodsid);
+        criteria.andCM_USERIDEqualTo(userId);
+        criteria.andCM_GOODSIDEqualTo(goodsid);
         return collectionsMapper.deleteByExample(collectionsExample);
     }
 
@@ -439,8 +439,8 @@ public class UserDoMainDao {
     public int selectMyCollectionByGoodsidAndUserid(String goodsid, String userId) {
         CollectionsExample collectionsExample = new CollectionsExample();
         CollectionsExample.Criteria criteria = collectionsExample.createCriteria();
-        criteria.andCmUseridEqualTo(userId);
-        criteria.andCmGoodsidEqualTo(goodsid);
+        criteria.andCM_USERIDEqualTo(userId);
+        criteria.andCM_GOODSIDEqualTo(goodsid);
         List<Collections> list = collectionsMapper.selectByExample(collectionsExample);
         return list.size();
     }
@@ -463,7 +463,7 @@ public class UserDoMainDao {
     public List<Addresses> selectAddaddressbyuserid(String userId) {
         AddressesExample addressesExample = new AddressesExample();
         AddressesExample.Criteria criteria = addressesExample.createCriteria();
-        criteria.andCmUseridEqualTo(userId);
+        criteria.andCM_USERIDEqualTo(userId);
         return addressesMapper.selectByExample(addressesExample);
     }
 
@@ -484,7 +484,7 @@ public class UserDoMainDao {
     public void updateAddress(Addresses addresses) {
         AddressesExample addressesExample = new AddressesExample();
         AddressesExample.Criteria criteria = addressesExample.createCriteria();
-        criteria.andCmAddressidEqualTo(addresses.getCmAddressid());
+        criteria.andCM_ADDRESSIDEqualTo(addresses.getCM_ADDRESSID());
         addressesMapper.updateByExample(addresses, addressesExample);
     }
 
@@ -497,7 +497,7 @@ public class UserDoMainDao {
     public int delAdressD(Integer addressid) {
         AddressesExample addressesExample = new AddressesExample();
         AddressesExample.Criteria criteria = addressesExample.createCriteria();
-        criteria.andCmAddressidEqualTo(addressid);
+        criteria.andCM_ADDRESSIDEqualTo(addressid);
         return addressesMapper.deleteByExample(addressesExample);
     }
 
@@ -529,7 +529,7 @@ public class UserDoMainDao {
     public List<Users> selectUserByuserid(String userId) {
         UsersExample usersExample = new UsersExample();
         UsersExample.Criteria criteria = usersExample.createCriteria();
-        criteria.andCmUseridEqualTo(userId);
+        criteria.andCM_USERIDEqualTo(userId);
         return usersMapper.selectByExample(usersExample);
     }
 
@@ -541,7 +541,7 @@ public class UserDoMainDao {
     public void updateUsersPassword(Users users) {
         UsersExample usersExample = new UsersExample();
         UsersExample.Criteria criteria = usersExample.createCriteria();
-        criteria.andCmUseridEqualTo(users.getCmUserid());
+        criteria.andCM_USERIDEqualTo(users.getCM_USERID());
         usersMapper.updateByExample(users, usersExample);
     }
 
@@ -554,7 +554,7 @@ public class UserDoMainDao {
     public List<Register> selectRegisterByPhone(Long phone) {
         RegisterExample registerExample = new RegisterExample();
         RegisterExample.Criteria criteria = registerExample.createCriteria();
-        criteria.andCmPhoneEqualTo(phone);
+        criteria.andCM_PHONEEqualTo(phone);
         return registerMapper.selectByExample(registerExample);
     }
 
@@ -575,7 +575,7 @@ public class UserDoMainDao {
     public void updateRegister(Register register) {
         RegisterExample registerExample = new RegisterExample();
         RegisterExample.Criteria criteria = registerExample.createCriteria();
-        criteria.andCmPhoneEqualTo(register.getCmPhone());
+        criteria.andCM_PHONEEqualTo(register.getCM_PHONE());
         registerMapper.updateByExample(register, registerExample);
     }
 
@@ -588,7 +588,7 @@ public class UserDoMainDao {
     public Users selectUserByPhone(Long phone) {
         UsersExample usersExample = new UsersExample();
         UsersExample.Criteria criteria = usersExample.createCriteria();
-        criteria.andCmPhoneEqualTo(phone);
+        criteria.andCM_PHONEEqualTo(phone);
         return usersMapper.selectByExample(usersExample).get(0);
     }
 
@@ -601,7 +601,7 @@ public class UserDoMainDao {
     public ServicedetailsWithBLOBs selectServicedetailsBySvid(String cmSvid) {
         ServicedetailsExample servicedetailsExample = new ServicedetailsExample();
         ServicedetailsExample.Criteria criteria = servicedetailsExample.createCriteria();
-        criteria.andCmSvidEqualTo(cmSvid);
+        criteria.andCM_SVIDEqualTo(cmSvid);
         return servicedetailsMapper.selectByExampleWithBLOBs(servicedetailsExample).get(0);
     }
 
@@ -613,7 +613,7 @@ public class UserDoMainDao {
     public void updateServicedetails(ServicedetailsWithBLOBs servicedetailsWithBLOBs) {
         ServicedetailsExample servicedetailsExample = new ServicedetailsExample();
         ServicedetailsExample.Criteria criteria = servicedetailsExample.createCriteria();
-        criteria.andCmSvidEqualTo(servicedetailsWithBLOBs.getCmSvid());
+        criteria.andCM_SVIDEqualTo(servicedetailsWithBLOBs.getCM_SVID());
         servicedetailsMapper.updateByExampleWithBLOBs(servicedetailsWithBLOBs, servicedetailsExample);
     }
 }

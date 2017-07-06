@@ -80,12 +80,12 @@ public class CustomServiceService {
             if (list != null && list.size() > 0) {
                 //list中放的是父类，有些属性只有子类才有，需要对list中的对象塑性
                 goodsWithBLOBs = (GoodsWithBLOBs) list.get(0);
-                String[] str1 = goodsWithBLOBs.getCmFigurespath().split("|");
+                String[] str1 = goodsWithBLOBs.getCM_FIGURESPATH().split("|");
                 //删除图片
                 storageService.deleteByFigurePath(str1[delnum]);
                 str1[delnum] = "";
                 String str2 = String.join("|", str1).replace("||", "|");
-                goodsWithBLOBs.setCmFigurespath(str2);
+                goodsWithBLOBs.setCM_FIGURESPATH(str2);
                 int i = customServiceDao.updateGoods(goodsWithBLOBs);
             }
             return GetResult.toJson(0, null, str, null, 0);
@@ -173,9 +173,9 @@ public class CustomServiceService {
             //只有当list不为空的时候才对list1进行赋值，不然就是搜索的厂家名不存在
             for (Sellers sellers : list) {
                 SelleridAndNameAndAccount selectSellerByLikeContent = new SelleridAndNameAndAccount();
-                selectSellerByLikeContent.setCmSellerid(sellers.getCmSellerid());
-                selectSellerByLikeContent.setCmSellername(sellers.getCmSellername());
-                selectSellerByLikeContent.setCmAccount(sellers.getCmAccount());
+                selectSellerByLikeContent.setCM_SELLERID(sellers.getCM_SELLERID());
+                selectSellerByLikeContent.setCM_SELLERNAME(sellers.getCM_SELLERNAME());
+                selectSellerByLikeContent.setCM_ACCOUNT(sellers.getCM_ACCOUNT());
                 list1.add(selectSellerByLikeContent);
             }
         }
@@ -193,8 +193,8 @@ public class CustomServiceService {
         if (list != null && list.size() > 0) {
             for (Brands brands : list) {
                 BrandidAndBrand brandidAndBrand = new BrandidAndBrand();
-                brandidAndBrand.setCmBrand(brands.getCmBrand());
-                brandidAndBrand.setCmBrandid(brands.getCmBrandid());
+                brandidAndBrand.setCM_BRAND(brands.getCM_BRAND());
+                brandidAndBrand.setCM_BRANDID(brands.getCM_BRANDID());
                 list1.add(brandidAndBrand);
             }
         }
@@ -226,7 +226,7 @@ public class CustomServiceService {
     public Result uploadGoods(String userId, String goodsartnum, String sellerid, int classifyid, String classifytabs, int brandid, String title, double originalprice, double presentprice, String html, String chtml, int ispromotion, String spec, int stock, String[] colorarr, List<MultipartFile> files, String goodsid) {
         try {
             Admins admin = customServiceDao.selectAdminInfo(userId);
-            if (admin == null || (admin.getCmLevel() != 1 && admin.getCmLevel() != 3)) {
+            if (admin == null || (admin.getCM_LEVEL() != 1 && admin.getCM_LEVEL() != 3)) {
                 return GetResult.toJson(45, null, null, null, 0);
             }
             Date time = new Date();
@@ -248,7 +248,7 @@ public class CustomServiceService {
             for (MultipartFile file1 : files) {
                 String res = "";
                 String newfilename = i + "." + storageService.getFileType(file1.getOriginalFilename());
-                if (storageService.store(file1, root+newfilename)) {
+                if (storageService.store(file1, root + newfilename)) {
                     res = root + newfilename;
                 }
                 if (file1.getName() == "main") {
@@ -257,34 +257,34 @@ public class CustomServiceService {
                     showpath += res + "|";
                 } else {
                     GooddetailsWithBLOBs details = new GooddetailsWithBLOBs();
-                    details.setCmGoodsid(goodsid);
-                    details.setCmImagepath(res);
-                    details.setCmColor(colorarr[i]);
-                    details.setCmSpecStock(spec_stock);
+                    details.setCM_GOODSID(goodsid);
+                    details.setCM_IMAGEPATH(res);
+                    details.setCM_COLOR(colorarr[i]);
+                    details.setCM_SPEC_STOCK(spec_stock);
                     customServiceDao.insertGoodDetails(details);
                     i++;
                 }
             }
 
             GoodsWithBLOBs goods = new GoodsWithBLOBs();
-            goods.setCmGoodsid(goodsid);
-            goods.setCmGoodsartnum(goodsartnum);
-            goods.setCmSellerid(sellerid);
-            goods.setCmClassifyid(classifyid);
-            goods.setCmClassifytabs(classifytabs);
-            goods.setCmBrandid(brandid);
-            goods.setCmTitle(title);
-            goods.setCmChtml(chtml);
-            goods.setCmSales(0);
-            goods.setCmOriginalprice(originalprice);
-            goods.setCmPresentprice(presentprice);
-            goods.setCmHtml(html);
-            goods.setCmMainfigurepath(mainpath);
-            goods.setCmFigurespath(showpath);
-            goods.setCmCreatetime(time);
-            goods.setCmIsoff(0);
-            goods.setCmIspromotion(ispromotion);
-            goods.setCmSpec(spec);
+            goods.setCM_GOODSID(goodsid);
+            goods.setCM_GOODSARTNUM(goodsartnum);
+            goods.setCM_SELLERID(sellerid);
+            goods.setCM_CLASSIFYID(classifyid);
+            goods.setCM_CLASSIFYTABS(classifytabs);
+            goods.setCM_BRANDID(brandid);
+            goods.setCM_TITLE(title);
+            goods.setCM_CHTML(chtml);
+            goods.setCM_SALES(0);
+            goods.setCM_ORIGINALPRICE(originalprice);
+            goods.setCM_PRESENTPRICE(presentprice);
+            goods.setCM_HTML(html);
+            goods.setCM_MAINFIGUREPATH(mainpath);
+            goods.setCM_FIGURESPATH(showpath);
+            goods.setCM_CREATETIME(time);
+            goods.setCM_ISOFF(0);
+            goods.setCM_ISPROMOTION(ispromotion);
+            goods.setCM_SPEC(spec);
 
             customServiceDao.insertGoods(goods);
 
@@ -319,7 +319,7 @@ public class CustomServiceService {
     public Result reviseGoodsS(String adminid, String goodsartnum, String sellerid, int classifyid, String classifytabs, int brandid, String title, double originalprice, double presentprice, String html, String chtml, int ispromotion, String spec, int stock, List<MultipartFile> files, String goodsid, String changetab) {
         try {
             Admins admins = customServiceDao.selectAdminInfo(adminid);
-            if (admins == null || (admins.getCmLevel() != 1 && admins.getCmLevel() != 3)) {
+            if (admins == null || (admins.getCM_LEVEL() != 1 && admins.getCM_LEVEL() != 3)) {
                 return GetResult.toJson(45, null, null, null, 0);
             }
             GoodsWithBLOBs goods = null;
@@ -337,14 +337,14 @@ public class CustomServiceService {
             }
             List<GooddetailsWithBLOBs> gooddetailsList = customServiceDao.selectGooddetailBygoodid(goodsid);
             for (GooddetailsWithBLOBs gooddetails : gooddetailsList) {
-                gooddetails.setCmSpecStock(spec_stock);
+                gooddetails.setCM_SPEC_STOCK(spec_stock);
             }
             int a = files.size();
             String mainpath = "";
             String showpath = "";
             if (a > 0) {
                 String[] carr = changetab.split("|");
-                List<String> iarr = Arrays.asList(goods.getCmFigurespath().split("|"));
+                List<String> iarr = Arrays.asList(goods.getCM_FIGURESPATH().split("|"));
                 File file = new File(root);
                 if (!file.isDirectory()) {
                     file.mkdirs();
@@ -373,24 +373,24 @@ public class CustomServiceService {
                 }
                 showpath = String.join("|", iarr);
             }
-            goods.setCmGoodsartnum(goodsartnum);
-            goods.setCmSellerid(sellerid);
-            goods.setCmClassifyid(classifyid);
-            goods.setCmClassifytabs(classifytabs);
-            goods.setCmBrandid(brandid);
-            goods.setCmTitle(title);
-            goods.setCmChtml(chtml);
-            goods.setCmSales(0);
-            goods.setCmOriginalprice(originalprice);
-            goods.setCmPresentprice(presentprice);
-            goods.setCmHtml(html);
-            goods.setCmIspromotion(ispromotion);
-            goods.setCmSpec(spec);
+            goods.setCM_GOODSARTNUM(goodsartnum);
+            goods.setCM_SELLERID(sellerid);
+            goods.setCM_CLASSIFYID(classifyid);
+            goods.setCM_CLASSIFYTABS(classifytabs);
+            goods.setCM_BRANDID(brandid);
+            goods.setCM_TITLE(title);
+            goods.setCM_CHTML(chtml);
+            goods.setCM_SALES(0);
+            goods.setCM_ORIGINALPRICE(originalprice);
+            goods.setCM_PRESENTPRICE(presentprice);
+            goods.setCM_HTML(html);
+            goods.setCM_ISPROMOTION(ispromotion);
+            goods.setCM_SPEC(spec);
             if (!mainpath.equals("")) {
-                goods.setCmMainfigurepath(mainpath);
+                goods.setCM_MAINFIGUREPATH(mainpath);
             }
             if (!showpath.equals("")) {
-                goods.setCmFigurespath(showpath);
+                goods.setCM_FIGURESPATH(showpath);
             }
             customServiceDao.updateGoods(goods);
             return GetResult.toJson(0, null, jwt.createJWT(adminid), null, 0);
@@ -418,7 +418,7 @@ public class CustomServiceService {
             }
             if (files.size() > 0) {
                 String res = "";
-                storageService.deleteByFigurePath(gooddetailsWithBLOBs.getCmImagepath());
+                storageService.deleteByFigurePath(gooddetailsWithBLOBs.getCM_IMAGEPATH());
                 File file = new File(root);
                 if (!file.isDirectory()) {
                     file.mkdirs();
@@ -430,20 +430,20 @@ public class CustomServiceService {
                 if (storageService.store(files.get(0), root + newfilename)) {
                     res = root + newfilename;
                 }
-                gooddetailsWithBLOBs.setCmImagepath(res);
+                gooddetailsWithBLOBs.setCM_IMAGEPATH(res);
             }
             int stock1 = Integer.valueOf(stock);
             if (stock1 > 0) {
                 String spec_stock = "";
-                Goods goods = customServiceDao.selectGoodsByGoodsid(gooddetailsWithBLOBs.getCmGoodsid()).get(0);
-                String spec = goods.getCmSpec();
+                Goods goods = customServiceDao.selectGoodsByGoodsid(gooddetailsWithBLOBs.getCM_GOODSID()).get(0);
+                String spec = goods.getCM_SPEC();
                 String[] specArr = spec.split("|");
                 for (String spec1 : specArr) {
                     spec_stock = spec1 + "_" + stock + "|";
                 }
-                gooddetailsWithBLOBs.setCmSpecStock(spec_stock);
+                gooddetailsWithBLOBs.setCM_SPEC_STOCK(spec_stock);
             }
-            gooddetailsWithBLOBs.setCmColor(color);
+            gooddetailsWithBLOBs.setCM_COLOR(color);
             customServiceDao.updateGooddetails(gooddetailsWithBLOBs);
             return GetResult.toJson(0, null, jwt.createJWT(adminid), null, 0);
         } catch (NumberFormatException e) {
@@ -485,16 +485,16 @@ public class CustomServiceService {
                 res = root + newfilename;
             }
             String spec_stock = "";
-            String spec = goods.getCmSpec();
+            String spec = goods.getCM_SPEC();
             String[] specArr = spec.split("|");
             for (String spec1 : specArr) {
                 spec_stock = spec1 + "_" + stock + "|";
             }
             GooddetailsWithBLOBs gooddetailsWithBLOBs = new GooddetailsWithBLOBs();
-            gooddetailsWithBLOBs.setCmColor(color);
-            gooddetailsWithBLOBs.setCmGoodsid(goodsid);
-            gooddetailsWithBLOBs.setCmSpecStock(spec_stock);
-            gooddetailsWithBLOBs.setCmImagepath(res);
+            gooddetailsWithBLOBs.setCM_COLOR(color);
+            gooddetailsWithBLOBs.setCM_GOODSID(goodsid);
+            gooddetailsWithBLOBs.setCM_SPEC_STOCK(spec_stock);
+            gooddetailsWithBLOBs.setCM_IMAGEPATH(res);
             customServiceDao.insertGoodDetails(gooddetailsWithBLOBs);
             return GetResult.toJson(0, null, jwt.createJWT(adminid), null, 0);
         } catch (Exception e) {

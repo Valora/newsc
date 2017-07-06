@@ -36,7 +36,7 @@ public class CustomServiceDao {
     public int delGoodsDetailsD(Integer goodsdetailsid) {
         GooddetailsExample gooddetailsExample = new GooddetailsExample();
         GooddetailsExample.Criteria criteria = gooddetailsExample.createCriteria();
-        criteria.andCmGoodsdetailsidEqualTo(goodsdetailsid);
+        criteria.andCM_GOODSDETAILSIDEqualTo(goodsdetailsid);
         return gooddetailsMapper.deleteByExample(gooddetailsExample);
     }
 
@@ -49,7 +49,7 @@ public class CustomServiceDao {
     public List<Goods> selectGoodsByGoodsid(String goodsid) {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        criteria.andCmGoodsidEqualTo(goodsid);
+        criteria.andCM_GOODSIDEqualTo(goodsid);
         return goodsMapper.selectByExample(goodsExample);
     }
 
@@ -62,7 +62,7 @@ public class CustomServiceDao {
     public int updateGoods(GoodsWithBLOBs goodsWithBLOBs) {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        criteria.andCmGoodsidEqualTo(goodsWithBLOBs.getCmGoodsid());
+        criteria.andCM_GOODSIDEqualTo(goodsWithBLOBs.getCM_GOODSID());
         return goodsMapper.updateByExampleWithBLOBs(goodsWithBLOBs, goodsExample);
     }
 
@@ -76,7 +76,7 @@ public class CustomServiceDao {
         SellersExample sellersExample = new SellersExample();
         SellersExample.Criteria criteria = sellersExample.createCriteria();
         String string = "%" + content + "%";
-        criteria.andCmSellernameLike(string);
+        criteria.andCM_SELLERNAMELike(string);
         return sellersMapper.selectByExample(sellersExample);
     }
 
@@ -100,7 +100,7 @@ public class CustomServiceDao {
         BrandsExample brandsExample = new BrandsExample();
         BrandsExample.Criteria criteria = brandsExample.createCriteria();
         String string = "%" + content + "%";
-        criteria.andCmBrandLike(string);
+        criteria.andCM_BRANDLike(string);
         return brandsMapper.selectByExample(brandsExample);
     }
 
@@ -123,7 +123,7 @@ public class CustomServiceDao {
     public Admins selectAdminInfo(String userId) {
         AdminsExample adminsExample = new AdminsExample();
         AdminsExample.Criteria criteria = adminsExample.createCriteria();
-        criteria.andCmAdminidEqualTo(userId);
+        criteria.andCM_ADMINIDEqualTo(userId);
         Admins admins = adminsMapper.selectByExample(adminsExample).get(0);
         if (admins == null) {
             return null;
@@ -159,7 +159,7 @@ public class CustomServiceDao {
     public List<GooddetailsWithBLOBs> selectGooddetailBygoodid(String goodsid) {
         GooddetailsExample gooddetailsExample = new GooddetailsExample();
         GooddetailsExample.Criteria criteria = gooddetailsExample.createCriteria();
-        criteria.andCmGoodsidEqualTo(goodsid);
+        criteria.andCM_GOODSIDEqualTo(goodsid);
         return gooddetailsMapper.selectByExampleWithBLOBs(gooddetailsExample);
     }
 
@@ -173,7 +173,7 @@ public class CustomServiceDao {
         GooddetailsWithBLOBs gooddetailsWithBLOBs = null;
         GooddetailsExample gooddetailsExample = new GooddetailsExample();
         GooddetailsExample.Criteria criteria = gooddetailsExample.createCriteria();
-        criteria.andCmGoodsdetailsidEqualTo(Integer.valueOf(goodsdetailsid));
+        criteria.andCM_GOODSDETAILSIDEqualTo(Integer.valueOf(goodsdetailsid));
         List<GooddetailsWithBLOBs> list = gooddetailsMapper.selectByExampleWithBLOBs(gooddetailsExample);
         if (list != null && list.size() > 0) {
             gooddetailsWithBLOBs = list.get(0);
@@ -189,7 +189,7 @@ public class CustomServiceDao {
     public void updateGooddetails(GooddetailsWithBLOBs gooddetailsWithBLOBs) {
         GooddetailsExample gooddetailsExample = new GooddetailsExample();
         GooddetailsExample.Criteria criteria = gooddetailsExample.createCriteria();
-        criteria.andCmGoodsdetailsidEqualTo(gooddetailsWithBLOBs.getCmGoodsdetailsid());
+        criteria.andCM_GOODSDETAILSIDEqualTo(gooddetailsWithBLOBs.getCM_GOODSDETAILSID());
         gooddetailsMapper.updateByExample(gooddetailsWithBLOBs, gooddetailsExample);
     }
 }

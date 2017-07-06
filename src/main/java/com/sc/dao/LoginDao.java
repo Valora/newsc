@@ -49,42 +49,82 @@ public class LoginDao {
 
     /**
      * 厂家信息
-     * @param account 账号
+     *
+     * @param account  账号
      * @param password 密码
      * @return 厂家
      */
     public List<Users> getUserByAccountAndPassword(String account, String password) {
         UsersExample userExample = new UsersExample();
         UsersExample.Criteria criteria = userExample.createCriteria();
-        criteria.andCmAccountEqualTo(account);
-        criteria.andCmPasswordEqualTo(password);
+        criteria.andCM_ACCOUNTEqualTo(account);
+        criteria.andCM_PASSWORDEqualTo(password);
         return usersMapper.selectByExample(userExample);
     }
 
     /**
-     * 厂家登录信息
-     * @param account 账号
+     * 商家登录信息
+     *
+     * @param account  账号
      * @param password 密码
      * @return Result
      */
     public UserLogin getUserLoginInfo(String account, String password) {
         //登录信息类
         UserLogin userLoginInfo = new UserLogin();
-
         List<UserLogin> result = userLoginMapper.selectLoginInfo(account, password);
-        userLoginInfo.setCmUserid(result.get(0).getCmUserid());
-        userLoginInfo.setCmBalance(result.get(0).getCmBalance());
-        userLoginInfo.setCmNickname(result.get(0).getCmNickname());
-        userLoginInfo.setCmLevel(result.get(0).getCmLevel());
-        userLoginInfo.setCmIntegral(result.get(0).getCmIntegral());
-        userLoginInfo.setCmCode(result.get(0).getCmCode());
-        userLoginInfo.setCmPhone(result.get(0).getCmPhone());
+        userLoginInfo.setCM_USERID(result.get(0).getCM_USERID());
+        userLoginInfo.setCM_BALANCE(result.get(0).getCM_BALANCE());
+        userLoginInfo.setCM_NICKNAME(result.get(0).getCM_NICKNAME());
+        userLoginInfo.setCM_LEVEL(result.get(0).getCM_LEVEL());
+        userLoginInfo.setCM_INTEGRAL(result.get(0).getCM_INTEGRAL());
+        userLoginInfo.setCM_CODE(result.get(0).getCM_CODE());
+        userLoginInfo.setCM_PHONE(result.get(0).getCM_PHONE());
         return userLoginInfo;
     }
 
     /**
+     * 商家只用手机号和验证码登入
+     *
+     * @param phone 手机号
+     * @param code  验证码
+     * @return
+     */
+    public Register selectByPhoneAndCodeD(String phone, String code) {
+        Register register = null;
+        RegisterExample registerExample = new RegisterExample();
+        RegisterExample.Criteria criteria = registerExample.createCriteria();
+        criteria.andCM_PHONEEqualTo(Long.valueOf(phone));
+        criteria.andCM_CODEEqualTo(Integer.valueOf(code));
+        List<Register> list = registerMapper.selectByExample(registerExample);
+        if (list != null && list.size() > 0) {
+            register = list.get(0);
+        }
+        return register;
+    }
+
+    /**
+     * 根据手机号查询商家（用户）信息
+     *
+     * @param phone
+     * @return
+     */
+    public Users getUserLoginInfoByPhone(String phone) {
+        Users users = null;
+        UsersExample usersExample = new UsersExample();
+        UsersExample.Criteria criteria = usersExample.createCriteria();
+        criteria.andCM_PHONEEqualTo(Long.valueOf(phone));
+        List<Users> list = usersMapper.selectByExample(usersExample);
+        if (list != null && list.size() > 0) {
+            users = list.get(0);
+        }
+        return users;
+    }
+
+    /**
      * 管理员登录信息
-     * @param account 账号
+     *
+     * @param account  账号
      * @param password 密码
      * @return 管理员信息
      */
@@ -94,18 +134,20 @@ public class LoginDao {
 
     /**
      * 删除存在的验证码
+     *
      * @param phone 手机号
      */
     public void deleteCode(Long phone) {
         RegisterExample registerExample = new RegisterExample();
         RegisterExample.Criteria criteria = registerExample.createCriteria();
-        criteria.andCmPhoneEqualTo(phone);
+        criteria.andCM_PHONEEqualTo(phone);
         registerMapper.deleteByExample(registerExample);
     }
 
     /**
      * 厂家登录信息
-     * @param account 账号
+     *
+     * @param account  账号
      * @param password 密码
      * @return 厂家登录信息
      */
@@ -113,55 +155,60 @@ public class LoginDao {
         //厂家信息
         SellerLogin sellerLoginInfo = new SellerLogin();
         List<SellerLogin> result = sellerLoginMapper.selectLoginInfo(account, password);
-        sellerLoginInfo.setCmCode(result.get(0).getCmCode());
-        sellerLoginInfo.setCmPhone(result.get(0).getCmPhone());
-        sellerLoginInfo.setCmSellerid(result.get(0).getCmSellerid());
-        sellerLoginInfo.setCmSellerName(result.get(0).getCmSellerName());
+        sellerLoginInfo.setCM_CODE(result.get(0).getCM_CODE());
+        sellerLoginInfo.setCM_PHONE(result.get(0).getCM_PHONE());
+        sellerLoginInfo.setCM_SELLERID(result.get(0).getCM_SELLERID());
+        sellerLoginInfo.setCM_SELLERNAME(result.get(0).getCM_SELLERNAME());
         return sellerLoginInfo;
     }
 
     /**
      * 获得注册信息
+     *
      * @param phone 手机号码
      * @return
      */
     public Register getRegisterInfo(String phone) {
         RegisterExample registerExample = new RegisterExample();
         RegisterExample.Criteria criteria = registerExample.createCriteria();
-        criteria.andCmPhoneEqualTo(Long.valueOf(phone));
+        criteria.andCM_PHONEEqualTo(Long.valueOf(phone));
         List<Register> result = registerMapper.selectByExample(registerExample);
         return result.size() == 0 ? null : result.get(0);
     }
 
     /**
      * 新建注册信息
+     *
      * @param phone 手机号
-     * @param code 验证码
-     * @param time 时间
+     * @param code  验证码
+     * @param time  时间
      */
     public void insertReg(String phone, String code, Date time) {
         Register register = new Register();
-        register.setCmPhone(Long.valueOf(phone));
-        register.setCmCode(Integer.valueOf(code));
-        register.setCmTime(time);
-        register.setCmCount(0);
+        register.setCM_PHONE(Long.valueOf(phone));
+        register.setCM_CODE(Integer.valueOf(code));
+        register.setCM_TIME(time);
+        register.setCM_COUNT(0);
         registerMapper.insert(register);
     }
 
     /**
      * 更新注册信息
+     *
      * @param phone 手机号
-     * @param code 验证码
-     * @param time 时间
+     * @param code  验证码
+     * @param time  时间
      */
     public void updateReg(String phone, String code, Date time) {
         RegisterExample registerExample = new RegisterExample();
         RegisterExample.Criteria criteria = registerExample.createCriteria();
-        criteria.andCmPhoneEqualTo(Long.valueOf(phone));
+        criteria.andCM_PHONEEqualTo(Long.valueOf(phone));
         Register register = new Register();
-        register.setCmCode(Integer.valueOf(code));
-        register.setCmCount(0);
-        register.setCmTime(time);
+        register.setCM_CODE(Integer.valueOf(code));
+        register.setCM_COUNT(0);
+        register.setCM_TIME(time);
         registerMapper.updateByExampleSelective(register, registerExample);
     }
+
+
 }

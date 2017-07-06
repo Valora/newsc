@@ -10,16 +10,16 @@ import java.util.Date;
  */
 @Data
 public class PageGoods {
-    private Integer cmBrandid;
-    private String cmFigurespath;
-    private String cmGoodsid;
-    private String cmMainfigurepath;
-    private Double cmPresentprice;
-    private Double cmOriginalprice;
-    private Integer cmSales;
-    private String cmTitle;
-    private Date cmCreatetime;
-    private Integer cmIsoff;
-    private String cmSellerid;
-    private String cmGoodsartnum;
+    private Integer CM_BRANDID;
+    private String CM_FIGURESPATH;
+    private String CM_GOODSID;
+    private String CM_MAINFIGUREPATH;
+    private Double CM_PRESENTPRICE;
+    private Double CM_ORIGINALPRICE;
+    private Integer CM_SALES;
+    private String CM_TITILE;
+    private Date CM_CREATETIME;
+    private Integer CM_ISOFF;
+    private String CM_SELLERID;
+    private String CM_GOODSARTNUM;
 }

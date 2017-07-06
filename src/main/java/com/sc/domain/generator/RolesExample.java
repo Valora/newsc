@@ -104,133 +104,133 @@ public class RolesExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andCmRoleidIsNull() {
+        public Criteria andCM_ROLEIDIsNull() {
             addCriterion("CM_ROLEID is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmRoleidIsNotNull() {
+        public Criteria andCM_ROLEIDIsNotNull() {
             addCriterion("CM_ROLEID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmRoleidEqualTo(Integer value) {
-            addCriterion("CM_ROLEID =", value, "cmRoleid");
+        public Criteria andCM_ROLEIDEqualTo(Integer value) {
+            addCriterion("CM_ROLEID =", value, "CM_ROLEID");
             return (Criteria) this;
         }
 
-        public Criteria andCmRoleidNotEqualTo(Integer value) {
-            addCriterion("CM_ROLEID <>", value, "cmRoleid");
+        public Criteria andCM_ROLEIDNotEqualTo(Integer value) {
+            addCriterion("CM_ROLEID <>", value, "CM_ROLEID");
             return (Criteria) this;
         }
 
-        public Criteria andCmRoleidGreaterThan(Integer value) {
-            addCriterion("CM_ROLEID >", value, "cmRoleid");
+        public Criteria andCM_ROLEIDGreaterThan(Integer value) {
+            addCriterion("CM_ROLEID >", value, "CM_ROLEID");
             return (Criteria) this;
         }
 
-        public Criteria andCmRoleidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("CM_ROLEID >=", value, "cmRoleid");
+        public Criteria andCM_ROLEIDGreaterThanOrEqualTo(Integer value) {
+            addCriterion("CM_ROLEID >=", value, "CM_ROLEID");
             return (Criteria) this;
         }
 
-        public Criteria andCmRoleidLessThan(Integer value) {
-            addCriterion("CM_ROLEID <", value, "cmRoleid");
+        public Criteria andCM_ROLEIDLessThan(Integer value) {
+            addCriterion("CM_ROLEID <", value, "CM_ROLEID");
             return (Criteria) this;
         }
 
-        public Criteria andCmRoleidLessThanOrEqualTo(Integer value) {
-            addCriterion("CM_ROLEID <=", value, "cmRoleid");
+        public Criteria andCM_ROLEIDLessThanOrEqualTo(Integer value) {
+            addCriterion("CM_ROLEID <=", value, "CM_ROLEID");
             return (Criteria) this;
         }
 
-        public Criteria andCmRoleidIn(List<Integer> values) {
-            addCriterion("CM_ROLEID in", values, "cmRoleid");
+        public Criteria andCM_ROLEIDIn(List<Integer> values) {
+            addCriterion("CM_ROLEID in", values, "CM_ROLEID");
             return (Criteria) this;
         }
 
-        public Criteria andCmRoleidNotIn(List<Integer> values) {
-            addCriterion("CM_ROLEID not in", values, "cmRoleid");
+        public Criteria andCM_ROLEIDNotIn(List<Integer> values) {
+            addCriterion("CM_ROLEID not in", values, "CM_ROLEID");
             return (Criteria) this;
         }
 
-        public Criteria andCmRoleidBetween(Integer value1, Integer value2) {
-            addCriterion("CM_ROLEID between", value1, value2, "cmRoleid");
+        public Criteria andCM_ROLEIDBetween(Integer value1, Integer value2) {
+            addCriterion("CM_ROLEID between", value1, value2, "CM_ROLEID");
             return (Criteria) this;
         }
 
-        public Criteria andCmRoleidNotBetween(Integer value1, Integer value2) {
-            addCriterion("CM_ROLEID not between", value1, value2, "cmRoleid");
+        public Criteria andCM_ROLEIDNotBetween(Integer value1, Integer value2) {
+            addCriterion("CM_ROLEID not between", value1, value2, "CM_ROLEID");
             return (Criteria) this;
         }
 
-        public Criteria andCmRolenameIsNull() {
+        public Criteria andCM_ROLENAMEIsNull() {
             addCriterion("CM_ROLENAME is null");
             return (Criteria) this;
         }
 
-        public Criteria andCmRolenameIsNotNull() {
+        public Criteria andCM_ROLENAMEIsNotNull() {
             addCriterion("CM_ROLENAME is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCmRolenameEqualTo(String value) {
-            addCriterion("CM_ROLENAME =", value, "cmRolename");
+        public Criteria andCM_ROLENAMEEqualTo(String value) {
+            addCriterion("CM_ROLENAME =", value, "CM_ROLENAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmRolenameNotEqualTo(String value) {
-            addCriterion("CM_ROLENAME <>", value, "cmRolename");
+        public Criteria andCM_ROLENAMENotEqualTo(String value) {
+            addCriterion("CM_ROLENAME <>", value, "CM_ROLENAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmRolenameGreaterThan(String value) {
-            addCriterion("CM_ROLENAME >", value, "cmRolename");
+        public Criteria andCM_ROLENAMEGreaterThan(String value) {
+            addCriterion("CM_ROLENAME >", value, "CM_ROLENAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmRolenameGreaterThanOrEqualTo(String value) {
-            addCriterion("CM_ROLENAME >=", value, "cmRolename");
+        public Criteria andCM_ROLENAMEGreaterThanOrEqualTo(String value) {
+            addCriterion("CM_ROLENAME >=", value, "CM_ROLENAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmRolenameLessThan(String value) {
-            addCriterion("CM_ROLENAME <", value, "cmRolename");
+        public Criteria andCM_ROLENAMELessThan(String value) {
+            addCriterion("CM_ROLENAME <", value, "CM_ROLENAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmRolenameLessThanOrEqualTo(String value) {
-            addCriterion("CM_ROLENAME <=", value, "cmRolename");
+        public Criteria andCM_ROLENAMELessThanOrEqualTo(String value) {
+            addCriterion("CM_ROLENAME <=", value, "CM_ROLENAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmRolenameLike(String value) {
-            addCriterion("CM_ROLENAME like", value, "cmRolename");
+        public Criteria andCM_ROLENAMELike(String value) {
+            addCriterion("CM_ROLENAME like", value, "CM_ROLENAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmRolenameNotLike(String value) {
-            addCriterion("CM_ROLENAME not like", value, "cmRolename");
+        public Criteria andCM_ROLENAMENotLike(String value) {
+            addCriterion("CM_ROLENAME not like", value, "CM_ROLENAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmRolenameIn(List<String> values) {
-            addCriterion("CM_ROLENAME in", values, "cmRolename");
+        public Criteria andCM_ROLENAMEIn(List<String> values) {
+            addCriterion("CM_ROLENAME in", values, "CM_ROLENAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmRolenameNotIn(List<String> values) {
-            addCriterion("CM_ROLENAME not in", values, "cmRolename");
+        public Criteria andCM_ROLENAMENotIn(List<String> values) {
+            addCriterion("CM_ROLENAME not in", values, "CM_ROLENAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmRolenameBetween(String value1, String value2) {
-            addCriterion("CM_ROLENAME between", value1, value2, "cmRolename");
+        public Criteria andCM_ROLENAMEBetween(String value1, String value2) {
+            addCriterion("CM_ROLENAME between", value1, value2, "CM_ROLENAME");
             return (Criteria) this;
         }
 
-        public Criteria andCmRolenameNotBetween(String value1, String value2) {
-            addCriterion("CM_ROLENAME not between", value1, value2, "cmRolename");
+        public Criteria andCM_ROLENAMENotBetween(String value1, String value2) {
+            addCriterion("CM_ROLENAME not between", value1, value2, "CM_ROLENAME");
             return (Criteria) this;
         }
     }

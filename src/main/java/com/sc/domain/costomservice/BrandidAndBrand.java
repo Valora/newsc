@@ -7,6 +7,6 @@ import lombok.Data;
  */
 @Data
 public class BrandidAndBrand {
-    private Integer cmBrandid;
-    private String cmBrand;
+    private Integer CM_BRANDID;
+    private String CM_BRAND;
 }

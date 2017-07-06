@@ -2,6 +2,7 @@ package com.sc.mapper.generator;
 
 import com.sc.domain.generator.Classifys;
 import com.sc.domain.generator.ClassifysExample;
+import java.util.List;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -11,8 +12,6 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
-
-import java.util.List;
 
 public interface ClassifysMapper {
     @SelectProvider(type=ClassifysSqlProvider.class, method="countByExample")
@@ -25,9 +24,9 @@ public interface ClassifysMapper {
         "insert into TB_CLASSIFYS (CM_CLASSIFYID, CM_CLASSIFYNAME, ",
         "CM_PARENTID, CM_IMGPATH, ",
         "CM_SORT)",
-        "values (#{cmClassifyid,jdbcType=INTEGER}, #{cmClassifyname,jdbcType=VARCHAR}, ",
-        "#{cmParentid,jdbcType=INTEGER}, #{cmImgpath,jdbcType=VARCHAR}, ",
-        "#{cmSort,jdbcType=INTEGER})"
+        "values (#{CM_CLASSIFYID,jdbcType=INTEGER}, #{CM_CLASSIFYNAME,jdbcType=VARCHAR}, ",
+        "#{CM_PARENTID,jdbcType=INTEGER}, #{CM_IMGPATH,jdbcType=VARCHAR}, ",
+        "#{CM_SORT,jdbcType=INTEGER})"
     })
     int insert(Classifys record);
 
@@ -36,11 +35,11 @@ public interface ClassifysMapper {
 
     @SelectProvider(type=ClassifysSqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="CM_CLASSIFYID", property="cmClassifyid", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_CLASSIFYNAME", property="cmClassifyname", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_PARENTID", property="cmParentid", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_IMGPATH", property="cmImgpath", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_SORT", property="cmSort", jdbcType= JdbcType.INTEGER)
+        @Result(column="CM_CLASSIFYID", property="CM_CLASSIFYID", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_CLASSIFYNAME", property="CM_CLASSIFYNAME", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_PARENTID", property="CM_PARENTID", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_IMGPATH", property="CM_IMGPATH", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_SORT", property="CM_SORT", jdbcType=JdbcType.INTEGER)
     })
     List<Classifys> selectByExample(ClassifysExample example);
 

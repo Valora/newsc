@@ -1,13 +1,12 @@
 package com.sc.mapper.generator;
 
-import com.sc.domain.generator.ServicedetailsExample;
 import com.sc.domain.generator.ServicedetailsExample.Criteria;
 import com.sc.domain.generator.ServicedetailsExample.Criterion;
+import com.sc.domain.generator.ServicedetailsExample;
 import com.sc.domain.generator.ServicedetailsWithBLOBs;
-import org.apache.ibatis.jdbc.SQL;
-
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.jdbc.SQL;
 
 public class ServicedetailsSqlProvider {
 
@@ -29,32 +28,32 @@ public class ServicedetailsSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("TB_SERVICEDETAILS");
         
-        if (record.getCmSvid() != null) {
-            sql.VALUES("CM_SVID", "#{cmSvid,jdbcType=VARCHAR}");
+        if (record.getCM_SVID() != null) {
+            sql.VALUES("CM_SVID", "#{CM_SVID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmAfterserviceid() != null) {
-            sql.VALUES("CM_AFTERSERVICEID", "#{cmAfterserviceid,jdbcType=VARCHAR}");
+        if (record.getCM_AFTERSERVICEID() != null) {
+            sql.VALUES("CM_AFTERSERVICEID", "#{CM_AFTERSERVICEID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmCreatetime() != null) {
-            sql.VALUES("CM_CREATETIME", "#{cmCreatetime,jdbcType=TIMESTAMP}");
+        if (record.getCM_CREATETIME() != null) {
+            sql.VALUES("CM_CREATETIME", "#{CM_CREATETIME,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getCmType() != null) {
-            sql.VALUES("CM_TYPE", "#{cmType,jdbcType=INTEGER}");
+        if (record.getCM_TYPE() != null) {
+            sql.VALUES("CM_TYPE", "#{CM_TYPE,jdbcType=INTEGER}");
         }
         
-        if (record.getCmLogisticsnum() != null) {
-            sql.VALUES("CM_LOGISTICSNUM", "#{cmLogisticsnum,jdbcType=VARCHAR}");
+        if (record.getCM_LOGISTICSNUM() != null) {
+            sql.VALUES("CM_LOGISTICSNUM", "#{CM_LOGISTICSNUM,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmLogisticsid() != null) {
-            sql.VALUES("CM_LOGISTICSID", "#{cmLogisticsid,jdbcType=INTEGER}");
+        if (record.getCM_LOGISTICSID() != null) {
+            sql.VALUES("CM_LOGISTICSID", "#{CM_LOGISTICSID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmLogisticsinfo() != null) {
-            sql.VALUES("CM_LOGISTICSINFO", "#{cmLogisticsinfo,jdbcType=LONGVARCHAR}");
+        if (record.getCM_LOGISTICSINFO() != null) {
+            sql.VALUES("CM_LOGISTICSINFO", "#{CM_LOGISTICSINFO,jdbcType=LONGVARCHAR}");
         }
         
         return sql.toString();
@@ -112,32 +111,32 @@ public class ServicedetailsSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_SERVICEDETAILS");
         
-        if (record.getCmSvid() != null) {
-            sql.SET("CM_SVID = #{record.cmSvid,jdbcType=VARCHAR}");
+        if (record.getCM_SVID() != null) {
+            sql.SET("CM_SVID = #{record.CM_SVID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmAfterserviceid() != null) {
-            sql.SET("CM_AFTERSERVICEID = #{record.cmAfterserviceid,jdbcType=VARCHAR}");
+        if (record.getCM_AFTERSERVICEID() != null) {
+            sql.SET("CM_AFTERSERVICEID = #{record.CM_AFTERSERVICEID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmCreatetime() != null) {
-            sql.SET("CM_CREATETIME = #{record.cmCreatetime,jdbcType=TIMESTAMP}");
+        if (record.getCM_CREATETIME() != null) {
+            sql.SET("CM_CREATETIME = #{record.CM_CREATETIME,jdbcType=TIMESTAMP}");
         }
         
-        if (record.getCmType() != null) {
-            sql.SET("CM_TYPE = #{record.cmType,jdbcType=INTEGER}");
+        if (record.getCM_TYPE() != null) {
+            sql.SET("CM_TYPE = #{record.CM_TYPE,jdbcType=INTEGER}");
         }
         
-        if (record.getCmLogisticsnum() != null) {
-            sql.SET("CM_LOGISTICSNUM = #{record.cmLogisticsnum,jdbcType=VARCHAR}");
+        if (record.getCM_LOGISTICSNUM() != null) {
+            sql.SET("CM_LOGISTICSNUM = #{record.CM_LOGISTICSNUM,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmLogisticsid() != null) {
-            sql.SET("CM_LOGISTICSID = #{record.cmLogisticsid,jdbcType=INTEGER}");
+        if (record.getCM_LOGISTICSID() != null) {
+            sql.SET("CM_LOGISTICSID = #{record.CM_LOGISTICSID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmLogisticsinfo() != null) {
-            sql.SET("CM_LOGISTICSINFO = #{record.cmLogisticsinfo,jdbcType=LONGVARCHAR}");
+        if (record.getCM_LOGISTICSINFO() != null) {
+            sql.SET("CM_LOGISTICSINFO = #{record.CM_LOGISTICSINFO,jdbcType=LONGVARCHAR}");
         }
         
         applyWhere(sql, example, true);
@@ -148,13 +147,13 @@ public class ServicedetailsSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_SERVICEDETAILS");
         
-        sql.SET("CM_SVID = #{record.cmSvid,jdbcType=VARCHAR}");
-        sql.SET("CM_AFTERSERVICEID = #{record.cmAfterserviceid,jdbcType=VARCHAR}");
-        sql.SET("CM_CREATETIME = #{record.cmCreatetime,jdbcType=TIMESTAMP}");
-        sql.SET("CM_TYPE = #{record.cmType,jdbcType=INTEGER}");
-        sql.SET("CM_LOGISTICSNUM = #{record.cmLogisticsnum,jdbcType=VARCHAR}");
-        sql.SET("CM_LOGISTICSID = #{record.cmLogisticsid,jdbcType=INTEGER}");
-        sql.SET("CM_LOGISTICSINFO = #{record.cmLogisticsinfo,jdbcType=LONGVARCHAR}");
+        sql.SET("CM_SVID = #{record.CM_SVID,jdbcType=VARCHAR}");
+        sql.SET("CM_AFTERSERVICEID = #{record.CM_AFTERSERVICEID,jdbcType=VARCHAR}");
+        sql.SET("CM_CREATETIME = #{record.CM_CREATETIME,jdbcType=TIMESTAMP}");
+        sql.SET("CM_TYPE = #{record.CM_TYPE,jdbcType=INTEGER}");
+        sql.SET("CM_LOGISTICSNUM = #{record.CM_LOGISTICSNUM,jdbcType=VARCHAR}");
+        sql.SET("CM_LOGISTICSID = #{record.CM_LOGISTICSID,jdbcType=INTEGER}");
+        sql.SET("CM_LOGISTICSINFO = #{record.CM_LOGISTICSINFO,jdbcType=LONGVARCHAR}");
         
         ServicedetailsExample example = (ServicedetailsExample) parameter.get("example");
         applyWhere(sql, example, true);
@@ -165,12 +164,12 @@ public class ServicedetailsSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_SERVICEDETAILS");
         
-        sql.SET("CM_SVID = #{record.cmSvid,jdbcType=VARCHAR}");
-        sql.SET("CM_AFTERSERVICEID = #{record.cmAfterserviceid,jdbcType=VARCHAR}");
-        sql.SET("CM_CREATETIME = #{record.cmCreatetime,jdbcType=TIMESTAMP}");
-        sql.SET("CM_TYPE = #{record.cmType,jdbcType=INTEGER}");
-        sql.SET("CM_LOGISTICSNUM = #{record.cmLogisticsnum,jdbcType=VARCHAR}");
-        sql.SET("CM_LOGISTICSID = #{record.cmLogisticsid,jdbcType=INTEGER}");
+        sql.SET("CM_SVID = #{record.CM_SVID,jdbcType=VARCHAR}");
+        sql.SET("CM_AFTERSERVICEID = #{record.CM_AFTERSERVICEID,jdbcType=VARCHAR}");
+        sql.SET("CM_CREATETIME = #{record.CM_CREATETIME,jdbcType=TIMESTAMP}");
+        sql.SET("CM_TYPE = #{record.CM_TYPE,jdbcType=INTEGER}");
+        sql.SET("CM_LOGISTICSNUM = #{record.CM_LOGISTICSNUM,jdbcType=VARCHAR}");
+        sql.SET("CM_LOGISTICSID = #{record.CM_LOGISTICSID,jdbcType=INTEGER}");
         
         ServicedetailsExample example = (ServicedetailsExample) parameter.get("example");
         applyWhere(sql, example, true);

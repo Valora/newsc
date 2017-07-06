@@ -2,6 +2,7 @@ package com.sc.mapper.generator;
 
 import com.sc.domain.generator.Logisticss;
 import com.sc.domain.generator.LogisticssExample;
+import java.util.List;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -12,8 +13,6 @@ import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
 
-import java.util.List;
-
 public interface LogisticssMapper {
     @SelectProvider(type=LogisticssSqlProvider.class, method="countByExample")
     long countByExample(LogisticssExample example);
@@ -23,7 +22,7 @@ public interface LogisticssMapper {
 
     @Insert({
         "insert into TB_LOGISTICSS (CM_LOGISTICSID, CM_LOGISTICSNAME)",
-        "values (#{cmLogisticsid,jdbcType=INTEGER}, #{cmLogisticsname,jdbcType=VARCHAR})"
+        "values (#{CM_LOGISTICSID,jdbcType=INTEGER}, #{CM_LOGISTICSNAME,jdbcType=VARCHAR})"
     })
     int insert(Logisticss record);
 
@@ -32,8 +31,8 @@ public interface LogisticssMapper {
 
     @SelectProvider(type=LogisticssSqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="CM_LOGISTICSID", property="cmLogisticsid", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_LOGISTICSNAME", property="cmLogisticsname", jdbcType= JdbcType.VARCHAR)
+        @Result(column="CM_LOGISTICSID", property="CM_LOGISTICSID", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_LOGISTICSNAME", property="CM_LOGISTICSNAME", jdbcType=JdbcType.VARCHAR)
     })
     List<Logisticss> selectByExample(LogisticssExample example);
 

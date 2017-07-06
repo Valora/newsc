@@ -2,91 +2,91 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sc.mapper.pagedata.PageDataMapper">
     <resultMap id="GoodDetail" type="com.sc.domain.pagedata.GoodDetail" autoMapping="true">
-        <result column="CM_GOODSID" property="cmGoodsid" jdbcType="VARCHAR"/>
-        <result column="CM_TITLE" property="cmTitle" jdbcType="VARCHAR"/>
-        <result column="CM_SALES" property="cmSales" jdbcType="VARCHAR"/>
-        <result column="CM_HTML" property="cmHtml" jdbcType="VARCHAR"/>
-        <result column="CM_CHTML" property="cmChtml" jdbcType="VARCHAR"/>
-        <result column="CM_BRANDID" property="cmBrandid" jdbcType="VARCHAR"/>
-        <result column="CM_MAINFIGUREPATH" property="cmMainfigurepath" jdbcType="VARCHAR"/>
-        <result column="CM_FIGURESPATH" property="cmFigurespath" jdbcType="VARCHAR"/>
-        <result column="CM_CREATETIME" property="cmCreatetime" jdbcType="DATE"/>
-        <result column="CM_ORIGINALPRICE" property="cmOriginalprice" jdbcType="DOUBLE"/>
-        <result column="CM_PRESENTPRICE" property="cmPresentprice" jdbcType="DOUBLE"/>
-        <result column="CM_ISOFF" property="cmIsoff" jdbcType="INTEGER"/>
-        <result column="CM_SELLERID" property="cmSellerid" jdbcType="VARCHAR"/>
-        <result column="CM_GOODSARTNUM" property="cmGoodsartnum" jdbcType="VARCHAR"/>
-        <result column="CM_ISPROMOTION" property="cmIspromotion" jdbcType="INTEGER"/>
-        <result column="CM_SELLERNAME" property="cmSellername" jdbcType="VARCHAR"/>
-        <result column="CM_ISCOLLECTION" property="cmIscollection" jdbcType="INTEGER"/>
-        <collection property="cmOther" ofType="com.sc.domain.pagedata.GoodDetailsOther">
-            <result column="CM_GOODSDETAILSID" property="cmGoodsdetailsid" jdbcType="VARCHAR"/>
-            <result column="CM_COLOR" property="cmColor" jdbcType="VARCHAR"/>
-            <result column="CM_IMAGEPATH" property="cmImagepath" jdbcType="VARCHAR"/>
-            <result column="CM_SPEC_STOCK" property="cmSpecStock" jdbcType="VARCHAR"/>
+        <result column="CM_GOODSID" property="CM_GOODSID" jdbcType="VARCHAR"/>
+        <result column="CM_TITLE" property="CM_TITLE" jdbcType="VARCHAR"/>
+        <result column="CM_SALES" property="CM_SALES" jdbcType="VARCHAR"/>
+        <result column="CM_HTML" property="CM_HTML" jdbcType="VARCHAR"/>
+        <result column="CM_CHTML" property="CM_CHTML" jdbcType="VARCHAR"/>
+        <result column="CM_BRANDID" property="CM_BRANDID" jdbcType="VARCHAR"/>
+        <result column="CM_MAINFIGUREPATH" property="CM_MAINFIGUREPATH" jdbcType="VARCHAR"/>
+        <result column="CM_FIGURESPATH" property="CM_FIGURESPATH" jdbcType="VARCHAR"/>
+        <result column="CM_CREATETIME" property="CM_CREATETIME" jdbcType="DATE"/>
+        <result column="CM_ORIGINALPRICE" property="CM_ORIGINALPRICE" jdbcType="DOUBLE"/>
+        <result column="CM_PRESENTPRICE" property="CM_PRESENTPRICE" jdbcType="DOUBLE"/>
+        <result column="CM_ISOFF" property="CM_ISOFF" jdbcType="INTEGER"/>
+        <result column="CM_SELLERID" property="CM_SELLERID" jdbcType="VARCHAR"/>
+        <result column="CM_GOODSARTNUM" property="CM_GOODSARTNUM" jdbcType="VARCHAR"/>
+        <result column="CM_ISPROMOTION" property="CM_ISPROMOTION" jdbcType="INTEGER"/>
+        <result column="CM_SELLERNAME" property="CM_SELLERNAME" jdbcType="VARCHAR"/>
+        <result column="CM_ISCOLLECTION" property="CM_ISCOLLECTION" jdbcType="INTEGER"/>
+        <collection property="CM_OTHER" ofType="com.sc.domain.pagedata.GoodDetailsOther">
+            <result column="CM_GOODSDETAILSID" property="CM_GOODSDETAILSID" jdbcType="VARCHAR"/>
+            <result column="CM_COLOR" property="CM_COLOR" jdbcType="VARCHAR"/>
+            <result column="CM_IMAGEPATH" property="CM_IMAGEPATH" jdbcType="VARCHAR"/>
+            <result column="CM_SPEC_STOCK" property="CM_SPEC_STOCK" jdbcType="VARCHAR"/>
         </collection>
     </resultMap>
 
     <resultMap id="GoodDetailWithOutUserID" type="com.sc.domain.pagedata.GoodDetailWithOutUserid" autoMapping="true">
-        <result column="CM_GOODSID" property="cmGoodsid" jdbcType="VARCHAR"/>
-        <result column="CM_TITLE" property="cmTitle" jdbcType="VARCHAR"/>
-        <result column="CM_SALES" property="cmSales" jdbcType="VARCHAR"/>
-        <result column="CM_HTML" property="cmHtml" jdbcType="VARCHAR"/>
-        <result column="CM_BRANDID" property="cmBrandid" jdbcType="VARCHAR"/>
-        <result column="CM_MAINFIGUREPATH" property="cmMainfigurepath" jdbcType="VARCHAR"/>
-        <result column="CM_FIGURESPATH" property="cmFigurespath" jdbcType="VARCHAR"/>
-        <result column="CM_CREATETIME" property="cmCreatetime" jdbcType="DATE"/>
-        <result column="CM_ORIGINALPRICE" property="cmOriginalprice" jdbcType="DOUBLE"/>
-        <result column="CM_PRESENTPRICE" property="cmPresentprice" jdbcType="DOUBLE"/>
-        <result column="CM_ISOFF" property="cmIsoff" jdbcType="INTEGER"/>
-        <result column="CM_SELLERID" property="cmSellerid" jdbcType="VARCHAR"/>
-        <result column="CM_SELLERNAME" property="cmSellername" jdbcType="VARCHAR"/>
-        <collection property="cmOther" ofType="com.sc.domain.pagedata.GoodDetailsOther">
-            <result column="CM_GOODSDETAILSID" property="cmGoodsdetailsid" jdbcType="VARCHAR"/>
-            <result column="CM_COLOR" property="cmColor" jdbcType="VARCHAR"/>
-            <result column="CM_IMAGEPATH" property="cmImagepath" jdbcType="VARCHAR"/>
-            <result column="CM_SPEC_STOCK" property="cmSpecStock" jdbcType="VARCHAR"/>
+        <result column="CM_GOODSID" property="CM_GOODSID" jdbcType="VARCHAR"/>
+        <result column="CM_TITLE" property="CM_TITLE" jdbcType="VARCHAR"/>
+        <result column="CM_SALES" property="CM_SALES" jdbcType="VARCHAR"/>
+        <result column="CM_HTML" property="CM_HTML" jdbcType="VARCHAR"/>
+        <result column="CM_BRANDID" property="CM_BRANDID" jdbcType="VARCHAR"/>
+        <result column="CM_MAINFIGUREPATH" property="CM_MAINFIGUREPATH" jdbcType="VARCHAR"/>
+        <result column="CM_FIGURESPATH" property="CM_FIGURESPATH" jdbcType="VARCHAR"/>
+        <result column="CM_CREATETIME" property="CM_CREATETIME" jdbcType="DATE"/>
+        <result column="CM_ORIGINALPRICE" property="CM_ORIGINALPRICE" jdbcType="DOUBLE"/>
+        <result column="CM_PRESENTPRICE" property="CM_PRESENTPRICE" jdbcType="DOUBLE"/>
+        <result column="CM_ISOFF" property="CM_ISOFF" jdbcType="INTEGER"/>
+        <result column="CM_SELLERID" property="CM_SELLERID" jdbcType="VARCHAR"/>
+        <result column="CM_SELLERNAME" property="CM_SELLERNAME" jdbcType="VARCHAR"/>
+        <collection property="CM_OTHER" ofType="com.sc.domain.pagedata.GoodDetailsOther">
+            <result column="CM_GOODSDETAILSID" property="CM_GOODSDETAILSID" jdbcType="VARCHAR"/>
+            <result column="CM_COLOR" property="CM_COLOR" jdbcType="VARCHAR"/>
+            <result column="CM_IMAGEPATH" property="CM_IMAGEPATH" jdbcType="VARCHAR"/>
+            <result column="CM_SPEC_STOCK" property="CM_SPEC_STOCK" jdbcType="VARCHAR"/>
         </collection>
     </resultMap>
 
     <resultMap id="Classify" type="com.sc.domain.pagedata.Classify">
-        <result column="CM_CLASSIFYNAME_A" property="cmClassifyname" jdbcType="VARCHAR"/>
-        <result column="CM_IMGPATH_A" property="cmImgpath" jdbcType="VARCHAR"/>
-        <result column="CM_CLASSIFYID_A" property="cmClassifyid" jdbcType="VARCHAR"/>
-        <result column="CM_SORT_A" property="cmSort" jdbcType="VARCHAR"/>
-        <collection property="tbSubclass" ofType="com.sc.domain.pagedata.Subclass">
-            <result column="CM_CLASSIFYNAME_B" property="cmClassifyname" jdbcType="VARCHAR"/>
-            <result column="CM_IMGPATH_B" property="cmImgpath" jdbcType="VARCHAR"/>
-            <result column="CM_CLASSIFYID_B" property="cmClassifyid" jdbcType="VARCHAR"/>
-            <result column="CM_SORT_B" property="cmSort" jdbcType="VARCHAR"/>
-            <collection property="tbGoods" ofType="com.sc.domain.pagedata.ClassifyGoods">
-                <result column="CM_GOODSID" property="cmGoodsid" jdbcType="VARCHAR"/>
-                <result column="CM_MAINFIGUREPATH" property="cmMainfigurepath" jdbcType="VARCHAR"/>
-                <result column="CM_CREATETIME" property="cmCreatetime" jdbcType="DATE"/>
+        <result column="CM_CLASSIFYNAME_A" property="CM_CLASSIFYNAME" jdbcType="VARCHAR"/>
+        <result column="CM_IMGPATH_A" property="CM_IMGPATH" jdbcType="VARCHAR"/>
+        <result column="CM_CLASSIFYID_A" property="CM_CLASSIFYID" jdbcType="VARCHAR"/>
+        <result column="CM_SORT_A" property="CM_SORT" jdbcType="VARCHAR"/>
+        <collection property="TB_SUBCLASS" ofType="com.sc.domain.pagedata.Subclass">
+            <result column="CM_CLASSIFYNAME_B" property="CM_CLASSIFYNAME" jdbcType="VARCHAR"/>
+            <result column="CM_IMGPATH_B" property="CM_IMGPATH" jdbcType="VARCHAR"/>
+            <result column="CM_CLASSIFYID_B" property="CM_CLASSIFYID" jdbcType="VARCHAR"/>
+            <result column="CM_SORT_B" property="CM_SORT" jdbcType="VARCHAR"/>
+            <collection property="TB_GOODS" ofType="com.sc.domain.pagedata.ClassifyGoods">
+                <result column="CM_GOODSID" property="CM_GOODSID" jdbcType="VARCHAR"/>
+                <result column="CM_MAINFIGUREPATH" property="CM_MAINFIGUREPATH" jdbcType="VARCHAR"/>
+                <result column="CM_CREATETIME" property="CM_CREATETIME" jdbcType="DATE"/>
             </collection>
         </collection>
     </resultMap>
 
     <resultMap id="Classify1" type="com.sc.domain.pagedata.Classify">
-        <result column="CM_CLASSIFYNAME_A" property="cmClassifyname" jdbcType="VARCHAR"/>
-        <result column="CM_IMGPATH_A" property="cmImgpath" jdbcType="VARCHAR"/>
-        <result column="CM_CLASSIFYID_A" property="cmClassifyid" jdbcType="VARCHAR"/>
-        <result column="CM_SORT_A" property="cmSort" jdbcType="VARCHAR"/>
-        <collection property="tbSubclass" javaType="com.sc.domain.pagedata.Subclass" resultMap="SubClass"/>
+        <result column="CM_CLASSIFYNAME_A" property="CM_CLASSIFYNAME" jdbcType="VARCHAR"/>
+        <result column="CM_IMGPATH_A" property="CM_IMGPATH" jdbcType="VARCHAR"/>
+        <result column="CM_CLASSIFYID_A" property="CM_CLASSIFYID" jdbcType="VARCHAR"/>
+        <result column="CM_SORT_A" property="CM_SORT" jdbcType="VARCHAR"/>
+        <collection property="TB_SUBCLASS" javaType="com.sc.domain.pagedata.Subclass" resultMap="SubClass"/>
     </resultMap>
 
     <resultMap id="SubClass" type="com.sc.domain.pagedata.Subclass">
-        <result column="CM_CLASSIFYNAME_B" property="cmClassifyname" jdbcType="VARCHAR"/>
-        <result column="CM_IMGPATH_B" property="cmImgpath" jdbcType="VARCHAR"/>
-        <result column="CM_CLASSIFYID_B" property="cmClassifyid" jdbcType="VARCHAR"/>
-        <result column="CM_SORT_B" property="cmSort" jdbcType="VARCHAR"/>
-        <collection property="tbGoods" javaType="com.sc.domain.pagedata.ClassifyGoods" resultMap="Goods"/>
+        <result column="CM_CLASSIFYNAME_B" property="CM_CLASSIFYNAME" jdbcType="VARCHAR"/>
+        <result column="CM_IMGPATH_B" property="CM_IMGPATH" jdbcType="VARCHAR"/>
+        <result column="CM_CLASSIFYID_B" property="CM_CLASSIFYID" jdbcType="VARCHAR"/>
+        <result column="CM_SORT_B" property="CM_SORT" jdbcType="VARCHAR"/>
+        <collection property="TB_GOODS" javaType="com.sc.domain.pagedata.ClassifyGoods" resultMap="Goods"/>
     </resultMap>
 
     <resultMap id="Goods" type="com.sc.domain.pagedata.ClassifyGoods">
-        <result column="CM_GOODSID" property="cmGoodsid" jdbcType="VARCHAR"/>
-        <result column="CM_MAINFIGUREPATH" property="cmMainfigurepath" jdbcType="VARCHAR"/>
-        <result column="CM_CREATETIME" property="cmCreatetime" jdbcType="DATE"/>
+        <result column="CM_GOODSID" property="CM_GOODSID" jdbcType="VARCHAR"/>
+        <result column="CM_MAINFIGUREPATH" property="CM_MAINFIGUREPATH" jdbcType="VARCHAR"/>
+        <result column="CM_CREATETIME" property="CM_CREATETIME" jdbcType="DATE"/>
     </resultMap>
 
 

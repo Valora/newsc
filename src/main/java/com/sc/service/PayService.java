@@ -50,7 +50,7 @@ import java.util.TreeMap;
 @Service
 public class PayService {
     private final PayMapper payMapper;
-    
+
     //异步接收微信支付结果通知的回调地址
     private final static String WX_NOTIFY_URL = "http://www.zuichu.cc/wxnotify";
 
@@ -97,7 +97,7 @@ public class PayService {
             payConfig.setTradeType("APP");
             WxPayService wxPayService = new WxPayServiceImpl();
             wxPayService.setConfig(payConfig);
-            
+
             XStream xStream = new XStream();
             //订单号处理
             String[] arr = orderids.split("|");
@@ -106,9 +106,9 @@ public class PayService {
                 return GetResult.toJson(63, null, null, null, 0);
             }
             //订单金额
-            double moneysum = orders.stream().mapToDouble(t -> (t.getCmMoneysun() - t.getCmUserbalance())).sum();
+            double moneysum = orders.stream().mapToDouble(t -> (t.getCM_MONEYSUN() - t.getCM_USERBALANCE())).sum();
             //使用积分
-            double score = orders.stream().mapToDouble(t -> t.getCmUsescore()).sum() * 0.01;
+            double score = orders.stream().mapToDouble(t -> t.getCM_USESCORE()).sum() * 0.01;
             //应付金额（以分为单位）
             int totalFee = (int) ((moneysum - score) * 100);
 
@@ -131,18 +131,18 @@ public class PayService {
             orderRequest.setAttach(orderids);
             //签名
             orderRequest.setSign(SignUtils.createSign(xStream.toXML(orderRequest), WX_MCHKEY));
-            
+
             String payjson = PayUtils.getPayJson(wxPayService.unifiedOrder(orderRequest));
             try {
                 Date time = new Date();
                 for (OrdersWithBLOBs order : orders) {
                     Pays pays = new Pays();
-                    pays.setCmPaytype(4);
-                    pays.setCmPayjson(payjson);
-                    pays.setCmOrderid(order.getCmOrderid());
-                    pays.setCmTime(time);
+                    pays.setCM_PAYTYPE(4);
+                    pays.setCM_PAYJSON(payjson);
+                    pays.setCM_ORDERID(order.getCM_ORDERID());
+                    pays.setCM_TIME(time);
                     paysMapper.insertSelective(pays);
-                    payMapper.updateTableOrder(order.getCmOrderid());
+                    payMapper.updateTableOrder(order.getCM_ORDERID());
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -178,8 +178,8 @@ public class PayService {
             if (orders.size() <= 0) {
                 return GetResult.toJson(63, null, null, null, 0);
             }
-            double moneysum = orders.stream().mapToDouble(t -> (t.getCmMoneysun() - t.getCmUserbalance())).sum();
-            double score = orders.stream().mapToDouble(t -> t.getCmUsescore()).sum() * 0.01;
+            double moneysum = orders.stream().mapToDouble(t -> (t.getCM_MONEYSUN() - t.getCM_USERBALANCE())).sum();
+            double score = orders.stream().mapToDouble(t -> t.getCM_USESCORE()).sum() * 0.01;
             int totalFee = (int) ((moneysum - score) * 100);
             WxPayUnifiedOrderRequest orderRequest = new WxPayUnifiedOrderRequest();
             //随机字符串
@@ -206,12 +206,12 @@ public class PayService {
                 Date time = new Date();
                 for (OrdersWithBLOBs order : orders) {
                     Pays pays = new Pays();
-                    pays.setCmPaytype(4);
-                    pays.setCmPayjson(url);
-                    pays.setCmOrderid(order.getCmOrderid());
-                    pays.setCmTime(time);
+                    pays.setCM_PAYTYPE(4);
+                    pays.setCM_PAYJSON(url);
+                    pays.setCM_ORDERID(order.getCM_ORDERID());
+                    pays.setCM_TIME(time);
                     paysMapper.insertSelective(pays);
-                    payMapper.updateTableOrder(order.getCmOrderid());
+                    payMapper.updateTableOrder(order.getCM_ORDERID());
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -236,8 +236,8 @@ public class PayService {
             if (orders.size() <= 0) {
                 return GetResult.toJson(63, null, null, null, 0);
             }
-            double moneysum = orders.stream().mapToDouble(t -> (t.getCmMoneysun() - t.getCmUserbalance())).sum();
-            double score = orders.stream().mapToDouble(t -> t.getCmUsescore()).sum() * 0.01;
+            double moneysum = orders.stream().mapToDouble(t -> (t.getCM_MONEYSUN() - t.getCM_USERBALANCE())).sum();
+            double score = orders.stream().mapToDouble(t -> t.getCM_USESCORE()).sum() * 0.01;
             double totalFee = (moneysum - score);
             String aliorderid = DateUtils.todayYyyyMmDdHhMmSs() + GetRandomNumber.genRandomNum(3);
             AlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipay.com/gateway.do", AliPayConfig.APPID, AliPayConfig.APPPRIVATEKEY, "json", AliPayConfig.CHARSET, AliPayConfig.ALIPAYPUBLICKEY, "RSA2");
@@ -257,12 +257,12 @@ public class PayService {
                 Date time = new Date();
                 for (OrdersWithBLOBs order : orders) {
                     Pays pays = new Pays();
-                    pays.setCmPaytype(1);
-                    pays.setCmPayjson(payjson);
-                    pays.setCmOrderid(order.getCmOrderid());
-                    pays.setCmTime(time);
+                    pays.setCM_PAYTYPE(1);
+                    pays.setCM_PAYJSON(payjson);
+                    pays.setCM_ORDERID(order.getCM_ORDERID());
+                    pays.setCM_TIME(time);
                     paysMapper.insertSelective(pays);
-                    payMapper.updateTableOrder(order.getCmOrderid());
+                    payMapper.updateTableOrder(order.getCM_ORDERID());
                 }
                 return GetResult.toJson(0, null, null, payjson, 0);
             } catch (Exception e) {
@@ -315,12 +315,12 @@ public class PayService {
      */
     public void wxNotify(HttpServletRequest request, HttpServletResponse response) throws IOException, Exception {
         //读取参数  
-        InputStream inputStream ;
+        InputStream inputStream;
         StringBuffer sb = new StringBuffer();
         inputStream = request.getInputStream();
-        String s ;
+        String s;
         BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-        while ((s = in.readLine()) != null){
+        while ((s = in.readLine()) != null) {
             sb.append(s);
         }
         in.close();
@@ -332,14 +332,14 @@ public class PayService {
         m = (Map<String, String>) xStream.fromXML(sb.toString());
 
         //过滤空 设置 TreeMap  
-        SortedMap<Object,Object> packageParams = new TreeMap<>();
+        SortedMap<Object, Object> packageParams = new TreeMap<>();
         Iterator it = m.keySet().iterator();
         while (it.hasNext()) {
             String parameter = (String) it.next();
             String parameterValue = m.get(parameter);
 
             String v = "";
-            if(null != parameterValue) {
+            if (null != parameterValue) {
                 v = parameterValue.trim();
             }
             packageParams.put(parameter, v);
@@ -349,12 +349,12 @@ public class PayService {
         String key = WX_MCHKEY; //key  
 
         //判断签名是否正确  
-        if(SignUtils.checkSign(packageParams,key)) {
+        if (SignUtils.checkSign(packageParams, key)) {
             //------------------------------  
             //处理业务开始  
             //------------------------------  
             String resXml = "";
-            if("SUCCESS".equals(packageParams.get("result_code"))){
+            if ("SUCCESS".equals(packageParams.get("result_code"))) {
                 String orderid = (String) packageParams.get("attach");
                 String money = (String) packageParams.get("total_fee");
                 // 这里是支付成功  
@@ -380,7 +380,7 @@ public class PayService {
             out.write(resXml.getBytes());
             out.flush();
             out.close();
-        } else{
+        } else {
             System.out.println("通知签名验证失败");
         }
     }

@@ -14,19 +14,19 @@ import java.util.List;
 public interface QuerySaleOrderDetailsByOrderdetailsIdMapper {
     @SelectProvider(type = QuerySaleOrderDetailsByOrderdetailsIdSqlProvider.class, method = "QuerySaleOrderDetailMi")
     @Results({
-            @Result(column = "CM_CREATETIME", property = "cmCreatetime", jdbcType = JdbcType.DATE),
-            @Result(column = "CM_SPECNUMDETAILS", property = "cmSpecnumdetails", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_MONEY", property = "cmMoney", jdbcType = JdbcType.DOUBLE),
-            @Result(column = "CM_NUMBER", property = "cmNumber", jdbcType = JdbcType.INTEGER),
-            @Result(column = "CM_SELLERSTATE", property = "cmSellerstate", jdbcType = JdbcType.INTEGER),
-            @Result(column = "CM_SERVICESTATE", property = "cmServicestate", jdbcType = JdbcType.INTEGER),
-            @Result(column = "CM_LOGISTICSNUM", property = "cmLogisticsnum", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_LOGISTICSID", property = "cmLogisticsid", jdbcType = JdbcType.INTEGER),
-            @Result(column = "CM_LOGISTICSINFO", property = "cmLogisticsinfo", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_LOGISTICSNAME", property = "cmLogisticsname", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_PHONE", property = "cmPhone", jdbcType = JdbcType.DECIMAL),
-            @Result(column = "CM_SHOPEADDRESS", property = "cmShopeaddress", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_SHOPNAME", property = "cmNickname", jdbcType = JdbcType.VARCHAR)
+            @Result(column = "CM_CREATETIME", property = "CM_CREATETIME", jdbcType = JdbcType.DATE),
+            @Result(column = "CM_SPECNUMDETAILS", property = "CM_SPECNUMDETAILS", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_MONEY", property = "CM_MONEY", jdbcType = JdbcType.DOUBLE),
+            @Result(column = "CM_NUMBER", property = "CM_NUMBER", jdbcType = JdbcType.INTEGER),
+            @Result(column = "CM_SELLERSTATE", property = "CM_SELLERSTATE", jdbcType = JdbcType.INTEGER),
+            @Result(column = "CM_SERVICESTATE", property = "CM_SERVICESTATE", jdbcType = JdbcType.INTEGER),
+            @Result(column = "CM_LOGISTICSNUM", property = "CM_LOGISTICSNUM", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_LOGISTICSID", property = "CM_LOGISTICSID", jdbcType = JdbcType.INTEGER),
+            @Result(column = "CM_LOGISTICSINFO", property = "CM_LOGISTICSINFO", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_LOGISTICSNAME", property = "CM_LOGISTICSNAME", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_PHONE", property = "CM_PHONE", jdbcType = JdbcType.DECIMAL),
+            @Result(column = "CM_SHOPEADDRESS", property = "CM_SHOPEADDRESS", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_SHOPNAME", property = "CM_SHOPNAME", jdbcType = JdbcType.VARCHAR)
     })
     List<OrderdetailsWithBLOBAndUsersAndLogisticss> QuerySaleOrderDetailM(String orderdetailsid);
 }

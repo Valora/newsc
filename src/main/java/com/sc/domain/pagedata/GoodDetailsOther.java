@@ -7,8 +7,8 @@ import lombok.Data;
  */
 @Data
 public class GoodDetailsOther {
-    private String cmGoodsdetailsid;
-    private String cmColor;
-    private String cmImagepath;
-    private String cmSpecStock;
+    private String CM_GOODSDETAILSID;
+    private String CM_COLOR;
+    private String CM_IMAGEPATH;
+    private String CM_SPEC_STOCK;
 }

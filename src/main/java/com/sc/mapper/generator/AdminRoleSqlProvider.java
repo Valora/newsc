@@ -1,13 +1,12 @@
 package com.sc.mapper.generator;
 
 import com.sc.domain.generator.AdminRole;
-import com.sc.domain.generator.AdminRoleExample;
 import com.sc.domain.generator.AdminRoleExample.Criteria;
 import com.sc.domain.generator.AdminRoleExample.Criterion;
-import org.apache.ibatis.jdbc.SQL;
-
+import com.sc.domain.generator.AdminRoleExample;
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.jdbc.SQL;
 
 public class AdminRoleSqlProvider {
 
@@ -29,16 +28,16 @@ public class AdminRoleSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("TB_ADMIN_ROLE");
         
-        if (record.getCmId() != null) {
-            sql.VALUES("CM_ID", "#{cmId,jdbcType=INTEGER}");
+        if (record.getCM_ID() != null) {
+            sql.VALUES("CM_ID", "#{CM_ID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmAdminid() != null) {
-            sql.VALUES("CM_ADMINID", "#{cmAdminid,jdbcType=VARCHAR}");
+        if (record.getCM_ADMINID() != null) {
+            sql.VALUES("CM_ADMINID", "#{CM_ADMINID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmRoleid() != null) {
-            sql.VALUES("CM_ROLEID", "#{cmRoleid,jdbcType=INTEGER}");
+        if (record.getCM_ROLEID() != null) {
+            sql.VALUES("CM_ROLEID", "#{CM_ROLEID,jdbcType=INTEGER}");
         }
         
         return sql.toString();
@@ -70,16 +69,16 @@ public class AdminRoleSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_ADMIN_ROLE");
         
-        if (record.getCmId() != null) {
-            sql.SET("CM_ID = #{record.cmId,jdbcType=INTEGER}");
+        if (record.getCM_ID() != null) {
+            sql.SET("CM_ID = #{record.CM_ID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmAdminid() != null) {
-            sql.SET("CM_ADMINID = #{record.cmAdminid,jdbcType=VARCHAR}");
+        if (record.getCM_ADMINID() != null) {
+            sql.SET("CM_ADMINID = #{record.CM_ADMINID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmRoleid() != null) {
-            sql.SET("CM_ROLEID = #{record.cmRoleid,jdbcType=INTEGER}");
+        if (record.getCM_ROLEID() != null) {
+            sql.SET("CM_ROLEID = #{record.CM_ROLEID,jdbcType=INTEGER}");
         }
         
         applyWhere(sql, example, true);
@@ -90,9 +89,9 @@ public class AdminRoleSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_ADMIN_ROLE");
         
-        sql.SET("CM_ID = #{record.cmId,jdbcType=INTEGER}");
-        sql.SET("CM_ADMINID = #{record.cmAdminid,jdbcType=VARCHAR}");
-        sql.SET("CM_ROLEID = #{record.cmRoleid,jdbcType=INTEGER}");
+        sql.SET("CM_ID = #{record.CM_ID,jdbcType=INTEGER}");
+        sql.SET("CM_ADMINID = #{record.CM_ADMINID,jdbcType=VARCHAR}");
+        sql.SET("CM_ROLEID = #{record.CM_ROLEID,jdbcType=INTEGER}");
         
         AdminRoleExample example = (AdminRoleExample) parameter.get("example");
         applyWhere(sql, example, true);

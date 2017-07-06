@@ -23,39 +23,42 @@ public class RadCodeDao {
 
     /**
      * 随机码
+     *
      * @param userId 商家ID
      * @return 随机码
      */
     public List<RadCode> getRcByUserID(String userId) {
         RadCodeExample rc = new RadCodeExample();
         RadCodeExample.Criteria criteria = rc.createCriteria();
-        criteria.andCmUseridEqualTo(userId);
+        criteria.andCM_USERIDEqualTo(userId);
         return radCodeMapper.selectByExample(rc);
     }
 
     /**
      * 插入随机码
+     *
      * @param userId 商家ID
-     * @param code 随机码
+     * @param code   随机码
      */
     public void insert(String userId, int code) {
         RadCode rc = new RadCode();
-        rc.setCmUserid(userId);
-        rc.setCmCode(code);
+        rc.setCM_USERID(userId);
+        rc.setCM_CODE(code);
         radCodeMapper.insert(rc);
     }
 
     /**
      * 更新随机码
+     *
      * @param userID 商家ID
-     * @param code 随机码
+     * @param code   随机码
      */
     public void updateCode(String userID, int code) {
         RadCodeExample radCodeExample = new RadCodeExample();
         RadCodeExample.Criteria criteria = radCodeExample.createCriteria();
-        criteria.andCmUseridEqualTo(userID);
+        criteria.andCM_USERIDEqualTo(userID);
         RadCode rc = new RadCode();
-        rc.setCmCode(code);
+        rc.setCM_CODE(code);
         radCodeMapper.updateByExampleSelective(rc, radCodeExample);
     }
 }

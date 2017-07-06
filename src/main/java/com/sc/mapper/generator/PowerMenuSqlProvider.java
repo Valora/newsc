@@ -1,13 +1,12 @@
 package com.sc.mapper.generator;
 
 import com.sc.domain.generator.PowerMenu;
-import com.sc.domain.generator.PowerMenuExample;
 import com.sc.domain.generator.PowerMenuExample.Criteria;
 import com.sc.domain.generator.PowerMenuExample.Criterion;
-import org.apache.ibatis.jdbc.SQL;
-
+import com.sc.domain.generator.PowerMenuExample;
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.jdbc.SQL;
 
 public class PowerMenuSqlProvider {
 
@@ -29,16 +28,16 @@ public class PowerMenuSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("TB_POWER_MENU");
         
-        if (record.getCmId() != null) {
-            sql.VALUES("CM_ID", "#{cmId,jdbcType=INTEGER}");
+        if (record.getCM_ID() != null) {
+            sql.VALUES("CM_ID", "#{CM_ID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmMenuid() != null) {
-            sql.VALUES("CM_MENUID", "#{cmMenuid,jdbcType=INTEGER}");
+        if (record.getCM_MENUID() != null) {
+            sql.VALUES("CM_MENUID", "#{CM_MENUID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmPowerid() != null) {
-            sql.VALUES("CM_POWERID", "#{cmPowerid,jdbcType=INTEGER}");
+        if (record.getCM_POWERID() != null) {
+            sql.VALUES("CM_POWERID", "#{CM_POWERID,jdbcType=INTEGER}");
         }
         
         return sql.toString();
@@ -70,16 +69,16 @@ public class PowerMenuSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_POWER_MENU");
         
-        if (record.getCmId() != null) {
-            sql.SET("CM_ID = #{record.cmId,jdbcType=INTEGER}");
+        if (record.getCM_ID() != null) {
+            sql.SET("CM_ID = #{record.CM_ID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmMenuid() != null) {
-            sql.SET("CM_MENUID = #{record.cmMenuid,jdbcType=INTEGER}");
+        if (record.getCM_MENUID() != null) {
+            sql.SET("CM_MENUID = #{record.CM_MENUID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmPowerid() != null) {
-            sql.SET("CM_POWERID = #{record.cmPowerid,jdbcType=INTEGER}");
+        if (record.getCM_POWERID() != null) {
+            sql.SET("CM_POWERID = #{record.CM_POWERID,jdbcType=INTEGER}");
         }
         
         applyWhere(sql, example, true);
@@ -90,9 +89,9 @@ public class PowerMenuSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_POWER_MENU");
         
-        sql.SET("CM_ID = #{record.cmId,jdbcType=INTEGER}");
-        sql.SET("CM_MENUID = #{record.cmMenuid,jdbcType=INTEGER}");
-        sql.SET("CM_POWERID = #{record.cmPowerid,jdbcType=INTEGER}");
+        sql.SET("CM_ID = #{record.CM_ID,jdbcType=INTEGER}");
+        sql.SET("CM_MENUID = #{record.CM_MENUID,jdbcType=INTEGER}");
+        sql.SET("CM_POWERID = #{record.CM_POWERID,jdbcType=INTEGER}");
         
         PowerMenuExample example = (PowerMenuExample) parameter.get("example");
         applyWhere(sql, example, true);

@@ -2,6 +2,7 @@ package com.sc.mapper.generator;
 
 import com.sc.domain.generator.Sellers;
 import com.sc.domain.generator.SellersExample;
+import java.util.List;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -11,8 +12,6 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
-
-import java.util.List;
 
 public interface SellersMapper {
     @SelectProvider(type=SellersSqlProvider.class, method="countByExample")
@@ -32,16 +31,16 @@ public interface SellersMapper {
         "CM_CARDNO, CM_NAME, ",
         "CM_CONTACTNAME, CM_CONTACTPHONE, ",
         "CM_TELEPHONE, CM_PAX)",
-        "values (#{cmSellerid,jdbcType=VARCHAR}, #{cmSellername,jdbcType=VARCHAR}, ",
-        "#{cmPhone,jdbcType=BIGINT}, #{cmAccount,jdbcType=VARCHAR}, ",
-        "#{cmPassword,jdbcType=VARCHAR}, #{cmBrandid,jdbcType=INTEGER}, ",
-        "#{cmCardpath,jdbcType=VARCHAR}, #{cmStorepath,jdbcType=VARCHAR}, ",
-        "#{cmLicensepath,jdbcType=VARCHAR}, #{cmAddress,jdbcType=VARCHAR}, ",
-        "#{cmLon,jdbcType=DOUBLE}, #{cmLat,jdbcType=DOUBLE}, #{cmCreatetime,jdbcType=TIMESTAMP}, ",
-        "#{cmIsexamine,jdbcType=INTEGER}, #{cmReason,jdbcType=VARCHAR}, ",
-        "#{cmCardno,jdbcType=VARCHAR}, #{cmName,jdbcType=VARCHAR}, ",
-        "#{cmContactname,jdbcType=VARCHAR}, #{cmContactphone,jdbcType=VARCHAR}, ",
-        "#{cmTelephone,jdbcType=VARCHAR}, #{cmPax,jdbcType=VARCHAR})"
+        "values (#{CM_SELLERID,jdbcType=VARCHAR}, #{CM_SELLERNAME,jdbcType=VARCHAR}, ",
+        "#{CM_PHONE,jdbcType=BIGINT}, #{CM_ACCOUNT,jdbcType=VARCHAR}, ",
+        "#{CM_PASSWORD,jdbcType=VARCHAR}, #{CM_BRANDID,jdbcType=INTEGER}, ",
+        "#{CM_CARDPATH,jdbcType=VARCHAR}, #{CM_STOREPATH,jdbcType=VARCHAR}, ",
+        "#{CM_LICENSEPATH,jdbcType=VARCHAR}, #{CM_ADDRESS,jdbcType=VARCHAR}, ",
+        "#{CM_LON,jdbcType=DOUBLE}, #{CM_LAT,jdbcType=DOUBLE}, #{CM_CREATETIME,jdbcType=TIMESTAMP}, ",
+        "#{CM_ISEXAMINE,jdbcType=INTEGER}, #{CM_REASON,jdbcType=VARCHAR}, ",
+        "#{CM_CARDNO,jdbcType=VARCHAR}, #{CM_NAME,jdbcType=VARCHAR}, ",
+        "#{CM_CONTACTNAME,jdbcType=VARCHAR}, #{CM_CONTACTPHONE,jdbcType=VARCHAR}, ",
+        "#{CM_TELEPHONE,jdbcType=VARCHAR}, #{CM_PAX,jdbcType=VARCHAR})"
     })
     int insert(Sellers record);
 
@@ -50,27 +49,27 @@ public interface SellersMapper {
 
     @SelectProvider(type=SellersSqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="CM_SELLERID", property="cmSellerid", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_SELLERNAME", property="cmSellername", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_PHONE", property="cmPhone", jdbcType= JdbcType.BIGINT),
-        @Result(column="CM_ACCOUNT", property="cmAccount", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_PASSWORD", property="cmPassword", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_BRANDID", property="cmBrandid", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_CARDPATH", property="cmCardpath", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_STOREPATH", property="cmStorepath", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_LICENSEPATH", property="cmLicensepath", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_ADDRESS", property="cmAddress", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_LON", property="cmLon", jdbcType= JdbcType.DOUBLE),
-        @Result(column="CM_LAT", property="cmLat", jdbcType= JdbcType.DOUBLE),
-        @Result(column="CM_CREATETIME", property="cmCreatetime", jdbcType= JdbcType.TIMESTAMP),
-        @Result(column="CM_ISEXAMINE", property="cmIsexamine", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_REASON", property="cmReason", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_CARDNO", property="cmCardno", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_NAME", property="cmName", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_CONTACTNAME", property="cmContactname", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_CONTACTPHONE", property="cmContactphone", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_TELEPHONE", property="cmTelephone", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_PAX", property="cmPax", jdbcType= JdbcType.VARCHAR)
+        @Result(column="CM_SELLERID", property="CM_SELLERID", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_SELLERNAME", property="CM_SELLERNAME", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_PHONE", property="CM_PHONE", jdbcType=JdbcType.BIGINT),
+        @Result(column="CM_ACCOUNT", property="CM_ACCOUNT", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_PASSWORD", property="CM_PASSWORD", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_BRANDID", property="CM_BRANDID", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_CARDPATH", property="CM_CARDPATH", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_STOREPATH", property="CM_STOREPATH", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_LICENSEPATH", property="CM_LICENSEPATH", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_ADDRESS", property="CM_ADDRESS", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_LON", property="CM_LON", jdbcType=JdbcType.DOUBLE),
+        @Result(column="CM_LAT", property="CM_LAT", jdbcType=JdbcType.DOUBLE),
+        @Result(column="CM_CREATETIME", property="CM_CREATETIME", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="CM_ISEXAMINE", property="CM_ISEXAMINE", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_REASON", property="CM_REASON", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_CARDNO", property="CM_CARDNO", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_NAME", property="CM_NAME", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_CONTACTNAME", property="CM_CONTACTNAME", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_CONTACTPHONE", property="CM_CONTACTPHONE", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_TELEPHONE", property="CM_TELEPHONE", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_PAX", property="CM_PAX", jdbcType=JdbcType.VARCHAR)
     })
     List<Sellers> selectByExample(SellersExample example);
 

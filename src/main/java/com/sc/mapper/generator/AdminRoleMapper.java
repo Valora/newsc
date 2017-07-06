@@ -2,6 +2,7 @@ package com.sc.mapper.generator;
 
 import com.sc.domain.generator.AdminRole;
 import com.sc.domain.generator.AdminRoleExample;
+import java.util.List;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -11,8 +12,6 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
-
-import java.util.List;
 
 public interface AdminRoleMapper {
     @SelectProvider(type=AdminRoleSqlProvider.class, method="countByExample")
@@ -24,8 +23,8 @@ public interface AdminRoleMapper {
     @Insert({
         "insert into TB_ADMIN_ROLE (CM_ID, CM_ADMINID, ",
         "CM_ROLEID)",
-        "values (#{cmId,jdbcType=INTEGER}, #{cmAdminid,jdbcType=VARCHAR}, ",
-        "#{cmRoleid,jdbcType=INTEGER})"
+        "values (#{CM_ID,jdbcType=INTEGER}, #{CM_ADMINID,jdbcType=VARCHAR}, ",
+        "#{CM_ROLEID,jdbcType=INTEGER})"
     })
     int insert(AdminRole record);
 
@@ -34,9 +33,9 @@ public interface AdminRoleMapper {
 
     @SelectProvider(type=AdminRoleSqlProvider.class, method="selectByExample")
     @Results({
-        @Result(column="CM_ID", property="cmId", jdbcType= JdbcType.INTEGER),
-        @Result(column="CM_ADMINID", property="cmAdminid", jdbcType= JdbcType.VARCHAR),
-        @Result(column="CM_ROLEID", property="cmRoleid", jdbcType= JdbcType.INTEGER)
+        @Result(column="CM_ID", property="CM_ID", jdbcType=JdbcType.INTEGER),
+        @Result(column="CM_ADMINID", property="CM_ADMINID", jdbcType=JdbcType.VARCHAR),
+        @Result(column="CM_ROLEID", property="CM_ROLEID", jdbcType=JdbcType.INTEGER)
     })
     List<AdminRole> selectByExample(AdminRoleExample example);
 

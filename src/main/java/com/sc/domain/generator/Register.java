@@ -3,43 +3,43 @@ package com.sc.domain.generator;
 import java.util.Date;
 
 public class Register {
-    private Long cmPhone;
+    private Long CM_PHONE;
 
-    private Integer cmCode;
+    private Integer CM_CODE;
 
-    private Date cmTime;
+    private Date CM_TIME;
 
-    private Integer cmCount;
+    private Integer CM_COUNT;
 
-    public Long getCmPhone() {
-        return cmPhone;
+    public Long getCM_PHONE() {
+        return CM_PHONE;
     }
 
-    public void setCmPhone(Long cmPhone) {
-        this.cmPhone = cmPhone;
+    public void setCM_PHONE(Long CM_PHONE) {
+        this.CM_PHONE = CM_PHONE;
     }
 
-    public Integer getCmCode() {
-        return cmCode;
+    public Integer getCM_CODE() {
+        return CM_CODE;
     }
 
-    public void setCmCode(Integer cmCode) {
-        this.cmCode = cmCode;
+    public void setCM_CODE(Integer CM_CODE) {
+        this.CM_CODE = CM_CODE;
     }
 
-    public Date getCmTime() {
-        return cmTime;
+    public Date getCM_TIME() {
+        return CM_TIME;
     }
 
-    public void setCmTime(Date cmTime) {
-        this.cmTime = cmTime;
+    public void setCM_TIME(Date CM_TIME) {
+        this.CM_TIME = CM_TIME;
     }
 
-    public Integer getCmCount() {
-        return cmCount;
+    public Integer getCM_COUNT() {
+        return CM_COUNT;
     }
 
-    public void setCmCount(Integer cmCount) {
-        this.cmCount = cmCount;
+    public void setCM_COUNT(Integer CM_COUNT) {
+        this.CM_COUNT = CM_COUNT;
     }
 }

@@ -100,26 +100,26 @@ public class SellerService {
             if (afterservices == null) {
                 return GetResult.toJson(51, null, jwt.createJWT(sellerId), null, 0);
             }
-            if (afterservices.getCmState() != 1) {
+            if (afterservices.getCM_STATE() != 1) {
                 return GetResult.toJson(52, null, jwt.createJWT(sellerId), null, 0);
             }
-            Orderdetails orderdetails = sellerDao.selectordertails(afterservices.getCmOrderdetailsid());
-            if (orderdetails == null || orderdetails.getCmSellerstate() != 4 || orderdetails.getCmServicestate() != 1) {
+            Orderdetails orderdetails = sellerDao.selectordertails(afterservices.getCM_ORDERDETAILSID());
+            if (orderdetails == null || orderdetails.getCM_SELLERSTATE() != 4 || orderdetails.getCM_SERVICESTATE() != 1) {
                 return GetResult.toJson(52, null, jwt.createJWT(sellerId), null, 0);
             }
-            afterservices.setCmState(2);
-            orderdetails.setCmServicestate(2);
+            afterservices.setCM_STATE(2);
+            orderdetails.setCM_SERVICESTATE(2);
             ServicedetailsWithBLOBs servicedetailsWithBLOBs = new ServicedetailsWithBLOBs();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd HHmmssSSSS");
             Date date = new Date();
             String str = simpleDateFormat.format(date);
-            servicedetailsWithBLOBs.setCmSvid(str);
-            servicedetailsWithBLOBs.setCmAfterserviceid(afterservices.getCmAfterserviceid());
-            servicedetailsWithBLOBs.setCmCreatetime(date);
-            servicedetailsWithBLOBs.setCmType(2);
+            servicedetailsWithBLOBs.setCM_SVID(str);
+            servicedetailsWithBLOBs.setCM_AFTERSERVICEID(afterservices.getCM_AFTERSERVICEID());
+            servicedetailsWithBLOBs.setCM_CREATETIME(date);
+            servicedetailsWithBLOBs.setCM_TYPE(2);
             sellerDao.insertservicedetails(servicedetailsWithBLOBs);
             sellerDao.updateAfterservice(afterservices, afierserviceid);
-            sellerDao.updateOrderdetails(orderdetails, afterservices.getCmOrderdetailsid());
+            sellerDao.updateOrderdetails(orderdetails, afterservices.getCM_ORDERDETAILSID());
             return GetResult.toJson(0, null, jwt.createJWT(sellerId), null, 0);
         } catch (Exception e) {
             return GetResult.toJson(200, null, null, null, 0);
@@ -142,25 +142,25 @@ public class SellerService {
             if (orderdetails == null) {
                 return GetResult.toJson(50, null, jwt.createJWT(sellerId), null, 0);
             }
-            Orders orders = sellerDao.selectOrderbyOrderid(orderdetails.getCmOrderid());
-            if (orders != null || orders.getCmState() != 2 || orderdetails.getCmSellerstate() != 2) {
+            Orders orders = sellerDao.selectOrderbyOrderid(orderdetails.getCM_ORDERID());
+            if (orders != null || orders.getCM_STATE() != 2 || orderdetails.getCM_SELLERSTATE() != 2) {
                 return GetResult.toJson(49, null, jwt.createJWT(sellerId), null, 0);
             }
-            orderdetails.setCmSellerstate(3);
-            orderdetails.setCmLogisticsid(Integer.valueOf(logisticsid));
-            orderdetails.setCmLogisticsnum(logisticsnum);
+            orderdetails.setCM_SELLERSTATE(3);
+            orderdetails.setCM_LOGISTICSID(Integer.valueOf(logisticsid));
+            orderdetails.setCM_LOGISTICSNUM(logisticsnum);
             boolean isF = true;
-            List<Orderdetails> list = sellerDao.selectOrdertailsByOrderid(orders.getCmOrderid());
+            List<Orderdetails> list = sellerDao.selectOrdertailsByOrderid(orders.getCM_ORDERID());
             for (Orderdetails o : list) {
-                if (o.getCmOrderdetailsid() != orderdetails.getCmOrderdetailsid() && o.getCmSellerstate() == 2) {
+                if (o.getCM_ORDERDETAILSID() != orderdetails.getCM_ORDERDETAILSID() && o.getCM_SELLERSTATE() == 2) {
                     isF = false;
                 }
             }
             if (isF) {
-                orders.setCmState(3);
+                orders.setCM_STATE(3);
             }
-            sellerDao.updateOrderdetails(orderdetails, orderdetails.getCmOrderdetailsid());
-            sellerDao.updateOrder(orders, orders.getCmOrderid());
+            sellerDao.updateOrderdetails(orderdetails, orderdetails.getCM_ORDERDETAILSID());
+            sellerDao.updateOrder(orders, orders.getCM_ORDERID());
             return GetResult.toJson(0, null, jwt.createJWT(sellerId), null, 0);
         } catch (Exception e) {
             return GetResult.toJson(200, null, null, null, 0);
@@ -204,29 +204,29 @@ public class SellerService {
             if (afterservices == null) {
                 return GetResult.toJson(51, null, jwt.createJWT(sellerId), null, 0);
             }
-            if (afterservices.getCmType() == 1) {
+            if (afterservices.getCM_TYPE() == 1) {
                 return GetResult.toJson(62, null, jwt.createJWT(sellerId), null, 0);
             }
-            if (afterservices.getCmState() == 3) {
+            if (afterservices.getCM_STATE() == 3) {
                 return GetResult.toJson(52, null, jwt.createJWT(sellerId), null, 0);
             }
-            Orderdetails orderdetails = sellerDao.selectordertails(afterservices.getCmOrderdetailsid());
-            if (orderdetails == null || orderdetails.getCmSellerstate() != 4 || orderdetails.getCmServicestate() != 3) {
+            Orderdetails orderdetails = sellerDao.selectordertails(afterservices.getCM_ORDERDETAILSID());
+            if (orderdetails == null || orderdetails.getCM_SELLERSTATE() != 4 || orderdetails.getCM_SERVICESTATE() != 3) {
                 return GetResult.toJson(52, null, jwt.createJWT(sellerId), null, 0);
             }
-            afterservices.setCmState(4);
-            orderdetails.setCmServicestate(4);
+            afterservices.setCM_STATE(4);
+            orderdetails.setCM_SERVICESTATE(4);
             ServicedetailsWithBLOBs servicedetailsWithBLOBs = new ServicedetailsWithBLOBs();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd HHmmssSSSS");
             Date date = new Date();
             String str = simpleDateFormat.format(date);
-            servicedetailsWithBLOBs.setCmSvid(str);
-            servicedetailsWithBLOBs.setCmAfterserviceid(afterservices.getCmAfterserviceid());
-            servicedetailsWithBLOBs.setCmCreatetime(date);
-            servicedetailsWithBLOBs.setCmType(4);
+            servicedetailsWithBLOBs.setCM_SVID(str);
+            servicedetailsWithBLOBs.setCM_AFTERSERVICEID(afterservices.getCM_AFTERSERVICEID());
+            servicedetailsWithBLOBs.setCM_CREATETIME(date);
+            servicedetailsWithBLOBs.setCM_TYPE(4);
             sellerDao.insertservicedetails(servicedetailsWithBLOBs);
-            sellerDao.updateAfterservice(afterservices, afterservices.getCmOrderdetailsid());
-            sellerDao.updateOrderdetails(orderdetails, orderdetails.getCmOrderdetailsid());
+            sellerDao.updateAfterservice(afterservices, afterservices.getCM_ORDERDETAILSID());
+            sellerDao.updateOrderdetails(orderdetails, orderdetails.getCM_ORDERDETAILSID());
             return GetResult.toJson(0, null, jwt.createJWT(sellerId), null, 0);
         } catch (Exception e) {
             return GetResult.toJson(200, null, null, null, 0);
@@ -249,29 +249,29 @@ public class SellerService {
             if (afterservices == null) {
                 return GetResult.toJson(51, null, jwt.createJWT(sellerId), null, 0);
             }
-            if (afterservices.getCmType() == 1 || afterservices.getCmState() != 4) {
+            if (afterservices.getCM_TYPE() == 1 || afterservices.getCM_STATE() != 4) {
                 return GetResult.toJson(49, null, jwt.createJWT(sellerId), null, 0);
             }
-            Orderdetails orderdetails = sellerDao.selectordertails(afterservices.getCmOrderdetailsid());
-            if (orderdetails == null || orderdetails.getCmSellerstate() != 4 || orderdetails.getCmServicestate() != 4) {
+            Orderdetails orderdetails = sellerDao.selectordertails(afterservices.getCM_ORDERDETAILSID());
+            if (orderdetails == null || orderdetails.getCM_SELLERSTATE() != 4 || orderdetails.getCM_SERVICESTATE() != 4) {
                 return GetResult.toJson(52, null, jwt.createJWT(sellerId), null, 0);
             }
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd HHmmssSSSS");
             Date date = new Date();
             String str = simpleDateFormat.format(date);
-            afterservices.setCmState(5);
-            afterservices.setCmSvid(str);
-            orderdetails.setCmServicestate(5);
+            afterservices.setCM_STATE(5);
+            afterservices.setCM_SVID(str);
+            orderdetails.setCM_SERVICESTATE(5);
             ServicedetailsWithBLOBs servicedetailsWithBLOBs = new ServicedetailsWithBLOBs();
-            servicedetailsWithBLOBs.setCmSvid(str);
-            servicedetailsWithBLOBs.setCmAfterserviceid(afterservices.getCmAfterserviceid());
-            servicedetailsWithBLOBs.setCmCreatetime(date);
-            servicedetailsWithBLOBs.setCmType(5);
-            servicedetailsWithBLOBs.setCmLogisticsid(logisticsid);
-            servicedetailsWithBLOBs.setCmLogisticsnum(logisticsnum);
+            servicedetailsWithBLOBs.setCM_SVID(str);
+            servicedetailsWithBLOBs.setCM_AFTERSERVICEID(afterservices.getCM_AFTERSERVICEID());
+            servicedetailsWithBLOBs.setCM_CREATETIME(date);
+            servicedetailsWithBLOBs.setCM_TYPE(5);
+            servicedetailsWithBLOBs.setCM_LOGISTICSID(logisticsid);
+            servicedetailsWithBLOBs.setCM_LOGISTICSNUM(logisticsnum);
             sellerDao.insertservicedetails(servicedetailsWithBLOBs);
-            sellerDao.updateAfterservice(afterservices, afterservices.getCmOrderdetailsid());
-            sellerDao.updateOrderdetails(orderdetails, orderdetails.getCmOrderdetailsid());
+            sellerDao.updateAfterservice(afterservices, afterservices.getCM_ORDERDETAILSID());
+            sellerDao.updateOrderdetails(orderdetails, orderdetails.getCM_ORDERDETAILSID());
             return GetResult.toJson(0, null, jwt.createJWT(sellerId), null, 0);
         } catch (Exception e) {
             return GetResult.toJson(200, null, null, null, 0);
@@ -289,28 +289,28 @@ public class SellerService {
     public Result refundS(String sellerId, String afierserviceid) {
         try {
             Afterservices afterservices = sellerDao.selectafterserviceD(afierserviceid);
-            if (afterservices == null || afterservices.getCmType() != 1) {
+            if (afterservices == null || afterservices.getCM_TYPE() != 1) {
                 return GetResult.toJson(51, null, jwt.createJWT(sellerId), null, 0);
             }
-            Orderdetails orderdetails = sellerDao.selectordertails(afterservices.getCmOrderdetailsid());
-            if (orderdetails == null || (orderdetails.getCmSellerstate() != 4 && orderdetails.getCmServicestate() != 3)) {
+            Orderdetails orderdetails = sellerDao.selectordertails(afterservices.getCM_ORDERDETAILSID());
+            if (orderdetails == null || (orderdetails.getCM_SELLERSTATE() != 4 && orderdetails.getCM_SERVICESTATE() != 3)) {
                 return GetResult.toJson(52, null, jwt.createJWT(sellerId), null, 0);
             }
-            Users users = sellerDao.selectUsersByOrderdetailsid(orderdetails.getCmUserid());
-            users.setCmBalance(users.getCmBalance() == null ? orderdetails.getCmMoney() : (users.getCmBalance() + orderdetails.getCmMoney()));
-            afterservices.setCmState(9);
-            orderdetails.setCmServicestate(0);
+            Users users = sellerDao.selectUsersByOrderdetailsid(orderdetails.getCM_USERID());
+            users.setCM_BALANCE(users.getCM_BALANCE() == null ? orderdetails.getCM_MONEY() : (users.getCM_BALANCE() + orderdetails.getCM_MONEY()));
+            afterservices.setCM_STATE(9);
+            orderdetails.setCM_SERVICESTATE(0);
             ServicedetailsWithBLOBs servicedetailsWithBLOBs = new ServicedetailsWithBLOBs();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd HHmmssSSSS");
             Date date = new Date();
             String str = simpleDateFormat.format(date);
-            servicedetailsWithBLOBs.setCmSvid(str);
-            servicedetailsWithBLOBs.setCmAfterserviceid(afterservices.getCmAfterserviceid());
-            servicedetailsWithBLOBs.setCmCreatetime(date);
-            servicedetailsWithBLOBs.setCmType(9);
+            servicedetailsWithBLOBs.setCM_SVID(str);
+            servicedetailsWithBLOBs.setCM_AFTERSERVICEID(afterservices.getCM_AFTERSERVICEID());
+            servicedetailsWithBLOBs.setCM_CREATETIME(date);
+            servicedetailsWithBLOBs.setCM_TYPE(9);
             sellerDao.insertservicedetails(servicedetailsWithBLOBs);
-            sellerDao.updateAfterservice(afterservices, afterservices.getCmOrderdetailsid());
-            sellerDao.updateOrderdetails(orderdetails, orderdetails.getCmOrderdetailsid());
+            sellerDao.updateAfterservice(afterservices, afterservices.getCM_ORDERDETAILSID());
+            sellerDao.updateOrderdetails(orderdetails, orderdetails.getCM_ORDERDETAILSID());
             return GetResult.toJson(0, null, jwt.createJWT(sellerId), null, 0);
         } catch (Exception e) {
             return GetResult.toJson(200, null, null, null, 0);
@@ -349,10 +349,10 @@ public class SellerService {
     public Result modifyPasswordS(String sellerId, String oldpassword, String newpassword) {
         try {
             Sellers sellers = sellerDao.selectSellerBysellerid(sellerId);
-            if (!sellers.getCmPassword().equals(oldpassword)) {
+            if (!sellers.getCM_PASSWORD().equals(oldpassword)) {
                 return GetResult.toJson(41, null, null, null, 0);
             }
-            sellers.setCmPassword(newpassword);
+            sellers.setCM_PASSWORD(newpassword);
             //修改密码
             sellerDao.updateseller(sellers);
             return GetResult.toJson(0, null, jwt.createJWT(sellerId), sellers, 0);
@@ -378,15 +378,15 @@ public class SellerService {
             if (SendCode.sendCode(phone.toString(), Integer.valueOf(code), type)) {
                 //如果是新用户，则新增
                 if (register == null) {
-                    register.setCmPhone(phone);
-                    register.setCmCode(Integer.valueOf(code));
-                    register.setCmTime(date);
-                    register.setCmCount(0);
+                    register.setCM_PHONE(phone);
+                    register.setCM_CODE(Integer.valueOf(code));
+                    register.setCM_TIME(date);
+                    register.setCM_COUNT(0);
                     sellerDao.addregister(register);
                 } else {
                     //如果不是新用户，就update
-                    register.setCmCode(Integer.valueOf(code));
-                    register.setCmTime(date);
+                    register.setCM_CODE(Integer.valueOf(code));
+                    register.setCM_TIME(date);
                     sellerDao.updateregister(register, phone);
                 }
                 return GetResult.toJson(0, null, null, null, 0);
@@ -410,11 +410,11 @@ public class SellerService {
     public Result resettingPassword(String newpassword, Integer code, Long phone) {
         try {
             Register register = sellerDao.selectRegisterByPhone(phone);
-            if (register == null || register.getCmCode() != code) {
+            if (register == null || register.getCM_CODE() != code) {
                 return GetResult.toJson(8, null, null, null, 0);
             }
             Sellers sellers = sellerDao.selectSellerBysellerPhone(phone);
-            sellers.setCmPassword(newpassword);
+            sellers.setCM_PASSWORD(newpassword);
             sellerDao.updateseller(sellers);
             return GetResult.toJson(0, null, null, null, 0);
         } catch (Exception e) {
@@ -432,11 +432,11 @@ public class SellerService {
     public Result BackAccountS(Long phone, Integer code) {
         try {
             Register register = sellerDao.selectRegisterByPhone(phone);
-            if (register == null && register.getCmCode() != code) {
+            if (register == null && register.getCM_CODE() != code) {
                 return GetResult.toJson(8, null, null, null, 0);
             }
             Sellers sellers = sellerDao.selectSellerBysellerPhone(phone);
-            return GetResult.toJson(0, null, null, sellers.getCmAccount(), 0);
+            return GetResult.toJson(0, null, null, sellers.getCM_ACCOUNT(), 0);
         } catch (Exception e) {
             return GetResult.toJson(200, null, null, null, 0);
         }

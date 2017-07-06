@@ -3,213 +3,213 @@ package com.sc.domain.generator;
 import java.util.Date;
 
 public class Sellers {
-    private String cmSellerid;
+    private String CM_SELLERID;
 
-    private String cmSellername;
+    private String CM_SELLERNAME;
 
-    private Long cmPhone;
+    private Long CM_PHONE;
 
-    private String cmAccount;
+    private String CM_ACCOUNT;
 
-    private String cmPassword;
+    private String CM_PASSWORD;
 
-    private Integer cmBrandid;
+    private Integer CM_BRANDID;
 
-    private String cmCardpath;
+    private String CM_CARDPATH;
 
-    private String cmStorepath;
+    private String CM_STOREPATH;
 
-    private String cmLicensepath;
+    private String CM_LICENSEPATH;
 
-    private String cmAddress;
+    private String CM_ADDRESS;
 
-    private Double cmLon;
+    private Double CM_LON;
 
-    private Double cmLat;
+    private Double CM_LAT;
 
-    private Date cmCreatetime;
+    private Date CM_CREATETIME;
 
-    private Integer cmIsexamine;
+    private Integer CM_ISEXAMINE;
 
-    private String cmReason;
+    private String CM_REASON;
 
-    private String cmCardno;
+    private String CM_CARDNO;
 
-    private String cmName;
+    private String CM_NAME;
 
-    private String cmContactname;
+    private String CM_CONTACTNAME;
 
-    private String cmContactphone;
+    private String CM_CONTACTPHONE;
 
-    private String cmTelephone;
+    private String CM_TELEPHONE;
 
-    private String cmPax;
+    private String CM_PAX;
 
-    public String getCmSellerid() {
-        return cmSellerid;
+    public String getCM_SELLERID() {
+        return CM_SELLERID;
     }
 
-    public void setCmSellerid(String cmSellerid) {
-        this.cmSellerid = cmSellerid == null ? null : cmSellerid.trim();
+    public void setCM_SELLERID(String CM_SELLERID) {
+        this.CM_SELLERID = CM_SELLERID == null ? null : CM_SELLERID.trim();
     }
 
-    public String getCmSellername() {
-        return cmSellername;
+    public String getCM_SELLERNAME() {
+        return CM_SELLERNAME;
     }
 
-    public void setCmSellername(String cmSellername) {
-        this.cmSellername = cmSellername == null ? null : cmSellername.trim();
+    public void setCM_SELLERNAME(String CM_SELLERNAME) {
+        this.CM_SELLERNAME = CM_SELLERNAME == null ? null : CM_SELLERNAME.trim();
     }
 
-    public Long getCmPhone() {
-        return cmPhone;
+    public Long getCM_PHONE() {
+        return CM_PHONE;
     }
 
-    public void setCmPhone(Long cmPhone) {
-        this.cmPhone = cmPhone;
+    public void setCM_PHONE(Long CM_PHONE) {
+        this.CM_PHONE = CM_PHONE;
     }
 
-    public String getCmAccount() {
-        return cmAccount;
+    public String getCM_ACCOUNT() {
+        return CM_ACCOUNT;
     }
 
-    public void setCmAccount(String cmAccount) {
-        this.cmAccount = cmAccount == null ? null : cmAccount.trim();
+    public void setCM_ACCOUNT(String CM_ACCOUNT) {
+        this.CM_ACCOUNT = CM_ACCOUNT == null ? null : CM_ACCOUNT.trim();
     }
 
-    public String getCmPassword() {
-        return cmPassword;
+    public String getCM_PASSWORD() {
+        return CM_PASSWORD;
     }
 
-    public void setCmPassword(String cmPassword) {
-        this.cmPassword = cmPassword == null ? null : cmPassword.trim();
+    public void setCM_PASSWORD(String CM_PASSWORD) {
+        this.CM_PASSWORD = CM_PASSWORD == null ? null : CM_PASSWORD.trim();
     }
 
-    public Integer getCmBrandid() {
-        return cmBrandid;
+    public Integer getCM_BRANDID() {
+        return CM_BRANDID;
     }
 
-    public void setCmBrandid(Integer cmBrandid) {
-        this.cmBrandid = cmBrandid;
+    public void setCM_BRANDID(Integer CM_BRANDID) {
+        this.CM_BRANDID = CM_BRANDID;
     }
 
-    public String getCmCardpath() {
-        return cmCardpath;
+    public String getCM_CARDPATH() {
+        return CM_CARDPATH;
     }
 
-    public void setCmCardpath(String cmCardpath) {
-        this.cmCardpath = cmCardpath == null ? null : cmCardpath.trim();
+    public void setCM_CARDPATH(String CM_CARDPATH) {
+        this.CM_CARDPATH = CM_CARDPATH == null ? null : CM_CARDPATH.trim();
     }
 
-    public String getCmStorepath() {
-        return cmStorepath;
+    public String getCM_STOREPATH() {
+        return CM_STOREPATH;
     }
 
-    public void setCmStorepath(String cmStorepath) {
-        this.cmStorepath = cmStorepath == null ? null : cmStorepath.trim();
+    public void setCM_STOREPATH(String CM_STOREPATH) {
+        this.CM_STOREPATH = CM_STOREPATH == null ? null : CM_STOREPATH.trim();
     }
 
-    public String getCmLicensepath() {
-        return cmLicensepath;
+    public String getCM_LICENSEPATH() {
+        return CM_LICENSEPATH;
     }
 
-    public void setCmLicensepath(String cmLicensepath) {
-        this.cmLicensepath = cmLicensepath == null ? null : cmLicensepath.trim();
+    public void setCM_LICENSEPATH(String CM_LICENSEPATH) {
+        this.CM_LICENSEPATH = CM_LICENSEPATH == null ? null : CM_LICENSEPATH.trim();
     }
 
-    public String getCmAddress() {
-        return cmAddress;
+    public String getCM_ADDRESS() {
+        return CM_ADDRESS;
     }
 
-    public void setCmAddress(String cmAddress) {
-        this.cmAddress = cmAddress == null ? null : cmAddress.trim();
+    public void setCM_ADDRESS(String CM_ADDRESS) {
+        this.CM_ADDRESS = CM_ADDRESS == null ? null : CM_ADDRESS.trim();
     }
 
-    public Double getCmLon() {
-        return cmLon;
+    public Double getCM_LON() {
+        return CM_LON;
     }
 
-    public void setCmLon(Double cmLon) {
-        this.cmLon = cmLon;
+    public void setCM_LON(Double CM_LON) {
+        this.CM_LON = CM_LON;
     }
 
-    public Double getCmLat() {
-        return cmLat;
+    public Double getCM_LAT() {
+        return CM_LAT;
     }
 
-    public void setCmLat(Double cmLat) {
-        this.cmLat = cmLat;
+    public void setCM_LAT(Double CM_LAT) {
+        this.CM_LAT = CM_LAT;
     }
 
-    public Date getCmCreatetime() {
-        return cmCreatetime;
+    public Date getCM_CREATETIME() {
+        return CM_CREATETIME;
     }
 
-    public void setCmCreatetime(Date cmCreatetime) {
-        this.cmCreatetime = cmCreatetime;
+    public void setCM_CREATETIME(Date CM_CREATETIME) {
+        this.CM_CREATETIME = CM_CREATETIME;
     }
 
-    public Integer getCmIsexamine() {
-        return cmIsexamine;
+    public Integer getCM_ISEXAMINE() {
+        return CM_ISEXAMINE;
     }
 
-    public void setCmIsexamine(Integer cmIsexamine) {
-        this.cmIsexamine = cmIsexamine;
+    public void setCM_ISEXAMINE(Integer CM_ISEXAMINE) {
+        this.CM_ISEXAMINE = CM_ISEXAMINE;
     }
 
-    public String getCmReason() {
-        return cmReason;
+    public String getCM_REASON() {
+        return CM_REASON;
     }
 
-    public void setCmReason(String cmReason) {
-        this.cmReason = cmReason == null ? null : cmReason.trim();
+    public void setCM_REASON(String CM_REASON) {
+        this.CM_REASON = CM_REASON == null ? null : CM_REASON.trim();
     }
 
-    public String getCmCardno() {
-        return cmCardno;
+    public String getCM_CARDNO() {
+        return CM_CARDNO;
     }
 
-    public void setCmCardno(String cmCardno) {
-        this.cmCardno = cmCardno == null ? null : cmCardno.trim();
+    public void setCM_CARDNO(String CM_CARDNO) {
+        this.CM_CARDNO = CM_CARDNO == null ? null : CM_CARDNO.trim();
     }
 
-    public String getCmName() {
-        return cmName;
+    public String getCM_NAME() {
+        return CM_NAME;
     }
 
-    public void setCmName(String cmName) {
-        this.cmName = cmName == null ? null : cmName.trim();
+    public void setCM_NAME(String CM_NAME) {
+        this.CM_NAME = CM_NAME == null ? null : CM_NAME.trim();
     }
 
-    public String getCmContactname() {
-        return cmContactname;
+    public String getCM_CONTACTNAME() {
+        return CM_CONTACTNAME;
     }
 
-    public void setCmContactname(String cmContactname) {
-        this.cmContactname = cmContactname == null ? null : cmContactname.trim();
+    public void setCM_CONTACTNAME(String CM_CONTACTNAME) {
+        this.CM_CONTACTNAME = CM_CONTACTNAME == null ? null : CM_CONTACTNAME.trim();
     }
 
-    public String getCmContactphone() {
-        return cmContactphone;
+    public String getCM_CONTACTPHONE() {
+        return CM_CONTACTPHONE;
     }
 
-    public void setCmContactphone(String cmContactphone) {
-        this.cmContactphone = cmContactphone == null ? null : cmContactphone.trim();
+    public void setCM_CONTACTPHONE(String CM_CONTACTPHONE) {
+        this.CM_CONTACTPHONE = CM_CONTACTPHONE == null ? null : CM_CONTACTPHONE.trim();
     }
 
-    public String getCmTelephone() {
-        return cmTelephone;
+    public String getCM_TELEPHONE() {
+        return CM_TELEPHONE;
     }
 
-    public void setCmTelephone(String cmTelephone) {
-        this.cmTelephone = cmTelephone == null ? null : cmTelephone.trim();
+    public void setCM_TELEPHONE(String CM_TELEPHONE) {
+        this.CM_TELEPHONE = CM_TELEPHONE == null ? null : CM_TELEPHONE.trim();
     }
 
-    public String getCmPax() {
-        return cmPax;
+    public String getCM_PAX() {
+        return CM_PAX;
     }
 
-    public void setCmPax(String cmPax) {
-        this.cmPax = cmPax == null ? null : cmPax.trim();
+    public void setCM_PAX(String CM_PAX) {
+        this.CM_PAX = CM_PAX == null ? null : CM_PAX.trim();
     }
 }

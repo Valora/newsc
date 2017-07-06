@@ -1,33 +1,33 @@
 package com.sc.domain.generator;
 
 public class Brands {
-    private Integer cmBrandid;
+    private Integer CM_BRANDID;
 
-    private String cmBrand;
+    private String CM_BRAND;
 
-    private String cmOther;
+    private String CM_OTHER;
 
-    public Integer getCmBrandid() {
-        return cmBrandid;
+    public Integer getCM_BRANDID() {
+        return CM_BRANDID;
     }
 
-    public void setCmBrandid(Integer cmBrandid) {
-        this.cmBrandid = cmBrandid;
+    public void setCM_BRANDID(Integer CM_BRANDID) {
+        this.CM_BRANDID = CM_BRANDID;
     }
 
-    public String getCmBrand() {
-        return cmBrand;
+    public String getCM_BRAND() {
+        return CM_BRAND;
     }
 
-    public void setCmBrand(String cmBrand) {
-        this.cmBrand = cmBrand == null ? null : cmBrand.trim();
+    public void setCM_BRAND(String CM_BRAND) {
+        this.CM_BRAND = CM_BRAND == null ? null : CM_BRAND.trim();
     }
 
-    public String getCmOther() {
-        return cmOther;
+    public String getCM_OTHER() {
+        return CM_OTHER;
     }
 
-    public void setCmOther(String cmOther) {
-        this.cmOther = cmOther == null ? null : cmOther.trim();
+    public void setCM_OTHER(String CM_OTHER) {
+        this.CM_OTHER = CM_OTHER == null ? null : CM_OTHER.trim();
     }
 }

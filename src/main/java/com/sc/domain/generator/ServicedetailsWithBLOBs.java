@@ -1,13 +1,13 @@
 package com.sc.domain.generator;
 
 public class ServicedetailsWithBLOBs extends Servicedetails {
-    private String cmLogisticsinfo;
+    private String CM_LOGISTICSINFO;
 
-    public String getCmLogisticsinfo() {
-        return cmLogisticsinfo;
+    public String getCM_LOGISTICSINFO() {
+        return CM_LOGISTICSINFO;
     }
 
-    public void setCmLogisticsinfo(String cmLogisticsinfo) {
-        this.cmLogisticsinfo = cmLogisticsinfo == null ? null : cmLogisticsinfo.trim();
+    public void setCM_LOGISTICSINFO(String CM_LOGISTICSINFO) {
+        this.CM_LOGISTICSINFO = CM_LOGISTICSINFO == null ? null : CM_LOGISTICSINFO.trim();
     }
 }

@@ -10,10 +10,10 @@ import java.util.List;
  */
 @Data
 public class User {
-    private String cmUserid;
-    private Double cmShoplon;
-    private Double cmShoplat;
-    private Double cmBalance;
-    private Integer cmIntegral;
-    private List<TBUSERS> tbUsers;
+    private String CM_USERID;
+    private Double CM_SHOPLON;
+    private Double CM_SHOPLAT;
+    private Double CM_BLANCE;
+    private Integer CM_INTEGRAL;
+    private List<TBUSERS> TB_USERS;
 }

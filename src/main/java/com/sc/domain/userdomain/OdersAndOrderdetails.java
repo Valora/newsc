@@ -10,21 +10,21 @@ import java.util.List;
  */
 @Data
 public class OdersAndOrderdetails {
-    private Integer cmOrderState;
-    private Date cmCreatetime;
-    private Double cmMoneysun;
-    private Integer cmNumbersun;
-    private String cmOrderid;
-    private String cmOrderdetailsid;
-    private Double cmMoney;
-    private Integer cmNumber;
-    private Integer cmServiceState;
-    private String cmGoodsid;
-    private String cmTitle;
-    private String cmMainfigurepath;
-    private Double cmPresentprice;
-    private String cmSellerid2;
-    private String cmSellername;
-    private Integer value;
-    private List<OrderdetailsAndGoodsAndSellers> tborderdetails;
+    private Integer CM_ORDERSTATE;
+    private Date CM_CREATETIME;
+    private Double CM_MONEYSUN;
+    private Integer CM_NUMBERSUN;
+    private String CM_ORDERID;
+    private String CM_ORDERDETAILSID;
+    private Double CM_MONEY;
+    private Integer CM_NUMBER;
+    private Integer CM_SERVICESTATE;
+    private String CM_GOODSID;
+    private String CM_TITLE;
+    private String CM_MAINFIGUREPATH;
+    private Double CM_PRESENTPRICE;
+    private String CM_SELLERID2;
+    private String CM_SELLERNAME;
+    private Integer VALUE;
+    private List<OrderdetailsAndGoodsAndSellers> TB_ORDERDETAILS;
 }

@@ -1,63 +1,63 @@
 package com.sc.domain.generator;
 
 public class Admins {
-    private String cmAdminid;
+    private String CM_ADMINID;
 
-    private String cmName;
+    private String CM_NAME;
 
-    private String cmAccount;
+    private String CM_ACCOUNT;
 
-    private String cmPassword;
+    private String CM_PASSWORD;
 
-    private Integer cmLevel;
+    private Integer CM_LEVEL;
 
-    private Long cmPhone;
+    private Long CM_PHONE;
 
-    public String getCmAdminid() {
-        return cmAdminid;
+    public String getCM_ADMINID() {
+        return CM_ADMINID;
     }
 
-    public void setCmAdminid(String cmAdminid) {
-        this.cmAdminid = cmAdminid == null ? null : cmAdminid.trim();
+    public void setCM_ADMINID(String CM_ADMINID) {
+        this.CM_ADMINID = CM_ADMINID == null ? null : CM_ADMINID.trim();
     }
 
-    public String getCmName() {
-        return cmName;
+    public String getCM_NAME() {
+        return CM_NAME;
     }
 
-    public void setCmName(String cmName) {
-        this.cmName = cmName == null ? null : cmName.trim();
+    public void setCM_NAME(String CM_NAME) {
+        this.CM_NAME = CM_NAME == null ? null : CM_NAME.trim();
     }
 
-    public String getCmAccount() {
-        return cmAccount;
+    public String getCM_ACCOUNT() {
+        return CM_ACCOUNT;
     }
 
-    public void setCmAccount(String cmAccount) {
-        this.cmAccount = cmAccount == null ? null : cmAccount.trim();
+    public void setCM_ACCOUNT(String CM_ACCOUNT) {
+        this.CM_ACCOUNT = CM_ACCOUNT == null ? null : CM_ACCOUNT.trim();
     }
 
-    public String getCmPassword() {
-        return cmPassword;
+    public String getCM_PASSWORD() {
+        return CM_PASSWORD;
     }
 
-    public void setCmPassword(String cmPassword) {
-        this.cmPassword = cmPassword == null ? null : cmPassword.trim();
+    public void setCM_PASSWORD(String CM_PASSWORD) {
+        this.CM_PASSWORD = CM_PASSWORD == null ? null : CM_PASSWORD.trim();
     }
 
-    public Integer getCmLevel() {
-        return cmLevel;
+    public Integer getCM_LEVEL() {
+        return CM_LEVEL;
     }
 
-    public void setCmLevel(Integer cmLevel) {
-        this.cmLevel = cmLevel;
+    public void setCM_LEVEL(Integer CM_LEVEL) {
+        this.CM_LEVEL = CM_LEVEL;
     }
 
-    public Long getCmPhone() {
-        return cmPhone;
+    public Long getCM_PHONE() {
+        return CM_PHONE;
     }
 
-    public void setCmPhone(Long cmPhone) {
-        this.cmPhone = cmPhone;
+    public void setCM_PHONE(Long CM_PHONE) {
+        this.CM_PHONE = CM_PHONE;
     }
 }

@@ -1,13 +1,12 @@
 package com.sc.mapper.generator;
 
 import com.sc.domain.generator.Brands;
-import com.sc.domain.generator.BrandsExample;
 import com.sc.domain.generator.BrandsExample.Criteria;
 import com.sc.domain.generator.BrandsExample.Criterion;
-import org.apache.ibatis.jdbc.SQL;
-
+import com.sc.domain.generator.BrandsExample;
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.jdbc.SQL;
 
 public class BrandsSqlProvider {
 
@@ -29,16 +28,16 @@ public class BrandsSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("TB_BRANDS");
         
-        if (record.getCmBrandid() != null) {
-            sql.VALUES("CM_BRANDID", "#{cmBrandid,jdbcType=INTEGER}");
+        if (record.getCM_BRANDID() != null) {
+            sql.VALUES("CM_BRANDID", "#{CM_BRANDID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmBrand() != null) {
-            sql.VALUES("CM_BRAND", "#{cmBrand,jdbcType=VARCHAR}");
+        if (record.getCM_BRAND() != null) {
+            sql.VALUES("CM_BRAND", "#{CM_BRAND,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmOther() != null) {
-            sql.VALUES("CM_OTHER", "#{cmOther,jdbcType=VARCHAR}");
+        if (record.getCM_OTHER() != null) {
+            sql.VALUES("CM_OTHER", "#{CM_OTHER,jdbcType=VARCHAR}");
         }
         
         return sql.toString();
@@ -70,16 +69,16 @@ public class BrandsSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_BRANDS");
         
-        if (record.getCmBrandid() != null) {
-            sql.SET("CM_BRANDID = #{record.cmBrandid,jdbcType=INTEGER}");
+        if (record.getCM_BRANDID() != null) {
+            sql.SET("CM_BRANDID = #{record.CM_BRANDID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmBrand() != null) {
-            sql.SET("CM_BRAND = #{record.cmBrand,jdbcType=VARCHAR}");
+        if (record.getCM_BRAND() != null) {
+            sql.SET("CM_BRAND = #{record.CM_BRAND,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmOther() != null) {
-            sql.SET("CM_OTHER = #{record.cmOther,jdbcType=VARCHAR}");
+        if (record.getCM_OTHER() != null) {
+            sql.SET("CM_OTHER = #{record.CM_OTHER,jdbcType=VARCHAR}");
         }
         
         applyWhere(sql, example, true);
@@ -90,9 +89,9 @@ public class BrandsSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_BRANDS");
         
-        sql.SET("CM_BRANDID = #{record.cmBrandid,jdbcType=INTEGER}");
-        sql.SET("CM_BRAND = #{record.cmBrand,jdbcType=VARCHAR}");
-        sql.SET("CM_OTHER = #{record.cmOther,jdbcType=VARCHAR}");
+        sql.SET("CM_BRANDID = #{record.CM_BRANDID,jdbcType=INTEGER}");
+        sql.SET("CM_BRAND = #{record.CM_BRAND,jdbcType=VARCHAR}");
+        sql.SET("CM_OTHER = #{record.CM_OTHER,jdbcType=VARCHAR}");
         
         BrandsExample example = (BrandsExample) parameter.get("example");
         applyWhere(sql, example, true);

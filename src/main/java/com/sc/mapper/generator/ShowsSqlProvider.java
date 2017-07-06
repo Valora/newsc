@@ -1,13 +1,12 @@
 package com.sc.mapper.generator;
 
 import com.sc.domain.generator.Shows;
-import com.sc.domain.generator.ShowsExample;
 import com.sc.domain.generator.ShowsExample.Criteria;
 import com.sc.domain.generator.ShowsExample.Criterion;
-import org.apache.ibatis.jdbc.SQL;
-
+import com.sc.domain.generator.ShowsExample;
 import java.util.List;
 import java.util.Map;
+import org.apache.ibatis.jdbc.SQL;
 
 public class ShowsSqlProvider {
 
@@ -29,24 +28,24 @@ public class ShowsSqlProvider {
         SQL sql = new SQL();
         sql.INSERT_INTO("TB_SHOWS");
         
-        if (record.getCmShowid() != null) {
-            sql.VALUES("CM_SHOWID", "#{cmShowid,jdbcType=INTEGER}");
+        if (record.getCM_SHOWID() != null) {
+            sql.VALUES("CM_SHOWID", "#{CM_SHOWID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmPath() != null) {
-            sql.VALUES("CM_PATH", "#{cmPath,jdbcType=VARCHAR}");
+        if (record.getCM_PATH() != null) {
+            sql.VALUES("CM_PATH", "#{CM_PATH,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmGoodsid() != null) {
-            sql.VALUES("CM_GOODSID", "#{cmGoodsid,jdbcType=VARCHAR}");
+        if (record.getCM_GOODSID() != null) {
+            sql.VALUES("CM_GOODSID", "#{CM_GOODSID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmIstop() != null) {
-            sql.VALUES("CM_ISTOP", "#{cmIstop,jdbcType=INTEGER}");
+        if (record.getCM_ISTOP() != null) {
+            sql.VALUES("CM_ISTOP", "#{CM_ISTOP,jdbcType=INTEGER}");
         }
         
-        if (record.getCmUrl() != null) {
-            sql.VALUES("CM_URL", "#{cmUrl,jdbcType=VARCHAR}");
+        if (record.getCM_URL() != null) {
+            sql.VALUES("CM_URL", "#{CM_URL,jdbcType=VARCHAR}");
         }
         
         return sql.toString();
@@ -80,24 +79,24 @@ public class ShowsSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_SHOWS");
         
-        if (record.getCmShowid() != null) {
-            sql.SET("CM_SHOWID = #{record.cmShowid,jdbcType=INTEGER}");
+        if (record.getCM_SHOWID() != null) {
+            sql.SET("CM_SHOWID = #{record.CM_SHOWID,jdbcType=INTEGER}");
         }
         
-        if (record.getCmPath() != null) {
-            sql.SET("CM_PATH = #{record.cmPath,jdbcType=VARCHAR}");
+        if (record.getCM_PATH() != null) {
+            sql.SET("CM_PATH = #{record.CM_PATH,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmGoodsid() != null) {
-            sql.SET("CM_GOODSID = #{record.cmGoodsid,jdbcType=VARCHAR}");
+        if (record.getCM_GOODSID() != null) {
+            sql.SET("CM_GOODSID = #{record.CM_GOODSID,jdbcType=VARCHAR}");
         }
         
-        if (record.getCmIstop() != null) {
-            sql.SET("CM_ISTOP = #{record.cmIstop,jdbcType=INTEGER}");
+        if (record.getCM_ISTOP() != null) {
+            sql.SET("CM_ISTOP = #{record.CM_ISTOP,jdbcType=INTEGER}");
         }
         
-        if (record.getCmUrl() != null) {
-            sql.SET("CM_URL = #{record.cmUrl,jdbcType=VARCHAR}");
+        if (record.getCM_URL() != null) {
+            sql.SET("CM_URL = #{record.CM_URL,jdbcType=VARCHAR}");
         }
         
         applyWhere(sql, example, true);
@@ -108,11 +107,11 @@ public class ShowsSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE("TB_SHOWS");
         
-        sql.SET("CM_SHOWID = #{record.cmShowid,jdbcType=INTEGER}");
-        sql.SET("CM_PATH = #{record.cmPath,jdbcType=VARCHAR}");
-        sql.SET("CM_GOODSID = #{record.cmGoodsid,jdbcType=VARCHAR}");
-        sql.SET("CM_ISTOP = #{record.cmIstop,jdbcType=INTEGER}");
-        sql.SET("CM_URL = #{record.cmUrl,jdbcType=VARCHAR}");
+        sql.SET("CM_SHOWID = #{record.CM_SHOWID,jdbcType=INTEGER}");
+        sql.SET("CM_PATH = #{record.CM_PATH,jdbcType=VARCHAR}");
+        sql.SET("CM_GOODSID = #{record.CM_GOODSID,jdbcType=VARCHAR}");
+        sql.SET("CM_ISTOP = #{record.CM_ISTOP,jdbcType=INTEGER}");
+        sql.SET("CM_URL = #{record.CM_URL,jdbcType=VARCHAR}");
         
         ShowsExample example = (ShowsExample) parameter.get("example");
         applyWhere(sql, example, true);

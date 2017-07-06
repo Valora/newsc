@@ -8,8 +8,8 @@ import lombok.Data;
  */
 @Data
 public class AdminsInfo {
-    private Integer cmLevel;
-    private String cmAdminid;
-    private String cmName;
-    private Long cmPhone;
+    private Integer CM_LEVEL;
+    private String CM_ADMINID;
+    private String CM_NAME;
+    private Long CM_PHONE;
 }
