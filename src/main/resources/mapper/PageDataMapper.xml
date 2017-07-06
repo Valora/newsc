@@ -67,29 +67,6 @@
         </collection>
     </resultMap>
 
-    <resultMap id="Classify1" type="com.sc.domain.pagedata.Classify">
-        <result column="CM_CLASSIFYNAME_A" property="CM_CLASSIFYNAME" jdbcType="VARCHAR"/>
-        <result column="CM_IMGPATH_A" property="CM_IMGPATH" jdbcType="VARCHAR"/>
-        <result column="CM_CLASSIFYID_A" property="CM_CLASSIFYID" jdbcType="VARCHAR"/>
-        <result column="CM_SORT_A" property="CM_SORT" jdbcType="VARCHAR"/>
-        <collection property="TB_SUBCLASS" javaType="com.sc.domain.pagedata.Subclass" resultMap="SubClass"/>
-    </resultMap>
-
-    <resultMap id="SubClass" type="com.sc.domain.pagedata.Subclass">
-        <result column="CM_CLASSIFYNAME_B" property="CM_CLASSIFYNAME" jdbcType="VARCHAR"/>
-        <result column="CM_IMGPATH_B" property="CM_IMGPATH" jdbcType="VARCHAR"/>
-        <result column="CM_CLASSIFYID_B" property="CM_CLASSIFYID" jdbcType="VARCHAR"/>
-        <result column="CM_SORT_B" property="CM_SORT" jdbcType="VARCHAR"/>
-        <collection property="TB_GOODS" javaType="com.sc.domain.pagedata.ClassifyGoods" resultMap="Goods"/>
-    </resultMap>
-
-    <resultMap id="Goods" type="com.sc.domain.pagedata.ClassifyGoods">
-        <result column="CM_GOODSID" property="CM_GOODSID" jdbcType="VARCHAR"/>
-        <result column="CM_MAINFIGUREPATH" property="CM_MAINFIGUREPATH" jdbcType="VARCHAR"/>
-        <result column="CM_CREATETIME" property="CM_CREATETIME" jdbcType="DATE"/>
-    </resultMap>
-
-
     <select id="getGoodsDetailsWithUserid" resultMap="GoodDetail">
         SELECT
             t0.CM_GOODSID,

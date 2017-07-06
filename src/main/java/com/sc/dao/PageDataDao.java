@@ -350,11 +350,11 @@ public class PageDataDao {
     /**
      * 查询商品详情(有ID)
      *
-     * @param id
+     * @param goodid
      * @param userId
      */
-    public GoodDetail getGoodsDetailsWithUserid(String id, String userId) {
-        return pageDataMapper.getGoodsDetailsWithUserid(userId, id);
+    public GoodDetail getGoodsDetailsWithUserid(String userId, String goodid) {
+        return pageDataMapper.getGoodsDetailsWithUserid(userId, goodid);
     }
 
     /**

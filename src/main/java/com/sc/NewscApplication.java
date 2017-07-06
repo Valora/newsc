@@ -30,8 +30,6 @@ public class NewscApplication {
     @Bean
     CommandLineRunner init(StorageService storageService) {
         return (args) -> {
-//            storageService.deleteAll();
-//            storageService.init();
         };
     }
 
@@ -49,12 +47,8 @@ public class NewscApplication {
         TypeUtils.compatibleWithJavaBean = true;
         FastJsonHttpMessageConverter fastConvert = new FastJsonHttpMessageConverter();
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
-//        ParserConfig parserConfig = new ParserConfig();
         fastJsonConfig.setSerializerFeatures(SerializerFeature.WriteNullListAsEmpty);
         fastJsonConfig.setSerializerFeatures(SerializerFeature.WriteMapNullValue);
-//        fastJsonConfig.setSerializeFilters(filter);
-//        parserConfig.compatibleWithJavaBean= true;
-//        fastJsonConfig.setParserConfig(parserConfig);
         fastConvert.setFastJsonConfig(fastJsonConfig);
         return new HttpMessageConverters((HttpMessageConverter<?>) fastConvert);
     }
