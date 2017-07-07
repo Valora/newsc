@@ -17,7 +17,7 @@ import java.util.List;
 public interface ManageMapper {
     @SelectProvider(type = ManageSqlProvider.class, method = "getSellerDetail")
     @Results({
-            @Result(column = "CM_CREATETIME", property = "CM_CREATETIME", jdbcType = JdbcType.DATE),
+            @Result(column = "CM_CREATETIME", property = "CM_CREATETIME"),
             @Result(column = "CM_PHONE", property = "CM_PHONE", jdbcType = JdbcType.DECIMAL),
             @Result(column = "CM_NAME", property = "CM_NAME", jdbcType = JdbcType.VARCHAR),
             @Result(column = "CM_CONTACTNAME", property = "CM_CONTACTNAME", jdbcType = JdbcType.VARCHAR),

@@ -36,7 +36,7 @@ public class NewscApplication {
     @Bean
     public HttpMessageConverters fastJsonHttpMessageConverters() {
         TypeUtils.compatibleWithJavaBean = true;
-        JSON.DEFFAULT_DATE_FORMAT="yyyy-MM-dd HH:mm:ss.SSS";
+        JSON.DEFFAULT_DATE_FORMAT="yyyy-MM-dd HH:mm:ss";
         FastJsonHttpMessageConverter fastConvert = new FastJsonHttpMessageConverter();
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
         fastJsonConfig.setSerializerFeatures(SerializerFeature.WriteNullListAsEmpty);

@@ -124,12 +124,13 @@ public class CustomServiceDao {
         AdminsExample adminsExample = new AdminsExample();
         AdminsExample.Criteria criteria = adminsExample.createCriteria();
         criteria.andCM_ADMINIDEqualTo(userId);
-        Admins admins = adminsMapper.selectByExample(adminsExample).get(0);
-        if (admins == null) {
-            return null;
-        } else {
+        Admins admins = new Admins();
+        List<Admins> list = adminsMapper.selectByExample(adminsExample);
+        if (list != null && list.size() > 0) {
+            admins = list.get(0);
             return admins;
         }
+        return null;
     }
 
     /**
@@ -170,7 +171,7 @@ public class CustomServiceDao {
      * @return 商品详细对象
      */
     public GooddetailsWithBLOBs selectGooddetailBygooddetailsid(String goodsdetailsid) {
-        GooddetailsWithBLOBs gooddetailsWithBLOBs = null;
+        GooddetailsWithBLOBs gooddetailsWithBLOBs = new GooddetailsWithBLOBs();
         GooddetailsExample gooddetailsExample = new GooddetailsExample();
         GooddetailsExample.Criteria criteria = gooddetailsExample.createCriteria();
         criteria.andCM_GOODSDETAILSIDEqualTo(Integer.valueOf(goodsdetailsid));

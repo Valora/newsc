@@ -6,7 +6,7 @@
     </resultMap>
 
     <resultMap id="MyOrdersAll" type="com.sc.domain.userdomain.MyOrders" autoMapping="true">
-        <result column="CM_CREATETIME" property="CM_CREATETIME" jdbcType="DATE"/>
+        <result column="CM_CREATETIME" property="CM_CREATETIME"/>
         <result column="CM_ORDERID" property="CM_ORDERID" jdbcType="VARCHAR"/>
         <result column="CM_NUMBERSUN" property="CM_NUMBERSUN" jdbcType="DOUBLE"/>
         <result column="CM_MONEYSUM" property="CM_MONEYSUM" jdbcType="DOUBLE"/>
@@ -24,7 +24,7 @@
     </resultMap>
 
     <resultMap id="MyUnpaiedOrders" type="com.sc.domain.userdomain.MyStateOrders" autoMapping="true">
-        <result column="CM_CREATETIME" property="CM_CREATETIME" jdbcType="DATE"/>
+        <result column="CM_CREATETIME" property="CM_CREATETIME" />
         <result column="CM_ORDERID" property="CM_ORDERID" jdbcType="VARCHAR"/>
         <result column="CM_NUMBERSUN" property="CM_NUMBERSUN" jdbcType="INTEGER"/>
         <result column="CM_MONEYSUN" property="CM_MONEYSUN" jdbcType="DOUBLE"/>
@@ -44,7 +44,7 @@
     </resultMap>
 
     <resultMap id="MySettlementOrders" type="com.sc.domain.userdomain.MyStateOrders" autoMapping="true">
-        <result column="CM_CREATETIME" property="CM_CREATETIME" jdbcType="DATE"/>
+        <result column="CM_CREATETIME" property="CM_CREATETIME" />
         <result column="CM_ORDERID" property="CM_ORDERID" jdbcType="VARCHAR"/>
         <result column="CM_NUMBERSUN" property="CM_NUMBERSUN" jdbcType="INTEGER"/>
         <result column="CM_MONEYSUN" property="CM_MONEYSUN" jdbcType="DOUBLE"/>
@@ -64,7 +64,7 @@
     </resultMap>
 
     <resultMap id="OrderDetails" type="com.sc.domain.userdomain.OrderDetails" autoMapping="true">
-        <result column="CM_CREATETIME" property="CM_CREATETIME" jdbcType="DATE"/>
+        <result column="CM_CREATETIME" property="CM_CREATETIME" />
         <result column="CM_ORDERID" property="CM_ORDERID" jdbcType="VARCHAR"/>
         <result column="CM_NUMBERSUN" property="CM_NUMBERSUN" jdbcType="INTEGER"/>
         <result column="CM_MONEYSUN" property="CM_MONEYSUN" jdbcType="DOUBLE"/>
@@ -95,7 +95,7 @@
     <!--queryMyCanAfterServiceM-->
     <resultMap id="OdersAndOrderdetails" type="com.sc.domain.userdomain.OdersAndOrderdetails" autoMapping="true">
         <result column="CM_ORDER_STATE" property="CM_ORDERSTATE" jdbcType="INTEGER"/>
-        <result column="CM_CREATETIME" property="CM_CREATETIME" jdbcType="DATE"/>
+        <result column="CM_CREATETIME" property="CM_CREATETIME" />
         <result column="CM_MONEYSUN" property="CM_MONEYSUN" jdbcType="DOUBLE"/>
         <result column="CM_NUMBERSUN" property="CM_NUMBERSUN" jdbcType="INTEGER"/>
         <result column="CM_ORDERID" property="CM_ORDERID" jdbcType="VARCHAR"/>
@@ -136,7 +136,7 @@
         <result column="CM_GOODSID" property="CM_GOODSID" jdbcType="VARCHAR"/>
         <result column="CM_ORDERDETAILSID" property="CM_ORDERDETAILSID" jdbcType="VARCHAR"/>
         <result column="CM_STATE" property="CM_STATE" jdbcType="INTEGER"/>
-        <result column="CM_CREATETIME" property="CM_CREATETIME" jdbcType="DATE"/>
+        <result column="CM_CREATETIME" property="CM_CREATETIME" />
         <result column="CM_MAINFIGUREPATH" property="CM_MAINFIGUREPATH" jdbcType="VARCHAR"/>
         <result column="CM_TITLE" property="CM_TITLE" jdbcType="VARCHAR"/>
         <result column="CM_SELLERID" property="CM_SELLERID" jdbcType="VARCHAR"/>
@@ -157,7 +157,7 @@
         <result column="CM_ORIGINALPRICE" property="CM_ORIGINALPRICE" jdbcType="DOUBLE"/>
         <result column="CM_SALES" property="CM_SALES" jdbcType="INTEGER"/>
         <result column="CM_TITLE" property="CM_TITLE" jdbcType="VARCHAR"/>
-        <result column="CM_JOINTIME" property="CM_JOINTIME" jdbcType="DATE"/>
+        <result column="CM_JOINTIME" property="CM_JOINTIME" />
         <result column="CM_COLLECTIONID" property="CM_COLLECTIONID" jdbcType="INTEGER"/>
     </resultMap>
 

@@ -127,7 +127,10 @@ public class SaleDao {
         AdminsExample.Criteria criteria = adminsExample.createCriteria();
         criteria.andCM_PHONEEqualTo(phone);
         List<Admins> list = adminsMapper.selectByExample(adminsExample);
-        Admins admins = list.get(0);
+        Admins admins = new Admins();
+        if(list!=null&&list.size()>0){
+            admins=list.get(0);
+        }
         return admins;
 
     }

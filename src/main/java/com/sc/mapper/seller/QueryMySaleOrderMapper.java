@@ -18,7 +18,7 @@ public interface QueryMySaleOrderMapper {
             @Result(column = "CM_ORDERDETAILSID", property = "CM_ORDERDETAILSID", jdbcType = JdbcType.VARCHAR),
             @Result(column = "CM_MAINFIGUREPATH", property = "CM_MAINFIGUREPATH", jdbcType = JdbcType.VARCHAR),
             @Result(column = "CM_TITLE", property = "CM_TITLE", jdbcType = JdbcType.VARCHAR),
-            @Result(column = "CM_CREATETIME", property = "CM_CREATETIME", jdbcType = JdbcType.DATE),
+            @Result(column = "CM_CREATETIME", property = "CM_CREATETIME"),
             @Result(column = "CM_PRESENTPRICE", property = "CM_PRESENTPRICE", jdbcType = JdbcType.DOUBLE),
             @Result(column = "CM_ORIGINALPRICE", property = "CM_ORIGINALPRICE", jdbcType = JdbcType.DOUBLE),
             @Result(column = "CM_NUMBER", property = "CM_NUMBER", jdbcType = JdbcType.INTEGER),

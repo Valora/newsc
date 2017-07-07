@@ -59,7 +59,7 @@ public class LoginService {
      */
     public Result userLogin(String account, String password, Integer code) {
         UserLogin userLoginInfo = loginDao.getUserLoginInfo(account, password);
-        if (userLoginInfo == null) {
+        if (userLoginInfo.getCM_USERID() == null) {
             return GetResult.toJson(6, null, null, null, 0);
         }
         if (userLoginInfo.getCM_CODE() == null) {
@@ -98,7 +98,7 @@ public class LoginService {
      */
     public Result userLoginByPhoneAndCodeS(String phone, String code) {
         UserLogin userLoginInfo = loginDao.getUserLoginInfoByPhoneAndCode(phone, code);
-        if (userLoginInfo == null) {
+        if (userLoginInfo.getCM_USERID() == null) {
             return GetResult.toJson(6, null, null, null, 0);
         }
         //  loginDao.deleteCode(userLoginInfo.getCM_PHONE());
@@ -115,7 +115,7 @@ public class LoginService {
      */
     public Result sellerLogin(String account, String password, Integer code) {
         SellerLogin sellerLoginInfo = loginDao.getSellerLoginInfo(account, password);
-        if (sellerLoginInfo == null) {
+        if (sellerLoginInfo.getCM_SELLERID() == null) {
             return GetResult.toJson(6, null, null, null, 0);
         }
         if (sellerLoginInfo.getCM_CODE() == null) {

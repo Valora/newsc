@@ -10,7 +10,7 @@
         <result column="CM_BRANDID" property="CM_BRANDID" jdbcType="VARCHAR"/>
         <result column="CM_MAINFIGUREPATH" property="CM_MAINFIGUREPATH" jdbcType="VARCHAR"/>
         <result column="CM_FIGURESPATH" property="CM_FIGURESPATH" jdbcType="VARCHAR"/>
-        <result column="CM_CREATETIME" property="CM_CREATETIME" jdbcType="DATE"/>
+        <result column="CM_CREATETIME" property="CM_CREATETIME" />
         <result column="CM_ORIGINALPRICE" property="CM_ORIGINALPRICE" jdbcType="DOUBLE"/>
         <result column="CM_PRESENTPRICE" property="CM_PRESENTPRICE" jdbcType="DOUBLE"/>
         <result column="CM_ISOFF" property="CM_ISOFF" jdbcType="INTEGER"/>
@@ -35,7 +35,7 @@
         <result column="CM_BRANDID" property="CM_BRANDID" jdbcType="VARCHAR"/>
         <result column="CM_MAINFIGUREPATH" property="CM_MAINFIGUREPATH" jdbcType="VARCHAR"/>
         <result column="CM_FIGURESPATH" property="CM_FIGURESPATH" jdbcType="VARCHAR"/>
-        <result column="CM_CREATETIME" property="CM_CREATETIME" jdbcType="DATE"/>
+        <result column="CM_CREATETIME" property="CM_CREATETIME" />
         <result column="CM_ORIGINALPRICE" property="CM_ORIGINALPRICE" jdbcType="DOUBLE"/>
         <result column="CM_PRESENTPRICE" property="CM_PRESENTPRICE" jdbcType="DOUBLE"/>
         <result column="CM_ISOFF" property="CM_ISOFF" jdbcType="INTEGER"/>
@@ -62,7 +62,7 @@
             <collection property="TB_GOODS" ofType="com.sc.domain.pagedata.ClassifyGoods">
                 <result column="CM_GOODSID" property="CM_GOODSID" jdbcType="VARCHAR"/>
                 <result column="CM_MAINFIGUREPATH" property="CM_MAINFIGUREPATH" jdbcType="VARCHAR"/>
-                <result column="CM_CREATETIME" property="CM_CREATETIME" jdbcType="DATE"/>
+                <result column="CM_CREATETIME" property="CM_CREATETIME" />
             </collection>
         </collection>
     </resultMap>

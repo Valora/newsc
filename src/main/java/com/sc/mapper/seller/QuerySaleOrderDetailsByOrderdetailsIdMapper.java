@@ -14,7 +14,7 @@ import java.util.List;
 public interface QuerySaleOrderDetailsByOrderdetailsIdMapper {
     @SelectProvider(type = QuerySaleOrderDetailsByOrderdetailsIdSqlProvider.class, method = "QuerySaleOrderDetailMi")
     @Results({
-            @Result(column = "CM_CREATETIME", property = "CM_CREATETIME", jdbcType = JdbcType.DATE),
+            @Result(column = "CM_CREATETIME", property = "CM_CREATETIME"),
             @Result(column = "CM_SPECNUMDETAILS", property = "CM_SPECNUMDETAILS", jdbcType = JdbcType.VARCHAR),
             @Result(column = "CM_MONEY", property = "CM_MONEY", jdbcType = JdbcType.DOUBLE),
             @Result(column = "CM_NUMBER", property = "CM_NUMBER", jdbcType = JdbcType.INTEGER),

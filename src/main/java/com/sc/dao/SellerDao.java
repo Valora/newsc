@@ -88,12 +88,13 @@ public class SellerDao {
         AfterservicesExample afterservicesExample = new AfterservicesExample();
         AfterservicesExample.Criteria criteria = afterservicesExample.createCriteria();
         criteria.andCM_AFTERSERVICEIDEqualTo(afierserviceid);
-        Afterservices afterservices = null;
+        Afterservices afterservices = new Afterservices();
         List<Afterservices> list = afterservicesMapper.selectByExample(afterservicesExample);
         if (list != null && list.size() > 0) {
             afterservices = list.get(0);
+            return afterservices;
         }
-        return afterservices;
+        return null;
     }
 
     /**
@@ -107,11 +108,12 @@ public class SellerDao {
         OrderdetailsExample.Criteria criteria = orderdetailsExample.createCriteria();
         criteria.andCM_ORDERDETAILSIDEqualTo(cmOrderdetailsid);
         List<Orderdetails> list = orderdetailsMapper.selectByExample(orderdetailsExample);
-        Orderdetails orderdetails = null;
+        Orderdetails orderdetails = new Orderdetails();
         if (list != null && list.size() > 0) {
             orderdetails = list.get(0);
+            return orderdetails;
         }
-        return orderdetails;
+        return null;
     }
 
     /**
@@ -159,7 +161,11 @@ public class SellerDao {
         OrdersExample ordersExample = new OrdersExample();
         OrdersExample.Criteria criteria = ordersExample.createCriteria();
         criteria.andCM_ORDERIDEqualTo(cmOrderid);
-        Orders orders = ordersMapper.selectByExample(ordersExample).get(0);
+        Orders orders = new Orders();
+        List<Orders> list = ordersMapper.selectByExample(ordersExample);
+        if (list != null && list.size() > 0) {
+            orders = list.get(0);
+        }
         return orders;
     }
 
@@ -201,11 +207,12 @@ public class SellerDao {
         UsersExample.Criteria criteria = usersExample.createCriteria();
         criteria.andCM_USERIDEqualTo(ordcerdetailsid);
         List<Users> list = usersMapper.selectByExample(usersExample);
-        Users users = null;
+        Users users = new Users();
         if (list != null && list.size() > 0) {
             users = list.get(0);
+            return users;
         }
-        return users;
+        return null;
     }
 
     /**
@@ -233,7 +240,7 @@ public class SellerDao {
         SellersExample.Criteria criteria = sellersExample.createCriteria();
         criteria.andCM_SELLERIDEqualTo(sellerId);
         List<Sellers> list = sellersMapper.selectByExample(sellersExample);
-        Sellers sellers = null;
+        Sellers sellers = new Sellers();
         if (list != null && list.size() > 0) {
             sellers = list.get(0);
         }
@@ -303,7 +310,7 @@ public class SellerDao {
         SellersExample.Criteria criteria = sellersExample.createCriteria();
         criteria.andCM_PASSWORDEqualTo(phone.toString());
         List<Sellers> list = sellersMapper.selectByExample(sellersExample);
-        Sellers sellers = null;
+        Sellers sellers = new Sellers();
         if (list != null && list.size() > 0) {
             sellers = list.get(0);
         }

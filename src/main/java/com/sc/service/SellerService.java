@@ -97,7 +97,7 @@ public class SellerService {
     public Result AgreeUserService(String sellerId, String afierserviceid) {
         try {
             Afterservices afterservices = sellerDao.selectafterserviceD(afierserviceid);
-            if (afterservices == null) {
+            if (afterservices.getCM_SVID() == null) {
                 return GetResult.toJson(51, null, jwt.createJWT(sellerId), null, 0);
             }
             if (afterservices.getCM_STATE() != 1) {

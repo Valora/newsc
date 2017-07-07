@@ -84,7 +84,7 @@ public class LoginDao {
         }
         return userLoginInfo;
     }
-    
+
     /**
      * 商家根据电话号码和验证码登入
      *
@@ -103,10 +103,8 @@ public class LoginDao {
             userLoginInfo.setCM_INTEGRAL(result.get(0).getCM_INTEGRAL());
             userLoginInfo.setCM_CODE(result.get(0).getCM_CODE());
             userLoginInfo.setCM_PHONE(result.get(0).getCM_PHONE());
-            return userLoginInfo;
-        } else {
-            return null;
         }
+        return userLoginInfo;
     }
 
     /**
@@ -116,7 +114,7 @@ public class LoginDao {
      * @return
      */
     public Users getUserLoginInfoByPhone(String phone) {
-        Users users = null;
+        Users users = new Users();
         UsersExample usersExample = new UsersExample();
         UsersExample.Criteria criteria = usersExample.createCriteria();
         criteria.andCM_PHONEEqualTo(Long.valueOf(phone));

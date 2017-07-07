@@ -176,8 +176,11 @@ public class SaleService {
      */
     public Result BackAccount(Long phone, Integer code) {
         try {
+            Register register = new Register();
             List<Register> list = saleDao.selectregisterbyphone(phone);
-            Register register = list.get(0);
+            if (list != null && list.size() > 0) {
+                register = list.get(0);
+            }
             //业务人员不存在
             if (register == null || register.getCM_CODE() != code) {
                 return GetResult.toJson(8, null, null, list, 0);
@@ -215,8 +218,13 @@ public class SaleService {
             if (admins == null || (admins.getCM_LEVEL() != 2 && admins.getCM_LEVEL() != 1)) {
                 return GetResult.toJson(45, null, null, null, 0);
             }
-            Register register = saleDao.selectregisterbyphone(phone).get(0);
-            if (register == null) {
+
+            Register register = new Register();
+            List<Register> list = saleDao.selectregisterbyphone(phone);
+            if (list != null && list.size() > 0) {
+                register = list.get(0);
+            }
+            if (register.getCM_CODE() == null) {
                 return GetResult.toJson(7, null, null, null, 0);
             }
             if (!Objects.equals(register.getCM_CODE(), code)) {
@@ -311,8 +319,12 @@ public class SaleService {
             if (admins == null || (admins.getCM_LEVEL() != 2 && admins.getCM_LEVEL() != 1)) {
                 return GetResult.toJson(45, null, null, null, 0);
             }
-            Register register = saleDao.selectregisterbyphone(phone).get(0);
-            if (register == null) {
+            Register register = new Register();
+            List<Register> list = saleDao.selectregisterbyphone(phone);
+            if (list != null && list.size() > 0) {
+                register = list.get(0);
+            }
+            if (register.getCM_CODE() == null) {
                 return GetResult.toJson(7, null, null, null, 0);
             }
             if (!Objects.equals(register.getCM_CODE(), code)) {

@@ -25,6 +25,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -367,7 +368,7 @@ public class ManageService {
      * @return Result
      */
     public Result queryClassifies(Integer type, Integer pagenum, Integer pagesize) {
-        List<Classifys> classifys = null;
+        List<Classifys> classifys = new ArrayList<>();
         int i = 0;
         try {
             if (type == 1) {

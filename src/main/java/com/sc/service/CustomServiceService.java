@@ -75,10 +75,9 @@ public class CustomServiceService {
     public Result delGoodsShowImg(String adminId, String goodsid, Integer delnum) {
         try {
             String str = jwt.createJWT(adminId);
-            GoodsWithBLOBs goodsWithBLOBs = null;
+            GoodsWithBLOBs goodsWithBLOBs = new GoodsWithBLOBs();
             List<Goods> list = customServiceDao.selectGoodsByGoodsid(goodsid);
             if (list != null && list.size() > 0) {
-                //list中放的是父类，有些属性只有子类才有，需要对list中的对象塑性
                 goodsWithBLOBs = (GoodsWithBLOBs) list.get(0);
                 String[] str1 = goodsWithBLOBs.getCM_FIGURESPATH().split("|");
                 //删除图片
@@ -251,9 +250,9 @@ public class CustomServiceService {
                 if (storageService.store(file1, root + newfilename)) {
                     res = root + newfilename;
                 }
-                if (file1.getName() == "main") {
+                if (file1.getName().equals("main")) {
                     mainpath = res;
-                } else if (file1.getName() == "show") {
+                } else if (file1.getName().equals("show")) {
                     showpath += res + "|";
                 } else {
                     GooddetailsWithBLOBs details = new GooddetailsWithBLOBs();
@@ -322,12 +321,12 @@ public class CustomServiceService {
             if (admins == null || (admins.getCM_LEVEL() != 1 && admins.getCM_LEVEL() != 3)) {
                 return GetResult.toJson(45, null, null, null, 0);
             }
-            GoodsWithBLOBs goods = null;
+            GoodsWithBLOBs goods = new GoodsWithBLOBs();
             List list = customServiceDao.selectGoodsByGoodsid(goodsid);
             if (list != null && list.size() > 0) {
                 goods = (GoodsWithBLOBs) list.get(0);
             }
-            if (goods == null) {
+            if (goods.getCM_GOODSID() == null) {
                 return GetResult.toJson(17, null, jwt.createJWT(adminid), null, 0);
             }
             String spec_stock = "";
@@ -413,7 +412,7 @@ public class CustomServiceService {
     public Result reviseGoodsDetailsS(String adminid, String goodsdetailsid, String color, String stock, List<MultipartFile> files) {
         try {
             GooddetailsWithBLOBs gooddetailsWithBLOBs = customServiceDao.selectGooddetailBygooddetailsid(goodsdetailsid);
-            if (gooddetailsWithBLOBs == null) {
+            if (gooddetailsWithBLOBs.getCM_GOODSID() == null) {
                 return GetResult.toJson(53, null, jwt.createJWT(adminid), null, 0);
             }
             if (files.size() > 0) {
@@ -464,12 +463,12 @@ public class CustomServiceService {
      */
     public Result addGoodsDetailsS(String adminid, String goodsid, String color, String stock, MultipartFile multipartFile) {
         try {
-            GoodsWithBLOBs goods = null;
+            GoodsWithBLOBs goods = new GoodsWithBLOBs();
             List<Goods> list = customServiceDao.selectGoodsByGoodsid(goodsid);
             if (list != null && list.size() > 0) {
                 goods = (GoodsWithBLOBs) list.get(0);
             }
-            if (goods == null) {
+            if (goods.getCM_GOODSID() == null) {
                 return GetResult.toJson(53, null, jwt.createJWT(adminid), null, 0);
             }
             File file = new File(root);
