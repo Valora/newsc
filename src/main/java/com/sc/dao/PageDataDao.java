@@ -98,7 +98,7 @@ public class PageDataDao {
             pageGood.setCM_PRESENTPRICE(good.getCM_PRESENTPRICE());
             pageGood.setCM_ORIGINALPRICE(good.getCM_ORIGINALPRICE());
             pageGood.setCM_SALES(good.getCM_SALES());
-            pageGood.setCM_TITILE(good.getCM_TITLE());
+            pageGood.setCM_TITLE(good.getCM_TITLE());
             pageGood.setCM_CREATETIME(good.getCM_CREATETIME());
             pageGood.setCM_ISOFF(good.getCM_ISOFF());
             pageGood.setCM_SELLERID(good.getCM_SELLERID());
@@ -312,8 +312,8 @@ public class PageDataDao {
     public List<PageGoods> searchGoods(String content, Integer pageNum, Integer pageSize) {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        goodsExample.or(criteria.andCM_GOODSARTNUMLike("%" + content + "%"));
-        goodsExample.or(criteria.andCM_TITLELike("%" + content + "%"));
+        criteria.andCM_GOODSARTNUMLike(content);
+        criteria.andCM_TITLELike(content);
         PageHelper.startPage(pageNum, pageSize);
         List<GoodsWithBLOBs> goods = goodsMapper.selectByExampleWithBLOBs(goodsExample);
         return goodsToPageGoods(goods);
