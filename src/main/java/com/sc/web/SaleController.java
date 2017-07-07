@@ -7,17 +7,14 @@ import com.sc.utils.GetResult;
 import com.sc.utils.JWT;
 import com.sc.utils.Result;
 import com.sc.utils.Token;
+import com.sc.utils.pay.MD5;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
@@ -64,6 +61,7 @@ public class SaleController {
         }
         return saleService.UserApplication(tk.getUserId(), user.getPhone(), user.getCode(), user.getAddress(), user.getLon(), user.getLat(), user.getPwd(), user.getCardno(), user.getShopname(), user.getPersonname(), user.getContactname(), user.getContactphone(), user.getTelephone(), user.getPax(), user.getFiles());
     }
+
     @RequestMapping(value = URL + "SellerApplication", method = RequestMethod.POST)
     @ApiOperation("(商家)申请{token秘钥,phone电话,code验证码,shopname店铺名称，address地址,lon经度,lat纬度,pwd密码,pwdagain确认密码,cardno身份证号码，personname用户姓名,contactname紧急联系人姓名，contactphone紧急联系人电话，telephone固定电话,pax固定电话,图片{身份证以及人name:card,店铺name:store,营业执照以及证件name:license}")
     public Result sellerApplication(@ModelAttribute SellerApplication seller, BindingResult result) {
@@ -138,7 +136,7 @@ public class SaleController {
         if (newpassword.equals(confirmpassword)) {
             return GetResult.toJson(39, null, null, null, 0);
         }
-        return saleService.ResettingPassword(phone, code, newpassword);
+        return saleService.ResettingPassword(phone, code, MD5.MD5Encode(newpassword, null));
     }
 
     @RequestMapping(value = URL + "SendBackAccountCode", method = RequestMethod.GET)
@@ -156,6 +154,6 @@ public class SaleController {
     })
 
     public Result backAccount(@RequestParam("phone") Long phone, @RequestParam("code") Integer code) {
-        return saleService.BackAccount(phone,code);
+        return saleService.BackAccount(phone, code);
     }
 }

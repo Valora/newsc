@@ -6,6 +6,7 @@ import com.sc.utils.JWT;
 import com.sc.utils.Result;
 import com.sc.utils.Token;
 import com.sc.utils.goodobject.GOODSJSON;
+import com.sc.utils.pay.MD5;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -383,7 +384,7 @@ public class UserDoMainController {
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
         }
-        return userDoMainService.modifyPasswordS(oldpassword, newpassword, tk.getUserId());
+        return userDoMainService.modifyPasswordS(MD5.MD5Encode(oldpassword,null),MD5.MD5Encode(newpassword,null) , tk.getUserId());
     }
 
     @RequestMapping(value = URL + "SendRetrieveCode", method = RequestMethod.GET)
@@ -410,7 +411,7 @@ public class UserDoMainController {
         if (!newpassword.equals(confirmpassword)) {
             return GetResult.toJson(39, null, null, null, 0);
         }
-        return userDoMainService.resettingPassword(phone, code, newpassword);
+        return userDoMainService.resettingPassword(phone, code, MD5.MD5Encode(newpassword,null));
     }
 
     @RequestMapping(value = URL + "SendBackAccountCode", method = RequestMethod.GET)
