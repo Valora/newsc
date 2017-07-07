@@ -396,7 +396,7 @@ public class UserDoMainService {
             if (list != null && list.size() > 0) {
                 afterservices = list.get(0);
             }
-            if (afterservices.getCM_AFTERSERVICEID()== null) {
+            if (afterservices.getCM_AFTERSERVICEID() == null) {
                 return GetResult.toJson(51, null, jwt.createJWT(userId), null, 0);
             }
             Orderdetails orderdetails = new Orderdetails();
@@ -662,7 +662,7 @@ public class UserDoMainService {
             Users users = new Users();
             List<Users> list = userDoMainDao.selectUserByuserid(userId);
             if (list != null && list.size() > 0) {
-                users = (Users)list.get(0);
+                users = (Users) list.get(0);
             }
             return GetResult.toJson(0, null, jwt.createJWT(userId), users, 0);
         } catch (Exception e) {
@@ -776,21 +776,19 @@ public class UserDoMainService {
             Register register = new Register();
             List<Register> list = userDoMainDao.selectRegisterByPhone(phone);
             if (list != null && list.size() > 0) {
-                register = (Register)list.get(0);
+                register = (Register) list.get(0);
             }
-<<<<<<< HEAD
             if (register.getCM_PHONE() == null || register.getCM_CODE() != code) {
-=======
-            if (register == null || !Objects.equals(register.getCM_CODE(), code)) {
->>>>>>> 9e5c4f02dd566df91243d736f4ae9e1894bd5ebf
-                return GetResult.toJson(8, null, null, null, 0);
+                if (register == null || !Objects.equals(register.getCM_CODE(), code)) {
+                    return GetResult.toJson(8, null, null, null, 0);
+                }
+                Users users = userDoMainDao.selectUserByPhone(phone);
+                return GetResult.toJson(0, null, null, users.getCM_ACCOUNT(), 0);
             }
-            Users users = userDoMainDao.selectUserByPhone(phone);
-            return GetResult.toJson(0, null, null, users.getCM_ACCOUNT(), 0);
         } catch (Exception e) {
             e.printStackTrace();
-            return GetResult.toJson(200, null, null, null, 0);
         }
+        return GetResult.toJson(200, null, null, null, 0);
     }
 
     /**

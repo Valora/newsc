@@ -358,7 +358,7 @@ public class CustomServiceService {
                     if (storageService.store(file1, root + newfilename)) {
                         res = root + newfilename;
                     }
-                    if (file1.getName() == "main") {
+                    if (file1.getName().equals("main")) {
                         mainpath = res;
                     } else {
                         storageService.deleteByFigurePath(iarr.get(i));

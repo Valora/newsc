@@ -250,11 +250,11 @@ public class SaleService {
                 if (storageService.store(file, root + newfilename)) {
                     res = root + newfilename;
                 }
-                if (file.getName() == "card") {
+                if (file.getName().equals("card")) {
                     card += res + "|";
-                } else if (file.getName() == "store") {
+                } else if (file.getName().equals("store")) {
                     store += res + "|";
-                } else if (file.getName() == "license") {
+                } else if (file.getName().equals("license")) {
                     license += res + "|";
                 }
                 i++;
@@ -350,11 +350,11 @@ public class SaleService {
                 if (storageService.store(file, root + newfilename)) {
                     res = root + newfilename;
                 }
-                if (file.getName() == "card") {
+                if (file.getName().equals("card")) {
                     card += res + "|";
-                } else if (file.getName() == "store") {
+                } else if (file.getName().equals("store")) {
                     store += res + "|";
-                } else if (file.getName() == "license") {
+                } else if (file.getName().equals("license")) {
                     license += res + "|";
                 }
                 i++;
