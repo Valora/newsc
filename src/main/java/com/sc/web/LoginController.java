@@ -68,7 +68,7 @@ public class LoginController {
     }
 
     //新增
-    @RequestMapping(value = URL + "UserLoginByAccountAndPassword", method = RequestMethod.GET)
+    @RequestMapping(value = URL + "userLoginByAccountAndPassword", method = RequestMethod.GET)
     @ApiOperation("商家（用户）只用账号密码登录")
     @ApiImplicitParams({@ApiImplicitParam(name = "account", value = "账号", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "password", value = "密码", required = true, dataType = "String", paramType = "query"),
@@ -81,7 +81,7 @@ public class LoginController {
     }
 
     //新增
-    @RequestMapping(value = URL + "UserLoginByPhoneAndCode", method = RequestMethod.GET)
+    @RequestMapping(value = URL + "userLoginByPhoneAndCode", method = RequestMethod.GET)
     @ApiOperation("商家（用户）只用电话号码和验证码登入")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "phone", value = "手机号码", required = true, dataType = "String", paramType = "query"),
