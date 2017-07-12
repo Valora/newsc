@@ -1,5 +1,6 @@
 package com.sc.utils.goodobject;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
  * Created by valora on 2017/5/16.
  */
 @Data
+@AllArgsConstructor
 public class ORDER {
-    private List<GOODS> GOODLIST;
+    private List<GOODS> GOODSLIST;
 }

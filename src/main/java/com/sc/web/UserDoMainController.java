@@ -1,5 +1,9 @@
 package com.sc.web;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.sc.service.UserDoMainService;
 import com.sc.utils.GetResult;
 import com.sc.utils.JWT;
@@ -12,11 +16,12 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
 
 /**
  * userDoMainController
@@ -39,12 +44,15 @@ public class UserDoMainController {
 
     @RequestMapping(value = URL + "SubmitOrder", method = RequestMethod.POST)
     @ApiOperation("提交订单{传入参数-->秘钥:token，商品信息:goodsjson}")
-    public Result submitOrder(@RequestParam("token") String token, @ModelAttribute GOODSJSON goodsjson) {
-        GOODSJSON goodslist;
-        if (goodsjson == null) {
+    public Result submitOrder(@RequestParam("token") String token, @RequestParam("goodsjson") String goodsjson) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        mapper.setVisibility(VisibilityChecker.Std.defaultInstance().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
+        //json字符串转对象
+        GOODSJSON goodslist = mapper.readValue(goodsjson, GOODSJSON.class);
+        if (goodslist == null) {
             return GetResult.toJson(10, null, null, null, 0);
         }
-        goodslist = goodsjson;
         Token tk = jwt.checkJWT(token);
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
@@ -384,7 +392,7 @@ public class UserDoMainController {
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
         }
-        return userDoMainService.modifyPasswordS(MD5.MD5Encode(oldpassword,null),MD5.MD5Encode(newpassword,null) , tk.getUserId());
+        return userDoMainService.modifyPasswordS(MD5.MD5Encode(oldpassword, null), MD5.MD5Encode(newpassword, null), tk.getUserId());
     }
 
     @RequestMapping(value = URL + "SendRetrieveCode", method = RequestMethod.GET)
@@ -411,7 +419,7 @@ public class UserDoMainController {
         if (!newpassword.equals(confirmpassword)) {
             return GetResult.toJson(39, null, null, null, 0);
         }
-        return userDoMainService.resettingPassword(phone, code, MD5.MD5Encode(newpassword,null));
+        return userDoMainService.resettingPassword(phone, code, MD5.MD5Encode(newpassword, null));
     }
 
     @RequestMapping(value = URL + "SendBackAccountCode", method = RequestMethod.GET)
