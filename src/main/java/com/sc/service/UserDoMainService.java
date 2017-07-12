@@ -66,7 +66,7 @@ public class UserDoMainService {
                 String sellerid = "";
                 String orderdetailsids = "";
                 String detailsid = "";
-                for (GOODS goods : order.getGOODLIST()) {
+                for (GOODS goods : order.getGOODSLIST()) {
                     int count = 0;
                     Goods gd = userDoMainDao.getGoodByGoodId(goods.getGOODSID());
                     List<GooddetailsWithBLOBs> cmOther = userDoMainDao.getGoodsDetails(gd.getCM_GOODSID());
@@ -99,7 +99,7 @@ public class UserDoMainService {
                     }
 
                     StringBuilder specnumdetails = new StringBuilder();
-                    for (GOODSDETAILS details : goods.getGOODDETAILS()) {
+                    for (GOODSDETAILS details : goods.getGOODSDETAILS()) {
                         StringBuilder icc = new StringBuilder();
                         int k = 0;
                         List<GooddetailsWithBLOBs> dts = cmOther.parallelStream().

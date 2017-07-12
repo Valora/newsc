@@ -1,5 +1,6 @@
 package com.sc.utils.goodobject;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -7,6 +8,7 @@ import lombok.Data;
  * Created by valora on 2017/5/16.
  */
 @Data
+@AllArgsConstructor
 public class GOODSDETAILS {
     private Integer GOODSDETAILSID;
     private String SPEC_NUMBER;
