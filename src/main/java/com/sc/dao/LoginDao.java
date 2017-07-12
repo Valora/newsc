@@ -86,6 +86,30 @@ public class LoginDao {
     }
 
     /**
+     * 商家登录信息
+     *
+     * @param account  账号
+     * @param password 密码
+     * @return Result
+     */
+    public UserLogin getUserLoginInfo2(String account, String password) {
+        //登录信息类
+        UserLogin userLoginInfo = new UserLogin();
+        List<UserLogin> result = userLoginMapper.selectLoginInfo2(account, password);
+        if (result != null && result.size() > 0) {
+            userLoginInfo.setCM_USERID(result.get(0).getCM_USERID());
+            userLoginInfo.setCM_BALANCE(result.get(0).getCM_BALANCE());
+            userLoginInfo.setCM_SHOPNAME(result.get(0).getCM_SHOPNAME());
+            userLoginInfo.setCM_LEVEL(result.get(0).getCM_LEVEL());
+            userLoginInfo.setCM_INTEGRAL(result.get(0).getCM_INTEGRAL());
+            userLoginInfo.setCM_CODE(result.get(0).getCM_CODE());
+            userLoginInfo.setCM_PHONE(result.get(0).getCM_PHONE());
+        }
+        return userLoginInfo;
+    }
+
+
+    /**
      * 商家根据电话号码和验证码登入
      *
      * @param phone 电话号码

@@ -82,7 +82,7 @@ public class LoginService {
      * @return
      */
     public Result userLoginByAccountAndPasswordS(String account, String password) {
-        UserLogin userLoginInfo = loginDao.getUserLoginInfo(account, password);
+        UserLogin userLoginInfo = loginDao.getUserLoginInfo2(account, password);
         if (userLoginInfo == null || userLoginInfo.getCM_USERID() == null) {
             return GetResult.toJson(6, null, null, null, 0);
         }
