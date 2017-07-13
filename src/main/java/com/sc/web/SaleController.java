@@ -1,7 +1,5 @@
 package com.sc.web;
 
-import com.sc.domain.sale.SellerApplication;
-import com.sc.domain.sale.UserApplication;
 import com.sc.service.SaleService;
 import com.sc.utils.GetResult;
 import com.sc.utils.JWT;
@@ -12,10 +10,15 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
 /**
@@ -46,38 +49,72 @@ public class SaleController {
 
     @RequestMapping(value = URL + "UserApplication", method = RequestMethod.POST)
     @ApiOperation("(商家)申请{token秘钥,phone电话,code验证码,shopname店铺名称，address地址,lon经度,lat纬度,pwd密码,pwdagain确认密码,cardno身份证号码，personname用户姓名,contactname紧急联系人姓名，contactphone紧急联系人电话，telephone固定电话,pax固定电话,图片{身份证以及人name:card,店铺name:store,营业执照以及证件name:license}")
-    public Result userApplication(@ModelAttribute UserApplication user, BindingResult result) {
-        Token tk = jwt.checkJWT(user.getToken());
+    public Result userApplication(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
+        String token = request.getParameter("token");
+        String address = request.getParameter("address");
+        String pwd = request.getParameter("pwd");
+        String pwdagain = request.getParameter("pwdagain");
+        String cardno = request.getParameter("cardno");
+        String phone1 = request.getParameter("phone");
+        Long phone = Long.valueOf(request.getParameter("phone"));
+        String code1 = request.getParameter("code");
+        Integer code = Integer.valueOf(request.getParameter("code"));
+        String lon1 = request.getParameter("lon");
+        Double lon = Double.valueOf(request.getParameter("lon"));
+        String lat1 = request.getParameter("lat");
+        Double lat = Double.valueOf(request.getParameter("lat"));
+        String shopname = request.getParameter("shopname");
+        String personname = request.getParameter("personname");
+        String contactname = request.getParameter("contactname");
+        String contactphone = request.getParameter("contactphone");
+        String telephone = request.getParameter("telephone");
+        String pax = request.getParameter("pax");
+        Token tk = jwt.checkJWT(token);
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
         }
-
-        if (result.hasErrors()) {
+        if (StringUtils.isBlank(token) || StringUtils.isBlank(address) || StringUtils.isBlank(pwd) || StringUtils.isBlank(pwdagain) || StringUtils.isBlank(cardno) || StringUtils.isBlank(phone1) || StringUtils.isBlank(code1) || StringUtils.isBlank(lon1) || StringUtils.isBlank(lat1) || StringUtils.isBlank(shopname) || StringUtils.isBlank(personname) || StringUtils.isBlank(contactname) || StringUtils.isBlank(contactphone) || StringUtils.isBlank(telephone) || StringUtils.isBlank(pax)) {
             return GetResult.toJson(38, null, null, null, 0);
         }
-
-        if (!Objects.equals(user.getPwd(), user.getPwdagain())) {
+        if (!Objects.equals(pwd, pwdagain)) {
             return GetResult.toJson(55, null, null, null, 0);
         }
-        return saleService.UserApplication(tk.getUserId(), user.getPhone(), user.getCode(), user.getAddress(), user.getLon(), user.getLat(), user.getPwd(), user.getCardno(), user.getShopname(), user.getPersonname(), user.getContactname(), user.getContactphone(), user.getTelephone(), user.getPax(), user.getFiles());
+        return saleService.UserApplication(tk.getUserId(), phone, code, address, lon, lat, pwd, cardno, shopname, personname, contactname, contactphone, telephone, pax, files);
     }
 
     @RequestMapping(value = URL + "SellerApplication", method = RequestMethod.POST)
     @ApiOperation("(商家)申请{token秘钥,phone电话,code验证码,shopname店铺名称，address地址,lon经度,lat纬度,pwd密码,pwdagain确认密码,cardno身份证号码，personname用户姓名,contactname紧急联系人姓名，contactphone紧急联系人电话，telephone固定电话,pax固定电话,图片{身份证以及人name:card,店铺name:store,营业执照以及证件name:license}")
-    public Result sellerApplication(@ModelAttribute SellerApplication seller, BindingResult result) {
-        Token tk = jwt.checkJWT(seller.getToken());
+    public Result sellerApplication(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
+        String token = request.getParameter("token");
+        String address = request.getParameter("address");
+        String pwd = request.getParameter("pwd");
+        String pwdagain = request.getParameter("pwdagain");
+        String cardno = request.getParameter("cardno");
+        String phone1 = request.getParameter("phone");
+        Long phone = Long.valueOf(request.getParameter("phone"));
+        Integer code = Integer.valueOf(request.getParameter("code"));
+        String code1 = request.getParameter("code");
+        String lon1 = request.getParameter("lon");
+        Double lon = Double.valueOf(request.getParameter("lon"));
+        Double lat = Double.valueOf(request.getParameter("lat"));
+        String lat1 = request.getParameter("lat");
+        String companyname = request.getParameter("companyname");
+        String personname = request.getParameter("personname");
+        String contactname = request.getParameter("contactname");
+        String contactphone = request.getParameter("contactphone");
+        String telephone = request.getParameter("telephone");
+        String pax = request.getParameter("pax");
+        Token tk = jwt.checkJWT(token);
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
         }
-
-        if (result.hasErrors()) {
+        if (StringUtils.isBlank(token) || StringUtils.isBlank(address) || StringUtils.isBlank(pwd) || StringUtils.isBlank(pwdagain) || StringUtils.isBlank(cardno) || StringUtils.isBlank(phone1) || StringUtils.isBlank(code1) || StringUtils.isBlank(lon1) || StringUtils.isBlank(lat1) || StringUtils.isBlank(companyname) || StringUtils.isBlank(personname) || StringUtils.isBlank(contactname) || StringUtils.isBlank(contactphone) || StringUtils.isBlank(telephone) || StringUtils.isBlank(pax)) {
             return GetResult.toJson(38, null, null, null, 0);
         }
-
-        if (!Objects.equals(seller.getPwd(), seller.getPwdagain())) {
+        if (!Objects.equals(pwd, pwdagain)) {
             return GetResult.toJson(55, null, null, null, 0);
         }
-        return saleService.SellerApplication(tk.getUserId(), seller.getPhone(), seller.getCode(), seller.getAddress(), seller.getLon(), seller.getLat(), seller.getPwd(), seller.getCardno(), seller.getCompanyname(), seller.getPersonname(), seller.getContactname(), seller.getContactphone(), seller.getTelephone(), seller.getPax(), seller.getFiles());
+        return saleService.SellerApplication(tk.getUserId(), phone, code, address, lon, lat, pwd, cardno, companyname, personname, contactname, contactphone, telephone, pax, files);
     }
 
     @RequestMapping(value = URL + "QueryUsersByMap", method = RequestMethod.GET)

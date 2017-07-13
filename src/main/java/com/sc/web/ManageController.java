@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -57,7 +58,7 @@ public class ManageController {
             return GetResult.toJson(101, null, null, null, 0);
         }
 
-        return manageService.addEmployee(name,  MD5.MD5Encode(password, null), phone, type, tk.getUserId());
+        return manageService.addEmployee(name, MD5.MD5Encode(password, null), phone, type, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "DelEmployee", method = RequestMethod.GET)
@@ -229,7 +230,11 @@ public class ManageController {
 
     @RequestMapping(value = URL + "AddClassify", method = RequestMethod.POST)
     @ApiOperation("添加商品分类和子分类{classifyname分类名称, type分类类型（0：大类，1：子类）,parentid上级分类（如果是大类，则输入0）,token秘钥, 图片}")
-    public Result addClassify(@RequestParam("classifyname") String classifyname, @RequestParam("type") String type, @RequestParam("parentid") String parentid, @RequestParam("token") String token, @RequestParam("file") MultipartFile[] files) {
+    public Result addClassify(HttpServletRequest request, @RequestParam("file") MultipartFile[] files) {
+        String classifyname = request.getParameter("classifyname");
+        String type = request.getParameter("type");
+        String parentid = request.getParameter("parentid");
+        String token = request.getParameter("token");
         Token tk = jwt.checkJWT(token);
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
@@ -239,7 +244,12 @@ public class ManageController {
 
     @RequestMapping(value = URL + "ReviceClassify", method = RequestMethod.POST)
     @ApiOperation("修改商品分类和子分类{classifyid分类ID，classifyname分类名称,type分类类型（0：大类，1：子类）,parentid上级分类（如果是大类，则输入0）,token秘钥,图片}")
-    public Result reviceClassify(@RequestParam("classifyid") String classifyid, @RequestParam("classifyname") String classifyname, @RequestParam("type") String type, @RequestParam("parentid") String parentid, @RequestParam("token") String token, @RequestParam("file") MultipartFile[] files) {
+    public Result reviceClassify(HttpServletRequest request, @RequestParam("file") MultipartFile[] files) {
+        String classifyname = request.getParameter("classifyname");
+        String classifyid = request.getParameter("classifyid");
+        String type = request.getParameter("type");
+        String parentid = request.getParameter("parentid");
+        String token = request.getParameter("token");
         Token tk = jwt.checkJWT(token);
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);

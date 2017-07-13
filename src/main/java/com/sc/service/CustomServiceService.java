@@ -222,7 +222,7 @@ public class CustomServiceService {
      * @param goodsid
      * @return
      */
-    public Result uploadGoods(String userId, String goodsartnum, String sellerid, int classifyid, String classifytabs, int brandid, String title, double originalprice, double presentprice, String html, String chtml, int ispromotion, String spec, int stock, String[] colorarr, List<MultipartFile> files, String goodsid) {
+    public Result uploadGoods(String userId, String goodsartnum, String sellerid, int classifyid, String classifytabs, int brandid, String title, double originalprice, double presentprice, String html, String chtml, int ispromotion, String spec, int stock, String[] colorarr, MultipartFile[] files, String goodsid) {
         try {
             Admins admin = customServiceDao.selectAdminInfo(userId);
             if (admin == null || (admin.getCM_LEVEL() != 1 && admin.getCM_LEVEL() != 3)) {
@@ -315,7 +315,7 @@ public class CustomServiceService {
      * @param changetab
      * @return
      */
-    public Result reviseGoodsS(String adminid, String goodsartnum, String sellerid, int classifyid, String classifytabs, int brandid, String title, double originalprice, double presentprice, String html, String chtml, int ispromotion, String spec, int stock, List<MultipartFile> files, String goodsid, String changetab) {
+    public Result reviseGoodsS(String adminid, String goodsartnum, String sellerid, int classifyid, String classifytabs, int brandid, String title, double originalprice, double presentprice, String html, String chtml, int ispromotion, String spec, int stock, MultipartFile[] files, String goodsid, String changetab) {
         try {
             Admins admins = customServiceDao.selectAdminInfo(adminid);
             if (admins == null || (admins.getCM_LEVEL() != 1 && admins.getCM_LEVEL() != 3)) {
@@ -338,7 +338,7 @@ public class CustomServiceService {
             for (GooddetailsWithBLOBs gooddetails : gooddetailsList) {
                 gooddetails.setCM_SPEC_STOCK(spec_stock);
             }
-            int a = files.size();
+            int a = files.length;
             String mainpath = "";
             String showpath = "";
             if (a > 0) {
@@ -409,13 +409,13 @@ public class CustomServiceService {
      * @param files
      * @return
      */
-    public Result reviseGoodsDetailsS(String adminid, String goodsdetailsid, String color, String stock, List<MultipartFile> files) {
+    public Result reviseGoodsDetailsS(String adminid, String goodsdetailsid, String color, String stock, MultipartFile[] files) {
         try {
             GooddetailsWithBLOBs gooddetailsWithBLOBs = customServiceDao.selectGooddetailBygooddetailsid(goodsdetailsid);
             if (gooddetailsWithBLOBs.getCM_GOODSID() == null) {
                 return GetResult.toJson(53, null, jwt.createJWT(adminid), null, 0);
             }
-            if (files.size() > 0) {
+            if (files.length > 0) {
                 String res = "";
                 storageService.deleteByFigurePath(gooddetailsWithBLOBs.getCM_IMAGEPATH());
                 File file = new File(root);
@@ -425,8 +425,8 @@ public class CustomServiceService {
                 Date date = new Date();
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HHmmssSSSS");
                 String str = simpleDateFormat.format(date);
-                String newfilename = str + "." + storageService.getFileType(files.get(0).getOriginalFilename());
-                if (storageService.store(files.get(0), root + newfilename)) {
+                String newfilename = str + "." + storageService.getFileType(files[0].getOriginalFilename());
+                if (storageService.store(files[0], root + newfilename)) {
                     res = root + newfilename;
                 }
                 gooddetailsWithBLOBs.setCM_IMAGEPATH(res);
