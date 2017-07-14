@@ -3,8 +3,6 @@ package com.sc.domain.costomservice;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-
 /**
  * Created by valora on 2017/6/7.
  */
@@ -26,5 +24,5 @@ public class UploadGoods {
     private String spec;
     private String stock;
     private String colors;
-    private List<MultipartFile> files;
+    private MultipartFile[] files;
 }

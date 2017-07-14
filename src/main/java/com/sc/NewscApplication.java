@@ -43,5 +43,4 @@ public class NewscApplication {
         fastConvert.setFastJsonConfig(fastJsonConfig);
         return new HttpMessageConverters((HttpMessageConverter<?>) fastConvert);
     }
-
 }
