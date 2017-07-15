@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  * 后台管理
@@ -230,8 +232,8 @@ public class ManageController {
 
     @RequestMapping(value = URL + "AddClassify", method = RequestMethod.POST)
     @ApiOperation("添加商品分类和子分类{classifyname分类名称, type分类类型（0：大类，1：子类）,parentid上级分类（如果是大类，则输入0）,token秘钥, 图片}")
-    public Result addClassify(HttpServletRequest request, @RequestParam("file") MultipartFile[] files) {
-        System.out.println(files);
+    public Result addClassify(HttpServletRequest request) {
+        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("files");
         String classifyname = request.getParameter("classifyname");
         String type = request.getParameter("type");
         String parentid = request.getParameter("parentid");
@@ -245,7 +247,8 @@ public class ManageController {
 
     @RequestMapping(value = URL + "ReviceClassify", method = RequestMethod.POST)
     @ApiOperation("修改商品分类和子分类{classifyid分类ID，classifyname分类名称,type分类类型（0：大类，1：子类）,parentid上级分类（如果是大类，则输入0）,token秘钥,图片}")
-    public Result reviceClassify(HttpServletRequest request, @RequestParam("file") MultipartFile[] files) {
+    public Result reviceClassify(HttpServletRequest request) {
+        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("files");
         String classifyname = request.getParameter("classifyname");
         String classifyid = request.getParameter("classifyid");
         String type = request.getParameter("type");

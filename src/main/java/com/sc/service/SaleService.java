@@ -212,7 +212,7 @@ public class SaleService {
      * @param files
      * @return
      */
-    public Result UserApplication(String userId, Long phone, Integer code, String address, Double lon, Double lat, String pwd, String cardno, String shopname, String personname, String contactname, String contactphone, String telephone, String pax, MultipartFile[] files) {
+    public Result UserApplication(String userId, Long phone, Integer code, String address, Double lon, Double lat, String pwd, String cardno, String shopname, String personname, String contactname, String contactphone, String telephone, String pax, List<MultipartFile> files) {
         try {
             Admins admins = saleDao.getAdminByAdminId(userId);
             if (admins == null || (admins.getCM_LEVEL() != 2 && admins.getCM_LEVEL() != 1)) {
@@ -313,7 +313,7 @@ public class SaleService {
      * @param files
      * @return
      */
-    public Result SellerApplication(String userId, Long phone, Integer code, String address, Double lon, Double lat, String pwd, String cardno, String companyname, String personname, String contactname, String contactphone, String telephone, String pax, MultipartFile[] files) {
+    public Result SellerApplication(String userId, Long phone, Integer code, String address, Double lon, Double lat, String pwd, String cardno, String companyname, String personname, String contactname, String contactphone, String telephone, String pax, List<MultipartFile> files) {
         try {
             Admins admins = saleDao.getAdminByAdminId(userId);
             if (admins == null || (admins.getCM_LEVEL() != 2 && admins.getCM_LEVEL() != 1)) {

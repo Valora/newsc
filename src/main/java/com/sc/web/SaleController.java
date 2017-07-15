@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -49,7 +51,8 @@ public class SaleController {
 
     @RequestMapping(value = URL + "UserApplication", method = RequestMethod.POST)
     @ApiOperation("(商家)申请{token秘钥,phone电话,code验证码,shopname店铺名称，address地址,lon经度,lat纬度,pwd密码,pwdagain确认密码,cardno身份证号码，personname用户姓名,contactname紧急联系人姓名，contactphone紧急联系人电话，telephone固定电话,pax固定电话,图片{身份证以及人name:card,店铺name:store,营业执照以及证件name:license}")
-    public Result userApplication(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
+    public Result userApplication(HttpServletRequest request) {
+        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("files");
         String token = request.getParameter("token");
         String address = request.getParameter("address");
         String pwd = request.getParameter("pwd");
@@ -84,7 +87,8 @@ public class SaleController {
 
     @RequestMapping(value = URL + "SellerApplication", method = RequestMethod.POST)
     @ApiOperation("(厂家)申请{token秘钥,phone电话,code验证码,shopname店铺名称，address地址,lon经度,lat纬度,pwd密码,pwdagain确认密码,cardno身份证号码，personname用户姓名,contactname紧急联系人姓名，contactphone紧急联系人电话，telephone固定电话,pax固定电话,图片{身份证以及人name:card,店铺name:store,营业执照以及证件name:license}")
-    public Result sellerApplication(HttpServletRequest request, @RequestParam("files") MultipartFile[] files) {
+    public Result sellerApplication(HttpServletRequest request) {
+        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("files");
         String token = request.getParameter("token");
         String address = request.getParameter("address");
         String pwd = request.getParameter("pwd");

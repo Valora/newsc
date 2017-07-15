@@ -15,13 +15,18 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * userDoMainController
@@ -216,8 +221,29 @@ public class UserDoMainController {
 
     @RequestMapping(value = URL + "ApplyAfterService", method = RequestMethod.POST)
     @ApiOperation("申请售后服务(退换货){传入参数{订单详情ID:orderdetailsid，操作类型:type(1：退换，2：换货3：返修),秘钥：token，原因：reason}(请用账号333333，密码123456测试)")
-    public Result applyAfterService() {
-        return null;
+    public Result applyAfterService(HttpServletRequest request) {
+        String token = request.getParameter("token");
+        String type = request.getParameter("type");
+        String orderdetailsid = request.getParameter("orderdetailsid");
+        String reason = request.getParameter("reason");
+        if (StringUtils.isEmpty(type)) {
+            return GetResult.toJson(20, null, null, null, 0);
+        }
+        if (StringUtils.isEmpty(orderdetailsid)) {
+            return GetResult.toJson(21, null, null, null, 0);
+        }
+        if (StringUtils.isEmpty(reason)) {
+            return GetResult.toJson(22, null, null, null, 0);
+        }
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0); 
+        }
+        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("files");
+        if (files.size() > 5) {
+            return GetResult.toJson(23, null, null, null, 0);
+        }
+        return userDoMainService.applyAfterService(orderdetailsid, type, reason, files, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "SendBackGoods", method = RequestMethod.GET)

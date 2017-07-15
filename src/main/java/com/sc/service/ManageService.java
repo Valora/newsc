@@ -299,16 +299,16 @@ public class ManageService {
      * @param files        图片
      * @return Result
      */
-    public Result addClassify(String classifyname, String type, String parentid, String adminid, MultipartFile[] files) {
+    public Result addClassify(String classifyname, String type, String parentid, String adminid, List<MultipartFile> files) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
             if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             String filename = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmss")) + GetRandomNumber.genRandomNum(4);
-            if (files.length > 0) {
+            for (MultipartFile file : files) {
                 try {
-                    storageService.store(files[0], root + filename);
+                    storageService.store(file, root + filename);
                 } catch (Exception ex) {
                     return GetResult.toJson(47, null, null, null, 0);
                 }
@@ -331,7 +331,7 @@ public class ManageService {
      * @param files        图片
      * @return Result
      */
-    public Result reviceClassify(String classifyid, String classifyname, String type, String parentid, String adminid, MultipartFile[] files) {
+    public Result reviceClassify(String classifyid, String classifyname, String type, String parentid, String adminid, List<MultipartFile> files) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
             if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
@@ -344,9 +344,9 @@ public class ManageService {
             }
             String filename = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmss")) + GetRandomNumber.genRandomNum(4);
             String imgpath = "";
-            if (files.length > 0) {
+            for (MultipartFile file: files){
                 try {
-                    storageService.store(files[0], root + filename);
+                    storageService.store(file, root + filename);
                 } catch (Exception ex) {
                     return GetResult.toJson(47, null, null, null, 0);
                 }

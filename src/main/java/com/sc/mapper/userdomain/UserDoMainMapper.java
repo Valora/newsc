@@ -8,6 +8,7 @@ import com.sc.domain.userdomain.MyStateOrders;
 import com.sc.domain.userdomain.OdersAndOrderdetails;
 import com.sc.domain.userdomain.Order;
 import com.sc.domain.userdomain.OrderDetails;
+import com.sc.domain.userdomain.OrderInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -41,4 +42,8 @@ public interface UserDoMainMapper {
     int deleteAddressIsfirstM();
 
     int addAddressIsfirstM(Integer addressid);
+
+    OrderInfo getOrderInfo(@Param("orderdetailsid") String orderdetailsid);
+
+    void updateAfterService(@Param("orderdetailsid") String orderdetailsid);
 }

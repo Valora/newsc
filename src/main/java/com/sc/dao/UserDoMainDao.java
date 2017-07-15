@@ -616,4 +616,37 @@ public class UserDoMainDao {
         criteria.andCM_SVIDEqualTo(servicedetailsWithBLOBs.getCM_SVID());
         servicedetailsMapper.updateByExampleWithBLOBs(servicedetailsWithBLOBs, servicedetailsExample);
     }
+
+    /**
+     * 售后信息用
+     * @param orderdetailsid
+     * @return
+     */
+    public OrderInfo getOrderInfo(String orderdetailsid) {
+        return userDoMainMapper.getOrderInfo(orderdetailsid);
+    }
+
+    /**
+     * 更新订单详情表
+     * @param orderdetailsid
+     */
+    public void updateAfterService(String orderdetailsid) {
+        userDoMainMapper.updateAfterService(orderdetailsid);
+    }
+
+    /**
+     * 增加售后信息
+     * @param afterservices
+     */
+    public void addAfterService(Afterservices afterservices) {
+        afterservicesMapper.insert(afterservices);
+    }
+
+    /**
+     * 增加售后详情
+     * @param servicedetails
+     */
+    public void addAfterServiceDetail(Servicedetails servicedetails) {
+        servicedetailsMapper.insert((ServicedetailsWithBLOBs) servicedetails);
+    }
 }

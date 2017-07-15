@@ -5,6 +5,14 @@
         <result column="CM_STATE" property="CM_STATE" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <resultMap id="orderInfo" type="com.sc.domain.userdomain.OrderInfo">
+        <result column="CM_ORDER_STATE" property="CM_ORDER_STATE" jdbcType="INTEGER"/>
+        <result column="CM_DETAILS_STATE" property="CM_DETAILS_STATE" jdbcType="INTEGER"/>
+        <result column="CM_ORDERDETAILSID" property="CM_ORDERDETAILSID" jdbcType="VARCHAR"/>
+        <result column="CM_SELLERID" property="CM_SELLERID" jdbcType="VARCHAR"/>
+        <result column="CM_SERVICESTATE" property="CM_SERVICESTATE" jdbcType="INTEGER"/>
+    </resultMap>
+
     <resultMap id="MyOrdersAll" type="com.sc.domain.userdomain.MyOrders" autoMapping="true">
         <result column="CM_CREATETIME" property="CM_CREATETIME"/>
         <result column="CM_ORDERID" property="CM_ORDERID" jdbcType="VARCHAR"/>
@@ -24,7 +32,7 @@
     </resultMap>
 
     <resultMap id="MyUnpaiedOrders" type="com.sc.domain.userdomain.MyStateOrders" autoMapping="true">
-        <result column="CM_CREATETIME" property="CM_CREATETIME" />
+        <result column="CM_CREATETIME" property="CM_CREATETIME"/>
         <result column="CM_ORDERID" property="CM_ORDERID" jdbcType="VARCHAR"/>
         <result column="CM_NUMBERSUN" property="CM_NUMBERSUN" jdbcType="INTEGER"/>
         <result column="CM_MONEYSUN" property="CM_MONEYSUN" jdbcType="DOUBLE"/>
@@ -44,7 +52,7 @@
     </resultMap>
 
     <resultMap id="MySettlementOrders" type="com.sc.domain.userdomain.MyStateOrders" autoMapping="true">
-        <result column="CM_CREATETIME" property="CM_CREATETIME" />
+        <result column="CM_CREATETIME" property="CM_CREATETIME"/>
         <result column="CM_ORDERID" property="CM_ORDERID" jdbcType="VARCHAR"/>
         <result column="CM_NUMBERSUN" property="CM_NUMBERSUN" jdbcType="INTEGER"/>
         <result column="CM_MONEYSUN" property="CM_MONEYSUN" jdbcType="DOUBLE"/>
@@ -64,7 +72,7 @@
     </resultMap>
 
     <resultMap id="OrderDetails" type="com.sc.domain.userdomain.OrderDetails" autoMapping="true">
-        <result column="CM_CREATETIME" property="CM_CREATETIME" />
+        <result column="CM_CREATETIME" property="CM_CREATETIME"/>
         <result column="CM_ORDERID" property="CM_ORDERID" jdbcType="VARCHAR"/>
         <result column="CM_NUMBERSUN" property="CM_NUMBERSUN" jdbcType="INTEGER"/>
         <result column="CM_MONEYSUN" property="CM_MONEYSUN" jdbcType="DOUBLE"/>
@@ -95,7 +103,7 @@
     <!--queryMyCanAfterServiceM-->
     <resultMap id="OdersAndOrderdetails" type="com.sc.domain.userdomain.OdersAndOrderdetails" autoMapping="true">
         <result column="CM_ORDER_STATE" property="CM_ORDERSTATE" jdbcType="INTEGER"/>
-        <result column="CM_CREATETIME" property="CM_CREATETIME" />
+        <result column="CM_CREATETIME" property="CM_CREATETIME"/>
         <result column="CM_MONEYSUN" property="CM_MONEYSUN" jdbcType="DOUBLE"/>
         <result column="CM_NUMBERSUN" property="CM_NUMBERSUN" jdbcType="INTEGER"/>
         <result column="CM_ORDERID" property="CM_ORDERID" jdbcType="VARCHAR"/>
@@ -136,7 +144,7 @@
         <result column="CM_GOODSID" property="CM_GOODSID" jdbcType="VARCHAR"/>
         <result column="CM_ORDERDETAILSID" property="CM_ORDERDETAILSID" jdbcType="VARCHAR"/>
         <result column="CM_STATE" property="CM_STATE" jdbcType="INTEGER"/>
-        <result column="CM_CREATETIME" property="CM_CREATETIME" />
+        <result column="CM_CREATETIME" property="CM_CREATETIME"/>
         <result column="CM_MAINFIGUREPATH" property="CM_MAINFIGUREPATH" jdbcType="VARCHAR"/>
         <result column="CM_TITLE" property="CM_TITLE" jdbcType="VARCHAR"/>
         <result column="CM_SELLERID" property="CM_SELLERID" jdbcType="VARCHAR"/>
@@ -157,7 +165,7 @@
         <result column="CM_ORIGINALPRICE" property="CM_ORIGINALPRICE" jdbcType="DOUBLE"/>
         <result column="CM_SALES" property="CM_SALES" jdbcType="INTEGER"/>
         <result column="CM_TITLE" property="CM_TITLE" jdbcType="VARCHAR"/>
-        <result column="CM_JOINTIME" property="CM_JOINTIME" />
+        <result column="CM_JOINTIME" property="CM_JOINTIME"/>
         <result column="CM_COLLECTIONID" property="CM_COLLECTIONID" jdbcType="INTEGER"/>
     </resultMap>
 
@@ -166,8 +174,8 @@
         SELECT *
         FROM TB_ORDERDETAILS
         WHERE CM_ORDERID = (SELECT CM_ORDERID
-        FROM TB_ORDERDETAILS
-        WHERE CM_ORDERDETAILSID = #{orderdetailid})
+                            FROM TB_ORDERDETAILS
+                            WHERE CM_ORDERDETAILSID = #{orderdetailid})
     </select>
 
 
@@ -272,46 +280,46 @@
 
     <select id="getSettlementOrders" resultMap="MySettlementOrders">
         SELECT
-        t0.CM_CREATETIME,
-        t0.CM_ORDERID,
-        t0.CM_NUMBERSUN,
-        t0.CM_MONEYSUN,
-        t0.CM_ORDERDETAILSIDS,
-        t0.CM_STATE,
-        t0.CM_USERID,
-        t4.value  AS CM_GOODSID2,
-        t4.value2 AS CM_MAINFIGUREPATH,
-        t4.value3 AS CM_TITLE,
-        t4.value4 AS CM_PRESENTPRICE,
-        t4.CM_MONEY,
-        t4.CM_NUMBER,
-        t4.value5 AS CM_SELLERID2,
-        t4.value6 AS CM_SELLERNAME,
-        (
-        SELECT COUNT(*)
-        FROM TB_ORDERDETAILS AS t5
-        LEFT OUTER JOIN TB_GOODS AS t6 ON t5.CM_GOODSID = t6.CM_GOODSID
-        LEFT OUTER JOIN TB_SELLERS AS t7 ON t6.CM_SELLERID = t7.CM_SELLERID
-        WHERE t5.CM_ORDERID = t0.CM_ORDERID
-        )         AS value2
+            t0.CM_CREATETIME,
+            t0.CM_ORDERID,
+            t0.CM_NUMBERSUN,
+            t0.CM_MONEYSUN,
+            t0.CM_ORDERDETAILSIDS,
+            t0.CM_STATE,
+            t0.CM_USERID,
+            t4.value  AS CM_GOODSID2,
+            t4.value2 AS CM_MAINFIGUREPATH,
+            t4.value3 AS CM_TITLE,
+            t4.value4 AS CM_PRESENTPRICE,
+            t4.CM_MONEY,
+            t4.CM_NUMBER,
+            t4.value5 AS CM_SELLERID2,
+            t4.value6 AS CM_SELLERNAME,
+            (
+                SELECT COUNT(*)
+                FROM TB_ORDERDETAILS AS t5
+                    LEFT OUTER JOIN TB_GOODS AS t6 ON t5.CM_GOODSID = t6.CM_GOODSID
+                    LEFT OUTER JOIN TB_SELLERS AS t7 ON t6.CM_SELLERID = t7.CM_SELLERID
+                WHERE t5.CM_ORDERID = t0.CM_ORDERID
+            )         AS value2
         FROM TB_ORDERS AS t0
-        LEFT OUTER JOIN (
-        SELECT
-        t2.CM_GOODSID        AS value,
-        t2.CM_MAINFIGUREPATH AS value2,
-        t2.CM_TITLE          AS value3,
-        t2.CM_PRESENTPRICE   AS value4,
-        t1.CM_MONEY,
-        t1.CM_NUMBER,
-        t2.CM_SELLERID       AS value5,
-        t3.CM_SELLERNAME     AS value6,
-        t1.CM_ORDERID,
-        t1.CM_ORDERDETAILSID,
-        t3.CM_SELLERID
-        FROM TB_ORDERDETAILS AS t1
-        LEFT OUTER JOIN TB_GOODS AS t2 ON t1.CM_GOODSID = t2.CM_GOODSID
-        LEFT OUTER JOIN TB_SELLERS AS t3 ON t2.CM_SELLERID = t3.CM_SELLERID
-        ) AS t4 ON t4.CM_ORDERID = t0.CM_ORDERID
+            LEFT OUTER JOIN (
+                                SELECT
+                                    t2.CM_GOODSID        AS value,
+                                    t2.CM_MAINFIGUREPATH AS value2,
+                                    t2.CM_TITLE          AS value3,
+                                    t2.CM_PRESENTPRICE   AS value4,
+                                    t1.CM_MONEY,
+                                    t1.CM_NUMBER,
+                                    t2.CM_SELLERID       AS value5,
+                                    t3.CM_SELLERNAME     AS value6,
+                                    t1.CM_ORDERID,
+                                    t1.CM_ORDERDETAILSID,
+                                    t3.CM_SELLERID
+                                FROM TB_ORDERDETAILS AS t1
+                                    LEFT OUTER JOIN TB_GOODS AS t2 ON t1.CM_GOODSID = t2.CM_GOODSID
+                                    LEFT OUTER JOIN TB_SELLERS AS t3 ON t2.CM_SELLERID = t3.CM_SELLERID
+                            ) AS t4 ON t4.CM_ORDERID = t0.CM_ORDERID
         WHERE (t0.CM_USERID = #{userId}) AND (t0.CM_STATE = 2 OR t0.CM_STATE = 3)
         ORDER BY t0.CM_ORDERID, t4.CM_ORDERDETAILSID, t4.value, t4.CM_SELLERID, t0.CM_CREATETIME DESC
     </select>
@@ -376,111 +384,123 @@
     </select>
 
 
-    
-    
-    
-    
-    
-    
-    
-    
     <select id="queryMyCanAfterServiceM" resultMap="OdersAndOrderdetails">
-SELECT
-  t0.CM_STATE AS CM_ORDER_STATE,
-  t0.CM_CREATETIME,
-  t0.CM_MONEYSUN,
-  t0.CM_NUMBERSUN,
-  t0.CM_ORDERID,
-  t4.CM_ORDERDETAILSID,
-  t4.CM_MONEY,
-  t4.CM_NUMBER,
-  t4.CM_SERVICESTATE AS CM_SERVICE_STATE,
-  t4.CM_GOODSID,
-  t4.value AS CM_TITLE,
-  t4.value2 AS CM_MAINFIGUREPATH,
-  t4.value3 AS CM_PRESENTPRICE,
-  t4.value4 AS CM_SELLERID2,
-  t4.value5 AS CM_SELLERNAME,
-  ( SELECT COUNT(*)
-  FROM TB_ORDERDETAILS AS t5
-  LEFT OUTER JOIN TB_GOODS AS t6 ON t5.CM_GOODSID = t6.CM_GOODSID
-  LEFT OUTER JOIN TB_SELLERS AS t7 ON t6.CM_SELLERID = t7.CM_SELLERID
-  WHERE (t5.CM_ORDERID = t0.CM_ORDERID) AND (t5.CM_SERVICESTATE = 0)
-   ) AS value
-FROM TB_ORDERS AS t0
-LEFT OUTER JOIN (
-   SELECT
-      t1.CM_ORDERDETAILSID,
-      t1.CM_MONEY,
-      t1.CM_NUMBER,
-      t1.CM_SERVICESTATE,
-      t1.CM_GOODSID,
-      t2.CM_TITLE AS value,
-      t2.CM_MAINFIGUREPATH AS value2,
-      t2.CM_PRESENTPRICE AS value3,
-      t2.CM_SELLERID AS value4,
-      t3.CM_SELLERNAME AS value5,
-      t1.CM_ORDERID,
-      t2.CM_GOODSID AS CM_GOODSID2,
-      t3.CM_SELLERID
-      FROM TB_ORDERDETAILS  AS t1
-    LEFT OUTER JOIN TB_GOODS AS t2 ON t1.CM_GOODSID = t2.CM_GOODSID
-    LEFT OUTER JOIN TB_SELLERS AS t3 ON t2.CM_SELLERID = t3.CM_SELLERID
-) AS t4
- ON (t4.CM_ORDERID = t0.CM_ORDERID) AND (t4.CM_SERVICESTATE = 0)
-      WHERE (t0.CM_USERID = #{cmUserid}) AND ((t0.CM_STATE = 3) OR (t0.CM_STATE = 4)
-)
-ORDER BY t0.CM_CREATETIME,t0.CM_ORDERID,
-t4.CM_ORDERDETAILSID,
-t4.CM_GOODSID2,
-t4.CM_SELLERID
+        SELECT
+            t0.CM_STATE        AS CM_ORDER_STATE,
+            t0.CM_CREATETIME,
+            t0.CM_MONEYSUN,
+            t0.CM_NUMBERSUN,
+            t0.CM_ORDERID,
+            t4.CM_ORDERDETAILSID,
+            t4.CM_MONEY,
+            t4.CM_NUMBER,
+            t4.CM_SERVICESTATE AS CM_SERVICE_STATE,
+            t4.CM_GOODSID,
+            t4.value           AS CM_TITLE,
+            t4.value2          AS CM_MAINFIGUREPATH,
+            t4.value3          AS CM_PRESENTPRICE,
+            t4.value4          AS CM_SELLERID2,
+            t4.value5          AS CM_SELLERNAME,
+            (SELECT COUNT(*)
+             FROM TB_ORDERDETAILS AS t5
+                 LEFT OUTER JOIN TB_GOODS AS t6 ON t5.CM_GOODSID = t6.CM_GOODSID
+                 LEFT OUTER JOIN TB_SELLERS AS t7 ON t6.CM_SELLERID = t7.CM_SELLERID
+             WHERE (t5.CM_ORDERID = t0.CM_ORDERID) AND (t5.CM_SERVICESTATE = 0)
+            )                  AS value
+        FROM TB_ORDERS AS t0
+            LEFT OUTER JOIN (
+                                SELECT
+                                    t1.CM_ORDERDETAILSID,
+                                    t1.CM_MONEY,
+                                    t1.CM_NUMBER,
+                                    t1.CM_SERVICESTATE,
+                                    t1.CM_GOODSID,
+                                    t2.CM_TITLE          AS value,
+                                    t2.CM_MAINFIGUREPATH AS value2,
+                                    t2.CM_PRESENTPRICE   AS value3,
+                                    t2.CM_SELLERID       AS value4,
+                                    t3.CM_SELLERNAME     AS value5,
+                                    t1.CM_ORDERID,
+                                    t2.CM_GOODSID        AS CM_GOODSID2,
+                                    t3.CM_SELLERID
+                                FROM TB_ORDERDETAILS AS t1
+                                    LEFT OUTER JOIN TB_GOODS AS t2 ON t1.CM_GOODSID = t2.CM_GOODSID
+                                    LEFT OUTER JOIN TB_SELLERS AS t3 ON t2.CM_SELLERID = t3.CM_SELLERID
+                            ) AS t4
+                ON (t4.CM_ORDERID = t0.CM_ORDERID) AND (t4.CM_SERVICESTATE = 0)
+        WHERE (t0.CM_USERID = #{cmUserid}) AND ((t0.CM_STATE = 3) OR (t0.CM_STATE = 4)
+        )
+        ORDER BY t0.CM_CREATETIME, t0.CM_ORDERID,
+            t4.CM_ORDERDETAILSID,
+            t4.CM_GOODSID2,
+            t4.CM_SELLERID
     </select>
 
     <select id="queryMyAfterServiceM" resultMap="AfsAndOdtAndGoodsAndSellers">
-        SELECT 
-t1.CM_ORDERID AS CM_ORDERID, 
-t0.CM_AFTERSERVICEID, 
-t2.CM_GOODSID AS CM_GOODSID, 
-t1.CM_ORDERDETAILSID AS CM_ORDERDETAILSID, 
-t0.CM_STATE, 
-t0.CM_CREATETIME, 
-t2.CM_MAINFIGUREPATH AS CM_MAINFIGUREPATH, 
-t2.CM_TITLE AS CM_TITLE, 
-t2.CM_SELLERID AS CM_SELLERID, 
-t3.CM_SELLERNAME AS CM_SELLERNAME, 
-t1.CM_LOGISTICSNUM AS CM_LOGISTICSNUM, 
-t1.CM_LOGISTICSINFO AS CM_LOGISTICSINFO
-FROM TB_AFTERSERVICES AS t0
-LEFT OUTER JOIN TB_ORDERDETAILS AS t1 ON t0.CM_ORDERDETAILSID = t1.CM_ORDERDETAILSID
-LEFT OUTER JOIN TB_GOODS AS t2 ON t1.CM_GOODSID = t2.CM_GOODSID
-LEFT OUTER JOIN TB_SELLERS AS t3 ON t2.CM_SELLERID = t3.CM_SELLERID
-WHERE t0.CM_USERID = #{cmUserid}
-ORDER BY t0.CM_CREATETIME
+        SELECT
+            t1.CM_ORDERID        AS CM_ORDERID,
+            t0.CM_AFTERSERVICEID,
+            t2.CM_GOODSID        AS CM_GOODSID,
+            t1.CM_ORDERDETAILSID AS CM_ORDERDETAILSID,
+            t0.CM_STATE,
+            t0.CM_CREATETIME,
+            t2.CM_MAINFIGUREPATH AS CM_MAINFIGUREPATH,
+            t2.CM_TITLE          AS CM_TITLE,
+            t2.CM_SELLERID       AS CM_SELLERID,
+            t3.CM_SELLERNAME     AS CM_SELLERNAME,
+            t1.CM_LOGISTICSNUM   AS CM_LOGISTICSNUM,
+            t1.CM_LOGISTICSINFO  AS CM_LOGISTICSINFO
+        FROM TB_AFTERSERVICES AS t0
+            LEFT OUTER JOIN TB_ORDERDETAILS AS t1 ON t0.CM_ORDERDETAILSID = t1.CM_ORDERDETAILSID
+            LEFT OUTER JOIN TB_GOODS AS t2 ON t1.CM_GOODSID = t2.CM_GOODSID
+            LEFT OUTER JOIN TB_SELLERS AS t3 ON t2.CM_SELLERID = t3.CM_SELLERID
+        WHERE t0.CM_USERID = #{cmUserid}
+        ORDER BY t0.CM_CREATETIME
     </select>
 
     <select id="queryMyCollectionM" resultMap="CollectionAndGoods">
-        SELECT 
-t1.CM_BRANDID AS CM_BRANDID, 
-t1.CM_FIGURESPATH AS CM_FIGURESPATH, 
-t0.CM_GOODSID, 
-t1.CM_MAINFIGUREPATH AS CM_MAINFIGUREPATH, 
-t1.CM_PRESENTPRICE AS CM_PRESENTPRICE, 
-t1.CM_ORIGINALPRICE AS CM_ORIGINALPRICE, 
-t1.CM_SALES AS CM_SALES, 
-t1.CM_TITLE AS CM_TITLE, 
-t0.CM_JOINTIME, 
-t0.CM_COLLECTIONID
-FROM TB_COLLECTIONS AS t0
-LEFT OUTER JOIN TB_GOODS AS t1 ON t0.CM_GOODSID = t1.CM_GOODSID
-WHERE t0.CM_USERID = #{cmUserid}
-ORDER BY t0.CM_JOINTIME
+        SELECT
+            t1.CM_BRANDID        AS CM_BRANDID,
+            t1.CM_FIGURESPATH    AS CM_FIGURESPATH,
+            t0.CM_GOODSID,
+            t1.CM_MAINFIGUREPATH AS CM_MAINFIGUREPATH,
+            t1.CM_PRESENTPRICE   AS CM_PRESENTPRICE,
+            t1.CM_ORIGINALPRICE  AS CM_ORIGINALPRICE,
+            t1.CM_SALES          AS CM_SALES,
+            t1.CM_TITLE          AS CM_TITLE,
+            t0.CM_JOINTIME,
+            t0.CM_COLLECTIONID
+        FROM TB_COLLECTIONS AS t0
+            LEFT OUTER JOIN TB_GOODS AS t1 ON t0.CM_GOODSID = t1.CM_GOODSID
+        WHERE t0.CM_USERID = #{cmUserid}
+        ORDER BY t0.CM_JOINTIME
+    </select>
+    <select id="getOrderInfo" resultMap="orderInfo">
+        SELECT
+            a.CM_SELLERSTATE    AS CM_ORDER_STATE,
+            b.CM_STATE          AS CM_DETAILS_STATE,
+            a.CM_ORDERDETAILSID AS CM_ORDERDETAILSID,
+            a.CM_SELLERID       AS CM_SELLERID,
+            a.CM_SERVICESTATE   AS CM_SERVICESTATE
+        FROM TB_ORDERDETAILS a LEFT JOIN TB_ORDERS b ON a.CM_ORDERID = b.CM_ORDERID
+        WHERE a.CM_ORDERDETAILSID = #{orderdetailsid};
+
     </select>
 
     <update id="deleteAddressIsfirstM" parameterType="com.sc.domain.generator.Addresses">
-        update TB_ADDRESSES set CM_ISFIRST='0' where CM_ISFIRST='1'
+        UPDATE TB_ADDRESSES
+        SET CM_ISFIRST = '0'
+        WHERE CM_ISFIRST = '1'
     </update>
 
     <update id="addAddressIsfirstM" parameterType="com.sc.domain.generator.Addresses">
-        update TB_ADDRESSES set CM_ISFIRST='1' where CM_ADDRESSID=#{cmAddressid}
+        UPDATE TB_ADDRESSES
+        SET CM_ISFIRST = '1'
+        WHERE CM_ADDRESSID = #{cmAddressid}
+    </update>
+    <update id="updateAfterService">
+        UPDATE TB_ORDERDETAILS
+        SET CM_SERVICESTATE = '1'
+        WHERE CM_ORDERDETAILSID = #{orderdetailsid}
     </update>
 </mapper>

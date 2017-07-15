@@ -4,7 +4,14 @@ import com.github.pagehelper.PageHelper;
 import com.sc.dao.UserDoMainDao;
 import com.sc.domain.generator.*;
 import com.sc.domain.userdomain.*;
-import com.sc.utils.*;
+import com.sc.storage.StorageService;
+import com.sc.utils.DateUtils;
+import com.sc.utils.GetRandomNumber;
+import com.sc.utils.GetResult;
+import com.sc.utils.JWT;
+import com.sc.utils.QueryLogistics;
+import com.sc.utils.Result;
+import com.sc.utils.SendCode;
 import com.sc.utils.goodobject.GOODS;
 import com.sc.utils.goodobject.GOODSDETAILS;
 import com.sc.utils.goodobject.GOODSJSON;
@@ -12,10 +19,13 @@ import com.sc.utils.goodobject.ORDER;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -37,10 +47,16 @@ public class UserDoMainService {
 
     private final JWT jwt;
 
+    @Value("${exchangespath}")
+    private String exchangesPath;
+
+    private final StorageService storageService;
+
     @Autowired
-    public UserDoMainService(UserDoMainDao userDoMainDao, JWT jwt) {
+    public UserDoMainService(UserDoMainDao userDoMainDao, JWT jwt, StorageService storageService) {
         this.userDoMainDao = userDoMainDao;
         this.jwt = jwt;
+        this.storageService = storageService;
     }
 
     /**
@@ -876,6 +892,78 @@ public class UserDoMainService {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 申请售后服务
+     * @param orderdetailsid 订单详情ID
+     * @param type 操作类型:type(1：退换，2：换货3：返修)
+     * @param reason 原因
+     * @param files 图片
+     * @param userId 用户ID
+     * @return
+     */
+    @Transactional
+    public Result applyAfterService(String orderdetailsid, String type, String reason, List<MultipartFile> files, String userId) {
+        try {
+            OrderInfo orderInfo = userDoMainDao.getOrderInfo(orderdetailsid);
+            if (orderInfo.equals(null)) {
+                return GetResult.toJson(24, null, null, null, 0);
+            }
+            if (orderInfo.getCM_ORDER_STATE() != 4) {
+                return GetResult.toJson(35, null, null, null, 0);
+            }
+            if (orderInfo.getCM_SERVICESTATE() != 0) {
+                return GetResult.toJson(26, null, null, null, 0);
+            }
+            try {
+                Integer k = Integer.parseInt(type);
+            } catch (Exception ex) {
+                return GetResult.toJson(27, null, null, null, 0);
+            }
+            String exchangesid = DateUtils.DF_YYYY_MM_DD_HH_MM_SS + GetRandomNumber.genRandomNum(4);
+            StringBuffer imagepaths = new StringBuffer();
+            if (files != null) {
+                File file1 = new File(exchangesPath);
+                if (!file1.isDirectory()) {
+                    file1.mkdir();
+                }
+                for (MultipartFile file : files) {
+                    int i = 0;
+                    String filetype = storageService.getFileType(file.getOriginalFilename());
+                    if (storageService.isImage(file.getOriginalFilename())) {
+                        return GetResult.toJson(28, null, null, null, 0);
+                    }
+                    String filename = i + "." + filetype;
+                    if (storageService.store(file, exchangesPath + filename)) {
+                        imagepaths.append(exchangesPath).append(filename).append("|");
+                    } else {
+                        return GetResult.toJson(28, null, null, null, 0);
+                    }
+                }
+            }
+            userDoMainDao.updateAfterService(orderdetailsid);
+            Afterservices afterservices = new Afterservices();
+            afterservices.setCM_AFTERSERVICEID(exchangesid);
+            afterservices.setCM_CREATETIME(new Date());
+            afterservices.setCM_REASON(reason);
+            afterservices.setCM_TYPE(Integer.valueOf(type));
+            afterservices.setCM_USERID(userId);
+            afterservices.setCM_ORDERDETAILSID(orderInfo.getCM_ORDERDETAILSID());
+            afterservices.setCM_STATE(1);
+            afterservices.setCM_IMGPATHS(imagepaths.toString());
+            afterservices.setCM_SELLERID(orderInfo.getCM_SELLERID());
+            userDoMainDao.addAfterService(afterservices);
+            Servicedetails servicedetails = new Servicedetails();
+            servicedetails.setCM_SVID(DateUtils.DF_YYYY_MM_DD_HH_MM_SS);
+            servicedetails.setCM_AFTERSERVICEID(exchangesid);
+            servicedetails.setCM_CREATETIME(new Date());
+            servicedetails.setCM_TYPE(0);
+            userDoMainDao.addAfterServiceDetail(servicedetails);
+            return GetResult.toJson(0, null, null, jwt.createJWT(userId), 0);
+        } catch (Exception ex) {
             return GetResult.toJson(200, null, null, null, 0);
         }
     }
