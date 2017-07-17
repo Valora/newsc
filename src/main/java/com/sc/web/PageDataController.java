@@ -40,7 +40,7 @@ public class PageDataController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", value = "页码", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "页面大小", required = true, dataType = "Integer", paramType = "query"),
-            @ApiImplicitParam(name = "isFisrst", value = "是否第一次加载(1:第一次，0：不是)", required = true, dataType = "Integer", paramType = "query")
+            @ApiImplicitParam(name = "isFirst", value = "是否第一次加载(1:第一次，0：不是)", required = true, dataType = "Integer", paramType = "query")
     })
     public Result queryFirstData(@RequestParam(value = "pageNum") Integer pageNum, @RequestParam(value = "pageSize") Integer pageSize, @RequestParam(value = "isFirst") Integer isFirst) {
         pageNum = pageNum < 1 ? 1 : pageNum;

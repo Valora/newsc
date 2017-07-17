@@ -10,6 +10,6 @@ import java.util.List;
  */
 @Data
 public class FirstPage {
-    private List<PageShow> shows;
-    private List<PageGoods> goods;
+    private List<PageShow> Shows;
+    private List<PageGoods> Goods;
 }
