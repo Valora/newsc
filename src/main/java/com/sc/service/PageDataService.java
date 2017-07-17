@@ -116,6 +116,7 @@ public class PageDataService {
                 String classifyid = Integer.toString(classifyID);
                 List<PageGoods> goods = pageDataDao.queryClassifyData(classifyid, pageNum, pageSize);
                 Integer i = toIntExact(pageDataDao.getGoodsCount(classifyid));
+                i = (i / pageSize) + ((i % pageSize) > 0 ? 1 : 0);
                 return GetResult.toJson(0, null, null, goods, i);
             }
         } catch (Exception ex) {
@@ -203,10 +204,10 @@ public class PageDataService {
         try {
             List<Classifys> classifys = new ArrayList<>();
             if (type == 1) {
-                classifys = pageDataDao.getSunClassification(0);
+                classifys = pageDataDao.getSubClassification(0);
             }
             if (type == 2 && classifyid != 0) {
-                classifys = pageDataDao.getSunClassification(classifyid);
+                classifys = pageDataDao.getSubClassification(classifyid);
             }
             return GetResult.toJson(0, null, null, classifys, 0);
         } catch (Exception ex) {

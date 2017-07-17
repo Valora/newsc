@@ -33,7 +33,6 @@ public interface UserLoginMapper {
             @Result(column = "CM_INTEGRAL", property = "CM_INTEGRAL", jdbcType = JdbcType.INTEGER),
             @Result(column = "CM_BALANCE", property = "CM_BALANCE", jdbcType = JdbcType.DOUBLE),
             @Result(column = "CM_LEVEL", property = "CM_LEVEL", jdbcType = JdbcType.INTEGER),
-            @Result(column = "CM_CODE", property = "CM_CODE", jdbcType = JdbcType.INTEGER)
     })
     List<UserLogin> selectLoginInfo2(String account, String password);
 

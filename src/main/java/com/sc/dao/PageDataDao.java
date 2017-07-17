@@ -89,10 +89,10 @@ public class PageDataDao {
      */
     private List<PageGoods> goodsToPageGoods(List<GoodsWithBLOBs> goods) {
         List<PageGoods> pageGoods = new ArrayList<>();
-        for (Goods good : goods) {
+        for (GoodsWithBLOBs good : goods) {
             PageGoods pageGood = new PageGoods();
             pageGood.setCM_BRANDID(good.getCM_BRANDID());
-            pageGood.setCM_FIGURESPATH(good.getCM_HORIZONTALPATH());
+            pageGood.setCM_FIGURESPATH(good.getCM_FIGURESPATH());
             pageGood.setCM_GOODSID(good.getCM_GOODSID());
             pageGood.setCM_MAINFIGUREPATH(good.getCM_MAINFIGUREPATH());
             pageGood.setCM_PRESENTPRICE(good.getCM_PRESENTPRICE());
@@ -339,10 +339,10 @@ public class PageDataDao {
      * @param classifyid 查询类型（1：大类,2：子类）
      * @return 分类/二级分类
      */
-    public List<Classifys> getSunClassification(Integer classifyid) {
+    public List<Classifys> getSubClassification(Integer classifyid) {
         ClassifysExample classifysExample = new ClassifysExample();
         ClassifysExample.Criteria criteria = classifysExample.createCriteria();
-        criteria.andCM_CLASSIFYIDEqualTo(classifyid);
+        criteria.andCM_PARENTIDEqualTo(classifyid);
         classifysExample.setOrderByClause("CM_SORT");
         return classifysMapper.selectByExample(classifysExample);
     }
