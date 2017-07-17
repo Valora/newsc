@@ -99,6 +99,16 @@
         </collection>
     </resultMap>
 
+    <resultMap id="userInfo" type="com.sc.domain.userdomain.User">
+        <result column="CM_USERID" property="CM_USERID" jdbcType="VARCHAR"/>
+        <result column="CM_SHOPLON" property="CM_SHOPLON" jdbcType="VARCHAR"/>
+        <result column="CM_SHOPLAT" property="CM_SHOPLAT" jdbcType="VARCHAR"/>
+        <result column="CM_BALANCE" property="CM_BLANCE"/>
+        <result column="CM_INTEGRAL" property="CM_INTEGRAL"/>
+        <collection property="TB_USERS" ofType="com.sc.domain.userdomain.TBUSERS">
+            <result column="CM_USERID2" property="CM_USERID" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
 
     <!--queryMyCanAfterServiceM-->
     <resultMap id="OdersAndOrderdetails" type="com.sc.domain.userdomain.OdersAndOrderdetails" autoMapping="true">
@@ -182,10 +192,8 @@
     <select id="getOrderState" resultMap="OrderState">
         SELECT t1.CM_STATE AS CM_STATE
         FROM TB_ORDERDETAILS AS t0
-        LEFT OUTER JOIN TB_ORDERS AS t1 ON t0.CM_ORDERID = t1.CM_ORDERID
-        <where>
-            (t0.CM_GOODSID = #{cmGoodsid} AND (t0.CM_USERID = #{cmUserid})
-        </where>
+            LEFT OUTER JOIN TB_ORDERS AS t1 ON t0.CM_ORDERID = t1.CM_ORDERID
+        WHERE t0.CM_GOODSID = #{cmGoodsid} AND t0.CM_USERID = #{cmUserid};
     </select>
 
     <select id="getMyOrdersAll" resultMap="MyOrdersAll">
@@ -485,6 +493,30 @@
         FROM TB_ORDERDETAILS a LEFT JOIN TB_ORDERS b ON a.CM_ORDERID = b.CM_ORDERID
         WHERE a.CM_ORDERDETAILSID = #{orderdetailsid};
 
+    </select>
+    <select id="getUserByUserId" resultMap="userInfo">
+        SELECT
+            t0.CM_USERID,
+            t0.CM_SHOPLON,
+            t0.CM_SHOPLAT,
+            t0.CM_BALANCE,
+            t0.CM_INTEGRAL,
+            t1.CM_USERID AS CM_USERID2,
+            (
+                SELECT count(*)
+                FROM TB_USERS AS t2
+                WHERE (t2.CM_USERID   <![CDATA[ <> ]]>   t0.CM_USERID) AND (t2.CM_SHOPLON  <![CDATA[ > ]]>   (t0.CM_SHOPLON - 0.01)) AND
+                      (t2.CM_SHOPLON  <![CDATA[ <  ]]>   (t0.CM_SHOPLON + 0.01)) AND (t2.CM_SHOPLAT <![CDATA[ > ]]> (t0.CM_SHOPLAT - 0.01)) AND
+                      (t2.CM_SHOPLAT  <![CDATA[ <  ]]>   (t0.CM_SHOPLAT + 0.01))
+            )            AS VALUE
+        FROM TB_USERS AS t0
+            LEFT OUTER JOIN TB_USERS AS t1
+                ON (t1.CM_USERID   <![CDATA[ <> ]]>   t0.CM_USERID) AND (t1.CM_SHOPLON  <![CDATA[ > ]]>   (t0.CM_SHOPLON - 0.01)) AND
+                   (t1.CM_SHOPLON  <![CDATA[ <  ]]>   (t0.CM_SHOPLON + 0.01)) AND
+                   (t1.CM_SHOPLAT  <![CDATA[  > ]]>   (t0.CM_SHOPLAT - 0.01)) AND
+                   (t1.CM_SHOPLAT  <![CDATA[ <  ]]>   (t0.CM_SHOPLAT + 0.01))
+        WHERE t0.CM_USERID = #{userId}
+        ORDER BY t0.CM_USERID, t1.CM_USERID
     </select>
 
     <update id="deleteAddressIsfirstM" parameterType="com.sc.domain.generator.Addresses">

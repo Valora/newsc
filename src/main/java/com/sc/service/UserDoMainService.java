@@ -22,15 +22,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -66,16 +65,15 @@ public class UserDoMainService {
      * @param goodslist 订单列表
      * @return Result
      */
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public Result submitOrder(String userId, GOODSJSON goodslist) {
         String orderids = "";
         Double moneysum = 0.0;
         LocalDate time = LocalDate.now();
         String rad = GetRandomNumber.genRandomNum(4);
-        int kn = goodslist.getORDERS().size();
         try {
             for (ORDER order : goodslist.getORDERS()) {
-                String orderid = time.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")) + rad;
+                String orderid = DateUtils.todayYyyyMmDdHhMmSs() + rad;
                 orderids = orderid + "|";
                 int ordercount = 0;
                 Double ordermoney = 0.0;
@@ -125,14 +123,14 @@ public class UserDoMainService {
                         if (dt == null) {
                             return GetResult.toJson(12, null, jwt.createJWT(userId), null, 0);
                         }
-                        String[] arr1 = dt.getCM_SPEC_STOCK().split("|"); //库存
-                        String[] arr2 = details.getSPEC_NUMBER().split("|"); //购买
+                        String[] arr1 = dt.getCM_SPEC_STOCK().split("\\|"); //库存
+                        String[] arr2 = details.getSPEC_NUMBER().split("\\|"); //购买
                         int n = arr1.length - 1;
                         int m = arr2.length - 1;
                         if (n != m) {
                             return GetResult.toJson(12, null, jwt.createJWT(userId), null, 0);
                         }
-                        for (int i = 0; i < n; i++) {
+                        for (int i = 0; i <= n; i++) {
                             String[] ls1 = arr1[i].split("_");//库存
                             String[] ls2 = arr2[i].split("_");//购买
                             if (!Objects.equals(ls1[0], ls2[0])) {
@@ -154,7 +152,7 @@ public class UserDoMainService {
                         userDoMainDao.updateSpecStock(icc.toString(), dt.getCM_GOODSDETAILSID());
                         specnumdetails.append(details.getSPEC_NUMBER()).append("^").append(dt.getCM_COLOR()).append("#");
                     }
-                    detailsid = time.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")) + GetRandomNumber.genRandomNum(4);
+                    detailsid = DateUtils.todayYyyyMmDdHhMmSs() + GetRandomNumber.genRandomNum(4);
                     OrderdetailsWithBLOBs orderdetails = new OrderdetailsWithBLOBs();
                     orderdetails.setCM_ORDERDETAILSID(detailsid);
                     orderdetails.setCM_ORDERID(orderid);
@@ -165,10 +163,10 @@ public class UserDoMainService {
                     orderdetails.setCM_MONEY(count * gd.getCM_PRESENTPRICE());
                     orderdetails.setCM_SELLERSTATE(0);
                     orderdetails.setCM_SELLERID(gd.getCM_SELLERID());
-                    orderdetails.setCM_CREATETIME(Date.from(time.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+                    orderdetails.setCM_CREATETIME(new Date());
                     orderdetails.setCM_SELLERSTATE(0);
-                    //更新订单详情表
-                    userDoMainDao.updateOrderDetails(orderdetails);
+                    //增加订单详情
+                    userDoMainDao.addOrderDetails(orderdetails);
                     ordercount += count;
                     ordermoney += count * gd.getCM_PRESENTPRICE();
                     orderdetailsids += detailsid + "|";
@@ -182,15 +180,14 @@ public class UserDoMainService {
                 orders.setCM_MONEYSUN(ordermoney);
                 orders.setCM_CREATETIME(Date.from(time.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
                 orders.setCM_STATE(0);
-                orders.setCM_USESCORE(goodslist.getINTEGRAL() / kn);
-                orders.setCM_USERBALANCE(goodslist.getBALANCE() / kn);
-                userDoMainDao.updateOrder(orders);
+                orders.setCM_USESCORE(goodslist.getINTEGRAL());
+                orders.setCM_USERBALANCE(goodslist.getBALANCE());
+                userDoMainDao.addOrder(orders);
                 moneysum += ordermoney;
             }
-            BigDecimal icc = BigDecimal.valueOf(goodslist.getINTEGRAL() / 100);
-            Double money = moneysum - icc.doubleValue() - goodslist.getBALANCE();
-            return GetResult.toJson(0, null, jwt.createJWT(userId), "{orderid:" + orderids + ",balance:" + goodslist.getBALANCE() + ",integral:" + goodslist.getINTEGRAL() + ",integralmoney:" + icc + ",money:" + money + "}", 0);
+            return GetResult.toJson(0, null, jwt.createJWT(userId), "{orderid:" + orderids + ",money:" + moneysum + "}", 0);
         } catch (Exception ex) {
+            ex.printStackTrace();
             return GetResult.toJson(200, null, null, null, 0);
         }
     }
@@ -898,11 +895,12 @@ public class UserDoMainService {
 
     /**
      * 申请售后服务
+     *
      * @param orderdetailsid 订单详情ID
-     * @param type 操作类型:type(1：退换，2：换货3：返修)
-     * @param reason 原因
-     * @param files 图片
-     * @param userId 用户ID
+     * @param type           操作类型:type(1：退换，2：换货3：返修)
+     * @param reason         原因
+     * @param files          图片
+     * @param userId         用户ID
      * @return
      */
     @Transactional

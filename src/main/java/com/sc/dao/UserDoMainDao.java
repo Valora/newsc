@@ -8,7 +8,6 @@ import com.sc.mapper.userdomain.UserDoMainMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -59,8 +58,9 @@ public class UserDoMainDao {
     public Goods getGoodByGoodId(String goodsid) {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        criteria.andCM_GOODSARTNUMEqualTo(goodsid);
-        return goodsMapper.selectByExample(goodsExample).get(0);
+        criteria.andCM_GOODSIDEqualTo(goodsid);
+        List<Goods> goods = goodsMapper.selectByExample(goodsExample);
+        return goods.size() == 0 ? null : goods.get(0);
     }
 
     /**
@@ -73,7 +73,8 @@ public class UserDoMainDao {
         GooddetailsExample gooddetailsExample = new GooddetailsExample();
         GooddetailsExample.Criteria criteria = gooddetailsExample.createCriteria();
         criteria.andCM_GOODSIDEqualTo(cmGoodsid);
-        return gooddetailsMapper.selectByExampleWithBLOBs(gooddetailsExample);
+        List<GooddetailsWithBLOBs> gooddetailsWithBLOBs = gooddetailsMapper.selectByExampleWithBLOBs(gooddetailsExample);
+        return gooddetailsWithBLOBs.size() == 0 ? null : gooddetailsWithBLOBs;
     }
 
     /**
@@ -83,39 +84,7 @@ public class UserDoMainDao {
      * @return 用户列表
      */
     public User getUserByUserId(String userId) {
-        User user = new User();
-        //User
-        UsersExample usersExample1 = new UsersExample();
-        UsersExample.Criteria criteria1 = usersExample1.createCriteria();
-        criteria1.andCM_USERIDEqualTo(userId);
-        List<Users> users1 = usersMapper.selectByExample(usersExample1);
-        Users user1 = users1 == null ? null : users1.get(0);
-
-        //TBUSERS
-        UsersExample usersExample2 = new UsersExample();
-        UsersExample.Criteria criteria2 = usersExample2.createCriteria();
-        criteria2.andCM_USERIDNotEqualTo(userId);
-        criteria2.andCM_SHOPLONGreaterThan(user.getCM_SHOPLON() - 0.01);
-        criteria2.andCM_SHOPLONLessThan(user.getCM_SHOPLON() + 0.01);
-        criteria2.andCM_SHOPLATGreaterThan(user.getCM_SHOPLAT() - 0.01);
-        criteria2.andCM_SHOPLONLessThan(user.getCM_SHOPLAT() + 0.01);
-        List<Users> users2 = usersMapper.selectByExample(usersExample2);
-        List<TBUSERS> tbusers = new ArrayList<>();
-        for (Users users : users2) {
-            TBUSERS tb_users = new TBUSERS();
-            tb_users.setCM_USERID(users.getCM_USERID());
-            tbusers.add(tb_users);
-        }
-
-        //change to user
-        user.setCM_USERID(user1.getCM_USERID());
-        user.setCM_SHOPLON(user1.getCM_SHOPLON());
-        user.setCM_SHOPLAT(user1.getCM_SHOPLAT());
-        user.setCM_BLANCE(user1.getCM_BALANCE());
-        user.setCM_INTEGRAL(user1.getCM_INTEGRAL());
-        user.setTB_USERS(tbusers);
-
-        return user;
+        return userDoMainMapper.getUserByUserId(userId);
     }
 
     /**
@@ -141,7 +110,7 @@ public class UserDoMainDao {
         GooddetailsExample gooddetailsExample = new GooddetailsExample();
         GooddetailsExample.Criteria criteria = gooddetailsExample.createCriteria();
         criteria.andCM_GOODSDETAILSIDEqualTo(cmGoodsdetailsid);
-        gooddetailsMapper.updateByExampleWithBLOBs(gooddetails, gooddetailsExample);
+        gooddetailsMapper.updateByExampleSelective(gooddetails, gooddetailsExample);
     }
 
     /**
@@ -153,7 +122,7 @@ public class UserDoMainDao {
         OrderdetailsExample orderdetailsExample = new OrderdetailsExample();
         OrderdetailsExample.Criteria criteria = orderdetailsExample.createCriteria();
         criteria.andCM_ORDERDETAILSIDEqualTo(orderdetails.getCM_ORDERDETAILSID());
-        orderdetailsMapper.updateByExample(orderdetails, orderdetailsExample);
+        orderdetailsMapper.updateByExampleSelective(orderdetails, orderdetailsExample);
     }
 
     /**
@@ -161,9 +130,8 @@ public class UserDoMainDao {
      *
      * @param orders 订单
      */
-    public void updateOrder(OrdersWithBLOBs orders) {
-        OrdersExample ordersExample = new OrdersExample();
-        ordersMapper.updateByExampleWithBLOBs(orders, ordersExample);
+    public void addOrder(OrdersWithBLOBs orders) {
+        ordersMapper.insert(orders);
     }
 
     /**
@@ -619,6 +587,7 @@ public class UserDoMainDao {
 
     /**
      * 售后信息用
+     *
      * @param orderdetailsid
      * @return
      */
@@ -628,6 +597,7 @@ public class UserDoMainDao {
 
     /**
      * 更新订单详情表
+     *
      * @param orderdetailsid
      */
     public void updateAfterService(String orderdetailsid) {
@@ -636,6 +606,7 @@ public class UserDoMainDao {
 
     /**
      * 增加售后信息
+     *
      * @param afterservices
      */
     public void addAfterService(Afterservices afterservices) {
@@ -644,9 +615,18 @@ public class UserDoMainDao {
 
     /**
      * 增加售后详情
+     *
      * @param servicedetails
      */
     public void addAfterServiceDetail(Servicedetails servicedetails) {
         servicedetailsMapper.insert((ServicedetailsWithBLOBs) servicedetails);
+    }
+
+    /**
+     * 增加订单详情
+     * @param orderdetails
+     */
+    public void addOrderDetails(OrderdetailsWithBLOBs orderdetails) {
+        orderdetailsMapper.insert(orderdetails);
     }
 }
