@@ -29,7 +29,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -162,6 +161,7 @@ public class UserDoMainService {
                     orderdetails.setCM_NUMBER(count);
                     orderdetails.setCM_MONEY(count * gd.getCM_PRESENTPRICE());
                     orderdetails.setCM_SELLERSTATE(0);
+                    orderdetails.setCM_SERVICESTATE(0);
                     orderdetails.setCM_SELLERID(gd.getCM_SELLERID());
                     orderdetails.setCM_CREATETIME(new Date());
                     orderdetails.setCM_SELLERSTATE(0);
@@ -178,7 +178,7 @@ public class UserDoMainService {
                 orders.setCM_USERID(userId);
                 orders.setCM_NUMBERSUN(ordercount);
                 orders.setCM_MONEYSUN(ordermoney);
-                orders.setCM_CREATETIME(Date.from(time.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+                orders.setCM_CREATETIME(new Date());
                 orders.setCM_STATE(0);
                 orders.setCM_USESCORE(goodslist.getINTEGRAL());
                 orders.setCM_USERBALANCE(goodslist.getBALANCE());

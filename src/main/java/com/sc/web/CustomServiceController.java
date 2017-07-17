@@ -74,7 +74,7 @@ public class CustomServiceController {
         int ispromotion = Integer.parseInt(uploadGoods.getIspromotion());
         double originalprice = Double.parseDouble(uploadGoods.getOriginalprice());
         double presentprice = Double.parseDouble(uploadGoods.getPresentprice());
-        String[] colorarr = uploadGoods.getColors().split("|");
+        String[] colorarr = uploadGoods.getColors().split("\\|");
         for (String color : colorarr) {
             if (color.length() > 5) {
                 return GetResult.toJson(44, null, null, null, 0);

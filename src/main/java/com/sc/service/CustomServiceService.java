@@ -79,7 +79,7 @@ public class CustomServiceService {
             List<Goods> list = customServiceDao.selectGoodsByGoodsid(goodsid);
             if (list != null && list.size() > 0) {
                 goodsWithBLOBs = (GoodsWithBLOBs) list.get(0);
-                String[] str1 = goodsWithBLOBs.getCM_FIGURESPATH().split("|");
+                String[] str1 = goodsWithBLOBs.getCM_FIGURESPATH().split("\\|");
                 //删除图片
                 storageService.deleteByFigurePath(str1[delnum]);
                 str1[delnum] = "";
@@ -239,7 +239,7 @@ public class CustomServiceService {
                 file.mkdirs();
             }
             String spec_stock = "";
-            String[] specArr = spec.split("|");
+            String[] specArr = spec.split("\\|");
             for (String spec1 : specArr) {
                 spec_stock = spec1 + "_" + stock + "|";
             }
@@ -330,7 +330,7 @@ public class CustomServiceService {
                 return GetResult.toJson(17, null, jwt.createJWT(adminid), null, 0);
             }
             String spec_stock = "";
-            String[] specArr = spec.split("|");
+            String[] specArr = spec.split("\\|");
             for (String spec1 : specArr) {
                 spec_stock = spec1 + "_" + stock + "|";
             }
@@ -342,8 +342,8 @@ public class CustomServiceService {
             String mainpath = "";
             String showpath = "";
             if (a > 0) {
-                String[] carr = changetab.split("|");
-                List<String> iarr = Arrays.asList(goods.getCM_FIGURESPATH().split("|"));
+                String[] carr = changetab.split("\\|");
+                List<String> iarr = Arrays.asList(goods.getCM_FIGURESPATH().split("\\|"));
                 File file = new File(root);
                 if (!file.isDirectory()) {
                     file.mkdirs();
@@ -436,7 +436,7 @@ public class CustomServiceService {
                 String spec_stock = "";
                 Goods goods = customServiceDao.selectGoodsByGoodsid(gooddetailsWithBLOBs.getCM_GOODSID()).get(0);
                 String spec = goods.getCM_SPEC();
-                String[] specArr = spec.split("|");
+                String[] specArr = spec.split("\\|");
                 for (String spec1 : specArr) {
                     spec_stock = spec1 + "_" + stock + "|";
                 }
@@ -485,7 +485,7 @@ public class CustomServiceService {
             }
             String spec_stock = "";
             String spec = goods.getCM_SPEC();
-            String[] specArr = spec.split("|");
+            String[] specArr = spec.split("\\|");
             for (String spec1 : specArr) {
                 spec_stock = spec1 + "_" + stock + "|";
             }

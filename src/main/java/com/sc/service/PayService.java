@@ -100,7 +100,7 @@ public class PayService {
 
             XStream xStream = new XStream();
             //订单号处理
-            String[] arr = orderids.split("|");
+            String[] arr = orderids.split("\\|");
             List<OrdersWithBLOBs> orders = payMapper.getOrderByOrderIds(arr);
             if (orders.size() <= 0) {
                 return GetResult.toJson(63, null, null, null, 0);
@@ -173,7 +173,7 @@ public class PayService {
             wxPayService.setConfig(payConfig);
 
             XStream xStream = new XStream();
-            String[] arr = orderids.split("|");
+            String[] arr = orderids.split("\\|");
             List<OrdersWithBLOBs> orders = payMapper.getOrderByOrderIds(arr);
             if (orders.size() <= 0) {
                 return GetResult.toJson(63, null, null, null, 0);
@@ -231,7 +231,7 @@ public class PayService {
      */
     public Result aliPayApp(String orderids) {
         try {
-            String[] arr = orderids.split("|");
+            String[] arr = orderids.split("\\|");
             List<OrdersWithBLOBs> orders = payMapper.getOrderByOrderIds(arr);
             if (orders.size() <= 0) {
                 return GetResult.toJson(63, null, null, null, 0);
