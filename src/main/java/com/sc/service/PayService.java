@@ -200,6 +200,8 @@ public class PayService {
             orderRequest.setAttach(orderids);
             //签名
             orderRequest.setSign(SignUtils.createSign(xStream.toXML(orderRequest), WX_MCHKEY));
+            //商品ID
+            orderRequest.setProductId(DateUtils.todayYyyyMmDdHhMmSs() + GetRandomNumber.genRandomNum(4));
 
             String url = "/WechatPay/MakeQRCode.aspx?data=" + wxPayService.unifiedOrder(orderRequest).getCodeURL();
             try {

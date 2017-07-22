@@ -29,21 +29,21 @@ public class PayStartCallController {
 
     @RequestMapping(value = URL + "WechatPay_app", method = RequestMethod.GET)
     @ApiOperation("微信（APP）")
-    @ApiImplicitParam(name = "orderid", value = "订单ID", required = true, dataType = "String", paramType = "query")
+    @ApiImplicitParam(name = "orderids", value = "订单ID", required = true, dataType = "String", paramType = "query")
     public Result wechatPayApp(@RequestParam("orderids") String orderids) {
         return payService.wechatPayApp(orderids);
     }
 
     @RequestMapping(value = URL + "WechatPay_pc", method = RequestMethod.GET)
     @ApiOperation("微信（PC）")
-    @ApiImplicitParam(name = "orderid", value = "订单ID", required = true, dataType = "String", paramType = "query")
+    @ApiImplicitParam(name = "orderids", value = "订单ID", required = true, dataType = "String", paramType = "query")
     public Result wechatPayPc(@RequestParam("orderids") String orderids) {
         return payService.wechatPayPC(orderids);
     }
 
     @RequestMapping(value = URL + "AliPay_app", method = RequestMethod.GET)
     @ApiOperation("支付宝（APP）")
-    @ApiImplicitParam(name = "orderid", value = "订单ID", required = true, dataType = "String", paramType = "query")
+    @ApiImplicitParam(name = "orderids", value = "订单ID", required = true, dataType = "String", paramType = "query")
     public Result aliPayApp(@RequestParam("orderids") String orderids) {
         return payService.aliPayApp(orderids);
     }

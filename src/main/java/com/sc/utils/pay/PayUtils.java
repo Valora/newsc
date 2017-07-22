@@ -27,7 +27,9 @@ public class PayUtils {
      * @return
      */
     public static String generateOutTradeNo() {
-        return "{0}{1}{2}" + MCHID + DateUtils.todayYyyyMmDdHhMmSs() + GetRandomNumber.genRandomNum(3);
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(MCHID).append(DateUtils.todayYyyyMmDdHhMmSs()).append(GetRandomNumber.genRandomNum(3));
+        return stringBuffer.toString();
     }
 
     /**
