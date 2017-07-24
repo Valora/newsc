@@ -1,5 +1,6 @@
 package com.sc.service;
 
+import com.alibaba.fastjson.JSON;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
@@ -31,7 +32,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
@@ -147,7 +147,8 @@ public class PayService {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return GetResult.toJson(0, null, null, payjson, 0);
+            Map<String, String> result = (Map<String, String>) JSON.parse(payjson);
+            return GetResult.toJson(0, null, null, result, 0);
 
         } catch (Exception e) {
             return GetResult.toJson(200, null, null, null, 0);
@@ -315,7 +316,7 @@ public class PayService {
      * @param request
      * @param response
      */
-    public void wxNotify(HttpServletRequest request, HttpServletResponse response) throws IOException, Exception {
+    public void wxNotify(HttpServletRequest request, HttpServletResponse response) throws Exception {
         //读取参数  
         InputStream inputStream;
         StringBuffer sb = new StringBuffer();
