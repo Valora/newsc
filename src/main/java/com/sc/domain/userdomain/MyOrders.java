@@ -14,7 +14,7 @@ public class MyOrders {
     private Date CM_CREATETIME;
     private String CM_ORDERID;
     private Double CM_NUMBERSUN;
-    private Double CM_MONEYSUM;
+    private Double CM_MONEYSUN;
     private Integer CM_STATE;
     private List<MyOrderDetails> TB_ORDERDETAILS;
 }

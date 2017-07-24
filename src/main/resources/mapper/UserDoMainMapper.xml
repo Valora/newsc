@@ -17,7 +17,7 @@
         <result column="CM_CREATETIME" property="CM_CREATETIME"/>
         <result column="CM_ORDERID" property="CM_ORDERID" jdbcType="VARCHAR"/>
         <result column="CM_NUMBERSUN" property="CM_NUMBERSUN" jdbcType="DOUBLE"/>
-        <result column="CM_MONEYSUN" property="CM_MONEYSUM" jdbcType="DOUBLE"/>
+        <result column="CM_MONEYSUN" property="CM_MONEYSUN" jdbcType="DOUBLE"/>
         <result column="CM_STATE" property="CM_STATE" jdbcType="INTEGER"/>
         <collection property="TB_ORDERDETAILS" ofType="com.sc.domain.userdomain.MyOrderDetails">
             <result column="CM_GOODSID2" property="CM_GOODSID" jdbcType="VARCHAR"/>
