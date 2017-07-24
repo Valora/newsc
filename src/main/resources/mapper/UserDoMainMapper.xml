@@ -237,7 +237,7 @@
                                     LEFT OUTER JOIN TB_SELLERS AS t3 ON t2.CM_SELLERID = t3.CM_SELLERID
                             ) AS t4 ON t4.CM_ORDERID = t0.CM_ORDERID
         WHERE t0.CM_USERID = #{cmUserID}
-        ORDER BY t0.CM_ORDERID, t4.CM_ORDERDETAILSID, t4.value, t4.CM_SELLERID, t0.CM_CREATETIME DESC
+        ORDER BY t0.CM_CREATETIME DESC
     </select>
 
     <select id="getUnpaiedOrders" resultMap="MyUnpaiedOrders">
@@ -283,7 +283,7 @@
                                     LEFT OUTER JOIN TB_SELLERS AS t3 ON t2.CM_SELLERID = t3.CM_SELLERID
                             ) AS t4 ON t4.CM_ORDERID = t0.CM_ORDERID
         WHERE (t0.CM_USERID = #{userId}) AND (t0.CM_STATE = 0)
-        ORDER BY t0.CM_ORDERID, t4.CM_ORDERDETAILSID, t4.value, t4.CM_SELLERID, t0.CM_CREATETIME DESC
+        ORDER BY t0.CM_CREATETIME DESC
     </select>
 
     <select id="getSettlementOrders" resultMap="MySettlementOrders">
@@ -329,7 +329,7 @@
                                     LEFT OUTER JOIN TB_SELLERS AS t3 ON t2.CM_SELLERID = t3.CM_SELLERID
                             ) AS t4 ON t4.CM_ORDERID = t0.CM_ORDERID
         WHERE (t0.CM_USERID = #{userId}) AND (t0.CM_STATE = 2 OR t0.CM_STATE = 3)
-        ORDER BY t0.CM_ORDERID, t4.CM_ORDERDETAILSID, t4.value, t4.CM_SELLERID, t0.CM_CREATETIME DESC
+        ORDER BY t0.CM_CREATETIME DESC
     </select>
 
     <select id="queryOrderDetails" resultMap="OrderDetails">
