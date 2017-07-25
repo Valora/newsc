@@ -7,6 +7,7 @@ import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.domain.AlipayTradeAppPayModel;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradeAppPayRequest;
+import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.alipay.api.response.AlipayTradeAppPayResponse;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
 import com.github.binarywang.wxpay.config.WxPayConfig;
@@ -27,11 +28,15 @@ import com.thoughtworks.xstream.XStream;
 import me.chanjar.weixin.common.util.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
@@ -86,6 +91,7 @@ public class PayService {
      * @param orderids 订单号列表
      * @return
      */
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public Result wechatPayApp(String orderids) {
         try {
             //payService初始化
@@ -161,6 +167,7 @@ public class PayService {
      * @param orderids 订单号列表
      * @return
      */
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public Result wechatPayPC(String orderids) {
         try {
             //payService初始化
@@ -232,6 +239,7 @@ public class PayService {
      * @param orderids 订单列表
      * @return
      */
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public Result aliPayApp(String orderids) {
         try {
             String[] arr = orderids.split("\\|");
@@ -385,6 +393,63 @@ public class PayService {
             out.close();
         } else {
             System.out.println("通知签名验证失败");
+        }
+    }
+
+    /**
+     * 支付宝(PC)
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
+    public void aliPayPc(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        //获得订单号计算订单金额
+        String orderids = request.getParameter("orderids");
+        String[] arr = orderids.split("\\|");
+        List<OrdersWithBLOBs> orders = payMapper.getOrderByOrderIds(arr);
+        if (orders.size() > 0) {
+
+            double moneysum = orders.stream().mapToDouble(t -> (t.getCM_MONEYSUN() - t.getCM_USERBALANCE())).sum();
+            double score = orders.stream().mapToDouble(t -> t.getCM_USESCORE()).sum() * 0.01;
+            double totalFee = (moneysum - score);
+            String aliorderid = DateUtils.todayYyyyMmDdHhMmSs() + GetRandomNumber.genRandomNum(3);
+            //获得初始化的AlipayClient
+            AlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipay.com/gateway.do", AliPayConfig.APPID, AliPayConfig.APPPRIVATEKEY, "json", AliPayConfig.CHARSET, AliPayConfig.ALIPAYPUBLICKEY, AliPayConfig.SIGN_TYPE);
+            AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();//创建API对应的request
+            //todo
+            alipayRequest.setReturnUrl("http://domain.com/CallBack/return_url.jsp");
+            alipayRequest.setNotifyUrl("http://domain.com/CallBack/notify_url.jsp");//在公共参数中设置回跳和通知地址
+            alipayRequest.setBizContent("{" +
+                    "    \"out_trade_no\":\"" + aliorderid + "\"," +
+                    "    \"product_code\":\"QUICK_MSECURITY_PAY\"," +
+                    "    \"total_amount\":" + totalFee + "," +
+                    "    \"subject\":\"童E家\"," +
+                    "    \"body\":\"消费\"," +
+                    "    \"extend_params\":{" +
+                    "    \"sys_service_provider_id\":\"" + orderids + "\"" +
+                    "    }" +
+                    "  }");//填充业务参数
+            String form = "";
+            try {
+                form = alipayClient.pageExecute(alipayRequest).getBody(); //调用SDK生成表单
+                for (OrdersWithBLOBs order : orders) {
+                    Pays pays = new Pays();
+                    pays.setCM_PAYTYPE(2);
+                    pays.setCM_PAYJSON(form);
+                    pays.setCM_ORDERID(order.getCM_ORDERID());
+                    pays.setCM_TIME(new Date());
+                    paysMapper.insertSelective(pays);
+                    payMapper.updateTableOrderAliPay(order.getCM_ORDERID());
+                }
+            } catch (AlipayApiException e) {
+                e.printStackTrace();
+            }
+            response.setContentType("text/html;charset=" + AliPayConfig.CHARSET);
+            response.getWriter().write(form);//直接将完整的表单html输出到页面
+            response.getWriter().flush();
+            response.getWriter().close();
         }
     }
 }

@@ -15,4 +15,6 @@ public interface PayMapper {
     void updateTableOrderDetail(String cmOrderid);
 
     OrdersWithBLOBs getOrderByOrderId(String id);
+
+    void updateTableOrderAliPay(String cm_orderid);
 }

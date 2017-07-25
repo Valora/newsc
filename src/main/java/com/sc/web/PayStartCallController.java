@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * 支付用Controller
@@ -46,6 +48,13 @@ public class PayStartCallController {
     @ApiImplicitParam(name = "orderids", value = "订单ID", required = true, dataType = "String", paramType = "query")
     public Result aliPayApp(@RequestParam("orderids") String orderids) {
         return payService.aliPayApp(orderids);
+    }
+
+    @RequestMapping(value = URL + "AliPay_pc", method = RequestMethod.GET)
+    @ApiOperation("支付宝（PC）")
+    @ApiImplicitParam(name = "orderids", value = "订单ID", required = true, dataType = "String", paramType = "query")
+    public void aliPayPc(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        payService.aliPayPc(request, response);
     }
 
     @RequestMapping(value = "alinotify")

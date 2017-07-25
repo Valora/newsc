@@ -8,7 +8,10 @@
     <update id="updateTableOrderDetail">
         update TB_ORDERDETAILS set CM_SELLERSTATE=4 where CM_ORDERID = #{cmOrderid}
     </update>
-    
+    <update id="updateTableOrderAliPay">
+        UPDATE TB_ORDERS a set a.CM_PAYTYPE = 2 WHERE a.CM_ORDERID = #{cmOrderid}
+    </update>
+
     <select id="getOrderByOrderIds" resultType="com.sc.domain.generator.OrdersWithBLOBs">
         SELECT *
         FROM TB_ORDERS
