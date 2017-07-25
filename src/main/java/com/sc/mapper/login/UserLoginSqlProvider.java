@@ -12,6 +12,7 @@ public class UserLoginSqlProvider {
         sql.SELECT("  a.CM_USERID,\n" +
                 "  a.CM_BALANCE,\n" +
                 "  a.CM_PHONE,\n" +
+                "  a.CM_SHOPEADDRESS,\n" +
                 "  a.CM_LEVEL,\n" +
                 "  a.CM_SHOPNAME,\n" +
                 "  a.CM_INTEGRAL,\n" +
