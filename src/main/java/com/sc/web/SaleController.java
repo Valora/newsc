@@ -5,7 +5,6 @@ import com.sc.utils.GetResult;
 import com.sc.utils.JWT;
 import com.sc.utils.Result;
 import com.sc.utils.Token;
-import com.sc.utils.pay.MD5;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -177,7 +176,7 @@ public class SaleController {
         if (newpassword.equals(confirmpassword)) {
             return GetResult.toJson(39, null, null, null, 0);
         }
-        return saleService.ResettingPassword(phone, code, MD5.MD5Encode(newpassword, null));
+        return saleService.ResettingPassword(phone, code, newpassword);
     }
 
     @RequestMapping(value = URL + "SendBackAccountCode", method = RequestMethod.GET)

@@ -3,7 +3,6 @@ package com.sc.web;
 import com.sc.service.LoginService;
 import com.sc.utils.GetResult;
 import com.sc.utils.Result;
-import com.sc.utils.pay.MD5;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -50,7 +49,7 @@ public class LoginController {
         if (account.isEmpty() || password.isEmpty()) {
             return GetResult.toJson(1, null, null, null, 0);
         }
-        return loginService.GetToken(account, MD5.MD5Encode(password, null));
+        return loginService.GetToken(account, password);
     }
 
     @RequestMapping(value = URL + "UserLogin", method = RequestMethod.GET)
@@ -64,7 +63,7 @@ public class LoginController {
         if (account.isEmpty() || password.isEmpty()) {
             return GetResult.toJson(1, null, null, null, 0);
         }
-        return loginService.userLogin(account, MD5.MD5Encode(password, null), code);
+        return loginService.userLogin(account, password, code);
     }
 
     //新增
@@ -77,7 +76,7 @@ public class LoginController {
         if (StringUtils.isBlank(account) || StringUtils.isBlank(password)) {
             return GetResult.toJson(1, null, null, null, 0);
         }
-        return loginService.userLoginByAccountAndPasswordS(account,  MD5.MD5Encode(password, null));
+        return loginService.userLoginByAccountAndPasswordS(account,  password);
     }
 
     //新增
@@ -102,7 +101,7 @@ public class LoginController {
         if (account.isEmpty() || password.isEmpty()) {
             return GetResult.toJson(1, null, null, null, 0);
         }
-        return loginService.sellerLogin(account,  MD5.MD5Encode(password, null), code);
+        return loginService.sellerLogin(account,  password, code);
     }
 
     @RequestMapping(value = URL + "AdminLogin", method = RequestMethod.GET)
@@ -115,6 +114,6 @@ public class LoginController {
         if (account.isEmpty() || password.isEmpty()) {
             return GetResult.toJson(1, null, null, null, 0);
         }
-        return loginService.adminLogin(account,  MD5.MD5Encode(password, null));
+        return loginService.adminLogin(account,  password);
     }
 }

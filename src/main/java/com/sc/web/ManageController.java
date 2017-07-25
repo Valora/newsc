@@ -5,7 +5,6 @@ import com.sc.utils.GetResult;
 import com.sc.utils.JWT;
 import com.sc.utils.Result;
 import com.sc.utils.Token;
-import com.sc.utils.pay.MD5;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -60,7 +59,7 @@ public class ManageController {
             return GetResult.toJson(101, null, null, null, 0);
         }
 
-        return manageService.addEmployee(name, MD5.MD5Encode(password, null), phone, type, tk.getUserId());
+        return manageService.addEmployee(name, password, phone, type, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "DelEmployee", method = RequestMethod.GET)
