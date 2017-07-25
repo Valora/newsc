@@ -57,7 +57,7 @@ public class PayService {
     private final PayMapper payMapper;
 
     //异步接收微信支付结果通知的回调地址
-    private final static String WX_NOTIFY_URL = "http://www.zuichu.cc/wxnotify";
+    private final static String WX_NOTIFY_URL = "http://106.15.38.42:8080/wxnotify";
 
     //APP和网页支付提交用户端ip
     private final static String WX_IP = "8.8.8.8";
@@ -75,7 +75,7 @@ public class PayService {
     private final static String WX_APPSECREST = "7056583bc53be38a8ad16cc911aecb40";
 
     //通知地址
-    private final static String WX_PROXY_URL = "http://10.152.18.220:8080";
+    private final static String WX_PROXY_URL = "http://106.15.38.42:8080";
 
     private final PaysMapper paysMapper;
 
@@ -286,6 +286,62 @@ public class PayService {
     }
 
     /**
+     * 支付宝(PC)
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
+    public void aliPayPc(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        //获得订单号计算订单金额
+        String orderids = request.getParameter("orderids");
+        String[] arr = orderids.split("\\|");
+        List<OrdersWithBLOBs> orders = payMapper.getOrderByOrderIds(arr);
+        if (orders.size() > 0) {
+
+            double moneysum = orders.stream().mapToDouble(t -> (t.getCM_MONEYSUN() - t.getCM_USERBALANCE())).sum();
+            double score = orders.stream().mapToDouble(t -> t.getCM_USESCORE()).sum() * 0.01;
+            double totalFee = (moneysum - score);
+            String aliorderid = DateUtils.todayYyyyMmDdHhMmSs() + GetRandomNumber.genRandomNum(3);
+            //获得初始化的AlipayClient
+            AlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipay.com/gateway.do", AliPayConfig.APPID, AliPayConfig.APPPRIVATEKEY, "json", AliPayConfig.CHARSET, AliPayConfig.ALIPAYPUBLICKEY, AliPayConfig.SIGN_TYPE);
+            AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();//创建API对应的request
+            //todo
+            alipayRequest.setNotifyUrl(AliPayConfig.NOTIFYURL);//在公共参数中设置回跳和通知地址
+            alipayRequest.setBizContent("{" +
+                    "    \"out_trade_no\":\"" + aliorderid + "\"," +
+                    "    \"product_code\":\"QUICK_MSECURITY_PAY\"," +
+                    "    \"total_amount\":" + totalFee + "," +
+                    "    \"subject\":\"童E家\"," +
+                    "    \"body\":\"消费\"," +
+                    "    \"extend_params\":{" +
+                    "    \"sys_service_provider_id\":\"" + orderids + "\"" +
+                    "    }" +
+                    "  }");//填充业务参数
+            String form = "";
+            try {
+                form = alipayClient.pageExecute(alipayRequest).getBody(); //调用SDK生成表单
+                for (OrdersWithBLOBs order : orders) {
+                    Pays pays = new Pays();
+                    pays.setCM_PAYTYPE(2);
+                    pays.setCM_PAYJSON(form);
+                    pays.setCM_ORDERID(order.getCM_ORDERID());
+                    pays.setCM_TIME(new Date());
+                    paysMapper.insertSelective(pays);
+                    payMapper.updateTableOrderAliPay(order.getCM_ORDERID());
+                }
+            } catch (AlipayApiException e) {
+                e.printStackTrace();
+            }
+            response.setContentType("text/html;charset=" + AliPayConfig.CHARSET);
+            response.getWriter().write(form);//直接将完整的表单html输出到页面
+            response.getWriter().flush();
+            response.getWriter().close();
+        }
+    }
+
+    /**
      * 阿里异步通知
      *
      * @param request
@@ -393,63 +449,6 @@ public class PayService {
             out.close();
         } else {
             System.out.println("通知签名验证失败");
-        }
-    }
-
-    /**
-     * 支付宝(PC)
-     *
-     * @param request
-     * @param response
-     * @return
-     */
-    @Transactional(isolation = Isolation.REPEATABLE_READ)
-    public void aliPayPc(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        //获得订单号计算订单金额
-        String orderids = request.getParameter("orderids");
-        String[] arr = orderids.split("\\|");
-        List<OrdersWithBLOBs> orders = payMapper.getOrderByOrderIds(arr);
-        if (orders.size() > 0) {
-
-            double moneysum = orders.stream().mapToDouble(t -> (t.getCM_MONEYSUN() - t.getCM_USERBALANCE())).sum();
-            double score = orders.stream().mapToDouble(t -> t.getCM_USESCORE()).sum() * 0.01;
-            double totalFee = (moneysum - score);
-            String aliorderid = DateUtils.todayYyyyMmDdHhMmSs() + GetRandomNumber.genRandomNum(3);
-            //获得初始化的AlipayClient
-            AlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipay.com/gateway.do", AliPayConfig.APPID, AliPayConfig.APPPRIVATEKEY, "json", AliPayConfig.CHARSET, AliPayConfig.ALIPAYPUBLICKEY, AliPayConfig.SIGN_TYPE);
-            AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();//创建API对应的request
-            //todo
-            alipayRequest.setReturnUrl("http://domain.com/CallBack/return_url.jsp");
-            alipayRequest.setNotifyUrl("http://domain.com/CallBack/notify_url.jsp");//在公共参数中设置回跳和通知地址
-            alipayRequest.setBizContent("{" +
-                    "    \"out_trade_no\":\"" + aliorderid + "\"," +
-                    "    \"product_code\":\"QUICK_MSECURITY_PAY\"," +
-                    "    \"total_amount\":" + totalFee + "," +
-                    "    \"subject\":\"童E家\"," +
-                    "    \"body\":\"消费\"," +
-                    "    \"extend_params\":{" +
-                    "    \"sys_service_provider_id\":\"" + orderids + "\"" +
-                    "    }" +
-                    "  }");//填充业务参数
-            String form = "";
-            try {
-                form = alipayClient.pageExecute(alipayRequest).getBody(); //调用SDK生成表单
-                for (OrdersWithBLOBs order : orders) {
-                    Pays pays = new Pays();
-                    pays.setCM_PAYTYPE(2);
-                    pays.setCM_PAYJSON(form);
-                    pays.setCM_ORDERID(order.getCM_ORDERID());
-                    pays.setCM_TIME(new Date());
-                    paysMapper.insertSelective(pays);
-                    payMapper.updateTableOrderAliPay(order.getCM_ORDERID());
-                }
-            } catch (AlipayApiException e) {
-                e.printStackTrace();
-            }
-            response.setContentType("text/html;charset=" + AliPayConfig.CHARSET);
-            response.getWriter().write(form);//直接将完整的表单html输出到页面
-            response.getWriter().flush();
-            response.getWriter().close();
         }
     }
 }
