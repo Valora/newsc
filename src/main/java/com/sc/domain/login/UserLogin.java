@@ -12,6 +12,7 @@ public class UserLogin {
     private String CM_SHOPEADDRESS;
     private Double CM_BALANCE;
     private Long CM_PHONE;
+    private String CM_NAME;
     private Integer CM_LEVEL;
     private String CM_SHOPNAME;
     private Integer CM_INTEGRAL;

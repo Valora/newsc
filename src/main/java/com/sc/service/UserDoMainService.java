@@ -22,7 +22,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -64,7 +63,7 @@ public class UserDoMainService {
      * @param goodslist 订单列表
      * @return Result
      */
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     public Result submitOrder(String userId, GOODSJSON goodslist) {
         String orderids = "";
         Double moneysum = 0.0;

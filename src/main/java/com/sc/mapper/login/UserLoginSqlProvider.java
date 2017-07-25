@@ -13,6 +13,7 @@ public class UserLoginSqlProvider {
                 "  a.CM_BALANCE,\n" +
                 "  a.CM_PHONE,\n" +
                 "  a.CM_SHOPEADDRESS,\n" +
+                "  a.CM_NAME,\n" +
                 "  a.CM_LEVEL,\n" +
                 "  a.CM_SHOPNAME,\n" +
                 "  a.CM_INTEGRAL,\n" +
