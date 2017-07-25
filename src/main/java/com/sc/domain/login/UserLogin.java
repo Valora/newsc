@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class UserLogin {
     private String CM_USERID;
-    private String CM_SHOPADDRESS;
+    private String CM_SHOPEADDRESS;
     private Double CM_BALANCE;
     private Long CM_PHONE;
     private Integer CM_LEVEL;
