@@ -75,6 +75,7 @@ public class LoginDao {
         List<UserLogin> result = userLoginMapper.selectLoginInfo(account, password);
         if (result != null && result.size() > 0) {
             userLoginInfo.setCM_USERID(result.get(0).getCM_USERID());
+            userLoginInfo.setCM_SHOPADDRESS(result.get(0).getCM_SHOPADDRESS());
             userLoginInfo.setCM_BALANCE(result.get(0).getCM_BALANCE());
             userLoginInfo.setCM_SHOPNAME(result.get(0).getCM_SHOPNAME());
             userLoginInfo.setCM_LEVEL(result.get(0).getCM_LEVEL());
