@@ -43,10 +43,10 @@ public class GetImageService {
             } else {
                 // 载入图像
                 BufferedImage buffImg = ImageIO.read(new FileInputStream(path));
-                response.setContentType("image/jpeg");
+                response.setContentType("image/png");
                 // 将图像输出到Servlet输出流中。
                 ServletOutputStream sos = response.getOutputStream();
-                ImageIO.write(buffImg, "jpeg", sos);
+                ImageIO.write(buffImg, "png", sos);
                 sos.close();
             }
         } catch (Exception ex) {

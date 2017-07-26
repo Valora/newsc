@@ -296,24 +296,24 @@ public class ManageService {
      * @param type         分类类型（0：大类，1：子类）
      * @param parentid     上级分类（如果是大类，则输入0）
      * @param adminid      管理员ID
-     * @param files        图片
+     * @param file         图片
      * @return Result
      */
-    public Result addClassify(String classifyname, String type, String parentid, String adminid, List<MultipartFile> files) {
+    public Result addClassify(String classifyname, String type, String parentid, String adminid, MultipartFile file) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
             if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             String filename = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmss")) + GetRandomNumber.genRandomNum(4);
-            for (MultipartFile file : files) {
-                try {
-                    storageService.store(file, root + filename);
-                } catch (Exception ex) {
-                    return GetResult.toJson(47, null, null, null, 0);
-                }
+
+            try {
+                storageService.store(file, root + filename);
+            } catch (Exception ex) {
+                return GetResult.toJson(47, null, null, null, 0);
             }
-            manageDao.addClassify(classifyname, type, parentid, "/upload/" + root + filename);
+
+            manageDao.addClassify(classifyname, type, parentid, "C://" + root + filename);
             return GetResult.toJson(0, null, jwt.createJWT(adminid), null, 0);
         } catch (Exception ex) {
             return GetResult.toJson(200, null, null, null, 0);
@@ -344,7 +344,7 @@ public class ManageService {
             }
             String filename = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmss")) + GetRandomNumber.genRandomNum(4);
             String imgpath = "";
-            for (MultipartFile file: files){
+            for (MultipartFile file : files) {
                 try {
                     storageService.store(file, root + filename);
                 } catch (Exception ex) {
@@ -352,7 +352,7 @@ public class ManageService {
                 }
                 imgpath = root + filename;
             }
-            manageDao.reviceClassify(classifyname, type, parentid, "/upload/" + imgpath);
+            manageDao.reviceClassify(classifyname, type, parentid, "C://" + imgpath);
             return GetResult.toJson(0, null, jwt.createJWT(adminid), null, 0);
         } catch (Exception ex) {
             return GetResult.toJson(200, null, null, null, 0);

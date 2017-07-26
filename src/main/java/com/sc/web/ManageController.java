@@ -232,7 +232,7 @@ public class ManageController {
     @RequestMapping(value = URL + "AddClassify", method = RequestMethod.POST)
     @ApiOperation("添加商品分类和子分类{classifyname分类名称, type分类类型（0：大类，1：子类）,parentid上级分类（如果是大类，则输入0）,token秘钥, 图片}")
     public Result addClassify(HttpServletRequest request) {
-        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("files");
+        MultipartFile file = ((MultipartHttpServletRequest) request).getFile("file");
         String classifyname = request.getParameter("classifyname");
         String type = request.getParameter("type");
         String parentid = request.getParameter("parentid");
@@ -241,7 +241,7 @@ public class ManageController {
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
         }
-        return manageService.addClassify(classifyname, type, parentid, tk.getUserId(), files);
+        return manageService.addClassify(classifyname, type, parentid, tk.getUserId(), file);
     }
 
     @RequestMapping(value = URL + "ReviceClassify", method = RequestMethod.POST)

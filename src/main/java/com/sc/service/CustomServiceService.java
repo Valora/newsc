@@ -235,7 +235,7 @@ public class CustomServiceService {
             }
             String mainpath = "";
             String showpath = "";
-            File file = new File("/upload/" + root);
+            File file = new File("C://" + root);
             if (!file.isDirectory()) {
                 file.mkdirs();
             }
