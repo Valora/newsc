@@ -186,10 +186,11 @@ public class PageDataService {
     public Result searchGoods(String content, Integer pageNum, Integer pageSize) {
         try {
             List<PageGoods> goods = pageDataDao.searchGoods(content, pageNum, pageSize);
-            Integer i = toIntExact(pageDataDao.getSearchGoodsCount(content));
+            Integer i = goods.size();
             i = (i / pageSize) + ((i % pageSize) > 0 ? 1 : 0);
             return GetResult.toJson(0, null, null, goods, i);
         } catch (Exception ex) {
+            ex.printStackTrace();
             return GetResult.toJson(200, null, null, null, 0);
         }
     }

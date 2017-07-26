@@ -10,4 +10,5 @@ public class SelleridAndNameAndAccount {
     private String CM_SELLERID;
     private String CM_SELLERNAME;
     private String CM_ACCOUNT;
+    private String CM_PHONE;
 }

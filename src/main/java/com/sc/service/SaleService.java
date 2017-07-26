@@ -5,6 +5,8 @@ import com.sc.domain.generator.Admins;
 import com.sc.domain.generator.Register;
 import com.sc.domain.generator.Sellers;
 import com.sc.domain.generator.Users;
+import com.sc.domain.sale.SellersInfo;
+import com.sc.domain.sale.UsersInfo;
 import com.sc.storage.StorageService;
 import com.sc.utils.DateUtils;
 import com.sc.utils.GetRandomNumber;
@@ -21,7 +23,6 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 业务人员用
@@ -197,7 +198,6 @@ public class SaleService {
      *
      * @param userId
      * @param phone
-     * @param code
      * @param address
      * @param lon
      * @param lat
@@ -227,7 +227,7 @@ public class SaleService {
             if (register.getCM_CODE() == null) {
                 return GetResult.toJson(7, null, null, null, 0);
             }
-            
+
             //检查手机号是否被注册
             int n = saleDao.getUserCount(phone);
             if (n > 0) {
@@ -296,7 +296,6 @@ public class SaleService {
      *
      * @param userId
      * @param phone
-     * @param code
      * @param address
      * @param lon
      * @param lat
@@ -311,7 +310,7 @@ public class SaleService {
      * @param files
      * @return
      */
-    public Result SellerApplication(String userId, Long phone, Integer code, String address, Double lon, Double lat, String pwd, String cardno, String companyname, String personname, String contactname, String contactphone, String telephone, String pax, List<MultipartFile> files) {
+    public Result SellerApplication(String userId, Long phone, String address, Double lon, Double lat, String pwd, String cardno, String companyname, String personname, String contactname, String contactphone, String telephone, String pax, List<MultipartFile> files) {
         try {
             Admins admins = saleDao.getAdminByAdminId(userId);
             if (admins == null || (admins.getCM_LEVEL() != 2 && admins.getCM_LEVEL() != 1)) {
@@ -324,9 +323,6 @@ public class SaleService {
             }
             if (register.getCM_CODE() == null) {
                 return GetResult.toJson(7, null, null, null, 0);
-            }
-            if (!Objects.equals(register.getCM_CODE(), code)) {
-                return GetResult.toJson(8, null, null, null, 0);
             }
             //检查手机号是否被注册
             int n = saleDao.getSellerCount(phone);
@@ -383,6 +379,44 @@ public class SaleService {
             saleDao.sellerApplication(sellers);
             return GetResult.toJson(0, null, jwt.createJWT(userId), account, 0);
         } catch (Exception e) {
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 查询注册人员注册商家
+     *
+     * @param userId   注册人员ID
+     * @param pageNum  页码
+     * @param pageSize 页码大小
+     * @return
+     */
+    public Result queryUsersByAdminId(String userId, Integer pageNum, Integer pageSize) {
+        try {
+            List<UsersInfo> usersInfos = saleDao.getUserInfoByAdminId(userId, pageNum, pageSize);
+            int i = usersInfos.size();
+            i = (i / pageSize) + ((i % pageSize) > 0 ? 1 : 0);
+            return GetResult.toJson(0, null, null, usersInfos, i);
+        } catch (Exception ex) {
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
+
+    /**
+     * 查询注册人员注册家
+     *
+     * @param userId   注册人员ID
+     * @param pageNum  页码
+     * @param pageSize 页码大小
+     * @return
+     */
+    public Result querySellersByAdminId(String userId, Integer pageNum, Integer pageSize) {
+        try {
+            List<SellersInfo> sellersInfos = saleDao.getSellersInfoByAdminId(userId, pageNum, pageSize);
+            int i = sellersInfos.size();
+            i = (i / pageSize) + ((i % pageSize) > 0 ? 1 : 0);
+            return GetResult.toJson(0, null, null, sellersInfos, i);
+        } catch (Exception ex) {
             return GetResult.toJson(200, null, null, null, 0);
         }
     }

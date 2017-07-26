@@ -93,8 +93,6 @@ public class SaleController {
         String cardno = request.getParameter("cardno");
         String phone1 = request.getParameter("phone");
         Long phone = Long.valueOf(request.getParameter("phone"));
-        Integer code = Integer.valueOf(request.getParameter("code"));
-        String code1 = request.getParameter("code");
         String lon1 = request.getParameter("lon");
         Double lon = Double.valueOf(request.getParameter("lon"));
         Double lat = Double.valueOf(request.getParameter("lat"));
@@ -109,13 +107,13 @@ public class SaleController {
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
         }
-        if (StringUtils.isBlank(address) || StringUtils.isBlank(pwd) || StringUtils.isBlank(pwdagain) || StringUtils.isBlank(cardno) || StringUtils.isBlank(phone1) || StringUtils.isBlank(code1) || StringUtils.isBlank(lon1) || StringUtils.isBlank(lat1)) {
+        if (StringUtils.isBlank(address) || StringUtils.isBlank(pwd) || StringUtils.isBlank(pwdagain) || StringUtils.isBlank(cardno) || StringUtils.isBlank(phone1) || StringUtils.isBlank(lon1) || StringUtils.isBlank(lat1)) {
             return GetResult.toJson(38, null, null, null, 0);
         }
         if (!Objects.equals(pwd, pwdagain)) {
             return GetResult.toJson(55, null, null, null, 0);
         }
-        return saleService.SellerApplication(tk.getUserId(), phone, code, address, lon, lat, pwd, cardno, companyname, personname, contactname, contactphone, telephone, pax, files);
+        return saleService.SellerApplication(tk.getUserId(), phone, address, lon, lat, pwd, cardno, companyname, personname, contactname, contactphone, telephone, pax, files);
     }
 
     @RequestMapping(value = URL + "QueryUsersByMap", method = RequestMethod.GET)
@@ -149,6 +147,38 @@ public class SaleController {
             return GetResult.toJson(101, null, null, null, 0);
         } else {
             return saleService.QuerySellerByMap(tk.getUserId(), lon, lat, distance);
+        }
+    }
+
+    @RequestMapping(value = URL + "QueryUsersByAdminId", method = RequestMethod.GET)
+    @ApiOperation("查询注册人员注册商家")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "pageNum", value = "页码", required = true, dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "pageSize", value = "页面大小", required = true, dataType = "Integer", paramType = "query")
+    })
+    public Result queryUsersByAdminId(@RequestParam("token") String token, @RequestParam(value = "pageSize", defaultValue = "1")Integer pageSize, @RequestParam(value = "PageNum", defaultValue = "10")Integer pageNum) {
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        } else {
+            return saleService.queryUsersByAdminId(tk.getUserId(), pageNum, pageSize);
+        }
+    }
+
+    @RequestMapping(value = URL + "QuerySellersByAdminId", method = RequestMethod.GET)
+    @ApiOperation("查询注册人员注册厂家")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "pageNum", value = "页码", required = true, dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "pageSize", value = "页面大小", required = true, dataType = "Integer", paramType = "query")
+    })
+    public Result QuerySellersByAdminId(@RequestParam("token") String token, @RequestParam(value = "pageSize", defaultValue = "1")Integer pageSize, @RequestParam(value = "PageNum", defaultValue = "10")Integer pageNum) {
+        Token tk = jwt.checkJWT(token);
+        if (tk == null) {
+            return GetResult.toJson(101, null, null, null, 0);
+        } else {
+            return saleService.querySellersByAdminId(tk.getUserId(), pageNum, pageSize);
         }
     }
 

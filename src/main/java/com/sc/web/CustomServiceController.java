@@ -27,9 +27,9 @@ import java.util.List;
  * Created by valora on 2017/5/12.
  */
 @RestController
-@Api("costomservice")
+@Api("CustomService")
 public class CustomServiceController {
-    private final static String URL = "/api/costomservice/";
+    private final static String URL = "/api/CustomService/";
 
     private final JWT jwt;
 

@@ -37,7 +37,7 @@ public class VersionController {
     @RequestMapping(value = "/phone3", method = RequestMethod.GET)
     public Map phone3() {
         Map<Integer, Integer> result = new HashMap<>();
-        result.put(0, 0);
+        result.put(0, 1);
         return result;
     }
 

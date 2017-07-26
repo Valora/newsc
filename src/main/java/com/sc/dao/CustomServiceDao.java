@@ -63,7 +63,7 @@ public class CustomServiceDao {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
         criteria.andCM_GOODSIDEqualTo(goodsWithBLOBs.getCM_GOODSID());
-        return goodsMapper.updateByExampleWithBLOBs(goodsWithBLOBs, goodsExample);
+        return goodsMapper.updateByExampleSelective(goodsWithBLOBs, goodsExample);
     }
 
     /**
@@ -191,6 +191,6 @@ public class CustomServiceDao {
         GooddetailsExample gooddetailsExample = new GooddetailsExample();
         GooddetailsExample.Criteria criteria = gooddetailsExample.createCriteria();
         criteria.andCM_GOODSDETAILSIDEqualTo(gooddetailsWithBLOBs.getCM_GOODSDETAILSID());
-        gooddetailsMapper.updateByExample(gooddetailsWithBLOBs, gooddetailsExample);
+        gooddetailsMapper.updateByExampleSelective(gooddetailsWithBLOBs, gooddetailsExample);
     }
 }

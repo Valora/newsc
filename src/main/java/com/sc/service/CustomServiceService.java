@@ -175,6 +175,7 @@ public class CustomServiceService {
                 selectSellerByLikeContent.setCM_SELLERID(sellers.getCM_SELLERID());
                 selectSellerByLikeContent.setCM_SELLERNAME(sellers.getCM_SELLERNAME());
                 selectSellerByLikeContent.setCM_ACCOUNT(sellers.getCM_ACCOUNT());
+                selectSellerByLikeContent.setCM_PHONE(String.valueOf(sellers.getCM_PHONE()));
                 list1.add(selectSellerByLikeContent);
             }
         }

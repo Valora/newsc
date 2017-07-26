@@ -29,7 +29,7 @@ import java.util.List;
 @RestController
 @Api("Manage")
 public class ManageController {
-    private final static String URL = "/api/Values/";
+    private final static String URL = "/api/Manage/";
 
     private final JWT jwt;
 

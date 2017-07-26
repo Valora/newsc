@@ -124,9 +124,9 @@ public class FileSystemStorageService implements StorageService {
     @Override
     public String getFileType(String fileName) {
         if (fileName != null && fileName.indexOf(".") >= 0) {
-            return fileName.substring(fileName.lastIndexOf("."), fileName.length());
+            return fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
         }
-        return "";
+        return null;
     }
 
     private static void scale(MultipartFile srcFile, String result) {

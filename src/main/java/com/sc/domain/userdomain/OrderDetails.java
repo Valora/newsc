@@ -19,6 +19,7 @@ public class OrderDetails {
     private Integer CM_STATE;
     private String CM_USERID;
     private Integer CM_USESCORE;
+    private String CM_USEBALANCE;
     private String CM_NICKNAME;
     private Long CM_PHONE;
     private String CM_SHOPADDRESS;

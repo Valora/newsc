@@ -80,6 +80,7 @@
         <result column="CM_STATE" property="CM_STATE" jdbcType="INTEGER"/>
         <result column="CM_USERID" property="CM_USERID" jdbcType="VARCHAR"/>
         <result column="CM_USESCORE" property="CM_USESCORE" jdbcType="INTEGER"/>
+        <result column="CM_USERBALANCE" property="CM_USEBALANCE"/>
         <result column="CM_NICKNAME" property="CM_NICKNAME" jdbcType="VARCHAR"/>
         <result column="CM_PHONE" property="CM_PHONE" jdbcType="DOUBLE"/>
         <result column="CM_SHOPADDRESS" property="CM_SHOPADDRESS" jdbcType="VARCHAR"/>
@@ -342,6 +343,7 @@
             t0.CM_STATE,
             t0.CM_USERID,
             t0.CM_USESCORE,
+            t0.CM_USERBALANCE,
             t1.CM_SHOPNAME     AS CM_NICKNAME,
             t1.CM_PHONE        AS CM_PHONE,
             t1.CM_SHOPEADDRESS AS CM_SHOPEADDRESS,

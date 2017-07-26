@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.OutputStream;
 
 /**
@@ -31,11 +33,22 @@ public class GetImageService {
         }
         try {
             File file = storageService.loadAsFile(path);
-            response.setContentType("image/jpeg");
-            BufferedImage bufferedImage = ImageIO.read(file);
-            OutputStream outputStream = response.getOutputStream();
-            ImageIO.write(bufferedImage, "jpg", outputStream);
-            outputStream.close();
+            String fileType = storageService.getFileType(file.getAbsolutePath());
+            if (fileType != null) {
+                response.setContentType("image/" + fileType);
+                BufferedImage bufferedImage = ImageIO.read(file);
+                OutputStream outputStream = response.getOutputStream();
+                ImageIO.write(bufferedImage, fileType, outputStream);
+                outputStream.close();
+            } else {
+                // 载入图像
+                BufferedImage buffImg = ImageIO.read(new FileInputStream(path));
+                response.setContentType("image/jpeg");
+                // 将图像输出到Servlet输出流中。
+                ServletOutputStream sos = response.getOutputStream();
+                ImageIO.write(buffImg, "jpeg", sos);
+                sos.close();
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
             return;

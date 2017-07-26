@@ -247,7 +247,7 @@ public class UserDoMainDao {
         criteria.andCM_ORDERIDEqualTo(orderdetailid);
         OrderdetailsWithBLOBs orderdetails = new OrderdetailsWithBLOBs();
         orderdetails.setCM_SELLERSTATE(4);
-        orderdetailsMapper.updateByExampleWithBLOBs(orderdetails, orderdetailsExample);
+        orderdetailsMapper.updateByExampleSelective(orderdetails, orderdetailsExample);
     }
 
     /**
@@ -258,10 +258,10 @@ public class UserDoMainDao {
     public void updateOrderByOrderid(String orderid) {
         OrdersExample ordersExample = new OrdersExample();
         OrdersExample.Criteria criteria = ordersExample.createCriteria();
-        Orders orders = new Orders();
+        OrdersWithBLOBs orders = new OrdersWithBLOBs();
         orders.setCM_STATE(4);
         criteria.andCM_ORDERIDEqualTo(orderid);
-        ordersMapper.updateByExample(orders, ordersExample);
+        ordersMapper.updateByExampleSelective(orders, ordersExample);
     }
 
     /**
@@ -287,10 +287,10 @@ public class UserDoMainDao {
     public void updateOrderDetailsByOrderid(String orderid) {
         OrderdetailsExample orderdetailsExample = new OrderdetailsExample();
         OrderdetailsExample.Criteria criteria = orderdetailsExample.createCriteria();
-        Orderdetails orderdetails = new Orderdetails();
+        OrderdetailsWithBLOBs orderdetails = new OrderdetailsWithBLOBs();
         orderdetails.setCM_SELLERSTATE(4);
         criteria.andCM_ORDERDETAILSIDEqualTo(orderid);
-        orderdetailsMapper.updateByExample(orderdetails, orderdetailsExample);
+        orderdetailsMapper.updateByExampleSelective(orderdetails, orderdetailsExample);
     }
 
     /**
@@ -357,7 +357,7 @@ public class UserDoMainDao {
         AfterservicesExample afterservicesExample = new AfterservicesExample();
         AfterservicesExample.Criteria criteria = afterservicesExample.createCriteria();
         criteria.andCM_AFTERSERVICEIDEqualTo(afterservices.getCM_AFTERSERVICEID());
-        afterservicesMapper.updateByExample(afterservices, afterservicesExample);
+        afterservicesMapper.updateByExampleSelective(afterservices, afterservicesExample);
     }
 
     /**

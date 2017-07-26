@@ -76,6 +76,7 @@ public class LoginDao {
         if (result != null && result.size() > 0) {
             userLoginInfo.setCM_USERID(result.get(0).getCM_USERID());
             userLoginInfo.setCM_SHOPEADDRESS(result.get(0).getCM_SHOPEADDRESS());
+            userLoginInfo.setCM_NAME(result.get(0).getCM_NAME());
             userLoginInfo.setCM_BALANCE(result.get(0).getCM_BALANCE());
             userLoginInfo.setCM_SHOPNAME(result.get(0).getCM_SHOPNAME());
             userLoginInfo.setCM_LEVEL(result.get(0).getCM_LEVEL());

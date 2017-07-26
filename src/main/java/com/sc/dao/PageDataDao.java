@@ -310,13 +310,8 @@ public class PageDataDao {
      * @return 商品列表
      */
     public List<PageGoods> searchGoods(String content, Integer pageNum, Integer pageSize) {
-        GoodsExample goodsExample = new GoodsExample();
-        GoodsExample.Criteria criteria = goodsExample.createCriteria();
-        criteria.andCM_GOODSARTNUMLike(content);
-        criteria.andCM_TITLELike(content);
         PageHelper.startPage(pageNum, pageSize);
-        List<GoodsWithBLOBs> goods = goodsMapper.selectByExampleWithBLOBs(goodsExample);
-        return goodsToPageGoods(goods);
+        return pageDataMapper.searchGoods(content);
     }
 
     /**
@@ -325,6 +320,7 @@ public class PageDataDao {
      * @param content 商品编号或品牌
      * @return 数量
      */
+    @Deprecated
     public Long getSearchGoodsCount(String content) {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();

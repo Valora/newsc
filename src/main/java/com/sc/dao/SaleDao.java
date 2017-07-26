@@ -1,5 +1,7 @@
 package com.sc.dao;
 
+import com.alipay.api.domain.Sale;
+import com.github.pagehelper.PageHelper;
 import com.sc.domain.generator.Admins;
 import com.sc.domain.generator.AdminsExample;
 import com.sc.domain.generator.Register;
@@ -8,10 +10,13 @@ import com.sc.domain.generator.Sellers;
 import com.sc.domain.generator.SellersExample;
 import com.sc.domain.generator.Users;
 import com.sc.domain.generator.UsersExample;
+import com.sc.domain.sale.SellersInfo;
+import com.sc.domain.sale.UsersInfo;
 import com.sc.mapper.generator.AdminsMapper;
 import com.sc.mapper.generator.RegisterMapper;
 import com.sc.mapper.generator.SellersMapper;
 import com.sc.mapper.generator.UsersMapper;
+import com.sc.mapper.sale.SaleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -31,14 +36,16 @@ public class SaleDao {
     private final SellersMapper sellersMapper;
     private final AdminsMapper adminsMapper;
     private final JdbcTemplate jdbcTemplate;
+    private final SaleMapper saleMapper;
 
     @Autowired
-    public SaleDao(RegisterMapper registerMapper, UsersMapper usersMapper, SellersMapper sellersMapper, AdminsMapper adminsMapper, JdbcTemplate jdbcTemplate) {
+    public SaleDao(RegisterMapper registerMapper, UsersMapper usersMapper, SellersMapper sellersMapper, AdminsMapper adminsMapper, JdbcTemplate jdbcTemplate, SaleMapper saleMapper) {
         this.registerMapper = registerMapper;
         this.usersMapper = usersMapper;
         this.sellersMapper = sellersMapper;
         this.adminsMapper = adminsMapper;
         this.jdbcTemplate = jdbcTemplate;
+        this.saleMapper = saleMapper;
     }
 
     /**
@@ -144,7 +151,7 @@ public class SaleDao {
         AdminsExample adminsExample = new AdminsExample();
         AdminsExample.Criteria criteria = adminsExample.createCriteria();
         criteria.andCM_ADMINIDEqualTo(admins.getCM_ADMINID());
-        adminsMapper.updateByExample(admins, adminsExample);
+        adminsMapper.updateByExampleSelective(admins, adminsExample);
     }
 
     /**
@@ -205,7 +212,7 @@ public class SaleDao {
      * @return
      */
     public Long getUserMaxAccount() {
-        String sql = "SELECT MAX(cast(CM_ACCOUNT AS UNSIGNED INTEGER))FROM TB_USERS";
+        String sql = "select MAX(cast(CM_ACCOUNT AS UNSIGNED INTEGER))from TB_USERS a WHERE a.CM_USERID = (SELECT MAX(cast(CM_USERID AS UNSIGNED INTEGER)) from TB_USERS b);";
         return jdbcTemplate.queryForObject(sql, Long.class);
     }
 
@@ -237,7 +244,7 @@ public class SaleDao {
      * @return
      */
     public Long getSellerMaxAccount() {
-        String sql = "SELECT MAX(cast(CM_ACCOUNT AS UNSIGNED INTEGER))FROM TB_SELLERS";
+        String sql = "select MAX(cast(CM_ACCOUNT AS UNSIGNED INTEGER))from TB_SELLERS a WHERE a.CM_SELLERID = (SELECT MAX(cast(b.CM_SELLERID AS UNSIGNED INTEGER)) from TB_SELLERS b);";
         return jdbcTemplate.queryForObject(sql, Long.class);
     }
 
@@ -248,5 +255,29 @@ public class SaleDao {
      */
     public void sellerApplication(Sellers sellers) {
         sellersMapper.insert(sellers);
+    }
+
+    /**
+     * 查询注册人员注册商家
+     * @param userId 注册人员ID
+     * @param pageNum 页码
+     * @param pageSize 页码大小
+     * @return
+     */
+    public List<UsersInfo> getUserInfoByAdminId(String userId, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        return saleMapper.getUserInfoByAdminId(userId);
+    }
+
+    /**
+     * 查询注册人员注册家
+     * @param userId 注册人员ID
+     * @param pageNum 页码
+     * @param pageSize 页码大小
+     * @return
+     */
+    public List<SellersInfo> getSellersInfoByAdminId(String userId, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        return saleMapper.getSellersInfoByAdminId(userId);
     }
 }

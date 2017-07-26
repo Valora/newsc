@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.sale.SaleMapper">
+    <select id="getUserInfoByAdminId" resultType="com.sc.domain.sale.UsersInfo">
+        SSELECT
+          t0.CM_SHOPNAME,
+          t0.CM_PHONE,
+          t0.CM_ACCOUNT,
+          t0.CM_NAME,
+          t0.CM_CREATETIME
+        FROM TB_USERS AS t0
+        WHERE t0.CM_REASON = #{userId}
+    </select>
+    <select id="getSellersInfoByAdminId" resultType="com.sc.domain.sale.SellersInfo">
+        SSELECT
+          t0.CM_SELLERNAME,
+          t0.CM_PHONE,
+          t0.CM_ACCOUNT,
+          t0.CM_NAME,
+          t0.CM_CREATETIME
+        FROM TB_SELLERS AS t0
+        WHERE t0.CM_REASON = #{userId}
+    </select>
+</mapper>

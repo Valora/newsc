@@ -10,7 +10,7 @@
         <result column="CM_BRANDID" property="CM_BRANDID" jdbcType="VARCHAR"/>
         <result column="CM_MAINFIGUREPATH" property="CM_MAINFIGUREPATH" jdbcType="VARCHAR"/>
         <result column="CM_FIGURESPATH" property="CM_FIGURESPATH" jdbcType="VARCHAR"/>
-        <result column="CM_CREATETIME" property="CM_CREATETIME" />
+        <result column="CM_CREATETIME" property="CM_CREATETIME"/>
         <result column="CM_ORIGINALPRICE" property="CM_ORIGINALPRICE" jdbcType="DOUBLE"/>
         <result column="CM_PRESENTPRICE" property="CM_PRESENTPRICE" jdbcType="DOUBLE"/>
         <result column="CM_ISOFF" property="CM_ISOFF" jdbcType="INTEGER"/>
@@ -35,7 +35,7 @@
         <result column="CM_BRANDID" property="CM_BRANDID" jdbcType="VARCHAR"/>
         <result column="CM_MAINFIGUREPATH" property="CM_MAINFIGUREPATH" jdbcType="VARCHAR"/>
         <result column="CM_FIGURESPATH" property="CM_FIGURESPATH" jdbcType="VARCHAR"/>
-        <result column="CM_CREATETIME" property="CM_CREATETIME" />
+        <result column="CM_CREATETIME" property="CM_CREATETIME"/>
         <result column="CM_ORIGINALPRICE" property="CM_ORIGINALPRICE" jdbcType="DOUBLE"/>
         <result column="CM_PRESENTPRICE" property="CM_PRESENTPRICE" jdbcType="DOUBLE"/>
         <result column="CM_ISOFF" property="CM_ISOFF" jdbcType="INTEGER"/>
@@ -62,9 +62,24 @@
             <collection property="TB_GOODS" ofType="com.sc.domain.pagedata.ClassifyGoods">
                 <result column="CM_GOODSID" property="CM_GOODSID" jdbcType="VARCHAR"/>
                 <result column="CM_MAINFIGUREPATH" property="CM_MAINFIGUREPATH" jdbcType="VARCHAR"/>
-                <result column="CM_CREATETIME" property="CM_CREATETIME" />
+                <result column="CM_CREATETIME" property="CM_CREATETIME"/>
             </collection>
         </collection>
+    </resultMap>
+
+    <resultMap id="searchGoods" type="com.sc.domain.pagedata.PageGoods">
+        <result column="CM_BRANDID" property="CM_BRANDID"/>
+        <result column="CM_FIGURESPATH" property="CM_FIGURESPATH"/>
+        <result column="CM_GOODSID" property="CM_GOODSID"/>
+        <result column="CM_MAINFIGUREPATH" property="CM_MAINFIGUREPATH"/>
+        <result column="CM_PRESENTPRICE" property="CM_PRESENTPRICE"/>
+        <result column="CM_ORIGINALPRICE" property="CM_ORIGINALPRICE"/>
+        <result column="CM_SALES" property="CM_SALES"/>
+        <result column="CM_TITLE" property="CM_TITLE"/>
+        <result column="CM_CREATETIME" property="CM_CREATETIME"/>
+        <result column="CM_ISOFF" property="CM_ISOFF"/>
+        <result column="CM_SELLERID" property="CM_SELLERID"/>
+        <result column="CM_GOODSARTNUM" property="CM_GOODSARTNUM"/>
     </resultMap>
 
     <select id="getGoodsDetailsWithUserid" resultMap="GoodDetail">
@@ -164,5 +179,23 @@
             LEFT JOIN TB_GOODS d ON b.CM_CLASSIFYID = d.CM_CLASSIFYID
         WHERE a.CM_PARENTID = "0"
         ORDER BY  CM_SORT_A
+    </select>
+
+    <select id="searchGoods" resultMap="searchGoods">
+        SELECT
+          t0.CM_BRANDID,
+          t0.CM_FIGURESPATH,
+          t0.CM_GOODSID,
+          t0.CM_MAINFIGUREPATH,
+          t0.CM_PRESENTPRICE,
+          t0.CM_ORIGINALPRICE,
+          t0.CM_SALES,
+          t0.CM_TITLE,
+          t0.CM_CREATETIME,
+          t0.CM_ISOFF,
+          t0.CM_SELLERID,
+          t0.CM_GOODSARTNUM
+        FROM TB_GOODS AS t0
+        WHERE (t0.CM_GOODSARTNUM LIKE CONCAT('%','${content}','%' )) OR ((t0.CM_TITLE LIKE CONCAT('%','${content}','%' )) AND (t0.CM_ISOFF = 0))
     </select>
 </mapper>
