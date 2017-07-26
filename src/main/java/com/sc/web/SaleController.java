@@ -49,7 +49,7 @@ public class SaleController {
     }
 
     @RequestMapping(value = URL + "UserApplication", method = RequestMethod.POST)
-    @ApiOperation("(商家)申请{token秘钥,phone电话,code验证码,shopname店铺名称，address地址,lon经度,lat纬度,pwd密码,pwdagain确认密码,cardno身份证号码，personname用户姓名,contactname紧急联系人姓名，contactphone紧急联系人电话，telephone固定电话,pax固定电话,图片{身份证以及人name:card,店铺name:store,营业执照以及证件name:license}")
+    @ApiOperation("(商家)申请{token秘钥,phone电话,shopname店铺名称，address地址,lon经度,lat纬度,pwd密码,pwdagain确认密码,cardno身份证号码，personname用户姓名,contactname紧急联系人姓名，contactphone紧急联系人电话，telephone固定电话,pax固定电话,图片{身份证以及人name:card,店铺name:store,营业执照以及证件name:license}")
     public Result userApplication(HttpServletRequest request) {
         List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("files");
         String token = request.getParameter("token");
@@ -59,8 +59,6 @@ public class SaleController {
         String cardno = request.getParameter("cardno");
         String phone1 = request.getParameter("phone");
         Long phone = Long.valueOf(request.getParameter("phone"));
-        String code1 = request.getParameter("code");
-        Integer code = Integer.valueOf(request.getParameter("code"));
         String lon1 = request.getParameter("lon");
         Double lon = Double.valueOf(request.getParameter("lon"));
         String lat1 = request.getParameter("lat");
@@ -75,13 +73,13 @@ public class SaleController {
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
         }
-        if (StringUtils.isBlank(address) || StringUtils.isBlank(pwd) || StringUtils.isBlank(pwdagain) || StringUtils.isBlank(cardno) || StringUtils.isBlank(phone1) || StringUtils.isBlank(code1) || StringUtils.isBlank(lon1) || StringUtils.isBlank(lat1)) {
+        if (StringUtils.isBlank(address) || StringUtils.isBlank(pwd) || StringUtils.isBlank(pwdagain) || StringUtils.isBlank(cardno) || StringUtils.isBlank(phone1) || StringUtils.isBlank(lon1) || StringUtils.isBlank(lat1)) {
             return GetResult.toJson(38, null, null, null, 0);
         }
         if (!Objects.equals(pwd, pwdagain)) {
             return GetResult.toJson(55, null, null, null, 0);
         }
-        return saleService.UserApplication(tk.getUserId(), phone, code, address, lon, lat, pwd, cardno, shopname, personname, contactname, contactphone, telephone, pax, files);
+        return saleService.UserApplication(tk.getUserId(), phone, address, lon, lat, pwd, cardno, shopname, personname, contactname, contactphone, telephone, pax, files);
     }
 
     @RequestMapping(value = URL + "SellerApplication", method = RequestMethod.POST)

@@ -212,7 +212,7 @@ public class SaleService {
      * @param files
      * @return
      */
-    public Result UserApplication(String userId, Long phone, Integer code, String address, Double lon, Double lat, String pwd, String cardno, String shopname, String personname, String contactname, String contactphone, String telephone, String pax, List<MultipartFile> files) {
+    public Result UserApplication(String userId, Long phone, String address, Double lon, Double lat, String pwd, String cardno, String shopname, String personname, String contactname, String contactphone, String telephone, String pax, List<MultipartFile> files) {
         try {
             Admins admins = saleDao.getAdminByAdminId(userId);
             if (admins == null || (admins.getCM_LEVEL() != 2 && admins.getCM_LEVEL() != 1)) {
@@ -227,9 +227,7 @@ public class SaleService {
             if (register.getCM_CODE() == null) {
                 return GetResult.toJson(7, null, null, null, 0);
             }
-            if (!Objects.equals(register.getCM_CODE(), code)) {
-                return GetResult.toJson(8, null, null, null, 0);
-            }
+            
             //检查手机号是否被注册
             int n = saleDao.getUserCount(phone);
             if (n > 0) {
