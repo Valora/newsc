@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sc.mapper.sale.SaleMapper">
-    <select id="getUserInfoByAdminId" resultType="com.sc.domain.sale.UsersInfo">
-        SSELECT
+    <resultMap id="UsersInfo" type="com.sc.domain.sale.UsersInfo">
+        <result column="CM_SHOPNAME" property="CM_SHOPNAME"/>
+        <result column="CM_PHONE" property="CM_PHONE"/>
+        <result column="CM_ACCOUNT" property="CM_ACCOUNT"/>
+        <result column="CM_NAME" property="CM_NAME"/>
+        <result column="CM_CREATETIME" property="CM_CREATETIME"/>
+    </resultMap>
+
+    <resultMap id="SellersInfo" type="com.sc.domain.sale.SellersInfo">
+        <result column="CM_SELLERNAME" property="CM_SELLERNAME"/>
+        <result column="CM_PHONE" property="CM_PHONE"/>
+        <result column="CM_ACCOUNT" property="CM_ACCOUNT"/>
+        <result column="CM_NAME" property="CM_NAME"/>
+        <result column="CM_CREATETIME" property="CM_CREATETIME"/>
+    </resultMap>
+    <select id="getUserInfoByAdminId" resultMap="UsersInfo">
+        SELECT
           t0.CM_SHOPNAME,
           t0.CM_PHONE,
           t0.CM_ACCOUNT,
@@ -11,8 +26,8 @@
         FROM TB_USERS AS t0
         WHERE t0.CM_REASON = #{userId}
     </select>
-    <select id="getSellersInfoByAdminId" resultType="com.sc.domain.sale.SellersInfo">
-        SSELECT
+    <select id="getSellersInfoByAdminId" resultMap="SellersInfo">
+        SELECT
           t0.CM_SELLERNAME,
           t0.CM_PHONE,
           t0.CM_ACCOUNT,

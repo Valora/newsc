@@ -31,6 +31,8 @@ public class UserLoginSqlProvider {
         sql.SELECT(" CM_USERID,\n" +
                 " CM_BALANCE,\n" +
                 " CM_PHONE,\n" +
+                " CM_SHOPEADDRESS,\n" +
+                " CM_NAME,\n" +
                 " CM_LEVEL,\n" +
                 " CM_SHOPNAME,\n" +
                 " CM_INTEGRAL\n");

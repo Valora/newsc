@@ -102,6 +102,8 @@ public class LoginDao {
             userLoginInfo.setCM_USERID(result.get(0).getCM_USERID());
             userLoginInfo.setCM_BALANCE(result.get(0).getCM_BALANCE());
             userLoginInfo.setCM_SHOPNAME(result.get(0).getCM_SHOPNAME());
+            userLoginInfo.setCM_SHOPEADDRESS(result.get(0).getCM_SHOPEADDRESS());
+            userLoginInfo.setCM_NAME(result.get(0).getCM_NAME());
             userLoginInfo.setCM_LEVEL(result.get(0).getCM_LEVEL());
             userLoginInfo.setCM_INTEGRAL(result.get(0).getCM_INTEGRAL());
             userLoginInfo.setCM_PHONE(result.get(0).getCM_PHONE());

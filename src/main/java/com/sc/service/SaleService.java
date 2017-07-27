@@ -23,6 +23,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 业务人员用
@@ -58,12 +59,10 @@ public class SaleService {
         try {
             List<Register> list = saleDao.selectregisterbyphone(phone);
             Integer code = Integer.valueOf(GetRandomNumber.genRandomNum(4));
-            LocalDate time = LocalDate.now();
             if (SendCode.sendCode(phone.toString(), code, type)) {
                 Register register = new Register();
                 register.setCM_CODE(code);
-                Date date = Date.from(time.atStartOfDay(ZoneId.systemDefault()).toInstant());
-                register.setCM_TIME(date);
+                register.setCM_TIME(new Date());
                 register.setCM_COUNT(0);
                 //如果是新用户，则新增
                 if (list.get(0) == null) {
@@ -154,15 +153,13 @@ public class SaleService {
         try {
             List<Register> list = saleDao.selectregisterbyphone(phone);
             Register register = list.get(0);
-            //业务人员不存在
-            if (register == null || register.getCM_CODE() != code) {
-                return GetResult.toJson(8, null, null, list, 0);
+            //wrong code
+            if (register == null || register.getCM_CODE().intValue() != code.intValue()) {
+                return GetResult.toJson(8, null, null, null, 0);
             }
-            Admins admins = saleDao.selectadminbyphone(phone);
-            admins.setCM_PASSWORD(newpassword);
-            //update业务人员密码
-            saleDao.updateAdminPassword(admins);
-            return GetResult.toJson(0, null, null, list, 0);
+            //update password
+            saleDao.updateAdminPassword(phone, newpassword);
+            return GetResult.toJson(0, null, null, null, 0);
         } catch (Exception e) {
             return GetResult.toJson(200, null, null, null, 0);
         }
@@ -182,12 +179,11 @@ public class SaleService {
             if (list != null && list.size() > 0) {
                 register = list.get(0);
             }
-            //业务人员不存在
-            if (register == null || register.getCM_CODE() != code) {
-                return GetResult.toJson(8, null, null, list, 0);
+            if (register == null || register.getCM_CODE().intValue() != code.intValue()) {
+                return GetResult.toJson(8, null, null, null, 0);
             }
             Admins admins = saleDao.selectadminbyphone_and_Level(phone, 1);
-            return GetResult.toJson(0, null, null, admins == null ? admins.getCM_ACCOUNT() : null, 0);
+            return GetResult.toJson(0, null, null, admins == null ? null : admins.getCM_ACCOUNT(), 0);
         } catch (Exception e) {
             return GetResult.toJson(200, null, null, null, 0);
         }
@@ -209,23 +205,16 @@ public class SaleService {
      * @param contactphone
      * @param telephone
      * @param pax
-     * @param files
+     * @param cardFiles
+     * @param storeFiles
+     * @param licenseFiles
      * @return
      */
-    public Result UserApplication(String userId, Long phone, String address, Double lon, Double lat, String pwd, String cardno, String shopname, String personname, String contactname, String contactphone, String telephone, String pax, List<MultipartFile> files) {
+    public Result UserApplication(String userId, Long phone, String address, Double lon, Double lat, String pwd, String cardno, String shopname, String personname, String contactname, String contactphone, String telephone, String pax, MultipartFile[] cardFiles, MultipartFile[] storeFiles, MultipartFile[] licenseFiles) {
         try {
             Admins admins = saleDao.getAdminByAdminId(userId);
             if (admins == null || (admins.getCM_LEVEL() != 2 && admins.getCM_LEVEL() != 1)) {
                 return GetResult.toJson(45, null, null, null, 0);
-            }
-
-            Register register = new Register();
-            List<Register> list = saleDao.selectregisterbyphone(phone);
-            if (list != null && list.size() > 0) {
-                register = list.get(0);
-            }
-            if (register.getCM_CODE() == null) {
-                return GetResult.toJson(7, null, null, null, 0);
             }
 
             //检查手机号是否被注册
@@ -233,38 +222,65 @@ public class SaleService {
             if (n > 0) {
                 return GetResult.toJson(60, null, null, null, 0);
             }
+
+            //check user cardno
+            int m = saleDao.getUserCount(cardno);
+            if (m > 0) {
+                return GetResult.toJson(64, null, null, null, 0);
+            }
             String card = "";
             String store = "";
             String license = "";
-            Date now = new Date();
-            for (MultipartFile file : files) {
+            String Date = DateUtils.todayYyyyMmDdHhMmSs();
+            for (MultipartFile file : cardFiles) {
                 int i = 0;
                 String fileName = file.getOriginalFilename();
                 if (!storageService.isImage(fileName)) {
                     return GetResult.toJson(28, null, null, null, 0);
                 }
                 String res = "";
-                String newfilename = i + "." + storageService.getFileType(fileName);
-                if (storageService.store(file, root + newfilename)) {
-                    res = root + newfilename;
+                String newfilename = root + "users\\" + Date + "\\" +"card"+ i + "." + storageService.getFileType(fileName);
+                if (storageService.store(file, newfilename)) {
+                    res =   "C://Applications/users/" + Date + "/card/" + i + "." + storageService.getFileType(fileName);
                 }
-                if (file.getName().equals("card")) {
-                    card += res + "|";
-                } else if (file.getName().equals("store")) {
-                    store += res + "|";
-                } else if (file.getName().equals("license")) {
-                    license += res + "|";
-                }
+                card += res + "|";
                 i++;
             }
-
+            for (MultipartFile file : storeFiles) {
+                int i = 0;
+                String fileName = file.getOriginalFilename();
+                if (!storageService.isImage(fileName)) {
+                    return GetResult.toJson(28, null, null, null, 0);
+                }
+                String res = "";
+                String newfilename = root + "users\\" + Date + "\\" +"store"+ i + "." + storageService.getFileType(fileName);
+                if (storageService.store(file, newfilename)){
+                    res = "C://Applications/users/" + Date + "/store/" + i + "." + storageService.getFileType(fileName);
+                }
+                store += res + "|";
+                i++;
+            }
+            for (MultipartFile file : licenseFiles) {
+                int i = 0;
+                String fileName = file.getOriginalFilename();
+                if (!storageService.isImage(fileName)) {
+                    return GetResult.toJson(28, null, null, null, 0);
+                }
+                String res = "";
+                String newfilename = root + "users\\" +  Date + "\\" +"license" + i + "." + storageService.getFileType(fileName);
+                if (storageService.store(file, newfilename)){
+                    res =  "C://Applications/users/" + Date + "/store/" + i + "." + storageService.getFileType(fileName);
+                }
+                license += res + "|";
+                i++;
+            }
             Long act = saleDao.getUserMaxAccount();
             String account = String.valueOf(act + 1).replace("4", "5");
             Users users = new Users();
             users.setCM_USERID(DateUtils.todayYyyyMmDdHhMmSs());
             users.setCM_ACCOUNT(account);
             users.setCM_BALANCE((double) 0);
-            users.setCM_CREATETIME(now);
+            users.setCM_CREATETIME(new Date());
             users.setCM_INTEGRAL(0);
             users.setCM_ISEXAMINE(0);
             users.setCM_LEVEL(0);
@@ -283,6 +299,7 @@ public class SaleService {
             users.setCM_CONTACTPHONE(contactphone);
             users.setCM_TELEPHONE(telephone);
             users.setCM_PAX(pax);
+            users.setCM_REASON(userId);
 
             saleDao.userApplication(users);
             return GetResult.toJson(0, null, jwt.createJWT(userId), account, 0);
@@ -307,50 +324,71 @@ public class SaleService {
      * @param contactphone
      * @param telephone
      * @param pax
-     * @param files
+     * @param cardFiles
+     * @param storeFiles
+     * @param licenseFiles
      * @return
      */
-    public Result SellerApplication(String userId, Long phone, String address, Double lon, Double lat, String pwd, String cardno, String companyname, String personname, String contactname, String contactphone, String telephone, String pax, List<MultipartFile> files) {
+    public Result SellerApplication(String userId, Long phone, String address, Double lon, Double lat, String pwd, String cardno, String companyname, String personname, String contactname, String contactphone, String telephone, String pax, MultipartFile[] cardFiles, MultipartFile[] storeFiles, MultipartFile[] licenseFiles) {
         try {
             Admins admins = saleDao.getAdminByAdminId(userId);
             if (admins == null || (admins.getCM_LEVEL() != 2 && admins.getCM_LEVEL() != 1)) {
                 return GetResult.toJson(45, null, null, null, 0);
-            }
-            Register register = new Register();
-            List<Register> list = saleDao.selectregisterbyphone(phone);
-            if (list != null && list.size() > 0) {
-                register = list.get(0);
-            }
-            if (register.getCM_CODE() == null) {
-                return GetResult.toJson(7, null, null, null, 0);
             }
             //检查手机号是否被注册
             int n = saleDao.getSellerCount(phone);
             if (n > 0) {
                 return GetResult.toJson(60, null, null, null, 0);
             }
+            //check seller cardno
+            int m = saleDao.getSellerCount(cardno);
+            if (m > 0) {
+                return GetResult.toJson(64, null, null, null, 0);
+            }
             String card = "";
             String store = "";
             String license = "";
-            Date now = new Date();
-            for (MultipartFile file : files) {
+            String Date = DateUtils.todayYyyyMmDdHhMmSs();
+            for (MultipartFile file : cardFiles) {
                 int i = 0;
                 String fileName = file.getOriginalFilename();
                 if (!storageService.isImage(fileName)) {
                     return GetResult.toJson(28, null, null, null, 0);
                 }
                 String res = "";
-                String newfilename = i + "." + storageService.getFileType(fileName);
-                if (storageService.store(file, root + newfilename)) {
-                    res = root + newfilename;
+                String newfilename = root + "sellers\\" + Date + "\\" +"card"+ i + "." + storageService.getFileType(fileName);
+                if (storageService.store(file, newfilename)) {
+                    res =   "C://Applications/sellers/" + Date + "/card/" + i + "." + storageService.getFileType(fileName);
                 }
-                if (file.getName().equals("card")) {
-                    card += res + "|";
-                } else if (file.getName().equals("store")) {
-                    store += res + "|";
-                } else if (file.getName().equals("license")) {
-                    license += res + "|";
+                card += res + "|";
+                i++;
+            }
+            for (MultipartFile file : storeFiles) {
+                int i = 0;
+                String fileName = file.getOriginalFilename();
+                if (!storageService.isImage(fileName)) {
+                    return GetResult.toJson(28, null, null, null, 0);
                 }
+                String res = "";
+                String newfilename = root + "sellers\\" + Date + "\\" +"store"+ i + "." + storageService.getFileType(fileName);
+                if (storageService.store(file, newfilename)){
+                    res = "C://Applications/sellers/" + Date + "/store/" + i + "." + storageService.getFileType(fileName);
+                }
+                store += res + "|";
+                i++;
+            }
+            for (MultipartFile file : licenseFiles) {
+                int i = 0;
+                String fileName = file.getOriginalFilename();
+                if (!storageService.isImage(fileName)) {
+                    return GetResult.toJson(28, null, null, null, 0);
+                }
+                String res = "";
+                String newfilename = root + "sellers\\" +  Date + "\\" +"license" + i + "." + storageService.getFileType(fileName);
+                if (storageService.store(file, newfilename)){
+                    res =  "C://Applications/sellers/" + Date + "/license/" + i + "." + storageService.getFileType(fileName);
+                }
+                license += res + "|";
                 i++;
             }
 
@@ -358,7 +396,7 @@ public class SaleService {
             String account = String.valueOf(act + 1).replace("4", "5");
             Sellers sellers = new Sellers();
             sellers.setCM_ACCOUNT(account);
-            sellers.setCM_CREATETIME(now);
+            sellers.setCM_CREATETIME(new Date());
             sellers.setCM_ISEXAMINE(0);
             sellers.setCM_CARDPATH(card);
             sellers.setCM_STOREPATH(store);
@@ -376,6 +414,7 @@ public class SaleService {
             sellers.setCM_CONTACTPHONE(contactphone);
             sellers.setCM_TELEPHONE(telephone);
             sellers.setCM_PAX(pax);
+            sellers.setCM_REASON(userId);
             saleDao.sellerApplication(sellers);
             return GetResult.toJson(0, null, jwt.createJWT(userId), account, 0);
         } catch (Exception e) {

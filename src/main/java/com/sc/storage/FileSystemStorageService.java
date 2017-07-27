@@ -14,9 +14,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.stream.Stream;
 
 @Service
@@ -35,8 +33,10 @@ public class FileSystemStorageService implements StorageService {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
             }
-            //压缩
-            scale(file, String.valueOf(this.rootLocation.resolve(newfilename)));
+            Path newPath = this.rootLocation.resolve(newfilename);
+            if (!Files.exists(newPath))
+                Files.createDirectories(newPath);
+            Files.copy(file.getInputStream(), newPath);
             return true;
         } catch (Exception e) {
             throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
@@ -127,20 +127,5 @@ public class FileSystemStorageService implements StorageService {
             return fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
         }
         return null;
-    }
-
-    private static void scale(MultipartFile srcFile, String result) {
-        try {
-            BufferedImage src = ImageIO.read(srcFile.getInputStream());
-            int width = src.getWidth();
-            int height = src.getHeight();
-            width = width / 5;
-            height = width / 5;
-            Image image = src.getScaledInstance(width, height, Image.SCALE_DEFAULT);
-            BufferedImage tag = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-            ImageIO.write(tag, "JPEG", new File(result));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

@@ -44,9 +44,10 @@ public class JWT {
             if (code.equals(resultcode)) {
                 token.setUserId(userID);
                 token.setCode(code);
+                return token;
             }
         }
-        return token;
+        return null;
     }
 
     //解析Jwt

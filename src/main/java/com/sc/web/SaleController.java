@@ -50,8 +50,7 @@ public class SaleController {
 
     @RequestMapping(value = URL + "UserApplication", method = RequestMethod.POST)
     @ApiOperation("(商家)申请{token秘钥,phone电话,shopname店铺名称，address地址,lon经度,lat纬度,pwd密码,pwdagain确认密码,cardno身份证号码，personname用户姓名,contactname紧急联系人姓名，contactphone紧急联系人电话，telephone固定电话,pax固定电话,图片{身份证以及人name:card,店铺name:store,营业执照以及证件name:license}")
-    public Result userApplication(HttpServletRequest request) {
-        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("files");
+    public Result userApplication(HttpServletRequest request, @RequestParam("card")MultipartFile[] cardFiles, @RequestParam("store")MultipartFile[] storeFiles, @RequestParam("license")MultipartFile[] licenseFiles) {
         String token = request.getParameter("token");
         String address = request.getParameter("address");
         String pwd = request.getParameter("pwd");
@@ -79,13 +78,12 @@ public class SaleController {
         if (!Objects.equals(pwd, pwdagain)) {
             return GetResult.toJson(55, null, null, null, 0);
         }
-        return saleService.UserApplication(tk.getUserId(), phone, address, lon, lat, pwd, cardno, shopname, personname, contactname, contactphone, telephone, pax, files);
+        return saleService.UserApplication(tk.getUserId(), phone, address, lon, lat, pwd, cardno, shopname, personname, contactname, contactphone, telephone, pax, cardFiles, storeFiles, licenseFiles);
     }
 
     @RequestMapping(value = URL + "SellerApplication", method = RequestMethod.POST)
     @ApiOperation("(厂家)申请{token秘钥,phone电话,code验证码,shopname店铺名称，address地址,lon经度,lat纬度,pwd密码,pwdagain确认密码,cardno身份证号码，personname用户姓名,contactname紧急联系人姓名，contactphone紧急联系人电话，telephone固定电话,pax固定电话,图片{身份证以及人name:card,店铺name:store,营业执照以及证件name:license}")
-    public Result sellerApplication(HttpServletRequest request) {
-        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("files");
+    public Result sellerApplication(HttpServletRequest request,@RequestParam("card")MultipartFile[] cardFiles, @RequestParam("store")MultipartFile[] storeFiles, @RequestParam("license")MultipartFile[] licenseFiles) {
         String token = request.getParameter("token");
         String address = request.getParameter("address");
         String pwd = request.getParameter("pwd");
@@ -113,7 +111,7 @@ public class SaleController {
         if (!Objects.equals(pwd, pwdagain)) {
             return GetResult.toJson(55, null, null, null, 0);
         }
-        return saleService.SellerApplication(tk.getUserId(), phone, address, lon, lat, pwd, cardno, companyname, personname, contactname, contactphone, telephone, pax, files);
+        return saleService.SellerApplication(tk.getUserId(), phone, address, lon, lat, pwd, cardno, companyname, personname, contactname, contactphone, telephone, pax, cardFiles, storeFiles, licenseFiles);
     }
 
     @RequestMapping(value = URL + "QueryUsersByMap", method = RequestMethod.GET)
@@ -157,13 +155,13 @@ public class SaleController {
             @ApiImplicitParam(name = "pageNum", value = "页码", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "页面大小", required = true, dataType = "Integer", paramType = "query")
     })
-    public Result queryUsersByAdminId(@RequestParam("token") String token, @RequestParam(value = "pageSize", defaultValue = "1")Integer pageSize, @RequestParam(value = "PageNum", defaultValue = "10")Integer pageNum) {
+    public Result queryUsersByAdminId(@RequestParam("token") String token, @RequestParam(value = "pageSize", defaultValue = "1") Integer pageSize, @RequestParam(value = "pageNum", defaultValue = "10") Integer pageNum) {
         Token tk = jwt.checkJWT(token);
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
-        } else {
-            return saleService.queryUsersByAdminId(tk.getUserId(), pageNum, pageSize);
         }
+        return saleService.queryUsersByAdminId(tk.getUserId(), pageNum, pageSize);
+
     }
 
     @RequestMapping(value = URL + "QuerySellersByAdminId", method = RequestMethod.GET)
@@ -173,13 +171,13 @@ public class SaleController {
             @ApiImplicitParam(name = "pageNum", value = "页码", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "页面大小", required = true, dataType = "Integer", paramType = "query")
     })
-    public Result QuerySellersByAdminId(@RequestParam("token") String token, @RequestParam(value = "pageSize", defaultValue = "1")Integer pageSize, @RequestParam(value = "PageNum", defaultValue = "10")Integer pageNum) {
+    public Result QuerySellersByAdminId(@RequestParam("token") String token, @RequestParam(value = "pageSize", defaultValue = "1") Integer pageSize, @RequestParam(value = "pageNum", defaultValue = "10") Integer pageNum) {
         Token tk = jwt.checkJWT(token);
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
-        } else {
-            return saleService.querySellersByAdminId(tk.getUserId(), pageNum, pageSize);
         }
+
+        return saleService.querySellersByAdminId(tk.getUserId(), pageNum, pageSize);
     }
 
     @RequestMapping(value = URL + "SendRetrieveCode", method = RequestMethod.GET)
@@ -201,7 +199,7 @@ public class SaleController {
         if (newpassword.isEmpty() || confirmpassword.isEmpty()) {
             return GetResult.toJson(38, null, null, null, 0);
         }
-        if (newpassword.equals(confirmpassword)) {
+        if (Integer.valueOf(newpassword) != Integer.valueOf(confirmpassword)) {
             return GetResult.toJson(39, null, null, null, 0);
         }
         return saleService.ResettingPassword(phone, code, newpassword);

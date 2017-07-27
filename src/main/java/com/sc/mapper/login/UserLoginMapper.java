@@ -31,6 +31,8 @@ public interface UserLoginMapper {
     @Results({
             @Result(column = "CM_USERID", property = "CM_USERID", jdbcType = JdbcType.VARCHAR),
             @Result(column = "CM_SHOPNAME", property = "CM_SHOPNAME", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_SHOPEADDRESS", property = "CM_SHOPEADDRESS", jdbcType = JdbcType.VARCHAR),
+            @Result(column = "CM_NAME", property = "CM_NAME", jdbcType = JdbcType.VARCHAR),
             @Result(column = "CM_PHONE", property = "CM_PHONE", jdbcType = JdbcType.BIGINT),
             @Result(column = "CM_INTEGRAL", property = "CM_INTEGRAL", jdbcType = JdbcType.INTEGER),
             @Result(column = "CM_BALANCE", property = "CM_BALANCE", jdbcType = JdbcType.DOUBLE),

@@ -80,7 +80,7 @@ public class SaleDao {
         RegisterExample registerExample = new RegisterExample();
         RegisterExample.Criteria criteria = registerExample.createCriteria();
         criteria.andCM_PHONEEqualTo(phone);
-        registerMapper.updateByExample(register, registerExample);
+        registerMapper.updateByExampleSelective(register, registerExample);
     }
 
     /**
@@ -135,23 +135,11 @@ public class SaleDao {
         criteria.andCM_PHONEEqualTo(phone);
         List<Admins> list = adminsMapper.selectByExample(adminsExample);
         Admins admins = new Admins();
-        if(list!=null&&list.size()>0){
-            admins=list.get(0);
+        if (list != null && list.size() > 0) {
+            admins = list.get(0);
         }
         return admins;
 
-    }
-
-    /**
-     * 更新业务人员的密码
-     *
-     * @param admins 业务人员对象
-     */
-    public void updateAdminPassword(Admins admins) {
-        AdminsExample adminsExample = new AdminsExample();
-        AdminsExample.Criteria criteria = adminsExample.createCriteria();
-        criteria.andCM_ADMINIDEqualTo(admins.getCM_ADMINID());
-        adminsMapper.updateByExampleSelective(admins, adminsExample);
     }
 
     /**
@@ -165,14 +153,9 @@ public class SaleDao {
         AdminsExample adminsExample = new AdminsExample();
         AdminsExample.Criteria criteria = adminsExample.createCriteria();
         criteria.andCM_PHONEEqualTo(phone);
-        List<Integer> list = new ArrayList<Integer>();
-        list.add(i);
-        criteria.andCM_LEVELNotIn(list);
-        List<Admins> list2 = adminsMapper.selectByExample(adminsExample);
-        if (list2 != null && list2.size() > 0) {
-            return list2.get(0);
-        }
-        return null;
+        criteria.andCM_LEVELNotEqualTo(1);
+        List<Admins> admins = adminsMapper.selectByExample(adminsExample);
+        return admins.size() == 1 ? admins.get(0) : null;
     }
 
     /**
@@ -259,8 +242,9 @@ public class SaleDao {
 
     /**
      * 查询注册人员注册商家
-     * @param userId 注册人员ID
-     * @param pageNum 页码
+     *
+     * @param userId   注册人员ID
+     * @param pageNum  页码
      * @param pageSize 页码大小
      * @return
      */
@@ -271,13 +255,53 @@ public class SaleDao {
 
     /**
      * 查询注册人员注册家
-     * @param userId 注册人员ID
-     * @param pageNum 页码
+     *
+     * @param userId   注册人员ID
+     * @param pageNum  页码
      * @param pageSize 页码大小
      * @return
      */
     public List<SellersInfo> getSellersInfoByAdminId(String userId, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         return saleMapper.getSellersInfoByAdminId(userId);
+    }
+
+    /**
+     * check card no
+     *
+     * @param cardno
+     * @return
+     */
+    public int getUserCount(String cardno) {
+        UsersExample example = new UsersExample();
+        UsersExample.Criteria criteria = example.createCriteria();
+        criteria.andCM_CARDNOEqualTo(cardno);
+        return (int) usersMapper.countByExample(example);
+    }
+
+    /**
+     * check seller cardno
+     *
+     * @param cardno
+     * @return
+     */
+    public int getSellerCount(String cardno) {
+        SellersExample example = new SellersExample();
+        SellersExample.Criteria criteria = example.createCriteria();
+        criteria.andCM_CARDNOEqualTo(cardno);
+        return (int) sellersMapper.countByExample(example);
+    }
+
+    /**
+     * back password
+     * @param phone
+     * @param newpassword
+     */
+    public void updateAdminPassword(Long phone, String newpassword) {
+        Admins admins = new Admins();
+        admins.setCM_PASSWORD(newpassword);
+        AdminsExample example = new AdminsExample();
+        example.createCriteria().andCM_PHONEEqualTo(phone);
+        adminsMapper.updateByExampleSelective(admins, example);
     }
 }
