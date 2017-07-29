@@ -1,6 +1,7 @@
 package com.sc.dao;
 
 import com.sc.domain.generator.*;
+import com.sc.mapper.customservice.CustomServiceMapper;
 import com.sc.mapper.generator.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,14 +18,16 @@ public class CustomServiceDao {
     private final SellersMapper sellersMapper;
     private final BrandsMapper brandsMapper;
     private final AdminsMapper adminsMapper;
+    private final CustomServiceMapper customServiceMapper;
 
     @Autowired
-    public CustomServiceDao(GooddetailsMapper gooddetailsMapper, GoodsMapper goodsMapper, SellersMapper sellersMapper, BrandsMapper brandsMapper, AdminsMapper adminsMapper) {
+    public CustomServiceDao(GooddetailsMapper gooddetailsMapper, GoodsMapper goodsMapper, SellersMapper sellersMapper, BrandsMapper brandsMapper, AdminsMapper adminsMapper, CustomServiceMapper customServiceMapper) {
         this.gooddetailsMapper = gooddetailsMapper;
         this.goodsMapper = goodsMapper;
         this.sellersMapper = sellersMapper;
         this.brandsMapper = brandsMapper;
         this.adminsMapper = adminsMapper;
+        this.customServiceMapper = customServiceMapper;
     }
 
     /**
@@ -46,11 +49,12 @@ public class CustomServiceDao {
      * @param goodsid goodsid
      * @return goods集合
      */
-    public List<Goods> selectGoodsByGoodsid(String goodsid) {
+    public Goods selectGoodsByGoodsid(String goodsid) {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
         criteria.andCM_GOODSIDEqualTo(goodsid);
-        return goodsMapper.selectByExample(goodsExample);
+        List<Goods> goods = goodsMapper.selectByExample(goodsExample);
+        return goods.size() < 0 ? null : goods.get(0);
     }
 
     /**
@@ -124,13 +128,8 @@ public class CustomServiceDao {
         AdminsExample adminsExample = new AdminsExample();
         AdminsExample.Criteria criteria = adminsExample.createCriteria();
         criteria.andCM_ADMINIDEqualTo(userId);
-        Admins admins = new Admins();
         List<Admins> list = adminsMapper.selectByExample(adminsExample);
-        if (list != null && list.size() > 0) {
-            admins = list.get(0);
-            return admins;
-        }
-        return null;
+        return list.isEmpty() ? null : list.get(0);
     }
 
     /**
@@ -139,7 +138,7 @@ public class CustomServiceDao {
      * @param details
      */
     public void insertGoodDetails(GooddetailsWithBLOBs details) {
-        gooddetailsMapper.insert(details);
+        customServiceMapper.addGoodDetails(details);
     }
 
     /**
@@ -176,10 +175,7 @@ public class CustomServiceDao {
         GooddetailsExample.Criteria criteria = gooddetailsExample.createCriteria();
         criteria.andCM_GOODSDETAILSIDEqualTo(Integer.valueOf(goodsdetailsid));
         List<GooddetailsWithBLOBs> list = gooddetailsMapper.selectByExampleWithBLOBs(gooddetailsExample);
-        if (list != null && list.size() > 0) {
-            gooddetailsWithBLOBs = list.get(0);
-        }
-        return gooddetailsWithBLOBs;
+        return list.size() < 0 ? null : list.get(0);
     }
 
     /**

@@ -28,4 +28,6 @@ public interface StorageService {
     Boolean isImage(String fileName);
 
     String getFileType(String fileName);
+
+    boolean storeAndCompress(MultipartFile multipartFile, String newfilename, String thfilename);
 }

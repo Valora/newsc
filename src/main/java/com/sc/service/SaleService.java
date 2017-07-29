@@ -65,7 +65,7 @@ public class SaleService {
                 register.setCM_TIME(new Date());
                 register.setCM_COUNT(0);
                 //如果是新用户，则新增
-                if (list.get(0) == null) {
+                if (list.isEmpty()) {
                     register.setCM_PHONE(phone);
                     saleDao.addregister(register);
                 } else {
@@ -239,7 +239,7 @@ public class SaleService {
                     return GetResult.toJson(28, null, null, null, 0);
                 }
                 String res = "";
-                String newfilename = root + "users\\" + Date + "\\" +"card"+ i + "." + storageService.getFileType(fileName);
+                String newfilename = root + "users\\" + Date + "\\" +"card\\"+ i + "." + storageService.getFileType(fileName);
                 if (storageService.store(file, newfilename)) {
                     res =   "C://Applications/users/" + Date + "/card/" + i + "." + storageService.getFileType(fileName);
                 }
@@ -253,7 +253,7 @@ public class SaleService {
                     return GetResult.toJson(28, null, null, null, 0);
                 }
                 String res = "";
-                String newfilename = root + "users\\" + Date + "\\" +"store"+ i + "." + storageService.getFileType(fileName);
+                String newfilename = root + "users\\" + Date + "\\" +"store\\"+ i + "." + storageService.getFileType(fileName);
                 if (storageService.store(file, newfilename)){
                     res = "C://Applications/users/" + Date + "/store/" + i + "." + storageService.getFileType(fileName);
                 }
@@ -267,9 +267,9 @@ public class SaleService {
                     return GetResult.toJson(28, null, null, null, 0);
                 }
                 String res = "";
-                String newfilename = root + "users\\" +  Date + "\\" +"license" + i + "." + storageService.getFileType(fileName);
+                String newfilename = root + "users\\" +  Date + "\\" +"license\\" + i + "." + storageService.getFileType(fileName);
                 if (storageService.store(file, newfilename)){
-                    res =  "C://Applications/users/" + Date + "/store/" + i + "." + storageService.getFileType(fileName);
+                    res =  "C://Applications/users/" + Date + "/license/" + i + "." + storageService.getFileType(fileName);
                 }
                 license += res + "|";
                 i++;
@@ -356,7 +356,7 @@ public class SaleService {
                     return GetResult.toJson(28, null, null, null, 0);
                 }
                 String res = "";
-                String newfilename = root + "sellers\\" + Date + "\\" +"card"+ i + "." + storageService.getFileType(fileName);
+                String newfilename = root + "sellers\\" + Date + "\\" +"card\\"+ i + "." + storageService.getFileType(fileName);
                 if (storageService.store(file, newfilename)) {
                     res =   "C://Applications/sellers/" + Date + "/card/" + i + "." + storageService.getFileType(fileName);
                 }
@@ -370,7 +370,7 @@ public class SaleService {
                     return GetResult.toJson(28, null, null, null, 0);
                 }
                 String res = "";
-                String newfilename = root + "sellers\\" + Date + "\\" +"store"+ i + "." + storageService.getFileType(fileName);
+                String newfilename = root + "sellers\\" + Date + "\\" +"store\\"+ i + "." + storageService.getFileType(fileName);
                 if (storageService.store(file, newfilename)){
                     res = "C://Applications/sellers/" + Date + "/store/" + i + "." + storageService.getFileType(fileName);
                 }
@@ -384,7 +384,7 @@ public class SaleService {
                     return GetResult.toJson(28, null, null, null, 0);
                 }
                 String res = "";
-                String newfilename = root + "sellers\\" +  Date + "\\" +"license" + i + "." + storageService.getFileType(fileName);
+                String newfilename = root + "sellers\\" +  Date + "\\" +"license\\" + i + "." + storageService.getFileType(fileName);
                 if (storageService.store(file, newfilename)){
                     res =  "C://Applications/sellers/" + Date + "/license/" + i + "." + storageService.getFileType(fileName);
                 }

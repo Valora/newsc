@@ -1,6 +1,5 @@
 package com.sc.web;
 
-import com.sc.domain.costomservice.UploadGoods;
 import com.sc.service.CustomServiceService;
 import com.sc.utils.GetResult;
 import com.sc.utils.JWT;
@@ -43,54 +42,53 @@ public class CustomServiceController {
 
     @RequestMapping(value = URL + "UploadGoods", method = RequestMethod.POST)
     @ApiOperation("上传商品{goodsid商品ID（编辑HTML上传图片时返回的商品ID），token秘钥，goodsartnum商品码(限15字符)，sellerid厂家ID，classifyid大类ID(只属于一个大类)， classifytabs子类ID(如：1|2|3|,最后一个字符必须为\"|\")，brandid品牌ID，title标题(限25个字符)，originalprice原价，presentprice现价，stock库存， html展示内容，chtml展示内容(APP小图)，ispromotion是否推荐(0:不，1：推荐)，colors颜色(如：红色|黄色|酒红色|,单种颜色限5个字符,最后一个字符必须为\"|\"),spec规格(如：29/74A_10|30/76A_100|,最后一个字符必须为\"|\",请注意特殊字符，不能影响字符切割)，图片必须有name属性（主图：main,展示图:show,颜色图：color)}")
-    public Result uploadGoods(HttpServletRequest request) {
-        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("files");
-        UploadGoods uploadGoods = new UploadGoods();
-        uploadGoods.setToken(request.getParameter("token"));
-        uploadGoods.setGoodsid(request.getParameter("goodsid"));
-        uploadGoods.setGoodsartnum(request.getParameter("goodsartnum"));
-        uploadGoods.setSellerid(request.getParameter("sellerid"));
-        uploadGoods.setClassifyid(request.getParameter("classifyid"));
-        uploadGoods.setClassifytabs(request.getParameter("classifytabs"));
-        uploadGoods.setBrandid(request.getParameter("brandid"));
-        uploadGoods.setTitle(request.getParameter("title"));
-        uploadGoods.setOriginalprice(request.getParameter("originalprice"));
-        uploadGoods.setPresentprice(request.getParameter("presentprice"));
-        uploadGoods.setHtml(request.getParameter("html"));
-        uploadGoods.setChtml(request.getParameter("chtml"));
-        uploadGoods.setIspromotion(request.getParameter("ispromotion"));
-        uploadGoods.setSpec(request.getParameter("spec"));
-        uploadGoods.setStock(request.getParameter("stock"));
-        uploadGoods.setColors(request.getParameter("colors"));
-        if (StringUtils.isBlank(uploadGoods.getToken()) || StringUtils.isBlank(uploadGoods.getGoodsid()) || StringUtils.isBlank(uploadGoods.getGoodsartnum()) || StringUtils.isBlank(uploadGoods.getSellerid()) || StringUtils.isBlank(uploadGoods.getClassifyid()) || StringUtils.isBlank(uploadGoods.getClassifytabs()) || StringUtils.isBlank(uploadGoods.getBrandid()) || StringUtils.isBlank(uploadGoods.getTitle()) || StringUtils.isBlank(uploadGoods.getOriginalprice()) || StringUtils.isBlank(uploadGoods.getPresentprice()) || StringUtils.isBlank(uploadGoods.getHtml()) || StringUtils.isBlank(uploadGoods.getChtml()) || StringUtils.isBlank(uploadGoods.getIspromotion()) || StringUtils.isBlank(uploadGoods.getSpec()) || StringUtils.isBlank(uploadGoods.getStock()) || StringUtils.isBlank(uploadGoods.getColors())) {
+    public Result uploadGoods(HttpServletRequest request, @RequestParam("main")MultipartFile[] mainFiles, @RequestParam("show") MultipartFile[] showFiles, @RequestParam("color") MultipartFile[] colorFiles ) {
+        String token = request.getParameter("token");
+        String goodsid = request.getParameter("goodsid");
+        String goodsartnum = request.getParameter("goodsartnum");
+        String sellerid = request.getParameter("sellerid");
+        String classifyid = request.getParameter("classifyid");
+        String classifytabs = request.getParameter("classifytabs");
+        String brandid = request.getParameter("brandid");
+        String title = request.getParameter("title");
+        String originalprice = request.getParameter("originalprice");
+        String presentprice = request.getParameter("presentprice");
+        String html = request.getParameter("html");
+        String stock = request.getParameter("stock");
+        String chtml = request.getParameter("chtml");
+        String ispromotion = request.getParameter("ispromotion");
+        String spec = request.getParameter("spec");
+
+        String colors = request.getParameter("colors");
+
+        if (StringUtils.isEmpty(token) || StringUtils.isEmpty(goodsartnum) || StringUtils.isEmpty(sellerid) || StringUtils.isEmpty(classifyid) || StringUtils.isEmpty(classifytabs) || StringUtils.isEmpty(brandid) || StringUtils.isEmpty(title) || StringUtils.isEmpty(originalprice) || StringUtils.isEmpty(presentprice) || StringUtils.isEmpty(ispromotion) || StringUtils.isEmpty(spec) ||  StringUtils.isEmpty(colors) || StringUtils.isEmpty(stock)) {
             return GetResult.toJson(43, null, null, null, 0);
         }
-        if (!ParseUtil.parseInt(uploadGoods.getClassifyid()) || !ParseUtil.parseInt(uploadGoods.getBrandid()) || !ParseUtil.parseInt(uploadGoods.getIspromotion()) || !ParseUtil.parseInt((uploadGoods.getStock())) || !ParseUtil.parseDouble(uploadGoods.getOriginalprice()) || !ParseUtil.parseDouble(uploadGoods.getPresentprice()) || uploadGoods.getGoodsartnum().length() > 15 || uploadGoods.getTitle().length() > 25 || files.size() < 2) {
+        if (!ParseUtil.parseInt(classifyid) || !ParseUtil.parseInt(brandid) || !ParseUtil.parseInt(ispromotion) || !ParseUtil.parseDouble(originalprice) || !ParseUtil.parseDouble(presentprice) || goodsartnum.length() > 15 || title.length() > 25 || mainFiles.length < 1 || showFiles.length < 1 || colorFiles.length < 1){
             return GetResult.toJson(44, null, null, null, 0);
         }
-        int classifyid = Integer.parseInt(uploadGoods.getClassifyid());
-        int branid = Integer.parseInt(uploadGoods.getBrandid());
-        int stock = Integer.parseInt(uploadGoods.getStock());
-        int ispromotion = Integer.parseInt(uploadGoods.getIspromotion());
-        double originalprice = Double.parseDouble(uploadGoods.getOriginalprice());
-        double presentprice = Double.parseDouble(uploadGoods.getPresentprice());
-        String[] colorarr = uploadGoods.getColors().split("\\|");
+        int classifyidint = Integer.parseInt(classifyid);
+        int branidint = Integer.parseInt(brandid);
+        int ispromotionint = Integer.parseInt(ispromotion);
+        double originalpricedouble = Double.parseDouble(originalprice);
+        double presentpricedouble = Double.parseDouble(presentprice);
+        String[] stockarr = stock.split("\\|");
+        String[] colorarr = colors.split("\\|");
         for (String color : colorarr) {
             if (color.length() > 5) {
                 return GetResult.toJson(44, null, null, null, 0);
             }
         }
-        Token tk = jwt.checkJWT(uploadGoods.getToken());
+        Token tk = jwt.checkJWT(token);
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
         }
-        return customServiceService.uploadGoods(tk.getUserId(), uploadGoods.getGoodsartnum(), uploadGoods.getSellerid(), classifyid, uploadGoods.getClassifytabs(), branid, uploadGoods.getTitle(), originalprice, presentprice, uploadGoods.getHtml(), uploadGoods.getChtml(), ispromotion, uploadGoods.getSpec(), stock, colorarr, files, uploadGoods.getGoodsid());
+        return customServiceService.uploadGoods(tk.getUserId(), goodsartnum, sellerid, classifyidint, classifytabs, branidint, title, originalpricedouble, presentpricedouble, html, chtml, ispromotionint, spec, colorarr, stockarr, goodsid, mainFiles, showFiles, colorFiles);
     }
 
     @RequestMapping(value = URL + "ReviceGoods", method = RequestMethod.POST)
-    @ApiOperation("修改商品{goodsid商品ID，token秘钥，goodsartnum商品码(限15字符)， sellerid厂家ID，classifyid大类ID(只属于一个大类)，classifytabs子类ID(如：1|2|3|,最后一个字符必须为\"|\")，brandid品牌ID，title标题(限25个字符)，originalprice原价，presentprice现价，stock库存，html展示内容，chtml展示内容(APP小图)，ispromotion是否推荐(0:不，1：推荐)，spec规格(如：29/74A_10|30/76A_100|,最后一个字符必须为\"|\",请注意特殊字符，不能影响字符切割)，图片必须有name属性（主图：main,展示图:show)changetab(多张修改用|拼接，如0|1|)}")
-    public Result reviseGoods(HttpServletRequest request) {
-        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("files");
+    @ApiOperation("修改商品{goodsid商品ID，token秘钥，goodsartnum商品码(限15字符)， sellerid厂家ID，classifyid大类ID(只属于一个大类)，classifytabs子类ID(如：1|2|3|,最后一个字符必须为\"|\")，brandid品牌ID，title标题(限25个字符)，originalprice原价，presentprice现价，html展示内容，chtml展示内容(APP小图)，ispromotion是否推荐(0:不，1：推荐)，spec规格(如：29/74A_10|30/76A_100|,最后一个字符必须为\"|\",请注意特殊字符，不能影响字符切割)，图片必须有name属性（主图：main,展示图:show)changetab(多张修改用|拼接，如0|1|)}")
+    public Result reviseGoods(HttpServletRequest request, @RequestParam("main") MultipartFile[] mainFiles, @RequestParam("show") MultipartFile[] showFiles) {
         String token = request.getParameter("token");
         String goodsid = request.getParameter("goodsid");
         String goodsartnum = request.getParameter("goodsartnum");
@@ -105,12 +103,11 @@ public class CustomServiceController {
         String chtml = request.getParameter("chtml");
         String ispromotion = request.getParameter("ispromotion");
         String spec = request.getParameter("spec");
-        String stock = request.getParameter("stock");
         String changetab = request.getParameter("changetab");
-        if (StringUtils.isBlank(token) || StringUtils.isBlank(goodsid) || StringUtils.isBlank(goodsartnum) || StringUtils.isBlank(sellerid) || StringUtils.isBlank(classifyid) || StringUtils.isBlank(classifytabs) || StringUtils.isBlank(brandid) || StringUtils.isBlank(title) || StringUtils.isBlank(originalprice) || StringUtils.isBlank(presentprice) || StringUtils.isBlank(html) || StringUtils.isBlank(chtml) || StringUtils.isBlank(ispromotion) || StringUtils.isBlank(spec) || StringUtils.isBlank(stock) || StringUtils.isBlank(changetab)) {
+        if (StringUtils.isEmpty(token) || StringUtils.isEmpty(goodsid) || StringUtils.isEmpty(goodsartnum) || StringUtils.isEmpty(sellerid) || StringUtils.isEmpty(classifyid) || StringUtils.isEmpty(classifytabs) || StringUtils.isEmpty(brandid) || StringUtils.isEmpty(title) || StringUtils.isEmpty(originalprice) || StringUtils.isEmpty(presentprice) || StringUtils.isEmpty(html) || StringUtils.isEmpty(chtml) || StringUtils.isEmpty(ispromotion) || StringUtils.isEmpty(spec) || StringUtils.isEmpty(changetab)) {
             return GetResult.toJson(43, null, null, null, 0);
         }
-        if (!ParseUtil.parseInt(classifyid) || !ParseUtil.parseInt(brandid) || !ParseUtil.parseInt(ispromotion) || !ParseUtil.parseInt(stock) || !ParseUtil.parseDouble(originalprice) || !ParseUtil.parseDouble(presentprice) || goodsartnum.length() > 15 || title.length() > 25) {
+        if (!ParseUtil.parseInt(classifyid) || !ParseUtil.parseInt(brandid) || !ParseUtil.parseInt(ispromotion) || !ParseUtil.parseDouble(originalprice) || !ParseUtil.parseDouble(presentprice) || goodsartnum.length() > 15 || title.length() > 25) {
             return GetResult.toJson(44, null, null, null, 0);
         }
         Token tk = jwt.checkJWT(token);
@@ -122,17 +119,16 @@ public class CustomServiceController {
         double Originalprice = Double.parseDouble(originalprice);
         double Presentprice = Double.parseDouble(presentprice);
         int Ispromotion = Integer.parseInt(ispromotion);
-        int Stock = Integer.parseInt(stock);
-        return customServiceService.reviseGoodsS(tk.getUserId(), goodsartnum, sellerid, Classifyid, classifytabs, Brandid, title, Originalprice, Presentprice, html, chtml, Ispromotion, spec, Stock, files, goodsid, changetab);
+        return customServiceService.reviseGoodsS(tk.getUserId(), goodsartnum, sellerid, Classifyid, classifytabs, Brandid, title, Originalprice, Presentprice, html, chtml, Ispromotion, spec, goodsid, changetab, mainFiles, showFiles);
     }
 
     @RequestMapping(value = URL + "ReciceGoodsDetails", method = RequestMethod.POST)
-    @ApiOperation("修改商品详细(颜色，颜色图){token：秘钥，goodsdetailsid：商品详细ID,color:颜色，stock：库存，图片自定}")
-    public Result reviseGoodsDetails(HttpServletRequest request) {
-        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("files");
+    @ApiOperation("修改商品详细(颜色，颜色图){token：秘钥，goodsdetailsid：商品详细ID,color:颜色，spec:尺寸，stock：库存，form_color颜色图片}")
+    public Result reviseGoodsDetails(HttpServletRequest request, @RequestParam("form_color")MultipartFile colorFile) {
         String goodsdetailsid = request.getParameter("goodsdetailsid");
         String token = request.getParameter("token");
         String color = request.getParameter("color");
+        String spec = request.getParameter("spec");
         String stock = request.getParameter("stock");
         if (goodsdetailsid == null || !ParseUtil.parseInt(goodsdetailsid)) {
             return GetResult.toJson(53, null, null, null, 0);
@@ -144,28 +140,28 @@ public class CustomServiceController {
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
         }
-        return customServiceService.reviseGoodsDetailsS(tk.getUserId(), goodsdetailsid, color, stock, files);
+        return customServiceService.reviseGoodsDetailsS(tk.getUserId(), goodsdetailsid, color, spec, stock, colorFile);
     }
 
     @RequestMapping(value = URL + "AddGoodsDetails", method = RequestMethod.POST)
-    @ApiOperation("添加商品详细{token：秘钥，goodsid：商品ID，color：颜色，stock：库存，图片自定}")
-    public Result addGoodsDetails(HttpServletRequest request) {
-        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("files");
+    @ApiOperation("添加商品详细{token：秘钥，goodsid：商品ID，color：颜色，spec: 种类，stock：库存，form_color 颜色图片}")
+    public Result addGoodsDetails(HttpServletRequest request, @RequestParam("form_color")MultipartFile colorFile) {
         String goodsid = request.getParameter("goodsid");
         String token = request.getParameter("token");
         String color = request.getParameter("color");
+        String spec = request.getParameter("spec");
         String stock = request.getParameter("stock");
         if (goodsid == null || color == null || !ParseUtil.parseInt(stock)) {
             return GetResult.toJson(53, null, null, null, 0);
         }
-        if (files.size() < 1) {
+        if (colorFile.isEmpty()) {
             return GetResult.toJson(58, null, null, null, 0);
         }
         Token tk = jwt.checkJWT(token);
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
         }
-        return customServiceService.addGoodsDetailsS(tk.getUserId(), goodsid, color, stock, files.get(0));
+        return customServiceService.addGoodsDetailsS(tk.getUserId(), goodsid, color, spec, stock, colorFile);
     }
 
     @RequestMapping(value = URL + "DelGoodsDetails", method = RequestMethod.GET)
@@ -199,18 +195,17 @@ public class CustomServiceController {
 
     @RequestMapping(value = URL + "UploadGoodsImg", method = RequestMethod.POST)
     @ApiOperation("上传商品HTML内容中的图片{token秘钥,goodsid商品ID(如果为第一次上传则输入null或者\"\"),图片必须有name属性，上传成功后返回商品ID和图片地址}")
-    public Result uploadGoodsImg(HttpServletRequest request) {
-        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("files");
+    public Result uploadGoodsImg(HttpServletRequest request, @RequestParam("HTMLImg") MultipartFile[] htmlimg) {
         String goodsid = request.getParameter("goodsid");
         String token = request.getParameter("token");
-        if (files.size() < 1) {
+        if (htmlimg.length < 1) {
             return GetResult.toJson(46, null, null, null, 0);
         }
         Token tk = jwt.checkJWT(token);
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
         }
-        return customServiceService.uploadGoodsImg(files.get(0), goodsid);
+        return customServiceService.uploadGoodsImg(htmlimg[0], goodsid);
     }
 
     @RequestMapping(value = URL + "SearchSellers", method = RequestMethod.GET)

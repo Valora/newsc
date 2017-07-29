@@ -67,10 +67,9 @@ public class UserDoMainService {
     public Result submitOrder(String userId, GOODSJSON goodslist) {
         String orderids = "";
         Double moneysum = 0.0;
-        LocalDate time = LocalDate.now();
-        String rad = GetRandomNumber.genRandomNum(4);
         try {
             for (ORDER order : goodslist.getORDERS()) {
+                String rad = GetRandomNumber.genRandomNum(4);
                 String orderid = DateUtils.todayYyyyMmDdHhMmSs() + rad;
                 orderids = orderid + "|";
                 int ordercount = 0;
@@ -256,7 +255,7 @@ public class UserDoMainService {
      */
     public Result queryOrderDetails(String orderid) {
         try {
-            List<OrderDetails> orderDetails = userDoMainDao.queryOrderDetails(orderid);
+            OrderDetails orderDetails = userDoMainDao.queryOrderDetails(orderid);
             return GetResult.toJson(0, null, null, orderDetails, 0);
         } catch (Exception ex) {
             return GetResult.toJson(200, null, null, null, 0);
@@ -763,7 +762,7 @@ public class UserDoMainService {
             if (list != null && list.size() > 0) {
                 register = list.get(0);
             }
-            if (register.getCM_PHONE() == null || register.getCM_CODE() != code) {
+            if (register.getCM_PHONE() == null || register.getCM_CODE().intValue() != code.intValue()) {
                 return GetResult.toJson(8, null, null, null, 0);
             }
             Users users = userDoMainDao.selectUserByPhone(phone);

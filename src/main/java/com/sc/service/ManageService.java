@@ -313,7 +313,7 @@ public class ManageService {
                 return GetResult.toJson(47, null, null, null, 0);
             }
 
-            manageDao.addClassify(classifyname, type, parentid, "C://" + root + filename);
+            manageDao.addClassify(classifyname, type, parentid, "C://ClassifyFiles/" + filename);
             return GetResult.toJson(0, null, jwt.createJWT(adminid), null, 0);
         } catch (Exception ex) {
             return GetResult.toJson(200, null, null, null, 0);

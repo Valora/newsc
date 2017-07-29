@@ -179,8 +179,9 @@ public class UserDoMainDao {
      * @param orderid 订单ID
      * @return 订单详情
      */
-    public List<OrderDetails> queryOrderDetails(String orderid) {
-        return userDoMainMapper.queryOrderDetails(orderid);
+    public OrderDetails queryOrderDetails(String orderid) {
+        List<OrderDetails> orderdetails =  userDoMainMapper.queryOrderDetails(orderid);
+        return orderdetails.isEmpty() ? null : orderdetails.get(0);
     }
 
     /**
@@ -510,7 +511,7 @@ public class UserDoMainDao {
         UsersExample usersExample = new UsersExample();
         UsersExample.Criteria criteria = usersExample.createCriteria();
         criteria.andCM_USERIDEqualTo(users.getCM_USERID());
-        usersMapper.updateByExample(users, usersExample);
+        usersMapper.updateByExampleSelective(users, usersExample);
     }
 
     /**

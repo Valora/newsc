@@ -76,17 +76,17 @@ public class CustomServiceService {
         try {
             String str = jwt.createJWT(adminId);
             GoodsWithBLOBs goodsWithBLOBs = new GoodsWithBLOBs();
-            List<Goods> list = customServiceDao.selectGoodsByGoodsid(goodsid);
-            if (list != null && list.size() > 0) {
-                goodsWithBLOBs = (GoodsWithBLOBs) list.get(0);
-                String[] str1 = goodsWithBLOBs.getCM_FIGURESPATH().split("\\|");
-                //删除图片
-                storageService.deleteByFigurePath(str1[delnum]);
-                str1[delnum] = "";
-                String str2 = String.join("|", str1).replace("||", "|");
-                goodsWithBLOBs.setCM_FIGURESPATH(str2);
-                int i = customServiceDao.updateGoods(goodsWithBLOBs);
-            }
+//            List<Goods> list = customServiceDao.selectGoodsByGoodsid(goodsid);
+//            if (list != null && list.size() > 0) {
+//                goodsWithBLOBs = (GoodsWithBLOBs) list.get(0);
+//                String[] str1 = goodsWithBLOBs.getCM_FIGURESPATH().split("\\|");
+//                //删除图片
+//                storageService.deleteByFigurePath(str1[delnum]);
+//                str1[delnum] = "";
+//                String str2 = String.join("|", str1).replace("||", "|");
+//                goodsWithBLOBs.setCM_FIGURESPATH(str2);
+//                int i = customServiceDao.updateGoods(goodsWithBLOBs);
+//            }
             return GetResult.toJson(0, null, str, null, 0);
         } catch (Exception e) {
             return GetResult.toJson(200, null, null, null, 0);
@@ -217,13 +217,11 @@ public class CustomServiceService {
      * @param chtml
      * @param ispromotion
      * @param spec
-     * @param stock
      * @param colorarr
-     * @param files
      * @param goodsid
      * @return
      */
-    public Result uploadGoods(String userId, String goodsartnum, String sellerid, int classifyid, String classifytabs, int brandid, String title, double originalprice, double presentprice, String html, String chtml, int ispromotion, String spec, int stock, String[] colorarr, List<MultipartFile> files, String goodsid) {
+    public Result uploadGoods(String userId, String goodsartnum, String sellerid, int classifyid, String classifytabs, int brandid, String title, double originalprice, double presentprice, String html, String chtml, int ispromotion, String spec, String[] colorarr, String[] stockarr, String goodsid, MultipartFile[] mainFiles, MultipartFile[] showFiles, MultipartFile[] colorFiles) {
         try {
             Admins admin = customServiceDao.selectAdminInfo(userId);
             if (admin == null || (admin.getCM_LEVEL() != 1 && admin.getCM_LEVEL() != 3)) {
@@ -233,37 +231,69 @@ public class CustomServiceService {
             if (StringUtils.isBlank(goodsid)) {
                 goodsid = DateUtils.todayYyyyMmDdHhMmSs() + GetRandomNumber.genRandomNum(4);
             }
+            if (colorarr.length != stockarr.length) {
+                return GetResult.toJson(65, null, null, null, 0);
+            }
             String mainpath = "";
             String showpath = "";
-            File file = new File("C://" + root);
-            if (!file.isDirectory()) {
-                file.mkdirs();
-            }
+
+            String[] specarr = spec.split("\\|");
             String spec_stock = "";
-            String[] specArr = spec.split("\\|");
-            for (String spec1 : specArr) {
-                spec_stock = spec1 + "_" + stock + "|";
+            ArrayList<String> spec_stocks = new ArrayList<>();
+            //处理每个颜色的库存
+            for (int i = 0; i < colorarr.length; i++) {
+                spec_stock = "";
+                for (int j = 0; j < specarr.length; j++) {
+                    spec_stock += specarr[j] + "_" + stockarr[i] + "|";
+                }
+                spec_stocks.add(spec_stock);
             }
             int i = 0;
-            for (MultipartFile file1 : files) {
-                String res = "";
-                String newfilename = i + "." + storageService.getFileType(file1.getOriginalFilename());
-                if (storageService.store(file1, root + newfilename)) {
-                    res = root + newfilename;
+            //处理主图
+            for (MultipartFile mainFile : mainFiles) {
+                String fileName = mainFile.getOriginalFilename();
+                if (!storageService.isImage(fileName)) {
+                    return GetResult.toJson(28, null, null, null, 0);
                 }
-                if (file1.getName().equals("main")) {
-                    mainpath = res;
-                } else if (file1.getName().equals("show")) {
-                    showpath += res + "|";
-                } else {
-                    GooddetailsWithBLOBs details = new GooddetailsWithBLOBs();
-                    details.setCM_GOODSID(goodsid);
-                    details.setCM_IMAGEPATH(res);
-                    details.setCM_COLOR(colorarr[i]);
-                    details.setCM_SPEC_STOCK(spec_stock);
-                    customServiceDao.insertGoodDetails(details);
-                    i++;
+                String newfileName = root + goodsid + "\\main\\" + i + "." + storageService.getFileType(fileName);
+                if (storageService.store(mainFile, newfileName)) {
+                    mainpath += "C://Goodsfiles/" + goodsid + "/main/" + i + "." + storageService.getFileType(fileName);
                 }
+                i = ++i;
+            }
+            int j = 0;
+            //处理展示图
+            for (MultipartFile showFile : showFiles) {
+                String fileName = showFile.getOriginalFilename();
+                if (!storageService.isImage(fileName)) {
+                    return GetResult.toJson(28, null, null, null, 0);
+                }
+                String newfileName = root + goodsid + "\\show\\" + j + "." + storageService.getFileType(fileName);
+                if (storageService.store(showFile, newfileName)) {
+                    showpath += "C://Goodsfiles/" + goodsid + "/show/" + j + "." + storageService.getFileType(fileName) + "|";
+                }
+                j = ++j;
+            }
+            int k = 0;
+            //处理颜色图
+            for (MultipartFile colorFile : colorFiles) {
+                String colorpath = "C://Goodsfiles/";
+                String fileName = colorFile.getOriginalFilename();
+                if (!storageService.isImage(fileName)) {
+                    return GetResult.toJson(28, null, null, null, 0);
+                }
+                String newfileName = root + goodsid + "\\color\\" + k + "." + storageService.getFileType(fileName);
+                if (storageService.store(colorFile, newfileName)) {
+                    colorpath += goodsid + "/color/" + k + "." + storageService.getFileType(fileName);
+                }
+                //插入商品详情表
+                GooddetailsWithBLOBs gooddetails = new GooddetailsWithBLOBs();
+                gooddetails.setCM_SPEC_STOCK(spec_stocks.get(k));
+                gooddetails.setCM_COLOR(colorarr[k]);
+                gooddetails.setCM_GOODSID(goodsid);
+                gooddetails.setCM_IMAGEPATH(colorpath);
+                customServiceDao.insertGoodDetails(gooddetails);
+                k = ++k;
             }
 
             GoodsWithBLOBs goods = new GoodsWithBLOBs();
@@ -310,69 +340,57 @@ public class CustomServiceService {
      * @param chtml
      * @param ispromotion
      * @param spec
-     * @param stock
-     * @param files
      * @param goodsid
      * @param changetab
+     * @param mainFiles
+     * @param showFiles
      * @return
      */
-    public Result reviseGoodsS(String adminid, String goodsartnum, String sellerid, int classifyid, String classifytabs, int brandid, String title, double originalprice, double presentprice, String html, String chtml, int ispromotion, String spec, int stock, List<MultipartFile> files, String goodsid, String changetab) {
+    public Result reviseGoodsS(String adminid, String goodsartnum, String sellerid, int classifyid, String classifytabs, int brandid, String title, double originalprice, double presentprice, String html, String chtml, int ispromotion, String spec, String goodsid, String changetab, MultipartFile[] mainFiles, MultipartFile[] showFiles) {
         try {
             Admins admins = customServiceDao.selectAdminInfo(adminid);
             if (admins == null || (admins.getCM_LEVEL() != 1 && admins.getCM_LEVEL() != 3)) {
                 return GetResult.toJson(45, null, null, null, 0);
             }
-            GoodsWithBLOBs goods = new GoodsWithBLOBs();
-            List list = customServiceDao.selectGoodsByGoodsid(goodsid);
-            if (list != null && list.size() > 0) {
-                goods = (GoodsWithBLOBs) list.get(0);
-            }
-            if (goods.getCM_GOODSID() == null) {
+            Goods good = customServiceDao.selectGoodsByGoodsid(goodsid);
+            if (good.getCM_GOODSID() == null) {
                 return GetResult.toJson(17, null, jwt.createJWT(adminid), null, 0);
             }
-            String spec_stock = "";
-            String[] specArr = spec.split("\\|");
-            for (String spec1 : specArr) {
-                spec_stock = spec1 + "_" + stock + "|";
-            }
-            List<GooddetailsWithBLOBs> gooddetailsList = customServiceDao.selectGooddetailBygoodid(goodsid);
-            for (GooddetailsWithBLOBs gooddetails : gooddetailsList) {
-                gooddetails.setCM_SPEC_STOCK(spec_stock);
-            }
-            int a = files.size();
             String mainpath = "";
             String showpath = "";
-            if (a > 0) {
-                String[] carr = changetab.split("\\|");
-                List<String> iarr = Arrays.asList(goods.getCM_FIGURESPATH().split("\\|"));
-                File file = new File(root);
-                if (!file.isDirectory()) {
-                    file.mkdirs();
-                }
+            if (mainFiles.length > 0) {
                 int i = 0;
-                for (MultipartFile file1 : files) {
-                    String res = "";
-                    Date date = new Date();
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HHmmssSSSS");
-                    String str = simpleDateFormat.format(date);
-                    String newfilename = str + "." + storageService.getFileType(file1.getOriginalFilename());
-                    if (storageService.store(file1, root + newfilename)) {
-                        res = root + newfilename;
+                //处理主图
+                for (MultipartFile mainFile : mainFiles) {
+                    String fileName = mainFile.getOriginalFilename();
+                    if (!storageService.isImage(fileName)) {
+                        return GetResult.toJson(28, null, null, null, 0);
                     }
-                    if (file1.getName().equals("main")) {
-                        mainpath = res;
-                    } else {
-                        storageService.deleteByFigurePath(iarr.get(i));
-                        if (i > (iarr.size() - 1)) {
-                            iarr.add(res);
-                        } else {
-                            iarr.set(i, res);
-                        }
-                        i++;
+                    String newfileName = root + goodsid + "\\main\\" + i + "." + storageService.getFileType(fileName);
+                    if (storageService.store(mainFile, newfileName)) {
+                        mainpath += "C://Goodsfiles/" + goodsid + "/main/" + i + "." + storageService.getFileType(fileName);
                     }
+                    i = ++i;
                 }
-                showpath = String.join("|", iarr);
             }
+
+            if (showFiles.length > 0) {
+                int j = 0;
+                //处理展示图
+                for (MultipartFile showFile : showFiles) {
+                    String fileName = showFile.getOriginalFilename();
+                    if (!storageService.isImage(fileName)) {
+                        return GetResult.toJson(28, null, null, null, 0);
+                    }
+                    String newfileName = root + goodsid + "\\show\\" + j + "." + storageService.getFileType(fileName);
+                    if (storageService.store(showFile, newfileName)) {
+                        showpath += "C://Goodsfiles/" + goodsid + "/show/" + j + "." + storageService.getFileType(fileName) + "|";
+                    }
+                    j = ++j;
+                }
+            }
+
+            GoodsWithBLOBs goods = new GoodsWithBLOBs();
             goods.setCM_GOODSARTNUM(goodsartnum);
             goods.setCM_SELLERID(sellerid);
             goods.setCM_CLASSIFYID(classifyid);
@@ -386,10 +404,10 @@ public class CustomServiceService {
             goods.setCM_HTML(html);
             goods.setCM_ISPROMOTION(ispromotion);
             goods.setCM_SPEC(spec);
-            if (!mainpath.equals("")) {
+            if (StringUtils.isNotEmpty(mainpath)) {
                 goods.setCM_MAINFIGUREPATH(mainpath);
             }
-            if (!showpath.equals("")) {
+            if (StringUtils.isNotEmpty(showpath)) {
                 goods.setCM_FIGURESPATH(showpath);
             }
             customServiceDao.updateGoods(goods);
@@ -400,51 +418,53 @@ public class CustomServiceService {
         }
     }
 
+
     /**
-     * 修改商品颜色
-     *
+     * 修改商品详细
      * @param adminid
      * @param goodsdetailsid
      * @param color
-     * @param stock
-     * @param files
+     * @param specs
+     * @param stocks
+     * @param colorFile
      * @return
      */
-    public Result reviseGoodsDetailsS(String adminid, String goodsdetailsid, String color, String stock, List<MultipartFile> files) {
+    public Result reviseGoodsDetailsS(String adminid, String goodsdetailsid, String color,String specs, String stocks, MultipartFile colorFile) {
         try {
-            GooddetailsWithBLOBs gooddetailsWithBLOBs = customServiceDao.selectGooddetailBygooddetailsid(goodsdetailsid);
-            if (gooddetailsWithBLOBs.getCM_GOODSID() == null) {
+            GooddetailsWithBLOBs gooddetail = customServiceDao.selectGooddetailBygooddetailsid(goodsdetailsid);
+            if (gooddetail.getCM_GOODSID() == null) {
                 return GetResult.toJson(53, null, jwt.createJWT(adminid), null, 0);
             }
-            for (MultipartFile file1: files){
+            String[] specarr = specs.split("\\|");
+            String[] stockarr = stocks.split("\\|");
+            if (specarr.length != stockarr.length) {
+                return GetResult.toJson(65, null, null, null, 0);
+            }
+            if (!colorFile.isEmpty()) {
                 String res = "";
-                storageService.deleteByFigurePath(gooddetailsWithBLOBs.getCM_IMAGEPATH());
-                File file = new File(root);
-                if (!file.isDirectory()) {
-                    file.mkdirs();
+                String goodid = gooddetail.getCM_GOODSID();
+                storageService.deleteByFigurePath(gooddetail.getCM_IMAGEPATH());
+                String originPath = gooddetail.getCM_IMAGEPATH();
+                String date = DateUtils.todayHhMmSs();
+                String newfilename = root + goodid + "\\color\\" + date + "." + storageService.getFileType(colorFile.getOriginalFilename());
+                if (storageService.store(colorFile, newfilename)) {
+                    res = "C://Goodsfiles/" + goodid+ "/color/" + date + "." + storageService.getFileType(colorFile.getOriginalFilename());
                 }
-                Date date = new Date();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HHmmssSSSS");
-                String str = simpleDateFormat.format(date);
-                String newfilename = str + "." + storageService.getFileType(file1.getOriginalFilename());
-                if (storageService.store(file1, root + newfilename)) {
-                    res = root + newfilename;
-                }
-                gooddetailsWithBLOBs.setCM_IMAGEPATH(res);
+                gooddetail.setCM_IMAGEPATH(res);
             }
-            int stock1 = Integer.valueOf(stock);
-            if (stock1 > 0) {
-                String spec_stock = "";
-                Goods goods = customServiceDao.selectGoodsByGoodsid(gooddetailsWithBLOBs.getCM_GOODSID()).get(0);
-                String spec = goods.getCM_SPEC();
-                String[] specArr = spec.split("\\|");
-                for (String spec1 : specArr) {
-                    spec_stock = spec1 + "_" + stock + "|";
-                }
-                gooddetailsWithBLOBs.setCM_SPEC_STOCK(spec_stock);
+
+            //修改每个颜色对应的库存详细
+            int i = 0;
+            String spec_stock = "";
+            for (String spec : specarr) {
+                spec_stock += spec + "_" + stockarr[i] + "|";
+                i = ++i;
             }
-            gooddetailsWithBLOBs.setCM_COLOR(color);
-            customServiceDao.updateGooddetails(gooddetailsWithBLOBs);
+            gooddetail.setCM_COLOR(color);
+            if (StringUtils.isNotEmpty(spec_stock)) {
+                gooddetail.setCM_SPEC_STOCK(spec_stock);
+            }
+            customServiceDao.updateGooddetails(gooddetail);
             return GetResult.toJson(0, null, jwt.createJWT(adminid), null, 0);
         } catch (NumberFormatException e) {
             e.printStackTrace();
@@ -453,42 +473,39 @@ public class CustomServiceService {
     }
 
     /**
-     * 添加商品详情
-     *
+     * 增加商品详情
      * @param adminid
      * @param goodsid
      * @param color
-     * @param stock
-     * @param multipartFile
+     * @param specs
+     * @param stocks
+     * @param colorFile
      * @return
      */
-    public Result addGoodsDetailsS(String adminid, String goodsid, String color, String stock, MultipartFile multipartFile) {
+    public Result addGoodsDetailsS(String adminid, String goodsid, String color, String specs, String stocks, MultipartFile colorFile) {
         try {
-            GoodsWithBLOBs goods = new GoodsWithBLOBs();
-            List<Goods> list = customServiceDao.selectGoodsByGoodsid(goodsid);
-            if (list != null && list.size() > 0) {
-                goods = (GoodsWithBLOBs) list.get(0);
-            }
+            Goods goods = customServiceDao.selectGoodsByGoodsid(goodsid);
             if (goods.getCM_GOODSID() == null) {
                 return GetResult.toJson(53, null, jwt.createJWT(adminid), null, 0);
             }
-            File file = new File(root);
-            if (!file.isDirectory()) {
-                file.mkdirs();
-            }
-            Date date = new Date();
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HHmmssSSSS");
-            String str = simpleDateFormat.format(date);
-            String newfilename = str + "." + storageService.getFileType(multipartFile.getOriginalFilename());
+            String goodid = goods.getCM_GOODSID();
+            String str = DateUtils.todayHhMmSs();
+            String newfilename = root + goodid + "\\color\\" + str + "." + storageService.getFileType(colorFile.getOriginalFilename());
             String res = "";
-            if (storageService.store(multipartFile, root + newfilename)) {
-                res = root + newfilename;
+            if (storageService.store(colorFile, newfilename)) {
+                res = "C://Goodsfiles/" + goodid+ "/color/" + str + "." + storageService.getFileType(colorFile.getOriginalFilename());
             }
             String spec_stock = "";
-            String spec = goods.getCM_SPEC();
-            String[] specArr = spec.split("\\|");
-            for (String spec1 : specArr) {
-                spec_stock = spec1 + "_" + stock + "|";
+            String[] specArr = specs.split("\\|");
+            String[] stockArr = stocks.split("\\|");
+            if (specArr.length != stockArr.length) {
+                return GetResult.toJson(65, null, null, null, 0);
+            }
+            //处理每个颜色对应的库存
+            int i = 0;
+            for (String spec : specArr) {
+                spec_stock += spec + "_" + stockArr[i] + "|";
+                i = ++i;
             }
             GooddetailsWithBLOBs gooddetailsWithBLOBs = new GooddetailsWithBLOBs();
             gooddetailsWithBLOBs.setCM_COLOR(color);
@@ -498,15 +515,15 @@ public class CustomServiceService {
             customServiceDao.insertGoodDetails(gooddetailsWithBLOBs);
             return GetResult.toJson(0, null, jwt.createJWT(adminid), null, 0);
         } catch (Exception e) {
-            e.printStackTrace();
             return GetResult.toJson(200, null, null, null, 0);
         }
     }
 
     /**
      * 上传商品HTML内容中的图片
+     *
      * @param multipartFile 图片
-     * @param goodsid 商品ID
+     * @param goodsid       商品ID
      * @return
      */
     public Result uploadGoodsImg(MultipartFile multipartFile, String goodsid) {
@@ -515,15 +532,16 @@ public class CustomServiceService {
                 return GetResult.toJson(28, null, null, null, 0);
             }
             if (StringUtils.isEmpty(goodsid)) {
-                goodsid = DateUtils.DF_YYYY_MM_DD_HH_MM_SS + GetRandomNumber.genRandomNum(4);
+                goodsid = DateUtils.todayYyyyMmDdHhMmSs() + GetRandomNumber.genRandomNum(4);
             }
-            File file = new File(root);
-            if (!file.isDirectory()) {
-                file.mkdirs();
-            }
-            String filename = DateUtils.DF_HH_MM_SS + GetRandomNumber.genRandomNum(4) + "." + storageService.getFileType(multipartFile.getOriginalFilename());
-            if (storageService.store(multipartFile, filename)) {
-                return GetResult.toJson(0, null, null, "{'filepath':'" + (root + filename) + "', cfilepath':'" + (root + "th" + filename) + "','goodsid':" + goodsid + "'}", 0);
+
+            String filename = DateUtils.todayHhMmSs() + GetRandomNumber.genRandomNum(4) + "." + storageService.getFileType(multipartFile.getOriginalFilename());
+            //主题路径
+            String newfilename = root + goodsid + "\\" + filename;
+            //缩略图路径
+            String thfilename = root + goodsid + "\\th" + filename;
+            if (storageService.storeAndCompress(multipartFile, newfilename, thfilename)) {
+                return GetResult.toJson(0, null, null, "{'filepath':'" + "C://GoodsFiles/" + goodsid + "/" + filename + "', 'cfilepath':'" + "C://GoodsFiles/" + goodsid + "/th" + filename + "','goodsid':'" + goodsid + "'}", 0);
             } else {
                 return GetResult.toJson(47, null, null, null, 0);
             }

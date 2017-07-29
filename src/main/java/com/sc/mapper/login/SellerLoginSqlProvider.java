@@ -12,7 +12,7 @@ public class SellerLoginSqlProvider {
         sql.SELECT("a.CM_SELLERID, b.CM_CODE, a.CM_SELLERNAME, a.CM_PHONE");
         sql.FROM("TB_SELLERS a");
         sql.INNER_JOIN("TB_REGISTER b ON a.CM_PHONE = b.CM_PHONE");
-        sql.WHERE("a.CM_ACCOUNT=" + account + "a.CM_PASSWORD'" + password+"'");
+        sql.WHERE("a.CM_ACCOUNT='" + account + "' and" + " a.CM_PASSWORD='" + password+"'");
         return sql.toString();
     };
 }

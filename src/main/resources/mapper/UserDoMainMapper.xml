@@ -83,7 +83,7 @@
         <result column="CM_USERBALANCE" property="CM_USEBALANCE"/>
         <result column="CM_NICKNAME" property="CM_NICKNAME" jdbcType="VARCHAR"/>
         <result column="CM_PHONE" property="CM_PHONE" jdbcType="DOUBLE"/>
-        <result column="CM_SHOPADDRESS" property="CM_SHOPADDRESS" jdbcType="VARCHAR"/>
+        <result column="CM_SHOPEADDRESS" property="CM_SHOPEADDRESS" jdbcType="VARCHAR"/>
         <collection property="TB_ORDERDETAILS" ofType="com.sc.domain.userdomain.TbOrderDetails">
             <result column="CM_GOODSID2" property="CM_GOODSID" jdbcType="VARCHAR"/>
             <result column="CM_MAINFIGUREPATH" property="CM_MAINFIGUREPATH" jdbcType="VARCHAR"/>

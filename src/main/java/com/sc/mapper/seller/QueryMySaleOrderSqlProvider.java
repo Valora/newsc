@@ -23,9 +23,9 @@ public class QueryMySaleOrderSqlProvider {
         sql.LEFT_OUTER_JOIN("TB_GOODS q ON c.CM_GOODSID = q.CM_GOODSID");
         sql.WHERE("c.CM_SELLERID =" + sellerid);
         sql.AND();
-        sql.WHERE("DATE_FORMAT(c.CM_CREATETIME, '%Y-%m-%d %H:%i:%S')>'" + starttime + "'");
+        sql.WHERE("DATE_FORMAT(c.CM_CREATETIME, '%Y-%m-%d-%H-%i-%S')>'" + starttime + "'");
         sql.AND();
-        sql.WHERE(" DATE_FORMAT(c.CM_CREATETIME, '%Y-%m-%d %H:%i:%S')<'" + endtime + "'");
+        sql.WHERE(" DATE_FORMAT(c.CM_CREATETIME, '%Y-%m-%d-%H-%i-%S')<'" + endtime + "'");
         sql.AND();
         if (orderState == 1) {
             sql.WHERE("c.CM_SELLERSTATE<>" + 0);

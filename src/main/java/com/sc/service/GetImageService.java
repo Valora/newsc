@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -42,7 +43,7 @@ public class GetImageService {
                 outputStream.close();
             } else {
                 // 载入图像
-                BufferedImage buffImg = ImageIO.read(new FileInputStream(path));
+                BufferedImage buffImg = (BufferedImage) Toolkit.getDefaultToolkit().getImage(path);
                 response.setContentType("image/png");
                 // 将图像输出到Servlet输出流中。
                 ServletOutputStream sos = response.getOutputStream();

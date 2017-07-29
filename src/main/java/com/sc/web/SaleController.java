@@ -199,7 +199,7 @@ public class SaleController {
         if (newpassword.isEmpty() || confirmpassword.isEmpty()) {
             return GetResult.toJson(38, null, null, null, 0);
         }
-        if (Integer.valueOf(newpassword) != Integer.valueOf(confirmpassword)) {
+        if (!newpassword.equals(confirmpassword)){
             return GetResult.toJson(39, null, null, null, 0);
         }
         return saleService.ResettingPassword(phone, code, newpassword);

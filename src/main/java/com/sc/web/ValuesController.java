@@ -91,6 +91,7 @@ public class ValuesController {
         result.put("62", "此订单为退货");
         result.put("63", "订单号错,无法支付");
         result.put("64", "身份证号已注册");
+        result.put("65", "商品颜色和库存不一致");
         return result;
     }
 

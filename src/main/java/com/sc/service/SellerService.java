@@ -28,6 +28,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by valora on 2017/5/9.
@@ -143,20 +144,20 @@ public class SellerService {
                 return GetResult.toJson(50, null, jwt.createJWT(sellerId), null, 0);
             }
             Orders orders = sellerDao.selectOrderbyOrderid(orderdetails.getCM_ORDERID());
-            if (orders != null || orders.getCM_STATE() != 2 || orderdetails.getCM_SELLERSTATE() != 2) {
+            if (orders != null || orders.getCM_STATE().intValue() != 2 || orderdetails.getCM_SELLERSTATE().intValue() != 2) {
                 return GetResult.toJson(49, null, jwt.createJWT(sellerId), null, 0);
             }
             orderdetails.setCM_SELLERSTATE(3);
             orderdetails.setCM_LOGISTICSID(Integer.valueOf(logisticsid));
             orderdetails.setCM_LOGISTICSNUM(logisticsnum);
-            boolean isF = true;
+            boolean issend = true;
             List<Orderdetails> list = sellerDao.selectOrdertailsByOrderid(orders.getCM_ORDERID());
             for (Orderdetails o : list) {
-                if (o.getCM_ORDERDETAILSID() != orderdetails.getCM_ORDERDETAILSID() && o.getCM_SELLERSTATE() == 2) {
-                    isF = false;
+                if (!Objects.equals(o.getCM_ORDERDETAILSID(), orderdetails.getCM_ORDERDETAILSID()) && o.getCM_SELLERSTATE().intValue() == 2) {
+                    issend = false;
                 }
             }
-            if (isF) {
+            if (issend) {
                 orders.setCM_STATE(3);
             }
             sellerDao.updateOrderdetails(orderdetails, orderdetails.getCM_ORDERDETAILSID());
@@ -331,7 +332,7 @@ public class SellerService {
             PageHelper.startPage(pagenum, pagesize);
             int i = list.size();
             i = (i / pagesize) + ((i % pagesize) > 0 ? 1 : 0);
-            return GetResult.toJson(200, null, null, list, i);
+            return GetResult.toJson(0, null, null, list, i);
         } catch (Exception e) {
             return GetResult.toJson(200, null, null, null, 0);
         }

@@ -1,5 +1,6 @@
 package com.sc.storage;
 
+import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -8,9 +9,6 @@ import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -35,8 +33,8 @@ public class FileSystemStorageService implements StorageService {
             }
             Path newPath = this.rootLocation.resolve(newfilename);
             if (!Files.exists(newPath))
-                Files.createDirectories(newPath);
-            Files.copy(file.getInputStream(), newPath);
+                Files.createFile(newPath);
+            Files.copy(file.getInputStream(), newPath, StandardCopyOption.REPLACE_EXISTING);
             return true;
         } catch (Exception e) {
             throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
@@ -108,7 +106,7 @@ public class FileSystemStorageService implements StorageService {
 
     @Override
     public Boolean isImage(String fileName) {
-        String[] img_type = new String[]{".jpg", ".jpeg", ".png", ".gif", ".bmp"};
+        String[] img_type = new String[]{".jpg", ".jpeg", ".png", ".gif", ".bmp", "blob"};
         if (fileName == null) {
             return false;
         }
@@ -126,6 +124,23 @@ public class FileSystemStorageService implements StorageService {
         if (fileName != null && fileName.indexOf(".") >= 0) {
             return fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
         }
-        return null;
+        return "jpg";
+    }
+
+    @Override
+    public boolean storeAndCompress(MultipartFile multipartFile, String newfilename, String thfilename) {
+        try {
+            if (multipartFile.isEmpty()) {
+                throw new StorageException("Failed to store empty file " + multipartFile.getOriginalFilename());
+            }
+            Path newPath = this.rootLocation.resolve(newfilename);
+            if (!Files.exists(newPath))
+                Files.createDirectories(newPath);
+            Files.copy(multipartFile.getInputStream(), newPath, StandardCopyOption.REPLACE_EXISTING);
+            Thumbnails.of("C:\\" + newfilename).scale(0.2f).toFile("C:\\" + thfilename);
+            return true;
+        } catch (Exception e) {
+            throw new StorageException("Failed to store file " + multipartFile.getOriginalFilename(), e);
+        }
     }
 }
