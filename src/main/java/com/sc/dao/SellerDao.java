@@ -73,9 +73,9 @@ public class SellerDao {
      * @param orderdetailsid 订单id
      * @return 订单集合
      */
-    public List<OrderdetailsWithBLOBAndUsersAndLogisticss> QuerySaleOrderDetailD(String orderdetailsid) {
+    public OrderdetailsWithBLOBAndUsersAndLogisticss QuerySaleOrderDetailD(String orderdetailsid) {
         List<OrderdetailsWithBLOBAndUsersAndLogisticss> list = querySaleOrderDetailsByOrderdetailsId.QuerySaleOrderDetailM(orderdetailsid);
-        return list;
+        return list.size() < 0 ? null : list.get(0);
     }
 
     /**
@@ -103,17 +103,12 @@ public class SellerDao {
      * @param cmOrderdetailsid 详情id
      * @return 订单详情对象
      */
-    public Orderdetails selectordertails(String cmOrderdetailsid) {
+    public OrderdetailsWithBLOBs selectordertails(String cmOrderdetailsid) {
         OrderdetailsExample orderdetailsExample = new OrderdetailsExample();
         OrderdetailsExample.Criteria criteria = orderdetailsExample.createCriteria();
         criteria.andCM_ORDERDETAILSIDEqualTo(cmOrderdetailsid);
-        List<Orderdetails> list = orderdetailsMapper.selectByExample(orderdetailsExample);
-        Orderdetails orderdetails = new Orderdetails();
-        if (list != null && list.size() > 0) {
-            orderdetails = list.get(0);
-            return orderdetails;
-        }
-        return null;
+        List<OrderdetailsWithBLOBs> list = orderdetailsMapper.selectByExampleWithBLOBs(orderdetailsExample);
+        return list.size() < 0 ? null : list.get(0);
     }
 
     /**
@@ -126,7 +121,7 @@ public class SellerDao {
         AfterservicesExample afterservicesExample = new AfterservicesExample();
         AfterservicesExample.Criteria criteria = afterservicesExample.createCriteria();
         criteria.andCM_AFTERSERVICEIDEqualTo(afierserviceid);
-        afterservicesMapper.updateByExample(afterservices, afterservicesExample);
+        afterservicesMapper.updateByExampleSelective(afterservices, afterservicesExample);
     }
 
     /**
@@ -135,11 +130,11 @@ public class SellerDao {
      * @param orderdetails     需要更新的订单详情表
      * @param cmOrderdetailsid 订单详情的id
      */
-    public void updateOrderdetails(Orderdetails orderdetails, String cmOrderdetailsid) {
+    public void updateOrderdetails(OrderdetailsWithBLOBs orderdetails, String cmOrderdetailsid) {
         OrderdetailsExample orderdetailsExample = new OrderdetailsExample();
         OrderdetailsExample.Criteria criteria = orderdetailsExample.createCriteria();
         criteria.andCM_ORDERDETAILSIDEqualTo(cmOrderdetailsid);
-        orderdetailsMapper.updateByExample(orderdetails, orderdetailsExample);
+        orderdetailsMapper.updateByExampleSelective(orderdetails, orderdetailsExample);
     }
 
     /**
@@ -157,16 +152,12 @@ public class SellerDao {
      * @param cmOrderid orderid
      * @return order对象
      */
-    public Orders selectOrderbyOrderid(String cmOrderid) {
+    public OrdersWithBLOBs selectOrderbyOrderid(String cmOrderid) {
         OrdersExample ordersExample = new OrdersExample();
         OrdersExample.Criteria criteria = ordersExample.createCriteria();
         criteria.andCM_ORDERIDEqualTo(cmOrderid);
-        Orders orders = new Orders();
-        List<Orders> list = ordersMapper.selectByExample(ordersExample);
-        if (list != null && list.size() > 0) {
-            orders = list.get(0);
-        }
-        return orders;
+        List<OrdersWithBLOBs> list = ordersMapper.selectByExampleWithBLOBs(ordersExample);
+        return list.size() < 0 ? null : list.get(0);
     }
 
     /**
@@ -189,11 +180,11 @@ public class SellerDao {
      * @param orders    需要更新的orders对象
      * @param cmOrderid ordersid
      */
-    public void updateOrder(Orders orders, String cmOrderid) {
+    public void updateOrder(OrdersWithBLOBs orders, String cmOrderid) {
         OrdersExample ordersExample = new OrdersExample();
         OrdersExample.Criteria criteria = ordersExample.createCriteria();
         criteria.andCM_ORDERIDEqualTo(cmOrderid);
-        ordersMapper.updateByExample(orders, ordersExample);
+        ordersMapper.updateByExampleSelective(orders, ordersExample);
     }
 
     /**
@@ -256,7 +247,7 @@ public class SellerDao {
         SellersExample sellersExample = new SellersExample();
         SellersExample.Criteria criteria = sellersExample.createCriteria();
         criteria.andCM_SELLERIDEqualTo(sellers.getCM_SELLERID());
-        sellersMapper.updateByExample(sellers, sellersExample);
+        sellersMapper.updateByExampleSelective(sellers, sellersExample);
     }
 
     /**
@@ -296,7 +287,7 @@ public class SellerDao {
         RegisterExample registerExample = new RegisterExample();
         RegisterExample.Criteria criteria = registerExample.createCriteria();
         criteria.andCM_PHONEEqualTo(phone);
-        registerMapper.updateByExample(register, registerExample);
+        registerMapper.updateByExampleSelective(register, registerExample);
     }
 
     /**

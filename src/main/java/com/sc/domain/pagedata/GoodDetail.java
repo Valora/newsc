@@ -30,5 +30,6 @@ public class GoodDetail {
     private Integer CM_ISPROMOTION;
     private String CM_SELLERNAME;
     private Integer CM_ISCOLLECTION;
+    private String CM_SPEC;
     private List<GoodDetailsOther> CM_OTHER;
 }

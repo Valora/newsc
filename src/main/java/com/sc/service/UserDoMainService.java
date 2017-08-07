@@ -410,12 +410,8 @@ public class UserDoMainService {
             if (afterservices.getCM_AFTERSERVICEID() == null) {
                 return GetResult.toJson(51, null, jwt.createJWT(userId), null, 0);
             }
-            Orderdetails orderdetails = new Orderdetails();
-            List<OrderdetailsWithBLOBs> list1 = userDoMainDao.selectOrderdetailsByorderdetailsid(afterservices.getCM_ORDERDETAILSID());
-            if (list1 != null && list1.size() > 0) {
-                orderdetails = list1.get(0);
-            }
-            if (orderdetails.getCM_ORDERDETAILSID() != null || orderdetails.getCM_SELLERSTATE() != 4 || afterservices.getCM_STATE() != 2) {
+            OrderdetailsWithBLOBs orderdetails = userDoMainDao.selectOrderdetailsByorderdetailsid(afterservices.getCM_ORDERDETAILSID());
+            if (orderdetails.getCM_ORDERDETAILSID() != null || orderdetails.getCM_SELLERSTATE().intValue() != 4 || afterservices.getCM_STATE().intValue() != 2) {
                 return GetResult.toJson(52, null, jwt.createJWT(userId), null, 0);
             }
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd HHmmssSSSS");
@@ -810,16 +806,16 @@ public class UserDoMainService {
      */
     public Result queryLogisticsInfoOneS(String orderdetailid) {
         try {
-            OrderdetailsWithBLOBs orderdetailsWithBLOBs = userDoMainDao.selectOrderdetailsByorderdetailsid(orderdetailid).get(0);
+            OrderdetailsWithBLOBs orderdetailsWithBLOBs = userDoMainDao.selectOrderdetailsByorderdetailsid(orderdetailid);
             String info = orderdetailsWithBLOBs.getCM_LOGISTICSINFO();
             if (StringUtils.isNotEmpty(info)) {
                 return GetResult.toJson(0, null, null, info, 0);
             } else {
                 String number = orderdetailsWithBLOBs.getCM_LOGISTICSNUM();
-                HttpResponse json = QueryLogistics.query(number);
+                String json = QueryLogistics.query(number);
                 System.out.println(json);
                 if (json != null) {
-                    orderdetailsWithBLOBs.setCM_LOGISTICSINFO(json.toString());
+                    orderdetailsWithBLOBs.setCM_LOGISTICSINFO(json);
                     orderdetailsWithBLOBs.setCM_SELLERSTATE(4);
                     userDoMainDao.updateOrderDetails(orderdetailsWithBLOBs);
                 }
@@ -849,9 +845,9 @@ public class UserDoMainService {
                 return GetResult.toJson(0, null, null, str, 0);
             } else {
                 String number = servicedetailsWithBLOBs.getCM_LOGISTICSNUM();
-                HttpResponse json = QueryLogistics.query(number);
+                String json = QueryLogistics.query(number);
                 if (json != null) {
-                    servicedetailsWithBLOBs.setCM_LOGISTICSINFO(json.toString());
+                    servicedetailsWithBLOBs.setCM_LOGISTICSINFO(json);
                 }
                 userDoMainDao.updateServicedetails(servicedetailsWithBLOBs);
                 return GetResult.toJson(0, null, null, json, 0);
@@ -878,9 +874,9 @@ public class UserDoMainService {
                 return GetResult.toJson(0, null, null, str, 0);
             } else {
                 String number = servicedetailsWithBLOBs.getCM_LOGISTICSNUM();
-                HttpResponse json = QueryLogistics.query(number);
+                String json = QueryLogistics.query(number);
                 if (json != null) {
-                    servicedetailsWithBLOBs.setCM_LOGISTICSINFO(json.toString());
+                    servicedetailsWithBLOBs.setCM_LOGISTICSINFO(json);
                 }
                 userDoMainDao.updateServicedetails(servicedetailsWithBLOBs);
                 return GetResult.toJson(0, null, null, json, 0);
@@ -897,12 +893,11 @@ public class UserDoMainService {
      * @param orderdetailsid 订单详情ID
      * @param type           操作类型:type(1：退换，2：换货3：返修)
      * @param reason         原因
-     * @param files          图片
      * @param userId         用户ID
      * @return
      */
     @Transactional
-    public Result applyAfterService(String orderdetailsid, String type, String reason, List<MultipartFile> files, String userId) {
+    public Result applyAfterService(String orderdetailsid, String type, String reason, String userId) {
         try {
             OrderInfo orderInfo = userDoMainDao.getOrderInfo(orderdetailsid);
             if (orderInfo.equals(null)) {
@@ -919,27 +914,8 @@ public class UserDoMainService {
             } catch (Exception ex) {
                 return GetResult.toJson(27, null, null, null, 0);
             }
-            String exchangesid = DateUtils.DF_YYYY_MM_DD_HH_MM_SS + GetRandomNumber.genRandomNum(4);
-            StringBuffer imagepaths = new StringBuffer();
-            if (files != null) {
-                File file1 = new File(exchangesPath);
-                if (!file1.isDirectory()) {
-                    file1.mkdir();
-                }
-                for (MultipartFile file : files) {
-                    int i = 0;
-                    String filetype = storageService.getFileType(file.getOriginalFilename());
-                    if (storageService.isImage(file.getOriginalFilename())) {
-                        return GetResult.toJson(28, null, null, null, 0);
-                    }
-                    String filename = i + "." + filetype;
-                    if (storageService.store(file, exchangesPath + filename)) {
-                        imagepaths.append(exchangesPath).append(filename).append("|");
-                    } else {
-                        return GetResult.toJson(28, null, null, null, 0);
-                    }
-                }
-            }
+            String exchangesid = DateUtils.todayYyyyMmDdHhMmSs() + GetRandomNumber.genRandomNum(4);
+
             userDoMainDao.updateAfterService(orderdetailsid);
             Afterservices afterservices = new Afterservices();
             afterservices.setCM_AFTERSERVICEID(exchangesid);
@@ -949,16 +925,15 @@ public class UserDoMainService {
             afterservices.setCM_USERID(userId);
             afterservices.setCM_ORDERDETAILSID(orderInfo.getCM_ORDERDETAILSID());
             afterservices.setCM_STATE(1);
-            afterservices.setCM_IMGPATHS(imagepaths.toString());
             afterservices.setCM_SELLERID(orderInfo.getCM_SELLERID());
             userDoMainDao.addAfterService(afterservices);
-            Servicedetails servicedetails = new Servicedetails();
-            servicedetails.setCM_SVID(DateUtils.DF_YYYY_MM_DD_HH_MM_SS);
+            ServicedetailsWithBLOBs servicedetails = new ServicedetailsWithBLOBs();
+            servicedetails.setCM_SVID(DateUtils.todayYyyyMmDdHhMmSs());
             servicedetails.setCM_AFTERSERVICEID(exchangesid);
             servicedetails.setCM_CREATETIME(new Date());
             servicedetails.setCM_TYPE(0);
             userDoMainDao.addAfterServiceDetail(servicedetails);
-            return GetResult.toJson(0, null, null, jwt.createJWT(userId), 0);
+            return GetResult.toJson(0, null, jwt.createJWT(userId), null, 0);
         } catch (Exception ex) {
             return GetResult.toJson(200, null, null, null, 0);
         }

@@ -244,9 +244,8 @@ public class ManageController {
     }
 
     @RequestMapping(value = URL + "ReviceClassify", method = RequestMethod.POST)
-    @ApiOperation("修改商品分类和子分类{classifyid分类ID，classifyname分类名称,type分类类型（0：大类，1：子类）,parentid上级分类（如果是大类，则输入0）,token秘钥,图片}")
-    public Result reviceClassify(HttpServletRequest request) {
-        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("files");
+    @ApiOperation("修改商品分类和子分类{classifyid分类ID，classifyname分类名称,type分类类型（0：大类，1：子类）,parentid上级分类（如果是大类，则输入0）,token秘钥, form图片}")
+    public Result reviceClassify(HttpServletRequest request, @RequestParam("form")MultipartFile classifyFile) {
         String classifyname = request.getParameter("classifyname");
         String classifyid = request.getParameter("classifyid");
         String type = request.getParameter("type");
@@ -257,7 +256,7 @@ public class ManageController {
             return GetResult.toJson(101, null, null, null, 0);
         }
 
-        return manageService.reviceClassify(classifyid, classifyname, type, parentid, tk.getUserId(), files);
+        return manageService.reviceClassify(classifyid, classifyname, type, parentid, tk.getUserId(), classifyFile);
     }
 
     @RequestMapping(value = URL + "QueryClassifies", method = RequestMethod.GET)

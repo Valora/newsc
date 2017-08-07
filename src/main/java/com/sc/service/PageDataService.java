@@ -229,4 +229,23 @@ public class PageDataService {
             return GetResult.toJson(200, null, null, null, 0);
         }
     }
+
+    /**
+     * 搜索商品
+     * @param content 商品编号或品牌
+     * @param pageNum 页码
+     * @param pageSize 页面大小
+     * @return 商品列表
+     */
+    public Result searchGoodsByAdmin(String content, Integer pageNum, Integer pageSize) {
+        try {
+            List<PageGoods> goods = pageDataDao.searchGoodsByAdmin(content, pageNum, pageSize);
+            Integer i = goods.size();
+            i = (i / pageSize) + ((i % pageSize) > 0 ? 1 : 0);
+            return GetResult.toJson(0, null, null, goods, i);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return GetResult.toJson(200, null, null, null, 0);
+        }
+    }
 }

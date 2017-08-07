@@ -49,11 +49,11 @@ public class CustomServiceDao {
      * @param goodsid goodsid
      * @return goods集合
      */
-    public Goods selectGoodsByGoodsid(String goodsid) {
+    public GoodsWithBLOBs selectGoodsByGoodsid(String goodsid) {
         GoodsExample goodsExample = new GoodsExample();
         GoodsExample.Criteria criteria = goodsExample.createCriteria();
         criteria.andCM_GOODSIDEqualTo(goodsid);
-        List<Goods> goods = goodsMapper.selectByExample(goodsExample);
+        List<GoodsWithBLOBs> goods = goodsMapper.selectByExampleWithBLOBs(goodsExample);
         return goods.size() < 0 ? null : goods.get(0);
     }
 

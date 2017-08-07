@@ -88,7 +88,7 @@ public class CustomServiceController {
 
     @RequestMapping(value = URL + "ReviceGoods", method = RequestMethod.POST)
     @ApiOperation("修改商品{goodsid商品ID，token秘钥，goodsartnum商品码(限15字符)， sellerid厂家ID，classifyid大类ID(只属于一个大类)，classifytabs子类ID(如：1|2|3|,最后一个字符必须为\"|\")，brandid品牌ID，title标题(限25个字符)，originalprice原价，presentprice现价，html展示内容，chtml展示内容(APP小图)，ispromotion是否推荐(0:不，1：推荐)，spec规格(如：29/74A_10|30/76A_100|,最后一个字符必须为\"|\",请注意特殊字符，不能影响字符切割)，图片必须有name属性（主图：main,展示图:show)changetab(多张修改用|拼接，如0|1|)}")
-    public Result reviseGoods(HttpServletRequest request, @RequestParam("main") MultipartFile[] mainFiles, @RequestParam("show") MultipartFile[] showFiles) {
+    public Result reviseGoods(HttpServletRequest request, @RequestParam("main") MultipartFile mainFiles, @RequestParam("show") MultipartFile[] showFiles) {
         String token = request.getParameter("token");
         String goodsid = request.getParameter("goodsid");
         String goodsartnum = request.getParameter("goodsartnum");
@@ -104,7 +104,8 @@ public class CustomServiceController {
         String ispromotion = request.getParameter("ispromotion");
         String spec = request.getParameter("spec");
         String changetab = request.getParameter("changetab");
-        if (StringUtils.isEmpty(token) || StringUtils.isEmpty(goodsid) || StringUtils.isEmpty(goodsartnum) || StringUtils.isEmpty(sellerid) || StringUtils.isEmpty(classifyid) || StringUtils.isEmpty(classifytabs) || StringUtils.isEmpty(brandid) || StringUtils.isEmpty(title) || StringUtils.isEmpty(originalprice) || StringUtils.isEmpty(presentprice) || StringUtils.isEmpty(html) || StringUtils.isEmpty(chtml) || StringUtils.isEmpty(ispromotion) || StringUtils.isEmpty(spec) || StringUtils.isEmpty(changetab)) {
+        String isoff = request.getParameter("isoff");
+        if (StringUtils.isEmpty(token) || StringUtils.isEmpty(goodsartnum) || StringUtils.isEmpty(sellerid) || StringUtils.isEmpty(classifyid) || StringUtils.isEmpty(classifytabs) || StringUtils.isEmpty(brandid) || StringUtils.isEmpty(title) || StringUtils.isEmpty(originalprice) || StringUtils.isEmpty(presentprice) || StringUtils.isEmpty(ispromotion) || StringUtils.isEmpty(spec))  {
             return GetResult.toJson(43, null, null, null, 0);
         }
         if (!ParseUtil.parseInt(classifyid) || !ParseUtil.parseInt(brandid) || !ParseUtil.parseInt(ispromotion) || !ParseUtil.parseDouble(originalprice) || !ParseUtil.parseDouble(presentprice) || goodsartnum.length() > 15 || title.length() > 25) {
@@ -119,7 +120,7 @@ public class CustomServiceController {
         double Originalprice = Double.parseDouble(originalprice);
         double Presentprice = Double.parseDouble(presentprice);
         int Ispromotion = Integer.parseInt(ispromotion);
-        return customServiceService.reviseGoodsS(tk.getUserId(), goodsartnum, sellerid, Classifyid, classifytabs, Brandid, title, Originalprice, Presentprice, html, chtml, Ispromotion, spec, goodsid, changetab, mainFiles, showFiles);
+        return customServiceService.reviseGoodsS(tk.getUserId(), goodsartnum, sellerid, Classifyid, classifytabs, Brandid, title, Originalprice, Presentprice, html, chtml, Ispromotion, spec, goodsid, changetab, mainFiles, showFiles, isoff);
     }
 
     @RequestMapping(value = URL + "ReciceGoodsDetails", method = RequestMethod.POST)
@@ -133,7 +134,7 @@ public class CustomServiceController {
         if (goodsdetailsid == null || !ParseUtil.parseInt(goodsdetailsid)) {
             return GetResult.toJson(53, null, null, null, 0);
         }
-        if (stock != null && (!ParseUtil.parseInt(stock))) {
+        if (stock == null ) {
             return GetResult.toJson(53, null, null, null, 0);
         }
         Token tk = jwt.checkJWT(token);
@@ -151,7 +152,7 @@ public class CustomServiceController {
         String color = request.getParameter("color");
         String spec = request.getParameter("spec");
         String stock = request.getParameter("stock");
-        if (goodsid == null || color == null || !ParseUtil.parseInt(stock)) {
+        if (goodsid == null || color == null ) {
             return GetResult.toJson(53, null, null, null, 0);
         }
         if (colorFile.isEmpty()) {

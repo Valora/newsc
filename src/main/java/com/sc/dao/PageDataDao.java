@@ -315,6 +315,19 @@ public class PageDataDao {
     }
 
     /**
+     * 搜索商品
+     *
+     * @param content  商品编号或品牌
+     * @param pageNum  页码
+     * @param pageSize 页面大小
+     * @return 商品列表
+     */
+    public List<PageGoods> searchGoodsByAdmin(String content, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        return pageDataMapper.searchGoodsByAdmin(content);
+    }
+
+    /**
      * 获得搜多商品数量
      *
      * @param content 商品编号或品牌
@@ -371,4 +384,5 @@ public class PageDataDao {
     public ArrayList<Classify> getClassify() {
         return pageDataMapper.getClassify();
     }
+
 }

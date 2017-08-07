@@ -355,27 +355,31 @@ public class ManageDao {
      * @param classifyid 分类Id
      * @return 分类列表
      */
-    public List<Classifys> selectClassifysByClassifyid(Integer classifyid) {
+    public Classifys selectClassifysByClassifyid(Integer classifyid) {
         ClassifysExample classifysExample = new ClassifysExample();
         ClassifysExample.Criteria criteria = classifysExample.createCriteria();
         criteria.andCM_CLASSIFYIDEqualTo(classifyid);
-        return classifysMapper.selectByExample(classifysExample);
+        List<Classifys> classifys = classifysMapper.selectByExample(classifysExample);
+        return classifys.size() < 0 ? null : classifys.get(0);
     }
 
     /**
-     * 修改商品分类和子分类
-     *
-     * @param classifyname 分类名称
-     * @param type         分类类型（0：大类，1：子类）
-     * @param parentid     上级分类（如果是大类，则输入0）
-     * @param imgpath      图片路径
+     * revice claddify
+     * @param classifyid
+     * @param classifyname
+     * @param type
+     * @param parentid
+     * @param imgpath
      */
-    public void reviceClassify(String classifyname, String type, String parentid, String imgpath) {
+    public void reviceClassify(int classifyid, String classifyname, String type, String parentid, String imgpath) {
+        ClassifysExample example = new ClassifysExample();
+        ClassifysExample.Criteria criteria = example.createCriteria();
         Classifys classifys = new Classifys();
+        criteria.andCM_CLASSIFYIDEqualTo(classifyid);
         classifys.setCM_IMGPATH(imgpath);
         classifys.setCM_CLASSIFYNAME(classifyname);
-        classifys.setCM_PARENTID(Objects.equals(type, "0") ? 0 : Integer.parseInt(parentid));
-        classifysMapper.updateByExample(classifys, new ClassifysExample());
+        classifys.setCM_PARENTID(Objects.equals(parentid, "0") ? 0 : Integer.parseInt(parentid));
+        classifysMapper.updateByExampleSelective(classifys, example);
     }
 
     /**
@@ -405,7 +409,7 @@ public class ManageDao {
             criteria.andCM_PARENTIDEqualTo(0);
         }
         if (type == 2) {
-            criteria.andCM_PARENTIDNotEqualTo(0);
+            criteria.andCM_PARENTIDNotEqualTo(1);
         }
         return classifysMapper.countByExample(classifysExample);
     }
@@ -547,7 +551,7 @@ public class ManageDao {
         criteria.andCM_USERIDEqualTo(userid);
         Users users = new Users();
         users.setCM_ISEXAMINE(2);
-        usersMapper.updateByExample(users, usersExample);
+        usersMapper.updateByExampleSelective(users, usersExample);
     }
 
     /**
@@ -563,7 +567,7 @@ public class ManageDao {
         Users users = new Users();
         users.setCM_ISEXAMINE(1);
         users.setCM_REASON(reason);
-        usersMapper.updateByExample(users, usersExample);
+        usersMapper.updateByExampleSelective(users, usersExample);
     }
 
     /**

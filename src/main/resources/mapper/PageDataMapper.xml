@@ -18,6 +18,7 @@
         <result column="CM_GOODSARTNUM" property="CM_GOODSARTNUM" jdbcType="VARCHAR"/>
         <result column="CM_ISPROMOTION" property="CM_ISPROMOTION" jdbcType="INTEGER"/>
         <result column="CM_SELLERNAME" property="CM_SELLERNAME" jdbcType="VARCHAR"/>
+        <result column="CM_SPEC" property="CM_SPEC" jdbcType="VARCHAR"/>
         <result column="CM_ISCOLLECTION" property="CM_ISCOLLECTION" jdbcType="INTEGER"/>
         <collection property="CM_OTHER" ofType="com.sc.domain.pagedata.GoodDetailsOther">
             <result column="CM_GOODSDETAILSID" property="CM_GOODSDETAILSID" jdbcType="VARCHAR"/>
@@ -101,6 +102,7 @@
             t0.CM_SELLERID,
             t0.CM_GOODSARTNUM,
             t0.CM_ISPROMOTION,
+            t0.CM_SPEC,
             t1.CM_SELLERNAME AS CM_SELLERNAME,
             (CASE
              WHEN t3.test IS NULL
@@ -197,5 +199,22 @@
           t0.CM_GOODSARTNUM
         FROM TB_GOODS AS t0
         WHERE (t0.CM_GOODSARTNUM LIKE CONCAT('%','${content}','%' )) OR ((t0.CM_TITLE LIKE CONCAT('%','${content}','%' )) AND (t0.CM_ISOFF = 0))
+    </select>
+    <select id="searchGoodsByAdmin" resultMap="searchGoods">
+        SELECT
+        t0.CM_BRANDID,
+        t0.CM_FIGURESPATH,
+        t0.CM_GOODSID,
+        t0.CM_MAINFIGUREPATH,
+        t0.CM_PRESENTPRICE,
+        t0.CM_ORIGINALPRICE,
+        t0.CM_SALES,
+        t0.CM_TITLE,
+        t0.CM_CREATETIME,
+        t0.CM_ISOFF,
+        t0.CM_SELLERID,
+        t0.CM_GOODSARTNUM
+        FROM TB_GOODS AS t0
+        WHERE (t0.CM_GOODSARTNUM LIKE CONCAT('%','${content}','%' )) OR ((t0.CM_TITLE LIKE CONCAT('%','${content}','%' )) )
     </select>
 </mapper>

@@ -113,7 +113,7 @@
 
     <!--queryMyCanAfterServiceM-->
     <resultMap id="OdersAndOrderdetails" type="com.sc.domain.userdomain.OdersAndOrderdetails" autoMapping="true">
-        <result column="CM_ORDER_STATE" property="CM_ORDERSTATE" jdbcType="INTEGER"/>
+        <result column="CM_ORDER_STATE" property="CM_ORDER_STATE" jdbcType="INTEGER"/>
         <result column="CM_CREATETIME" property="CM_CREATETIME"/>
         <result column="CM_MONEYSUN" property="CM_MONEYSUN" jdbcType="DOUBLE"/>
         <result column="CM_NUMBERSUN" property="CM_NUMBERSUN" jdbcType="INTEGER"/>

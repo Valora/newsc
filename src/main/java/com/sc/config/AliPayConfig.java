@@ -11,8 +11,9 @@ public class AliPayConfig {
     public static final String CHARSET = "UTF-8";
     
     public static final String ALIPAYPUBLICKEY = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAFljhNhgPdyPuBV64bfQNN1PjbCzkIM6qRdKBoLPXmKKMiFYnkd6rAoprih3/PrQEB/VsW8OoM8fxn67UDYuyBTqA23MML9q1+ilIZwBC2AQ2UBVOrFXfFl75p6/B5KsiNG9zpgmLCUYuLkxpLQIDAQAB";
-    
-    public static final String NOTIFYURL = "http://106.15.38.42:8080/alinotify";
+
+    //todo 域名更换
+    public static final String NOTIFYURL = "http://www.zuichu.cc/alinotify";
     
     public static final String SIGN_TYPE = "RSA2";
 }

@@ -16,6 +16,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 支付用Controller
@@ -57,12 +59,20 @@ public class PayStartCallController {
         payService.aliPayPc(request, response);
     }
 
-    @RequestMapping(value = "alinotify")
-    public void aliNotify(HttpServletRequest request, HttpServletResponse response) throws AlipayApiException {
-        payService.aliNotify(request, response);
+//    @RequestMapping(value = "/alinotify", method = RequestMethod.GET)
+//    public String aliNotify(HttpServletRequest request, HttpServletResponse response) throws AlipayApiException {
+//        payService.aliNotify(request, response);
+//        return "addd";
+//    }
+
+    @RequestMapping(value = "/alinotify", method = RequestMethod.GET)
+    public Map phone() {
+        Map<Integer, Integer> result = new HashMap<>();
+        result.put(0, 1);
+        return result;
     }
 
-    @RequestMapping(value = "wxnotify")
+    @RequestMapping(value = "/wxnotify")
     public void wxNotify(HttpServletRequest request, HttpServletResponse response) throws Exception {
         payService.wxNotify(request, response);
     }

@@ -19,6 +19,7 @@ public class OrderdetailsWithBLOBAndUsersAndLogisticss {
     private Integer CM_LOGISTICSID;
     private String CM_LOGISTICSINFO;
     private String CM_LOGISTICSNAME;
+    private String CM_SHOPNAME;
     private Long CM_PHONE;
     private String CM_SHOPEADDRESS;
     private String CM_NICKNAME;

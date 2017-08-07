@@ -10,7 +10,7 @@ import java.util.List;
  */
 @Data
 public class OdersAndOrderdetails {
-    private Integer CM_ORDERSTATE;
+    private Integer CM_ORDER_STATE;
     private Date CM_CREATETIME;
     private Double CM_MONEYSUN;
     private Integer CM_NUMBERSUN;

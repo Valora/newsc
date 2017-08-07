@@ -25,7 +25,7 @@ public class QuerySaleOrderDetailsByOrderdetailsIdSqlProvider {
         sql.FROM("TB_ORDERDETAILS  c");
         sql.LEFT_OUTER_JOIN("TB_USERS d on c.CM_USERID = d.CM_USERID");
         sql.LEFT_OUTER_JOIN("TB_LOGISTICSS q on c.CM_LOGISTICSID = q.CM_LOGISTICSID");
-        sql.WHERE("c.CM_ORDERDETAILSID=" + orderdetailsid);
+        sql.WHERE("c.CM_ORDERDETAILSID=" + "#{orderdetailsid}");
         return sql.toString();
     }
 }

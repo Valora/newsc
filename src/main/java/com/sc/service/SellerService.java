@@ -2,14 +2,7 @@ package com.sc.service;
 
 import com.github.pagehelper.PageHelper;
 import com.sc.dao.SellerDao;
-import com.sc.domain.generator.Afterservices;
-import com.sc.domain.generator.Goods;
-import com.sc.domain.generator.Orderdetails;
-import com.sc.domain.generator.Orders;
-import com.sc.domain.generator.Register;
-import com.sc.domain.generator.Sellers;
-import com.sc.domain.generator.ServicedetailsWithBLOBs;
-import com.sc.domain.generator.Users;
+import com.sc.domain.generator.*;
 import com.sc.domain.seller.AfterserviceAndOdtAndGoodsAndusers;
 import com.sc.domain.seller.OrderdetailsWithBLOBAndUsersAndLogisticss;
 import com.sc.domain.seller.OrderdetailsWithBLOBandGood;
@@ -76,12 +69,8 @@ public class SellerService {
      */
     public Result QuerySaleOrderDetails(String orderdetailsid) {
         try {
-            OrderdetailsWithBLOBAndUsersAndLogisticss orderdetailsWithBLOBAndUsersAndLogisticss = null;
-            List<OrderdetailsWithBLOBAndUsersAndLogisticss> list = sellerDao.QuerySaleOrderDetailD(orderdetailsid);
-            if (list != null && list.size() > 0) {
-                orderdetailsWithBLOBAndUsersAndLogisticss = list.get(0);
-            }
-            return GetResult.toJson(0, null, null, orderdetailsWithBLOBAndUsersAndLogisticss, 0);
+            OrderdetailsWithBLOBAndUsersAndLogisticss orderdetails = sellerDao.QuerySaleOrderDetailD(orderdetailsid);
+            return GetResult.toJson(0, null, null, orderdetails, 0);
         } catch (Exception e) {
             return GetResult.toJson(200, null, null, null, 0);
         }
@@ -104,7 +93,7 @@ public class SellerService {
             if (afterservices.getCM_STATE() != 1) {
                 return GetResult.toJson(52, null, jwt.createJWT(sellerId), null, 0);
             }
-            Orderdetails orderdetails = sellerDao.selectordertails(afterservices.getCM_ORDERDETAILSID());
+            OrderdetailsWithBLOBs orderdetails = sellerDao.selectordertails(afterservices.getCM_ORDERDETAILSID());
             if (orderdetails == null || orderdetails.getCM_SELLERSTATE() != 4 || orderdetails.getCM_SERVICESTATE() != 1) {
                 return GetResult.toJson(52, null, jwt.createJWT(sellerId), null, 0);
             }
@@ -139,12 +128,12 @@ public class SellerService {
     @Transactional(isolation = Isolation.READ_COMMITTED)
     public Result sendOutGoodsNewS(String sellerId, String orderdetailid, String logisticsid, String logisticsnum) {
         try {
-            Orderdetails orderdetails = sellerDao.selectordertails(orderdetailid);
+            OrderdetailsWithBLOBs orderdetails = sellerDao.selectordertails(orderdetailid);
             if (orderdetails == null) {
                 return GetResult.toJson(50, null, jwt.createJWT(sellerId), null, 0);
             }
-            Orders orders = sellerDao.selectOrderbyOrderid(orderdetails.getCM_ORDERID());
-            if (orders != null || orders.getCM_STATE().intValue() != 2 || orderdetails.getCM_SELLERSTATE().intValue() != 2) {
+            OrdersWithBLOBs orders = sellerDao.selectOrderbyOrderid(orderdetails.getCM_ORDERID());
+            if (orders == null || orders.getCM_STATE().intValue() != 2 || orderdetails.getCM_SELLERSTATE().intValue() != 2) {
                 return GetResult.toJson(49, null, jwt.createJWT(sellerId), null, 0);
             }
             orderdetails.setCM_SELLERSTATE(3);
@@ -211,7 +200,7 @@ public class SellerService {
             if (afterservices.getCM_STATE() == 3) {
                 return GetResult.toJson(52, null, jwt.createJWT(sellerId), null, 0);
             }
-            Orderdetails orderdetails = sellerDao.selectordertails(afterservices.getCM_ORDERDETAILSID());
+            OrderdetailsWithBLOBs orderdetails = sellerDao.selectordertails(afterservices.getCM_ORDERDETAILSID());
             if (orderdetails == null || orderdetails.getCM_SELLERSTATE() != 4 || orderdetails.getCM_SERVICESTATE() != 3) {
                 return GetResult.toJson(52, null, jwt.createJWT(sellerId), null, 0);
             }
@@ -253,7 +242,7 @@ public class SellerService {
             if (afterservices.getCM_TYPE() == 1 || afterservices.getCM_STATE() != 4) {
                 return GetResult.toJson(49, null, jwt.createJWT(sellerId), null, 0);
             }
-            Orderdetails orderdetails = sellerDao.selectordertails(afterservices.getCM_ORDERDETAILSID());
+            OrderdetailsWithBLOBs orderdetails = sellerDao.selectordertails(afterservices.getCM_ORDERDETAILSID());
             if (orderdetails == null || orderdetails.getCM_SELLERSTATE() != 4 || orderdetails.getCM_SERVICESTATE() != 4) {
                 return GetResult.toJson(52, null, jwt.createJWT(sellerId), null, 0);
             }
@@ -293,7 +282,7 @@ public class SellerService {
             if (afterservices == null || afterservices.getCM_TYPE() != 1) {
                 return GetResult.toJson(51, null, jwt.createJWT(sellerId), null, 0);
             }
-            Orderdetails orderdetails = sellerDao.selectordertails(afterservices.getCM_ORDERDETAILSID());
+            OrderdetailsWithBLOBs orderdetails = sellerDao.selectordertails(afterservices.getCM_ORDERDETAILSID());
             if (orderdetails == null || (orderdetails.getCM_SELLERSTATE() != 4 && orderdetails.getCM_SERVICESTATE() != 3)) {
                 return GetResult.toJson(52, null, jwt.createJWT(sellerId), null, 0);
             }

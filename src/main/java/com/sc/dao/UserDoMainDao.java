@@ -290,7 +290,7 @@ public class UserDoMainDao {
         OrderdetailsExample.Criteria criteria = orderdetailsExample.createCriteria();
         OrderdetailsWithBLOBs orderdetails = new OrderdetailsWithBLOBs();
         orderdetails.setCM_SELLERSTATE(4);
-        criteria.andCM_ORDERDETAILSIDEqualTo(orderid);
+        criteria.andCM_ORDERIDEqualTo(orderid);
         orderdetailsMapper.updateByExampleSelective(orderdetails, orderdetailsExample);
     }
 
@@ -333,11 +333,12 @@ public class UserDoMainDao {
      * @param cmOrderdetailsid Orderdetailsid
      * @return Orderdetails集合
      */
-    public List<OrderdetailsWithBLOBs> selectOrderdetailsByorderdetailsid(String cmOrderdetailsid) {
+    public OrderdetailsWithBLOBs selectOrderdetailsByorderdetailsid(String cmOrderdetailsid) {
         OrderdetailsExample orderdetailsExample = new OrderdetailsExample();
         OrderdetailsExample.Criteria criteria = orderdetailsExample.createCriteria();
         criteria.andCM_ORDERDETAILSIDEqualTo(cmOrderdetailsid);
-        return orderdetailsMapper.selectByExampleWithBLOBs(orderdetailsExample);
+        List<OrderdetailsWithBLOBs> orderdetails =  orderdetailsMapper.selectByExampleWithBLOBs(orderdetailsExample);
+        return orderdetails.size() < 0 ? null : orderdetails.get(0);
     }
 
     /**
@@ -370,7 +371,7 @@ public class UserDoMainDao {
         OrderdetailsExample orderdetailsExample = new OrderdetailsExample();
         OrderdetailsExample.Criteria criteria = orderdetailsExample.createCriteria();
         criteria.andCM_ORDERIDEqualTo(cmOrderdetailsid);
-        orderdetailsMapper.updateByExample(orderdetails, orderdetailsExample);
+        orderdetailsMapper.updateByExampleSelective((OrderdetailsWithBLOBs) orderdetails, orderdetailsExample);
     }
 
     /**
@@ -454,7 +455,7 @@ public class UserDoMainDao {
         AddressesExample addressesExample = new AddressesExample();
         AddressesExample.Criteria criteria = addressesExample.createCriteria();
         criteria.andCM_ADDRESSIDEqualTo(addresses.getCM_ADDRESSID());
-        addressesMapper.updateByExample(addresses, addressesExample);
+        addressesMapper.updateByExampleSelective(addresses, addressesExample);
     }
 
     /**
@@ -619,8 +620,8 @@ public class UserDoMainDao {
      *
      * @param servicedetails
      */
-    public void addAfterServiceDetail(Servicedetails servicedetails) {
-        servicedetailsMapper.insert((ServicedetailsWithBLOBs) servicedetails);
+    public void addAfterServiceDetail(ServicedetailsWithBLOBs servicedetails) {
+        servicedetailsMapper.insert(servicedetails);
     }
 
     /**

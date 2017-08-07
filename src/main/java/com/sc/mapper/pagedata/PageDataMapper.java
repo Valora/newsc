@@ -20,4 +20,6 @@ public interface PageDataMapper {
     ArrayList<Classify> getClassify();
 
     List<PageGoods> searchGoods(@Param("content") String content);
+
+    List<PageGoods> searchGoodsByAdmin(@Param("content") String content);
 }

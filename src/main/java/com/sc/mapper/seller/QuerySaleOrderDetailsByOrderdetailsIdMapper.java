@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.type.JdbcType;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public interface QuerySaleOrderDetailsByOrderdetailsIdMapper {
             @Result(column = "CM_SHOPEADDRESS", property = "CM_SHOPEADDRESS", jdbcType = JdbcType.VARCHAR),
             @Result(column = "CM_SHOPNAME", property = "CM_SHOPNAME", jdbcType = JdbcType.VARCHAR)
     })
-    List<OrderdetailsWithBLOBAndUsersAndLogisticss> QuerySaleOrderDetailM(String orderdetailsid);
+    List<OrderdetailsWithBLOBAndUsersAndLogisticss> QuerySaleOrderDetailM(@RequestParam("orderdetailsid") String orderdetailsid);
 }
 
 

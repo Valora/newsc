@@ -33,7 +33,7 @@ public class FileSystemStorageService implements StorageService {
             }
             Path newPath = this.rootLocation.resolve(newfilename);
             if (!Files.exists(newPath))
-                Files.createFile(newPath);
+                Files.createDirectories(newPath);
             Files.copy(file.getInputStream(), newPath, StandardCopyOption.REPLACE_EXISTING);
             return true;
         } catch (Exception e) {
@@ -124,7 +124,7 @@ public class FileSystemStorageService implements StorageService {
         if (fileName != null && fileName.indexOf(".") >= 0) {
             return fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
         }
-        return "jpg";
+        return "png";
     }
 
     @Override

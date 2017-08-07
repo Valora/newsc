@@ -12,10 +12,7 @@ import com.sc.domain.manage.SellerInfo;
 import com.sc.domain.manage.UserDetail;
 import com.sc.domain.manage.UserInfo;
 import com.sc.storage.StorageService;
-import com.sc.utils.GetRandomNumber;
-import com.sc.utils.GetResult;
-import com.sc.utils.JWT;
-import com.sc.utils.Result;
+import com.sc.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -305,7 +302,7 @@ public class ManageService {
             if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
-            String filename = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmss")) + GetRandomNumber.genRandomNum(4);
+            String filename = DateUtils.todayHhMmSs() + GetRandomNumber.genRandomNum(4) + "." + storageService.getFileType(file.getOriginalFilename());
 
             try {
                 storageService.store(file, root + filename);
@@ -323,36 +320,39 @@ public class ManageService {
     /**
      * 修改商品分类和子分类
      *
-     * @param classifyid   分类ID
-     * @param classifyname 分类名称
-     * @param type         分类类型（0：大类，1：子类）
-     * @param parentid     上级分类（如果是大类，则输入0）
-     * @param adminid      管理员ID
-     * @param files        图片
+     * @param classifyid    分类ID
+     * @param classifyname  分类名称
+     * @param type          分类类型（0：大类，1：子类）
+     * @param parentid      上级分类（如果是大类，则输入0）
+     * @param adminid       管理员ID
+     * @param classifyFiles 图片
      * @return Result
      */
-    public Result reviceClassify(String classifyid, String classifyname, String type, String parentid, String adminid, List<MultipartFile> files) {
+    public Result reviceClassify(String classifyid, String classifyname, String type, String parentid, String adminid, MultipartFile classifyFiles) {
         try {
             List<Admins> result = manageDao.selectAdminsByAdminId(adminid);
-            if (result.isEmpty() || result.get(0).getCM_LEVEL() != 1) {
+            if (result.isEmpty() || result.get(0).getCM_LEVEL().intValue() != 1) {
                 return GetResult.toJson(37, null, null, null, 0);
             }
             int id = Integer.parseInt(classifyid);
-            List<Classifys> classifys = manageDao.selectClassifysByClassifyid(id);
-            if (classifys.isEmpty()) {
+            Classifys classifys = manageDao.selectClassifysByClassifyid(id);
+            if (classifys == null) {
                 return GetResult.toJson(53, null, jwt.createJWT(adminid), null, 0);
             }
-            String filename = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HHmmss")) + GetRandomNumber.genRandomNum(4);
+            String filename = DateUtils.todayHhMmSs() + GetRandomNumber.genRandomNum(4) + "." + storageService.getFileType(classifyFiles.getOriginalFilename());
+
             String imgpath = "";
-            for (MultipartFile file : files) {
+            if (!classifyFiles.isEmpty()) {
                 try {
-                    storageService.store(file, root + filename);
+                    storageService.store(classifyFiles, root + filename);
                 } catch (Exception ex) {
                     return GetResult.toJson(47, null, null, null, 0);
                 }
-                imgpath = root + filename;
+                imgpath = "C://ClassifyFiles/" + filename;
+            } else {
+                imgpath = classifys.getCM_IMGPATH();
             }
-            manageDao.reviceClassify(classifyname, type, parentid, "C://" + imgpath);
+            manageDao.reviceClassify(id, classifyname, type, parentid, imgpath);
             return GetResult.toJson(0, null, jwt.createJWT(adminid), null, 0);
         } catch (Exception ex) {
             return GetResult.toJson(200, null, null, null, 0);

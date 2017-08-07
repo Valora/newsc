@@ -133,6 +133,24 @@ public class PageDataController {
         return pageDataService.searchGoods(content, pageNum, pageSize);
     }
 
+    @RequestMapping(value = URL + "SearchGoodsByAdmin", method = RequestMethod.GET)
+    @ApiOperation("查询商品详情(admin)")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "content", value = "商品编号或品牌", required = true, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "pageNum", value = "页码", required = true, dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "pageSize", value = "页面大小", required = true, dataType = "Integer", paramType = "query")
+    })
+    public Result searchGoodsByAdmin(@RequestParam(value = "content") String content, @RequestParam(value = "pageNum") Integer pageNum, @RequestParam(value = "pageSize") Integer pageSize) {
+        if (StringUtils.isEmpty(content) || StringUtils.isBlank(content)) {
+            return GetResult.toJson(16, null, null, null, 0);
+        }
+
+        pageNum = pageNum < 1 ? 1 : pageNum;
+        pageSize = pageSize < 1 ? 10 : pageSize;
+
+        return pageDataService.searchGoodsByAdmin(content, pageNum, pageSize);
+    }
+
     @RequestMapping(value = URL + "GetSubclassification", method = RequestMethod.GET)
     @ApiOperation("获取分类/二级分类")
     @ApiImplicitParams({

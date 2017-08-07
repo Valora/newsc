@@ -20,12 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * userDoMainController
@@ -174,7 +171,7 @@ public class UserDoMainController {
             @ApiImplicitParam(name = "orderid", value = "订单ID", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "token", value = "秘钥", required = true, dataType = "String", paramType = "query")
     })
-    public Result confirmOrderByOrderid(@RequestParam("orderdetailid") Long orderid, @RequestParam("token") String token) {
+    public Result confirmOrderByOrderid(@RequestParam("orderid") Long orderid, @RequestParam("token") String token) {
         Token tk = jwt.checkJWT(token);
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0);
@@ -238,11 +235,7 @@ public class UserDoMainController {
         if (tk == null) {
             return GetResult.toJson(101, null, null, null, 0); 
         }
-        List<MultipartFile> files = ((MultipartHttpServletRequest) request).getFiles("files");
-        if (files.size() > 5) {
-            return GetResult.toJson(23, null, null, null, 0);
-        }
-        return userDoMainService.applyAfterService(orderdetailsid, type, reason, files, tk.getUserId());
+        return userDoMainService.applyAfterService(orderdetailsid, type, reason, tk.getUserId());
     }
 
     @RequestMapping(value = URL + "SendBackGoods", method = RequestMethod.GET)
